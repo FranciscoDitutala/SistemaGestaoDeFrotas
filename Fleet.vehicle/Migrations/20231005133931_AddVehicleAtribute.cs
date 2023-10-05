@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Fleet.Transport.Migrations
 {
     /// <inheritdoc />
-    public partial class SECONDmIGRATION : Migration
+    public partial class AddVehicleAtribute : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -55,9 +55,12 @@ namespace Fleet.Transport.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BrandId = table.Column<int>(type: "int", nullable: false),
-                    ModelId = table.Column<int>(type: "int", nullable: false),
-                    VariantId = table.Column<int>(type: "int", nullable: false),
+                    Vin = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Registration = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Brand = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Model = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Variant = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Cor = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     YearOfManufacture = table.Column<int>(type: "int", nullable: false),
                     Type = table.Column<int>(type: "int", nullable: false),
                     Transmission = table.Column<int>(type: "int", nullable: false),

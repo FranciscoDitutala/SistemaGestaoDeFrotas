@@ -5,11 +5,12 @@ namespace Fleet.Principal.Dtos.TransPortDtos.VehicleDtos
     public class UpdateVehicleDto
     {
 
-        public int BrandId { get; set; }
-
-        public int ModelId { get; set; }
-
-        public int VariantId { get; set; }
+        public string? Vin { get; set; }
+        public string? Registration { get; set; }
+        public string? Brand { get; set; }
+        public string? Model { get; set; }
+        public string? Variant { get; set; }
+        public string? Cor { get; set; }
 
         public int YearOfManufacture { get; set; }
 

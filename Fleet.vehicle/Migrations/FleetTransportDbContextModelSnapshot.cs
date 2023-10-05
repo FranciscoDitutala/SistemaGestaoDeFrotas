@@ -101,8 +101,11 @@ namespace Fleet.Transport.Migrations
                     b.Property<bool>("Assigned")
                         .HasColumnType("bit");
 
-                    b.Property<int>("BrandId")
-                        .HasColumnType("int");
+                    b.Property<string>("Brand")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Cor")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
@@ -110,14 +113,17 @@ namespace Fleet.Transport.Migrations
                     b.Property<double>("FuelConsumption")
                         .HasColumnType("float");
 
-                    b.Property<int>("ModelId")
-                        .HasColumnType("int");
+                    b.Property<string>("Model")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("OrgaoId")
                         .HasColumnType("int");
 
                     b.Property<int>("Power")
                         .HasColumnType("int");
+
+                    b.Property<string>("Registration")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("RegistrationDate")
                         .HasColumnType("datetime2");
@@ -128,8 +134,11 @@ namespace Fleet.Transport.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
-                    b.Property<int>("VariantId")
-                        .HasColumnType("int");
+                    b.Property<string>("Variant")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Vin")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("YearOfManufacture")
                         .HasColumnType("int");

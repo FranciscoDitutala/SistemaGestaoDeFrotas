@@ -76,19 +76,22 @@ enum TransmissionType{
 
 message VehiclePayload {
 	int32 id= 1;
-	int32 brand_id= 2;
-	int32 model_id=3;
-	int32 variant_id=4;
-	int32 year_of_manufacture=5;
-	VehicleType type=6;
-	TransmissionType transmission=7;
-	int32 power=8;
-	double fuel_consumption=9;
-	google.protobuf.Timestamp registration_date =10;
-	int32 orgao_id=11;
-	int32 employee_id=12;
-	bool assigned =13;
-	int32 last_assignment_id=14;
+	string vin=2;
+	string registration=3;
+	string brand=4;
+	string model=5;
+	string variant=6;
+	string cor=7;
+	int32 year_of_manufacture=8;
+	VehicleType type=9;
+	TransmissionType transmission=10;
+	int32 power=11;
+	double fuel_consumption=12;
+	google.protobuf.Timestamp registration_date =13;
+	int32 orgao_id=14;
+	int32 employee_id=15;
+	bool assigned =16;
+	int32 last_assignment_id=17;
 
 
 }
