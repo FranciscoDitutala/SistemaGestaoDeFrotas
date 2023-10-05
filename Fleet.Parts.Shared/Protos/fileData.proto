@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option csharp_namespace = "Fleet.Parts";
+
+package Files;
+
+message AddDocumentRequest {
+  string name = 1;
+  string file_name = 2;
+  string mime_type = 3;
+  string description = 4;
+  bytes file = 5;
+}
+
+message DocumentMetadataPayload {
+  string document_id = 1;
+  string name = 2;
+  string file_name = 3;
+  string mime_type = 4;
+  string description = 5;
+}
+
+message DocumentPayload {
+  string document_id = 1;
+  string name = 2;
+  string file_name = 3;
+  string mime_type = 4;
+  string description = 5;
+  bytes file = 6;
+}

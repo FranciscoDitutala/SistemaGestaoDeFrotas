@@ -1,0 +1,124 @@
+syntax = "proto3";
+
+option csharp_namespace = "Fleet.Common";
+
+import "Protos/customTypes.proto";
+
+service VehicleVariantManager {
+  rpc FindVehicleVariant (FindVehicleVariantRequest) returns (VehicleVariantPayload);
+  rpc CreateVariant (CreateVehicleVariantRequest) returns (VehicleVariantPayload);
+  rpc UpdateVariant (VehicleVariantPayload) returns (VehicleVariantPayload);
+  rpc EnableVehicleVariant (FindVehicleVariantRequest) returns (VehicleVariantPayload);
+  rpc DissableVehicleVariant (FindVehicleVariantRequest) returns (VehicleVariantPayload);
+  rpc DeleteVehicleVariant (FindVehicleVariantRequest) returns (VehicleVariantPayload);
+  rpc FindVehicleVariantsByModel (FindVehicleVariantsByModelRequest) returns (stream VehicleVariantPayload);
+}
+
+enum VehicleBodyStyleRepresentation {
+  VEHICLE_BODY_STYLE_REPRESENTATION_NONE = 0;
+  VEHICLE_BODY_STYLE_REPRESENTATION_MICRO = 1;
+  VEHICLE_BODY_STYLE_REPRESENTATION_SEDAN = 2;
+  VEHICLE_BODY_STYLE_REPRESENTATION_HATCHBACK = 3;
+  VEHICLE_BODY_STYLE_REPRESENTATION_UNIVERSAL = 4;
+  VEHICLE_BODY_STYLE_REPRESENTATION_LIFTBACK = 5;
+  VEHICLE_BODY_STYLE_REPRESENTATION_COUPE = 6;
+  VEHICLE_BODY_STYLE_REPRESENTATION_CABRIOLET = 7;
+  VEHICLE_BODY_STYLE_REPRESENTATION_ROADSTER = 8;
+  VEHICLE_BODY_STYLE_REPRESENTATION_TARGA = 9;
+  VEHICLE_BODY_STYLE_REPRESENTATION_LIMOUSINE = 10;
+  VEHICLE_BODY_STYLE_REPRESENTATION_MUSCLE = 11;
+  VEHICLE_BODY_STYLE_REPRESENTATION_SPORT = 12;
+  VEHICLE_BODY_STYLE_REPRESENTATION_SUPER = 13;
+  VEHICLE_BODY_STYLE_REPRESENTATION_S_U_V = 14;
+  VEHICLE_BODY_STYLE_REPRESENTATION_CROSSOVER = 15;
+  VEHICLE_BODY_STYLE_REPRESENTATION_PICKUP = 16;
+  VEHICLE_BODY_STYLE_REPRESENTATION_VAN = 17;
+  VEHICLE_BODY_STYLE_REPRESENTATION_MINIVAN = 18;
+  VEHICLE_BODY_STYLE_REPRESENTATION_MINIBUS = 19;
+  VEHICLE_BODY_STYLE_REPRESENTATION_CAMPERVAN = 20;
+  VEHICLE_BODY_STYLE_REPRESENTATION_BUS = 21;
+  VEHICLE_BODY_STYLE_REPRESENTATION_TOW_TRUCK = 22;
+  VEHICLE_BODY_STYLE_REPRESENTATION_MINI_TRUCK = 23;
+  VEHICLE_BODY_STYLE_REPRESENTATION_DUMP_TRUCK = 24;
+  VEHICLE_BODY_STYLE_REPRESENTATION_MOTOCYCLE = 25;
+  VEHICLE_BODY_STYLE_REPRESENTATION_BOAT = 26;
+}
+
+enum EngineFuelTypeRepresentation {
+  ENGINE_FUEL_TYPE_REPRESENTATION_NONE = 0;
+  ENGINE_FUEL_TYPE_REPRESENTATION_GASOLINE = 1;
+  ENGINE_FUEL_TYPE_REPRESENTATION_DIESEL = 2;
+  ENGINE_FUEL_TYPE_REPRESENTATION_GAS = 3;
+  ENGINE_FUEL_TYPE_REPRESENTATION_BIO = 4;
+  ENGINE_FUEL_TYPE_REPRESENTATION_ELECTRIC = 5;
+}
+
+enum EngineCylinderArrangementRepresentation {
+  ENGINE_CYLINDER_ARRANGEMENT_REPRESENTATION_NONE = 0;
+  ENGINE_CYLINDER_ARRANGEMENT_REPRESENTATION_INLINE = 1;
+  ENGINE_CYLINDER_ARRANGEMENT_REPRESENTATION_V = 2;
+  ENGINE_CYLINDER_ARRANGEMENT_REPRESENTATION_W = 3;
+  ENGINE_CYLINDER_ARRANGEMENT_REPRESENTATION_HORIZONTAL = 4;
+  ENGINE_CYLINDER_ARRANGEMENT_REPRESENTATION_RADIAL = 5;
+}
+
+enum VehicleTransmissionTypeRepresentation {
+  VEHICLE_TRANSMISSION_TYPE_REPRESENTATION_NONE = 0;
+  VEHICLE_TRANSMISSION_TYPE_REPRESENTATION_AUTOMATIC = 1;
+  VEHICLE_TRANSMISSION_TYPE_REPRESENTATION_MANUAL = 2;
+}
+
+enum VehicleDrivertrainTypeRepresentation {
+  VEHICLE_DRIVERTRAIN_TYPE_REPRESENTATION_NONE = 0;
+  VEHICLE_DRIVERTRAIN_TYPE_REPRESENTATION_REAR_WHEEL_DRIVE = 1;
+  VEHICLE_DRIVERTRAIN_TYPE_REPRESENTATION_FRONT_WHEEL_DRIVE = 2;
+  VEHICLE_DRIVERTRAIN_TYPE_REPRESENTATION_FOUR_WHEEL_DRIVE = 3;
+  VEHICLE_DRIVERTRAIN_TYPE_REPRESENTATION_ALL_WHEEL_DRIVE = 4;
+}
+
+message VehicleBodySpecsPayload {
+  VehicleBodyStyleRepresentation body_style = 1;
+  int32 num_doors = 2;
+}
+
+message VehicleTechnicalSpecsPayload {
+  EngineFuelTypeRepresentation fuel_type = 1;
+  CustomTypes.DecimalValue consumption_kmL = 2;
+  int32 num_cylinders = 3;
+  EngineCylinderArrangementRepresentation cylinder_arrangement = 4;
+  VehicleTransmissionTypeRepresentation transmission_type = 5;
+  int32 transmission_speeds = 6;
+  VehicleDrivertrainTypeRepresentation drivertrain_type = 7;
+}
+
+message FindVehicleVariantRequest {
+  int32 id = 1;
+}
+
+message FindVehicleVariantsByModelRequest {
+  int32 vehicle_model_id = 1;
+  bool only_enabled = 2;
+}
+
+
+
+message CreateVehicleVariantRequest {
+  int32 release_year = 1;
+  string name = 2;
+  string technical_name = 3;
+  VehicleBodySpecsPayload body_specs = 4;
+  VehicleTechnicalSpecsPayload technical_specs = 5;
+  int32 vehicle_model_id = 6;
+  bool enabled = 7;
+}
+
+message VehicleVariantPayload {
+  int32 id = 1;
+  int32 release_year = 2;
+  string name = 3;
+  string technical_name = 4;
+  VehicleBodySpecsPayload body_specs = 5;
+  VehicleTechnicalSpecsPayload technical_specs = 6;
+  int32 vehicle_model_id = 7;
+  bool enabled = 8;
+}

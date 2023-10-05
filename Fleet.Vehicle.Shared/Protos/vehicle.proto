@@ -1,0 +1,94 @@
+﻿
+syntax= "proto3";
+
+
+option csharp_namespace="Fleet.Transport";
+
+import "google/protobuf/timestamp.proto";
+
+service VehicleManager{
+	rpc FindAllVehicles(FindAllVehiclesRequest) returns (stream VehiclePayload);
+	rpc FindVehicle(FindVehicleRequest) returns (VehiclePayload);
+	rpc AddVehicle(VehiclePayload) returns (VehiclePayload);
+	rpc UpdateVehicle(VehiclePayload) returns (VehiclePayload);
+	rpc DeleteVehicle(FindVehicleRequest) returns (VehiclePayload);
+	rpc FindAllVehiclesByType(FindByTypeRequest) returns (stream VehiclePayload);
+	rpc FindAllVehiclesByOrgao(FindByOrgaoRequest) returns (stream VehiclePayload);
+	rpc FindAllVehiclesByEmployee(FindByEmployeeRequest) returns (stream VehiclePayload);
+	rpc FindAllVehiclesAssigned(FindAllVehiclesAssignedRequest) returns (stream VehiclePayload);
+}
+
+message FindAllVehiclesAssignedRequest{
+	bool assigned = 1;
+}
+message FindVehicleRequest {
+	int32 id=1;
+}
+
+message AssignmentVehicleRequest{
+	int32 vehicle_id=1;
+	int32 assignment_id=2;
+	bool assigned=3;
+	int32 orgao_id=4;
+	int32 employee_id=5;
+	int32 type = 6;
+
+}
+
+message FindByOrgaoRequest{
+	int32 orgao_id=1;
+}
+
+message FindByEmployeeRequest{
+	int32 employee_id=1;
+}
+
+message FindByTypeRequest{
+	VehicleType type=1;
+}
+
+message FindAllVehiclesRequest{
+}
+
+message AddVehicleRequest{
+	string brand= 2;
+	string model=3;
+	string variant=4;
+	int32 year_of_manufacture=5;
+	VehicleType type=6;
+	int32 power=7;
+	double fuel_consumption=8;
+}
+
+enum VehicleType{
+	VEHICLE_TYPE_NONE=0;
+	CAR=1;
+	MOTORCYCLE=2;
+	TRUCK=3;
+	BUS =4;
+}
+enum TransmissionType{
+	TRANSMISSION_TYPE_NONE=0;
+	MANUAL=1;
+	AUTOMATIC=2;
+	CVT=3;
+}
+
+message VehiclePayload {
+	int32 id= 1;
+	int32 brand_id= 2;
+	int32 model_id=3;
+	int32 variant_id=4;
+	int32 year_of_manufacture=5;
+	VehicleType type=6;
+	TransmissionType transmission=7;
+	int32 power=8;
+	double fuel_consumption=9;
+	google.protobuf.Timestamp registration_date =10;
+	int32 orgao_id=11;
+	int32 employee_id=12;
+	bool assigned =13;
+	int32 last_assignment_id=14;
+
+
+}

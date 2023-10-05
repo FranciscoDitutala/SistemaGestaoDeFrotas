@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+option csharp_namespace = "Fleet.Parts";
+
+import "google/protobuf/timestamp.proto";
+import "Protos/customTypes.proto";
+import "Protos/fileData.proto";
+
+service StockOutManager {
+  rpc Create (CreateStockOutRequest) returns (StockOutPayload);
+  rpc FindAll (FindAllStockOutRequest) returns (stream StockOutPayload);
+  rpc Update (UpdateStockOutRequest) returns (StockOutPayload);
+  rpc Delete (DeleteStockOutRequest) returns (StockOutPayload);
+
+  rpc Approve (StockOutApproveRequest) returns (StockOutPayload);
+  rpc Cancel (StockOutCancelRequest) returns (StockOutPayload);
+  rpc Deliver (StockOutODeliverRequest) returns (StockOutPayload);
+}
+
+message FindAllStockOutRequest {
+  bool by_date_range = 1;
+  google.protobuf.Timestamp from_date = 2;
+  google.protobuf.Timestamp to_date = 3;
+}
+
+message StockOutCancelRequest {
+	int32 id = 1;
+}
+
+message StockOutApproveRequest {
+	int32 id = 1;
+	repeated StockOutLinePayload approved_lines = 2;
+}
+
+message StockOutODeliverRequest {
+	int32 id = 1;
+	string delivered_to = 2;
+}
+
+message DeleteStockOutRequest {
+  int32 id = 1;
+}
+
+message StockOutLinePayload {
+  string part_u_p_c = 1;
+  string part_type_name = 2;
+  string description = 3;
+  CustomTypes.DecimalValue stock_qty = 4;
+  CustomTypes.DecimalValue quantity = 5;
+}
+
+message CreateStockOutRequest {
+  string requested_by = 1;
+  string notes = 2;
+  repeated StockOutLinePayload requested_lines = 3;
+}
+
+message UpdateStockOutRequest {
+  int32 id = 1;
+  string requested_by = 2;
+  string notes = 3;
+  repeated StockOutLinePayload requested_lines = 4;
+}
+
+message StockOutPayload {
+  int32 id = 1;
+  google.protobuf.Timestamp registered_date = 2;
+  string registered_by = 3;
+  string requested_by = 4;
+  google.protobuf.Timestamp approved_date = 5;
+  string approved_by = 6;
+  google.protobuf.Timestamp delivered_date = 7;
+  string delivered_by = 8;
+  string delivered_to = 9;
+  google.protobuf.Timestamp cancelled_date = 10;
+  string cancelled_by = 11;
+  google.protobuf.Timestamp last_updated = 12;
+  string last_updated_by = 13;
+  string notes = 14;
+  repeated StockOutLinePayload requested_lines = 15;
+  repeated StockOutLinePayload approved_lines = 16;
+  repeated Files.DocumentMetadataPayload documents = 17;
+}

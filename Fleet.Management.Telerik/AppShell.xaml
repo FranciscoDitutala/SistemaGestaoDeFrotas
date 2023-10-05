@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell x:Class="Fleet.Management.AppShell"
+       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:view="clr-namespace:Fleet.Management.View"
+       Shell.FlyoutBehavior="Flyout"
+       Shell.FlyoutWidth="240">
+
+    <ShellContent Icon="new_product_64px.png"
+        Title="Entradas de Stock"
+        ContentTemplate="{DataTemplate view:StockEntriesPage}"
+        Route="StockEntriesPage" />
+
+    <ShellContent Icon="move_stock_64px.png"
+        Title="Saidas de Stock"
+        ContentTemplate="{DataTemplate view:StockOutsPage}"
+        Route="StockOutsPage" />
+
+    <ShellContent Icon="brake_discs_64px.png"
+        Title="Peças Sobressalentes"
+        ContentTemplate="{DataTemplate view:PartCategoriesPage}"
+        Route="PartCategoriesPage" />
+
+    <ShellContent Icon="car_service_64.png"
+        Title="Tipos de Viaturas"
+        ContentTemplate="{DataTemplate view:VehicleBrandsPage}"
+        Route="VehicleBrandsPage" />
+</Shell>

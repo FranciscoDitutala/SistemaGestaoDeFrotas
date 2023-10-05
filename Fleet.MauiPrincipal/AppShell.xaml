@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Fleet.MauiPrincipal.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Fleet.MauiPrincipal"
+    xmlns:part="clr-namespace:Fleet.MauiPrincipal.View.Part"
+    xmlns:vehicle="clr-namespace:Fleet.MauiPrincipal.View.Vehicle"
+    xmlns:views="clr-namespace:Fleet.MauiPrincipal.View"
+    xmlns:main="clr-namespace:Fleet.MauiPrincipal"
+     xmlns:user="clr-namespace:Fleet.MauiPrincipal.View.session"
+     xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+    xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome"
+     xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
+    xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+      xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"  
+    
+    Shell.FlyoutBehavior="Locked"
+    Shell.BackgroundColor="#512BD4"
+    Shell.TitleColor="#0B4CA1" >
+
+    <ShellContent 
+        Title="Dashboard"
+        ContentTemplate="{DataTemplate main:MainPage}"
+        Route="MainPage"  />
+    <ShellContent 
+        Title="Gerir Stock"
+        ContentTemplate="{DataTemplate part:PartPage}"
+        Route="PartCategoryPage" />
+
+    <ShellContent 
+        Title="Gerir Viaturas"
+        ContentTemplate="{DataTemplate vehicle:VehiclePage}"
+        Route="VehiclePage" >
+    </ShellContent>
+  
+    <ShellContent 
+        Title="Atribuir Veiculos"
+        ContentTemplate="{DataTemplate vehicle:VehicleAssignPage}"
+        Route="VehicleAssignPage" />
+   <ShellContent 
+    Title="Gerir Usuario"
+    ContentTemplate="{DataTemplate user:CreateUser}"
+    Route="CreateUser" />
+
+</Shell>

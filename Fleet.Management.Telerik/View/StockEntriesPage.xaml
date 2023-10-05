@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fleet.Management.View.StockEntriesPage"
+             xmlns:model="clr-namespace:Fleet.Parts;assembly=Fleet.Parts.Shared"
+             xmlns:viewmodel="clr-namespace:Fleet.Management.ViewModel"
+             x:DataType="viewmodel:StockEntriesViewModel"
+             Title="{Binding Title}">
+    <Grid RowDefinitions="*,Auto" RowSpacing="0">
+        <RefreshView
+            Command="{Binding GetStockEntriesCommand}"
+            IsRefreshing="{Binding IsRefreshing}">
+
+            <CollectionView ItemSizingStrategy="MeasureFirstItem"
+                            ItemsSource="{Binding StockEntries}"
+                            SelectionMode="None" >
+                <CollectionView.EmptyView>
+                    <StackLayout Padding="100" Opacity="0.4">
+                        <Image
+                            HorizontalOptions="CenterAndExpand"
+                            Source="nodata.png"
+                            VerticalOptions="CenterAndExpand" />
+                    </StackLayout>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout  Orientation="Vertical" Span="2"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:StockEntryPayload">
+                        <Frame Margin="12">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:StockEntriesViewModel}}, Path=GoToStockEntryCommand}"
+                                    CommandParameter="{Binding .}"/>
+                            </Frame.GestureRecognizers>
+                            
+                            <Grid Padding="10" RowDefinitions="Auto,Auto,Auto">
+                                <HorizontalStackLayout Grid.Column="0" VerticalOptions="Center">
+                                    <!--<Label Text="{Binding RegisteredDate}" Style="{StaticResource CaptionLabelStyle}"/>-->
+                                    <Label LineBreakMode="WordWrap">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="ID: " FontAttributes="Bold" />
+                                                <Span Text="{Binding Id, StringFormat='{0:0000}'}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label LineBreakMode="WordWrap">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="    Data: " FontAttributes="Bold" />
+                                                <Span Text="{Binding RegisteredDateValue, StringFormat='{0:dd-MM-yyyy}'}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </HorizontalStackLayout>
+                                <Label Grid.Row="1" LineBreakMode="WordWrap">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Proveedor(es): " FontAttributes="Bold" />
+                                            <Span Text="{Binding ProvidersInfo}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label Grid.Row="2" LineBreakMode="WordWrap">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Registado por: " FontAttributes="Bold,Italic" />
+                                            <Span Text="{Binding RegisteredBy}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+        <HorizontalStackLayout Grid.Row="1" BackgroundColor="{StaticResource Primary}">
+            <ImageButton Source="add_64px.png" Margin="2" HeightRequest="50"
+                         Command="{Binding GoToStockEntryCommand}"/>
+            <ImageButton Source="synchronize_64px.png" Margin="2" HeightRequest="50"
+                         Command="{Binding GetStockEntriesCommand}"/>
+        </HorizontalStackLayout>
+
+
+        <ActivityIndicator IsVisible="{Binding GetStockEntriesCommand.IsRunning}"
+                           IsRunning="{Binding GetStockEntriesCommand.IsRunning}"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="CenterAndExpand"
+                           Grid.RowSpan="2"/>
+    </Grid>
+
+</ContentPage>

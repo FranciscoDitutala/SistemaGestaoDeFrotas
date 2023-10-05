@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option csharp_namespace = "Fleet.Common";
+
+service VehicleBrandManager {
+  rpc FindVehicleBrand (FindVehicleBrandRequest) returns (VehicleBrandPayload);
+  rpc CreateBrand (CreateVehicleBrandRequest) returns (VehicleBrandPayload);
+  rpc UpdateBrand (VehicleBrandPayload) returns (VehicleBrandPayload);
+  rpc EnableVehicleBrand (FindVehicleBrandRequest) returns (VehicleBrandPayload);
+  rpc DissableVehicleBrand (FindVehicleBrandRequest) returns (VehicleBrandPayload);
+  rpc DeleteVehicleBrand (FindVehicleBrandRequest) returns (VehicleBrandPayload);
+  rpc FindAllVehicleBrands (FindAllVehicleBrandsRequest) returns (stream VehicleBrandPayload);
+}
+
+message FindVehicleBrandRequest {
+  int32 id = 1;
+}
+
+message FindAllVehicleBrandsRequest {
+  bool only_enabled = 1;
+}
+
+message CreateVehicleBrandRequest {
+  string company = 1;
+  string name = 2;
+  bytes logo = 3;
+  bool enabled = 4;
+}
+
+message VehicleBrandPayload {
+  int32 id = 1;
+  string company = 2;
+  string name = 3;
+  bytes logo = 4;
+  bool enabled = 5;
+}

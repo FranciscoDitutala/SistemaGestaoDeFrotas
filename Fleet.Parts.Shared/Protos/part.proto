@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+option csharp_namespace = "Fleet.Parts";
+
+import "Protos/customTypes.proto";
+
+service PartManager {
+  rpc Create (CreatePartRequest) returns (PartPayload);
+  rpc Find (FindPartRequest) returns (PartPayload);
+  rpc FindAllByType (FindPartsByTypeRequest) returns (stream PartPayload);
+  rpc Update (PartPayload) returns (PartPayload);
+  rpc Delete (DeletePartRequest) returns (PartPayload);
+  
+  rpc FindCategories (FindCategoriesRequest) returns (stream PartCategoryPayload);
+  rpc FindTypesByCategory (FindTypesByCategoryRequest) returns (stream PartTypePayload);
+}
+
+message FindCategoriesRequest {
+  string filter = 1;
+}
+
+message FindTypesByCategoryRequest {
+  string part_category_name = 1;
+  string filter = 2;
+}
+
+message FindPartRequest {
+  string code = 1;
+}
+
+message FindPartsByTypeRequest {
+  string part_type_name = 1;
+  string filter = 2;
+}
+
+message DeletePartRequest {
+  string u_p_c = 1;
+}
+
+message PartCategoryPayload {
+  string name = 1;
+  bytes image = 2;
+}
+
+message PartTypePayload {
+  string name = 1;
+  string sub_category = 2;
+  bytes image = 3;
+}
+
+message VehicleVariantFilterPayload {
+  int32 vehicle_brand_id = 1;
+  string vehicle_model_id = 2;
+}
+
+message CreatePartRequest {
+  string u_p_c = 1;
+  string s_k_u = 2;
+  string part_type_name = 3;
+  string brand = 4;
+  string model = 5;
+  string description = 6;
+  repeated VehicleVariantFilterPayload variant_filters = 7;
+}
+
+message PartPayload {
+  string u_p_c = 1;
+  string s_k_u = 2;
+  string part_type_name = 3;
+  string brand = 4;
+  string model = 5;
+  string description = 6;
+  repeated VehicleVariantFilterPayload variant_filters = 7;
+  CustomTypes.DecimalValue stock_qty = 8;
+}

@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option csharp_namespace = "Fleet.Common";
+
+service VehicleModelManager {
+  rpc FindVehicleModel (FindVehicleModelRequest) returns (VehicleModelPayload);
+  rpc CreateModel (CreateVehicleModelRequest) returns (VehicleModelPayload);
+  rpc UpdateModel (VehicleModelPayload) returns (VehicleModelPayload);
+  rpc EnableVehicleModel (FindVehicleModelRequest) returns (VehicleModelPayload);
+  rpc DissableVehicleModel (FindVehicleModelRequest) returns (VehicleModelPayload);
+  rpc DeleteVehicleModel (FindVehicleModelRequest) returns (VehicleModelPayload);
+  rpc FindVehicleModelsByBrand (FindVehicleModelsByBrandRequest) returns (stream VehicleModelPayload);
+}
+
+message FindVehicleModelRequest {
+  int32 id = 1;
+}
+
+message FindVehicleModelsByBrandRequest {
+  int32 vehicle_brand_id = 1;
+  bool only_enabled = 2;
+}
+
+message CreateVehicleModelRequest {
+  string name = 1;
+  string acronym = 2;
+  int32 vehicle_brand_id = 3;
+  bool enabled = 4;
+}
+
+message VehicleModelPayload {
+  int32 id = 1;
+  string name = 2;
+  string acronym = 3;
+  int32 vehicle_brand_id = 4;
+  bool enabled = 5;
+}

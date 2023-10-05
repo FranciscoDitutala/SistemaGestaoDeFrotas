@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+                    xmlns:converters="clr-namespace:Fleet.Management.Converters">
+
+    <converters:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
+    <converters:BooleanToAlertColorConverter x:Key="BooleanToAlertColorConverter" />
+    <converters:StockOutLineAlertStyleSelector x:Key="StockOutLineAlertStyleSelector">
+        <converters:StockOutLineAlertStyleSelector.PositiveCellTemplate>
+            <telerik:DataGridTextCellStyle  TextColor="{StaticResource Black}"/>
+        </converters:StockOutLineAlertStyleSelector.PositiveCellTemplate>
+        <converters:StockOutLineAlertStyleSelector.NegativeCellTemplate>
+            <telerik:DataGridTextCellStyle  TextColor="{StaticResource Gray400}" FontAttributes="Bold"/>
+        </converters:StockOutLineAlertStyleSelector.NegativeCellTemplate>
+    </converters:StockOutLineAlertStyleSelector>
+
+    <telerik:InvertedBooleanConverter x:Key="InvertedBooleanConverter"/>
+    <telerik:BoolToValueConverter TrueValue="SIM" FalseValue="NÃO"  x:Key="BoolToValueConverter"/>
+    <telerik:StringToBoolConverter  x:Key="StringToBoolConverter"/>
+    <telerik:NullOrEmptyToBoolConverter  x:Key="NullOrEmptyToBoolConverter"/>
+    <telerik:InvertedNullOrEmptyToBoolConverter  x:Key="InvertedNullOrEmptyToBoolConverter"/>
+
+    <Style x:Key="InvalidEntryStyle" TargetType="Entry" BasedOn="{StaticResource ValidEntryStyle}">
+        <Setter Property="TextColor" Value="{StaticResource Gray400}" />
+        <Setter Property="PlaceholderColor" Value="{StaticResource Gray300}" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{StaticResource Gray200}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <Style x:Key="CaptionLabelStyle" TargetType="Label" BasedOn="{StaticResource BaseLabelStyle}">
+        <Setter Property="TextColor" Value="{StaticResource Primary}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+
+</ResourceDictionary>

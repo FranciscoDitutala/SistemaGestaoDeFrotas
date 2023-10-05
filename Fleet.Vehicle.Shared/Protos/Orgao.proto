@@ -1,0 +1,22 @@
+﻿
+syntax ="proto3";
+
+option csharp_namespace="Fleet.Transport";
+
+service OrgaoManager{
+	rpc FindAllOrgaos(FindAllOrgaosRequest) returns (stream OrgaoPayload);
+	rpc FindOrgao(FindOrgaoRequest) returns (OrgaoPayload);
+}
+
+message FindAllOrgaosRequest{
+}
+
+message FindOrgaoRequest{
+	int32 id=1;
+}
+
+message OrgaoPayload{
+	int32 id =1;
+	string name =2;
+	string acronym=3;
+}

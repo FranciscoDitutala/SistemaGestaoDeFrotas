@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+	 <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+	 <PackageReference Include="EntityFramework" Version="6.4.4" />
+	 <PackageReference Include="Grpc" Version="2.46.6" />
+	 <PackageReference Include="Grpc.Core" Version="2.46.6" />
+	 <PackageReference Include="Grpc.Core.Api" Version="2.57.0" />
+	 <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.9" />
+	 <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+	 <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Fleet.Common.Shared\Fleet.Common.Shared.csproj" />
+    <ProjectReference Include="..\Fleet.Parts.Shared\Fleet.Parts.Shared.csproj" />
+    <ProjectReference Include="..\Fleet.Vehicle.Shared\Fleet.Transport.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Dtos\PartsDtos\StockyEntryDtos\UpdateStockEntryDto\" />
+    <Folder Include="Dtos\TransPortDtos\DocumentDtos\Lixo\" />
+  </ItemGroup>
+
+</Project>

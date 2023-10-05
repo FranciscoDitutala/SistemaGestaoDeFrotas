@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:telerik="http://schemas.telerik.com/2022/xaml/maui"
+             xmlns:viewmodel="clr-namespace:Fleet.Management.ViewModel"
+             x:Class="Fleet.Management.View.PartPage"
+             x:DataType="viewmodel:PartViewModel"
+             Title="{Binding Title}">
+    <Grid RowDefinitions=".2*,Auto,*,Auto" RowSpacing="0">
+        <!--<Image Source="{Binding BrandLogo, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}"
+               Grid.RowSpan="3"
+               Opacity="0.2"/>-->
+        <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="4" Margin="8"
+              RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+
+            <Label Grid.Column="0" Grid.Row="0" Text="Código Universal*"  Style="{StaticResource CaptionLabelStyle}"></Label>
+            <Label Grid.Column="1" Grid.Row="0" Text="Código Local"  Style="{StaticResource CaptionLabelStyle}"></Label>
+            <telerik:RadEntry Grid.Column="0" Grid.Row="1" 
+                              Placeholder="[UPC]" Text="{Binding UPC, Mode=TwoWay}" Margin="0, 0, 0, 24"></telerik:RadEntry>
+            <telerik:RadEntry Grid.Column="1" Grid.Row="1"
+                              Placeholder="[SKU]" Text="{Binding SKU, Mode=TwoWay}" Margin="0, 0, 0, 24"></telerik:RadEntry>
+
+            <Grid Grid.Row="2" Grid.ColumnSpan="2" ColumnDefinitions="*,2*" ColumnSpacing="4"
+                  RowDefinitions="Auto,Auto">
+                <Label Grid.Column="0" Grid.Row="0" Text="Tipo de Peça*" Style="{StaticResource CaptionLabelStyle}"></Label>
+                <Label Grid.Column="1" Grid.Row="0" Text="Designação*" Style="{StaticResource CaptionLabelStyle}"></Label>
+                <telerik:RadAutoComplete Grid.Column="0" Grid.Row="1"
+                                         ItemsSource="{Binding PartTypeNames}" CompletionMode="Contains"
+                                         NoResultsMessage="Tipo de peça não encontrado..."
+                                         Text="{Binding PartTypeName, Mode=TwoWay}" Margin="0, 0, 0, 24"></telerik:RadAutoComplete>
+                <telerik:RadEntry Grid.Column="14" Grid.Row="1"
+                                  Text="{Binding Description, Mode=TwoWay}" Margin="0, 0, 0, 24"></telerik:RadEntry>
+            </Grid>
+
+            <Label Grid.Column="0" Grid.Row="3" Text="Marca" Style="{StaticResource CaptionLabelStyle}"></Label>
+            <Label Grid.Column="1" Grid.Row="3" Text="Modelo" Style="{StaticResource CaptionLabelStyle}"></Label>
+            <telerik:RadEntry Grid.Column="0" Grid.Row="4" Text="{Binding Brand, Mode=TwoWay}" Margin="0, 0, 0, 24"></telerik:RadEntry>
+            <telerik:RadEntry Grid.Column="1" Grid.Row="4" Text="{Binding Model, Mode=TwoWay}" Margin="0, 0, 0, 24"></telerik:RadEntry>
+        </Grid>
+
+        <HorizontalStackLayout Grid.Row="3" BackgroundColor="{StaticResource Primary}">
+            <ImageButton Source="save_64px.png" Margin="2" HeightRequest="50"
+                         Command="{Binding SavePartCommand}" />
+        </HorizontalStackLayout>
+
+        <ActivityIndicator IsVisible="{Binding SavePartCommand.IsRunning}"
+                           IsRunning="{Binding SavePartCommand.IsRunning}"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="CenterAndExpand"
+                           Grid.RowSpan="4"/>
+    </Grid>
+</ContentPage>

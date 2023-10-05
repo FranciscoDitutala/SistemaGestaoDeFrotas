@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fleet.MauiPrincipal.View.Vehicle.VehicleBrandPage"
+              xmlns:viewmodel="clr-namespace:Fleet.MauiPrincipal.ViewModel"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome"
+             xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
+             xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+             xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"  
+             Title="Marcas de Veiculos"
+             x:DataType="viewmodel:VehicleBrandViewModel">
+    
+    <FlexLayout Margin="10"   FlowDirection="LeftToRight" Direction="Column" 
+              >
+
+        <input:FormView Spacing="10" Margin="20,30" HeightRequest="200" >
+            <Grid RowDefinitions="*" ColumnDefinitions="*,5*"   >
+                <Image Source="nodata.png" HeightRequest="200" WidthRequest="200" Grid.Row="0" Grid.Column="0"  />
+                <VerticalStackLayout Grid.RowSpan="2" Grid.Column="1" Spacing="15" >
+                <material:TextField Padding="10,0,0,0"
+                Title="Nome da Marca" HeightRequest="100"
+                 Icon="{FontImageSource FontFamily=MaterialRegular,
+                Glyph={x:Static m:MaterialRegular.Car_rental}}"
+                />
+                    <material:TextField
+                Title="Nome da Empresa" Padding="10,0,0,0"
+                     Icon="{FontImageSource FontFamily=MaterialRegular,
+                Glyph={x:Static m:MaterialRegular.Color_lens}}"/>
+                    <Button Text="Submit" input:FormView.IsSubmitButton="True" Margin="10,0,0,0"/>
+                </VerticalStackLayout>
+            </Grid>
+        </input:FormView >
+        <VerticalStackLayout   >
+            <SearchBar Margin="40,10" Text="Procurar" ></SearchBar>
+            <material:DataGrid   Margin="40,10"  HeightRequest="200">
+                <material:DataGrid.Columns >
+                    <material:DataGridSelectionColumn />
+                    <material:DataGridColumn  Title="Imagem" />
+                    <material:DataGridColumn  Title="Nome Completo" />
+                    <material:DataGridColumn  Title="Nome Curto" />
+                </material:DataGrid.Columns>
+            </material:DataGrid>
+            <Button Text="Remover" input:FormView.IsSubmitButton="True" StyleClass="FilledButton" WidthRequest="200" HorizontalOptions="End" Margin="30,0,40,0"/>
+        </VerticalStackLayout>
+
+    </FlexLayout>
+
+
+</ContentPage>

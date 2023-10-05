@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fleet.MauiPrincipal.View.Vehicle.VehiclePage"
+             xmlns:views="clr-namespace:Fleet.MauiPrincipal.View.Vehicle"
+             xmlns:viewmodel="clr-namespace:Fleet.MauiPrincipal.ViewModel"
+             x:DataType="viewmodel:VehiclePageViewModel"
+             
+          
+             
+             
+             >
+    <TabBar >
+        <Tab Title="Veiculo" > 
+            <ShellContent Title="Cadastrar"
+                         ContentTemplate="{DataTemplate views:VehicleListPage}" />
+            <ShellContent Title="Listar"
+                         ContentTemplate="{DataTemplate views:VehicleAddPage}" />
+            
+        </Tab>
+        <Tab Title="Modelo">
+            <ShellContent Title="Cadastrar"
+                         ContentTemplate="{DataTemplate views:VehicleModelPage}" />
+            
+        </Tab>
+        <Tab Title="Marca">
+            <ShellContent 
+                         ContentTemplate="{DataTemplate views:VehicleBrandPage}" />
+        </Tab>
+        <Tab Title="Variante">
+            <ShellContent Title="Cadastrar"
+                         ContentTemplate="{DataTemplate views:VehicleVaraintPage}" />
+            <ShellContent Title="Listar"
+                         ContentTemplate="{DataTemplate views:VehicleVariantList}" />
+        </Tab>
+    </TabBar>
+</Shell>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fleet.MauiPrincipal.View.Vehicle.VehicleVaraintPage"
+              xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome"
+             xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
+             xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+              xmlns:controls="https://trungnt2910.github.io/schemas/maui/2022/colorpicker"
+             xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
+             xmlns:viewModel="clr-namespace:Fleet.MauiPrincipal.ViewModel"
+             x:DataType="viewModel:VehicleVariantViewModel"
+             Title="VehicleVaraintPage">
+    
+    <ScrollView Margin="0,20,30,10"  FlowDirection="LeftToRight" >
+
+        <Grid RowDefinitions="15*,*" ColumnDefinitions="5*,5*"  ColumnSpacing="15"  >
+            <VerticalStackLayout Grid.RowSpan="1" Grid.Column="0" Spacing="25" Padding="0,10">
+
+                <material:TextField Padding="10,0,0,0"
+                Title="Nome da Marca"
+                 Icon="{FontImageSource FontFamily=MaterialRegular,
+                Glyph={x:Static m:MaterialRegular.Car_rental}}"
+                />
+               
+                <material:PickerField 
+                Title="Tipo de Tração"  Padding="10,0,0,0"
+                    Icon="{FontImageSource FontFamily=MaterialRegular,
+                Glyph={x:Static m:MaterialRegular.Car_rental}}"/>
+                <material:PickerField
+                Title="Tipo de veiculo" Padding="10,0,0,0"
+                 Icon="{FontImageSource FontFamily=MaterialRegular,
+                Glyph={x:Static m:MaterialRegular.Car_rental}}"
+                />
+                <material:PickerField
+                Title="Cilindro"  Padding="10,0,0,0"
+                     Icon="{FontImageSource FontFamily=MaterialRegular,
+                Glyph={x:Static m:MaterialRegular.Settings}}"/>
+                <material:PickerField
+                Title="Combustivel"  Padding="10,0,0,0"
+                     Icon="{FontImageSource FontFamily=MaterialRegular,
+                Glyph={x:Static m:MaterialRegular.Settings}}"/>
+                <material:PickerField
+                Title="Transmição"  Padding="10,0,0,0"
+                     Icon="{FontImageSource FontFamily=MaterialRegular,
+                Glyph={x:Static m:MaterialRegular.Settings}}"/>
+            </VerticalStackLayout>
+            
+            <VerticalStackLayout Grid.RowSpan="2" Grid.Column="1" Spacing="25" Padding="0,10,5,0" >
+                
+                <material:DatePickerField
+                Title="Informe a Data" Padding="10,0,0,0"
+                     Icon="{FontImageSource FontFamily=MaterialRegular,
+                Glyph={x:Static m:MaterialRegular.Date_range}}"/>
+                <material:TextField Padding="10,0,0,0"
+                Title="Codigo"
+                 Icon="{FontImageSource FontFamily=MaterialRegular,
+                Glyph={x:Static m:MaterialRegular.Car_rental}}"
+                />
+                <material:TextField
+                Title="Numero de Porta" Padding="10,0,0,0"
+                     Icon="{FontImageSource FontFamily=MaterialRegular,
+                Glyph={x:Static m:MaterialRegular.Color_lens}}"/>
+                <material:TextField 
+                Title="Numero de Cilindro" Padding="10,0,0,0"
+                    Icon="{FontImageSource FontFamily=MaterialRegular,
+                Glyph={x:Static m:MaterialRegular.Car_rental}}"/>
+              <material:TextField
+                Title="Consumo Km/h" Padding="10,0,0,0"
+                 Icon="{FontImageSource FontFamily=MaterialRegular,
+                Glyph={x:Static m:MaterialRegular.Car_rental}}"
+                />
+                <material:TextField
+                Title="Velocidade" Padding="10,0,0,0"
+                 Icon="{FontImageSource FontFamily=MaterialRegular,
+                Glyph={x:Static m:MaterialRegular.Car_rental}}"
+             />
+            </VerticalStackLayout>
+            <Button Grid.Row="2" Grid.Column="2" Text="Guardar"  input:FormView.IsSubmitButton="True" HeightRequest="60" Margin="10,0,0,50" />
+        </Grid>
+
+       
+
+    </ScrollView>
+
+</ContentPage>

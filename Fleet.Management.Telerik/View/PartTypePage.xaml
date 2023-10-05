@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fleet.Management.View.PartTypePage"
+             xmlns:model="clr-namespace:Fleet.Parts;assembly=Fleet.Parts.Shared"
+             xmlns:viewmodel="clr-namespace:Fleet.Management.ViewModel"
+             x:DataType="viewmodel:PartTypeViewModel"
+             Title="{Binding Title}">
+    <Grid RowDefinitions="*,Auto" RowSpacing="0">
+        
+        <RefreshView Command="{Binding GetPartsCommand}"
+                     IsRefreshing="{Binding IsRefreshing}">
+            <CollectionView
+                ItemsSource="{Binding Parts}"
+                SelectionMode="None">
+                <CollectionView.EmptyView>
+                    <StackLayout Padding="100" Opacity="0.4">
+                        <Image WidthRequest="450" HeightRequest="450"
+                            HorizontalOptions="CenterAndExpand"
+                            Source="nodata.png"
+                            VerticalOptions="CenterAndExpand" />
+                    </StackLayout>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:PartPayload">
+                        <Grid Margin="8">
+                            <Frame HeightRequest="84" BackgroundColor="Transparent">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:PartTypeViewModel}}, Path=GoToPartAsync}"
+                                    CommandParameter="{Binding .}"/>
+                                </Frame.GestureRecognizers>
+                                <VerticalStackLayout
+                                    VerticalOptions="Center"
+                                    Padding="8">
+                                    <Label LineBreakMode="WordWrap">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding PartTypeName}" FontAttributes="Bold" />
+                                                <Span>
+                                                    <Span.Text>
+                                                        <MultiBinding StringFormat="{} {0} ({1})">
+                                                            <Binding Path="ReleaseYear" />
+                                                            <Binding Path="TechnicalSpecs.FuelType" />
+                                                        </MultiBinding>
+                                                    </Span.Text>
+                                                </Span>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label FontAttributes="Italic">
+                                        <Label.Text>
+                                            <MultiBinding StringFormat="{}{0}, {1} ({2} Velocidades)">
+                                                <Binding Path="BodySpecs.BodyStyle" />
+                                                <Binding Path="TechnicalSpecs.TransmissionType" />
+                                                <Binding Path="TechnicalSpecs.TransmissionSpeeds" />
+                                            </MultiBinding>
+                                        </Label.Text>
+                                    </Label>
+                                </VerticalStackLayout>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+        <HorizontalStackLayout Grid.Row="3" BackgroundColor="{StaticResource Primary}">
+            <ImageButton Source="add_64px.png" Margin="2" HeightRequest="50"
+                         Command="{Binding GoToNewPartCommand}"/>
+            <ImageButton Source="synchronize_64px.png" Margin="2" HeightRequest="50"
+                         Command="{Binding GetPartsCommand}"/>
+        </HorizontalStackLayout>
+
+
+        <ActivityIndicator IsVisible="{Binding GetPartsCommand.IsRunning}"
+                           IsRunning="{Binding GetPartsCommand.IsRunning}"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="CenterAndExpand"
+                           Grid.RowSpan="5"/>
+    </Grid>
+</ContentPage>

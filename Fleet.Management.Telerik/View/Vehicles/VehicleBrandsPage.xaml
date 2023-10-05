@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fleet.Management.View.VehicleBrandsPage"
+             xmlns:model="clr-namespace:Fleet.Common;assembly=Fleet.Common.Shared"
+             xmlns:viewmodel="clr-namespace:Fleet.Management.ViewModel"
+             x:DataType="viewmodel:VehicleBrandsViewModel"
+             Title="{Binding Title}" >
+    <Grid
+        RowDefinitions="*,Auto"
+        RowSpacing="0">
+        <RefreshView
+            Command="{Binding GetVehicleBrandsCommand}"
+            IsRefreshing="{Binding IsRefreshing}">
+            <CollectionView
+                ItemsSource="{Binding VehicleBrands}"
+                SelectionMode="None">
+                <CollectionView.EmptyView>
+                    <StackLayout Padding="100" Opacity="0.4">
+                        <Image
+                            HorizontalOptions="CenterAndExpand"
+                            Source="nodata.png"
+                            VerticalOptions="CenterAndExpand" />
+                    </StackLayout>
+                </CollectionView.EmptyView>
+                <!--<CollectionView.ItemsLayout>
+                    <GridItemsLayout  Orientation="Vertical" Span="2"/>
+                </CollectionView.ItemsLayout>-->
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:VehicleBrandPayload">
+                        <Grid Margin="10">
+                            <Frame HeightRequest="125">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:VehicleBrandsViewModel}}, Path=GoToVehicleBrandCommand}"
+                                        CommandParameter="{Binding .}"/>
+                                </Frame.GestureRecognizers>
+                                <Grid Padding="0" ColumnDefinitions="125,*">
+                                    <Image
+                                        Aspect="AspectFit"
+                                        HeightRequest="125"
+                                        Source="{Binding LogoData, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}"
+                                        WidthRequest="125" />
+                                    <VerticalStackLayout
+                                        VerticalOptions="Center"
+                                        Grid.Column="1"
+                                        Padding="10">
+                                        <Label Text="{Binding Name}" Style="{StaticResource CaptionLabelStyle}"/>
+                                        <Label Text="{Binding Company}" FontAttributes="Italic"/>
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+        <HorizontalStackLayout Grid.Row="1" BackgroundColor="{StaticResource Primary}">
+            <ImageButton Source="add_64px.png" Margin="2" HeightRequest="50"
+                         Command="{Binding GoToVehicleBrandCommand}"/>
+            <ImageButton Source="synchronize_64px.png" Margin="2" HeightRequest="50"
+                         Command="{Binding GetVehicleBrandsCommand}"/>
+        </HorizontalStackLayout>
+
+
+        <ActivityIndicator IsVisible="{Binding GetVehicleBrandsCommand.IsRunning}"
+                           IsRunning="{Binding GetVehicleBrandsCommand.IsRunning}"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="CenterAndExpand"
+                           Grid.RowSpan="2"/>
+    </Grid>
+
+</ContentPage>

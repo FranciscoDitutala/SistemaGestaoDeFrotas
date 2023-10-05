@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+option csharp_namespace = "Fleet.Parts";
+
+import "google/protobuf/timestamp.proto";
+import "Protos/customTypes.proto";
+import "Protos/fileData.proto";
+
+service StockEntryManager {
+  rpc Create (CreateStockEntryRequest) returns (StockEntryPayload);
+  rpc find (FindStockEntryRequest) returns (StockEntryPayload);
+  rpc FindAll (FindStockEntriesRequest) returns (stream StockEntryPayload);
+  rpc Update (UpdateStockEntryRequest) returns (StockEntryPayload);
+  rpc Delete (DeleteStockEntryRequest) returns (StockEntryPayload);
+}
+
+
+message FindStockEntryRequest{
+	 int32 id = 1;
+}
+message FindStockEntriesRequest {
+  bool by_date_range = 1;
+  google.protobuf.Timestamp from_date = 2;
+  google.protobuf.Timestamp to_date = 3;
+}
+
+message StockEntryLinePayload {
+  string part_u_p_c = 1;
+  string part_type_name = 2;
+  string description = 3;
+  CustomTypes.DecimalValue quantity = 4;
+}
+
+message DeleteStockEntryRequest {
+  int32 id = 1;
+}
+
+message CreateStockEntryRequest {
+  string providers_info = 1;
+  string notes = 2;
+  CustomTypes.DecimalValue total_value = 3;
+  repeated StockEntryLinePayload lines = 4;
+}
+
+message UpdateStockEntryRequest {
+  int32 id = 1;
+  string providers_info = 2;
+  string notes = 3;
+  CustomTypes.DecimalValue total_value = 4;
+  repeated StockEntryLinePayload lines = 5;
+}
+
+message StockEntryPayload {
+  int32 id = 1;
+  google.protobuf.Timestamp registered_date = 2;
+  string registered_by = 3;
+  google.protobuf.Timestamp last_updated = 4;
+  string last_updated_by = 5;
+  string providers_info = 6;
+  string notes = 7;
+  CustomTypes.DecimalValue total_value = 8;
+  repeated StockEntryLinePayload lines = 9;
+  repeated Files.DocumentMetadataPayload documents = 10;
+}

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fleet.Management.View.VehicleVariantPage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:model="clr-namespace:Fleet.Common;assembly=Fleet.Common.Shared"
+             xmlns:viewmodel="clr-namespace:Fleet.Management.ViewModel"
+             x:DataType="viewmodel:VehicleVariantViewModel"
+             Title="{Binding Title}">
+    <Grid RowDefinitions=".2*,Auto,*,Auto" RowSpacing="0">
+        <Image Source="{Binding BrandLogo, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}"
+               Grid.RowSpan="3"
+               Opacity="0.2"/>
+        <Grid Grid.Row="1" ColumnDefinitions="1.6*,*" ColumnSpacing="4" Margin="8"
+              RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+
+            <Label Grid.Column="0" Grid.Row="0" Text="Nome da Variante:" Style="{StaticResource CaptionLabelStyle}"></Label>
+            <Label Grid.Column="1" Grid.Row="0" Text="Código:" Style="{StaticResource CaptionLabelStyle}"></Label>
+            <Entry Grid.Column="0" Grid.Row="1" Placeholder="[Nome]" Text="{Binding Name, Mode=TwoWay}" Margin="0, 0, 0, 24">
+                <Entry.Behaviors>
+                    <toolkit:TextValidationBehavior 
+                        InvalidStyle="{StaticResource InvalidEntryStyle}"
+                        ValidStyle="{StaticResource ValidEntryStyle}"
+                        Flags="ValidateOnValueChanged"
+                        MinimumLength="1"
+                        MaximumLength="120" />
+                </Entry.Behaviors>
+            </Entry>
+            <Entry Grid.Column="1" Grid.Row="1" Placeholder="[Nome Técnico]" Text="{Binding TechnicalName, Mode=TwoWay}" Margin="0, 0, 0, 24">
+                <Entry.Behaviors>
+                    <toolkit:TextValidationBehavior 
+                        InvalidStyle="{StaticResource InvalidEntryStyle}"
+                        ValidStyle="{StaticResource ValidEntryStyle}"
+                        Flags="ValidateOnValueChanged"
+                        MinimumLength="1"
+                        MaximumLength="30" />
+                </Entry.Behaviors>
+            </Entry>
+
+            <Label Grid.Column="0" Grid.Row="2" Text="Tipo de Tracção:" Style="{StaticResource CaptionLabelStyle}"></Label>
+            <Label Grid.Column="1" Grid.Row="2" Text="Ano de Fabrico:" Style="{StaticResource CaptionLabelStyle}"></Label>
+            <Picker Grid.Column="0" Grid.Row="3"  ItemsSource="{Binding DrivertrainTypes}" SelectedItem="{Binding DrivertrainType, Mode=TwoWay}" Margin="0, 0, 0, 24"></Picker>
+            <Entry Grid.Column="1" Grid.Row="3" Placeholder="Ano [1975 - ...]" Text="{Binding ReleaseYear, Mode=TwoWay}" Keyboard="Numeric" Margin="0, 0, 0, 24">
+                <Entry.Behaviors>
+                    <toolkit:NumericValidationBehavior 
+                        InvalidStyle="{StaticResource InvalidEntryStyle}"
+                        ValidStyle="{StaticResource ValidEntryStyle}"
+                        Flags="ValidateOnValueChanged"
+                        MinimumValue="1975"
+                        MaximumValue="2050"
+                        MaximumDecimalPlaces="0" />
+                </Entry.Behaviors>
+            </Entry>
+
+            <Label Grid.Column="0" Grid.Row="4" Text="Tipo de Vehículo:" Style="{StaticResource CaptionLabelStyle}"></Label>
+            <Label Grid.Column="1" Grid.Row="4" Text="Número de Portas:" Style="{StaticResource CaptionLabelStyle}"></Label>
+            <Picker Grid.Column="0" Grid.Row="5" ItemsSource="{Binding BodyStyles}" SelectedItem="{Binding BodyStyle, Mode=TwoWay}" Margin="0, 0, 0, 24"></Picker>
+            <Entry Grid.Column="1" Grid.Row="5"  Placeholder="Portas [0 - 10]" Text="{Binding NumDoors, Mode=TwoWay}" Keyboard="Numeric" Margin="0, 0, 0, 24">
+                <Entry.Behaviors>
+                    <toolkit:NumericValidationBehavior 
+                        InvalidStyle="{StaticResource InvalidEntryStyle}"
+                        ValidStyle="{StaticResource ValidEntryStyle}"
+                        Flags="ValidateOnValueChanged"
+                        MinimumValue="0"
+                        MaximumValue="10"
+                        MaximumDecimalPlaces="0" />
+                </Entry.Behaviors>
+            </Entry>
+
+            <Label Grid.Column="0" Grid.Row="6" Text="Disposição dos Cilindros:" Style="{StaticResource CaptionLabelStyle}"></Label>
+            <Label Grid.Column="1" Grid.Row="6" Text="Número de Cilindros:" Style="{StaticResource CaptionLabelStyle}"></Label>
+            <Picker Grid.Column="0" Grid.Row="7"  ItemsSource="{Binding CylinderArrangements}" SelectedItem="{Binding CylinderArrangement, Mode=TwoWay}" Margin="0, 0, 0, 24"></Picker>
+            <Entry Grid.Column="1" Grid.Row="7"  Placeholder="Cilindros [0 - 99]" Text="{Binding NumCylinders, Mode=TwoWay}" Keyboard="Numeric" Margin="0, 0, 0, 24">
+                <Entry.Behaviors>
+                    <toolkit:NumericValidationBehavior 
+                        InvalidStyle="{StaticResource InvalidEntryStyle}"
+                        ValidStyle="{StaticResource ValidEntryStyle}"
+                        Flags="ValidateOnValueChanged"
+                        MinimumValue="0"
+                        MaximumValue="99"
+                        MaximumDecimalPlaces="0" />
+                </Entry.Behaviors>
+            </Entry>
+
+            <Label Grid.Column="0" Grid.Row="8" Text="Combustível:" Style="{StaticResource CaptionLabelStyle}"></Label>
+            <Label Grid.Column="1" Grid.Row="8" Text="Consumo (Km/L):" Style="{StaticResource CaptionLabelStyle}"></Label>
+            <Picker Grid.Column="0" Grid.Row="9"  ItemsSource="{Binding FuelTypes}" SelectedItem="{Binding FuelType, Mode=TwoWay}" Margin="0, 0, 0, 24"></Picker>
+            <Entry Grid.Column="1" Grid.Row="9"  Placeholder="Consumo [0.00 - 999.99]" Text="{Binding ConsumptionKmL, Mode=TwoWay}" Keyboard="Numeric" Margin="0, 0, 0, 24">
+                <Entry.Behaviors>
+                    <toolkit:NumericValidationBehavior 
+                        InvalidStyle="{StaticResource InvalidEntryStyle}"
+                        ValidStyle="{StaticResource ValidEntryStyle}"
+                        Flags="ValidateOnValueChanged"
+                        MinimumValue="0.00"
+                        MaximumValue="999.99"
+                        MaximumDecimalPlaces="2" />
+                </Entry.Behaviors>
+            </Entry>
+
+            <Label Grid.Column="0" Grid.Row="10" Text="Transmissão:" Style="{StaticResource CaptionLabelStyle}"></Label>
+            <Label Grid.Column="1" Grid.Row="10" Text="Velocidades:" Style="{StaticResource CaptionLabelStyle}"></Label>
+            <Picker Grid.Column="0" Grid.Row="11"  ItemsSource="{Binding TransmissionTypes}" SelectedItem="{Binding TransmissionType, Mode=TwoWay}" Margin="0, 0, 0, 24"></Picker>
+            <Entry Grid.Column="1" Grid.Row="11"  Placeholder="Velocidades [1 - 99]" Text="{Binding TransmissionSpeeds, Mode=TwoWay}" Keyboard="Numeric" Margin="0, 0, 0, 24">
+                <Entry.Behaviors>
+                    <toolkit:NumericValidationBehavior 
+                        InvalidStyle="{StaticResource InvalidEntryStyle}"
+                        ValidStyle="{StaticResource ValidEntryStyle}"
+                        Flags="ValidateOnValueChanged"
+                        MinimumValue="1"
+                        MaximumValue="99"
+                        MaximumDecimalPlaces="0" />
+                </Entry.Behaviors>
+            </Entry>
+
+        </Grid>
+
+        <HorizontalStackLayout Grid.Row="3" BackgroundColor="{StaticResource Primary}">
+            <ImageButton Source="save_64px.png" Margin="2" HeightRequest="50"
+                         Command="{Binding SaveVehicleVariantCommand}" IsEnabled="{Binding IsChanged}"
+                         ToolTipProperties.Text="Salvar" />
+        </HorizontalStackLayout>
+
+
+        <ActivityIndicator IsVisible="{Binding SaveVehicleVariantCommand.IsRunning}"
+                           IsRunning="{Binding SaveVehicleVariantCommand.IsRunning}"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="CenterAndExpand"
+                           Grid.RowSpan="4"/>
+    </Grid>
+</ContentPage>

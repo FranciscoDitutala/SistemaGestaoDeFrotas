@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fleet.MauiPrincipal.View.session.Login"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome"
+             xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
+             xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+              xmlns:controls="https://trungnt2910.github.io/schemas/maui/2022/colorpicker"
+             xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
+                xmlns:viewModel="clr-namespace:Fleet.MauiPrincipal.ViewModel.session"
+               x:DataType="viewModel:LoginViewModel"
+             NavigationPage.HasNavigationBar="False"
+               Title="Login">
+          
+
+
+    <FlexLayout    FlowDirection="LeftToRight" Direction="Column" Wrap="Wrap" 
+            JustifyContent="Center" AlignItems="Center"  AlignContent="Center" BackgroundColor="WhiteSmoke">
+        <input:FormView Spacing="10" FlowDirection="LeftToRight">
+            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Margin="0,40,0,0">
+
+                <Label  Text="SEJA BEM-VINDO " FontSize="Large" TextColor="#512BD4" FontAttributes="Bold"
+                        VerticalOptions="Center" HorizontalOptions="Center" />
+                <Label  Text="Faça o seu Login  " FontSize="Micro" TextColor="#111111" FontAttributes="Italic"
+                         VerticalOptions="Center" HorizontalOptions="Center" />
+
+            </VerticalStackLayout>
+
+            <VerticalStackLayout BackgroundColor="WhiteSmoke"  HeightRequest="600" WidthRequest="500" 
+                                 HorizontalOptions="Center" VerticalOptions="Center" Padding="20" Margin="20">
+
+                <VerticalStackLayout Spacing="20" >
+                    
+                    <material:TextField WidthRequest="350" x:Name="UserName" 
+                         Title="Nome de Usuario" 
+                              Icon="{FontImageSource FontFamily=MaterialRegular,
+                         Glyph={x:Static m:MaterialRegular.Supervised_user_circle}}"/>
+                    <material:TextField WidthRequest="350"
+                             Title="Senha" x:Name="PassUser"
+                                  Icon="{FontImageSource FontFamily=MaterialRegular,
+                             Glyph={x:Static m:MaterialRegular.Email}}"/>
+                 
+                    <!--<material:TextField
+                        x:Name="PassUser" WidthRequest="350"
+                        />-->
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="10" HorizontalOptions="Center" VerticalOptions="Center" Padding="0,10,0,0">
+
+                    <Button StyleClass="FilledButton" WidthRequest="350"  Text="Entrar" Clicked="EntrarSistema" />
+
+                    <HorizontalStackLayout>
+                        <Button HorizontalOptions="End" Text="Recuperar Senha " Padding="0,0,10,0"  WidthRequest="350"  
+                            BackgroundColor="WhiteSmoke" TextColor="Green" Clicked="RecuperarSenha"
+                          FontAttributes="Bold" FontSize="Small"/>
+                        <!--<Button HorizontalOptions="End" Text="Recuperar a Senha!>" Padding="0,0,10,0" StyleClass="" WidthRequest="350"  
+                            BackgroundColor="WhiteSmoke" TextColor="Green"
+                              FontAttributes="Bold" FontSize="Small"/>-->
+                    </HorizontalStackLayout>
+            
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+            
+          </input:FormView>
+    </FlexLayout>
+
+</ContentPage>

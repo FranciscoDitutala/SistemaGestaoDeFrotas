@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="Fleet.Management.View.PartView">
+    <Grid RowDefinitions=".2*,Auto,*,Auto" RowSpacing="0">
+        <Image Source="{Binding BrandLogo, Mode=OneWay, Converter={StaticResource ByteArrayToImageSourceConverter}}"
+               Grid.RowSpan="3"
+               Opacity="0.2"/>
+        <Grid Grid.Row="1" ColumnDefinitions="1.6*,*" ColumnSpacing="4" Margin="8"
+              RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
+
+            <Label Grid.Column="0" Grid.Row="0" Text="Código Universal:" Style="{StaticResource CaptionLabelStyle}"></Label>
+            <Label Grid.Column="1" Grid.Row="0" Text="Código de Stock:" Style="{StaticResource CaptionLabelStyle}"></Label>
+            <Entry Grid.Column="0" Grid.Row="1" Placeholder="[UPC]" Text="{Binding UPC, Mode=TwoWay}" Margin="0, 0, 0, 24">
+                <Entry.Behaviors>
+                    <toolkit:TextValidationBehavior 
+                        InvalidStyle="{StaticResource InvalidEntryStyle}"
+                        ValidStyle="{StaticResource ValidEntryStyle}"
+                        Flags="ValidateOnValueChanged"
+                        MinimumLength="8"
+                        MaximumLength="16" />
+                </Entry.Behaviors>
+            </Entry>
+            <Entry Grid.Column="1" Grid.Row="1" Placeholder="[SKU]" Text="{Binding SKU, Mode=TwoWay}" Margin="0, 0, 0, 24">
+                <Entry.Behaviors>
+                    <toolkit:TextValidationBehavior 
+                        InvalidStyle="{StaticResource InvalidEntryStyle}"
+                        ValidStyle="{StaticResource ValidEntryStyle}"
+                        Flags="ValidateOnValueChanged"
+                        MinimumLength="4"
+                        MaximumLength="16" />
+                </Entry.Behaviors>
+            </Entry>
+
+            <Label Grid.Column="0" Grid.Row="2" Text="Tipo de Peça:" Style="{StaticResource CaptionLabelStyle}"></Label>
+            <HorizontalStackLayout Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2">
+                <Entry Placeholder="[Filtro]" Text="{Binding Filter, Mode=TwoWay}" Margin="0, 0, 0, 24"></Entry>
+                <Picker ItemsSource="{Binding PartTypes}" SelectedItem="{Binding PartTypeName, Mode=TwoWay}" Margin="0, 0, 0, 24"></Picker>
+            </HorizontalStackLayout>
+
+            <Label Grid.Column="0" Grid.Row="4" Text="Designação:" Style="{StaticResource CaptionLabelStyle}"></Label>
+            <Entry Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Placeholder="[Designação da Peça]" Text="{Binding Desciption, Mode=TwoWay}" Margin="0, 0, 0, 24">
+                <Entry.Behaviors>
+                    <toolkit:TextValidationBehavior 
+                        InvalidStyle="{StaticResource InvalidEntryStyle}"
+                        ValidStyle="{StaticResource ValidEntryStyle}"
+                        Flags="ValidateOnValueChanged"
+                        MinimumLength="1"
+                        MaximumLength="255" />
+                </Entry.Behaviors>
+            </Entry>
+        </Grid>
+
+        <HorizontalStackLayout Grid.Row="3" BackgroundColor="{StaticResource Primary}">
+            <ImageButton Source="save_64px.png" Margin="2" HeightRequest="50"
+                         Command="{Binding SaveVehicleVariantCommand}"
+                         IsEnabled="{Binding IsChanged}"
+                         ToolTipProperties.Text="Salvar" />
+        </HorizontalStackLayout>
+
+
+        <ActivityIndicator IsVisible="{Binding SaveVehicleVariantCommand.IsRunning}"
+                           IsRunning="{Binding SaveVehicleVariantCommand.IsRunning}"
+                           HorizontalOptions="FillAndExpand"
+                           VerticalOptions="CenterAndExpand"
+                           Grid.RowSpan="4"/>
+    </Grid>
+</toolkit:Popup>

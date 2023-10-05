@@ -1,0 +1,23 @@
+﻿
+syntax ="proto3";
+
+option csharp_namespace="Fleet.Transport";
+
+
+service EmployeeManager{
+	rpc FindAllEmployees(FindAllEmployeesRequest) returns (stream EmployeePayload);
+	rpc FindEmployee(FindEmployeeRequest) returns (EmployeePayload);
+}
+
+message FindAllEmployeesRequest{
+}
+
+message FindEmployeeRequest{
+	int32 id=1;
+}
+
+message EmployeePayload{
+	int32 id =1;
+	string name =2;
+	int32 nif=3;
+}
