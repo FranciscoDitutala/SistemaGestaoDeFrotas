@@ -14,12 +14,12 @@ using Fleet.MauiPrincipal.Service;
 using System.Text.Json;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Diagnostics;
 
 namespace Fleet.MauiPrincipal.ViewModel
 {
     public partial class VehicleListPageViewModel : ObservableObject , INotifyPropertyChanged
     {
-
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
@@ -28,29 +28,9 @@ namespace Fleet.MauiPrincipal.ViewModel
         private HttpClient Client;
         JsonSerializerOptions _SerializerOptions;
         string baseUrl = "https://localhost:7111";
-        //[ObservableProperty]
-        //public String _IdProcurar;
-        //[ObservableProperty]
-        //public String _SbProcurar;
-      
-        //[ObservableProperty]
-        //public ObservableCollection<Vehicle> _vehicles;
 
-        //private Vehicle selectedEmployee;
-        //public Vehicle SelectedEmployee
-        //{
-        //    get { return selectedEmployee; }
-        //    set
-        //    {
-        //        if (SelectedEmployee != value)
-        //        {
-        //            selectedEmployee = value;
-        //            OnPropertyChanged(nameof(SelectedEmployee));
-        //        }
-
-        //    }
-        //}
-
+        static Random random = new();
+        public ObservableCollection<Vehicle> VehicleItems { get; } = new();
 
         private List<Vehicle> _vehicles;
         public List<Vehicle> Vehicles
@@ -71,6 +51,7 @@ namespace Fleet.MauiPrincipal.ViewModel
                 PropertyNameCaseInsensitive = true
             };
             CarregarVehiclesAsync();
+
 
         }
   
@@ -94,69 +75,60 @@ namespace Fleet.MauiPrincipal.ViewModel
 
         }
 
-        [ICommand]
-        public async void CarregarVehicleID ()
+        public ObservableCollection<Vehicle> Items { get; set; }
+        public ObservableCollection<Vehicle> SelectedItems { get; set; } = new ObservableCollection<Vehicle>();
+
+        //public Vehicle SelectedItems { get; set; } = new Vehicle();
+        //public ICommand RemoveSelectedCommand { get; set; }
+
+        public ICommand RemoveSelectedCommand => new Command(async () =>
+             await DeletarVehiclesAsync());
+        private async Task DeletarVehiclesAsync()
         {
-            //var vehicleID = Convert.ToInt32(SbProcurar);
-            //if (!string.IsNullOrEmpty(SbProcurar))
-            //{
-                //if (vehicleID > 0)
-                //{
-                //    var url = $"{baseUrl}/FleetTransport/Vehicle/{SbProcurar}";
-                //    var response = await Client.GetAsync(url);
-                //    if (response.IsSuccessStatusCode)
-                //    {
-                //        using (var responseStream = await response.Content.ReadAsStreamAsync())
-                //        {
-                //            var data = await JsonSerializer.DeserializeAsync<Vehicle>(responseStream, _SerializerOptions);
-                //            Vehicle = data;
-                //        }
-            //    //    }
-            //    await AppShell.Current.DisplayAlert("ATT", "Quer procurar pelo ID do Veículo", "OK");
-            //    //}
-            //}
-            //else
-            //{
-             
-                await Shell.Current.GoToAsync(nameof(VehicleBrandPage));
-            //}
-            
+               Items = new ObservableCollection<Vehicle>(_vehicles);
+            foreach (var item in SelectedItems)
+            {
+                Debug.WriteLine("O TAMANHO DO selecteed items" + SelectedItems.Count);
+
+                    //var teste = Items.Remove(item);
+                    if (Items.Contains(item))
+                {
+                    var url = $"{baseUrl}/FleetTransport/Vehicle/{item.Id}";
+                    var response = await Client.DeleteAsync(url);
+                    Debug.WriteLine("A o veiculo foi apagado com id " + item.Id);
+                }
+                else
+                {
+                    Debug.WriteLine("veiculo nao foi apagado");
+                }
+
+                await CarregarVehiclesAsync();
+            }
         }
 
-
-        //Metodo do searchbar
-
-        //public async void CarregarVehicleID ()
-        //{
-        //    await Shell.Current.DisplayAlert("Alerta","Pretendes Fazer Procura ? ","OK"); 
-
+        //public async void GoToVehiclesAddCommand() {
+        //    await Shell.Current.GoToAsync(new VehicleAddPage());
 
         //}
 
 
 
 
-        [ICommand]
-        public async void DisplayAction(Employee employee)
-        { 
-            //var url = $"{baseUrl}/FleetTransport/Vehicle/{SbProcurar}";
-            var option = await AppShell.Current.DisplayActionSheet("Select Option", " OK ", null, "Edit", "Delete");
+        //[ObservableProperty]
+        //public Vehicle _selectedItems;
 
-            //if (option == "Edit")
-            //{
-            //    await AppShell.Current.GoToAsync(nameof(VehicleAddPage));
-          
-            //}
-            //if (option == "Delete")
-            //{
-            //    var response = await Client.DeleteAsync(url);
-              
-            //    if (response.IsSuccessStatusCode )
-            //    {
-            //        await  CarregarVehiclesAsync();
-            //    }
-            //}
-        }
+        //public ICommand RemoveItemCommand => new Command(async () =>
+        //     await RemoveItemAsync ());
+
+        //public async Task RemoveItemAsync()
+        //{
+        //    var item = SelectedItems.Id;
+
+        //    var  url = $"{baseUrl}/FleetTransport/Vehicle/{item}";
+        //    var response = await Client.DeleteAsync(url);
+        //    await CarregarVehiclesAsync();
+
+        //}
 
     }
 }

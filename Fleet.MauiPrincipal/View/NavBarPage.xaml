@@ -6,15 +6,15 @@
              xmlns:viewModel="clr-namespace:Fleet.MauiPrincipal.ViewModel" 
              x:DataType="viewModel:NavBarPageViewModel"
              Title="NavBarPage">
-    <FlyoutPage.Flyout>
+    <!--<FlyoutPage.Flyout>
         <views:VehiclePage x:Name="flyoutPage"  />
     </FlyoutPage.Flyout>
-    <FlyoutPage.Detail>
+    <--><!--FlyoutPage.Detail>
         <NavigationPage>
             <x:Arguments>
                 <views:VehicleModelPage />
             </x:Arguments>
-        </NavigationPage>
+        </NavigationPage>--><!--
         
-    </FlyoutPage.Detail>
+    </FlyoutPage.Detail>-->
 </FlyoutPage>

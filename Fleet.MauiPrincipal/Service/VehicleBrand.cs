@@ -8,10 +8,10 @@ namespace Fleet.MauiPrincipal.Service
 {
     public class VehicleBrand
     {
-        private string Name{get; set;}
-        private string Acronym { get; set; }
-        private string VehicleBrandId { get; set; }
-        private Boolean Enabled { get; set; }
+        public string Name{get; set;}
+        public string Company { get; set; }
+        public string Logo { get; set; }
+    
 
     }
     

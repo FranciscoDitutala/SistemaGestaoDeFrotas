@@ -6,6 +6,7 @@ using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http.Json;
@@ -28,9 +29,15 @@ namespace Fleet.MauiPrincipal.ViewModel
         //private readonly IVehicleService _vehicleService;
 
         [ObservableProperty]
-        public int _BrandId;
+        public string _Brand;
         [ObservableProperty]
         public int _TransmitionType;
+        [ObservableProperty]
+        public string _Registro;
+        [ObservableProperty]
+        public string _Cor;
+        [ObservableProperty]
+        public string _Vin;
         [ObservableProperty]
         public int _VehicleType;
         [ObservableProperty]
@@ -38,59 +45,77 @@ namespace Fleet.MauiPrincipal.ViewModel
         [ObservableProperty]
         public int _FuelConsumption;
         [ObservableProperty]
-        public int _Variante;
+        public string _Variante;
         [ObservableProperty]
         public Vehicle _Vehicle;
         [ObservableProperty]
         public ObservableCollection<Vehicle> _Vehicles;
         [ObservableProperty]
-        public int _Marca;
-        [ObservableProperty]
-        public int _ModelId;
+        public string _Model;
         [ObservableProperty]
         public int _DataFabrico;
+       
 
-        [ObservableProperty]
-        public DateTime _DataRegistro;
+        //[ObservableProperty]
+        //public DateTime _DataRegistro;
 
 
         public VehicleAddPageViewModel()
         {
 
             Client = new HttpClient();
-            //Client.BaseAddress= new Uri(Constants.API_BASE_URL) ;
             Vehicles = new ObservableCollection<Vehicle>();
             _SerializerOptions = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             };
+            CadastraVehicleAsync();
 
         }
 
+
+        //public ICommand CarregarVehiclesCommand => new Command(async () =>
+        //await CarregarVehiclesAsync());
+        //private async Task CarregarVehiclesAsync()
+        //{
         public ICommand CadastraVehicleCommand => new Command(async () =>
+        await CadastraVehicleAsync());
+
+        private async Task CadastraVehicleAsync()
         {
-            var url = $"{baseUrl}/FleetTransport/Vehicle";
-            if (BrandId > 0)
+            if (!string.IsNullOrEmpty(Vin))
             {
                 var vehicle = new Vehicle
                 {
-                    BrandId = BrandId,
-                    ModelId = ModelId,
-                    Power = Power,
+                    Vin = Vin,
+                    Cor = Cor,
+                    Variant = Variante,
+                    Brand = Brand,
+                    Model = Model,
+                    Power = 2,
+                    Registration = "Teste",
                     Transmission = TransmitionType,
                     FuelConsumption = FuelConsumption,
-                    VariantId = Variante,
                     Type = VehicleType,
                     YearOfManufacture = DataFabrico,
-                    RegistrationDate = DataRegistro
+                    RegistrationDate =DateTime.Today
+                    
                 };
+                var url = $"{baseUrl}/FleetTransport/Vehicle";
+                Debug.WriteLine("a COR DO VEICULO É " + vehicle.Cor);
                 string json = JsonSerializer.Serialize<Vehicle>(vehicle, _SerializerOptions);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await Client.PostAsync(url, content);
+                Debug.WriteLine("a COR DO VEICULO É " + json);
                 //await CarregarVehiclesAsync();
             }
+              Debug.WriteLine("Não entrou no if");
         }
-        );
+       
+
+   
+
+
         //public ICommand CarregarVehiclesCommand => new Command(async () =>
         //await CarregarVehiclesAsync());
         //private async Task CarregarVehiclesAsync()
@@ -181,16 +206,7 @@ namespace Fleet.MauiPrincipal.ViewModel
         //   }
         //);
 
-        //   public ICommand DeleteCategoriaCommand => 
-        //       new Command(async () =>
-        //   {
-        //       if (VID > 0)
-        //       {
-        //           var url = $"{baseUrl}/FleetTransport/Vehicle/{VID}";
-        //           var response = await Client.DeleteAsync(url);
-        //           await CarregarVehiclesAsync();
-        //       }
-        //   });
+
 
 
     }

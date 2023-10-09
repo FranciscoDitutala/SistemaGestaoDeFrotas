@@ -8,15 +8,12 @@ public partial class VehicleListPage : ContentPage
 {
     private VehicleListPageViewModel _viewModel;
 
- 
     public VehicleListPage(VehicleListPageViewModel viewModel)
     {
         InitializeComponent();
         _viewModel = viewModel;
         this.BindingContext = _viewModel;
-       
-
-
+     
     }
 
     protected override void OnAppearing()
@@ -36,4 +33,11 @@ public partial class VehicleListPage : ContentPage
     {
 
     }
+//    void OnCollectionViewSelectionChanged(object sender, SelectionChangedEventArgs e)
+//    {
+//        //string previous = (e.PreviousSelection.FirstOrDefault() as Vehicle)?.Vin;
+//        string current = (e.CurrentSelection.FirstOrDefault() as Vehicle?.Vin;
+       
+//}
+
 }

@@ -20,25 +20,31 @@ public partial class Login : ContentPage
 
     private async void EntrarSistema(object sender, EventArgs e)
     {
-        var user = Convert.ToString(UserName);
-        var pass = Convert.ToString(PassUser);
-        if (!(string.IsNullOrEmpty(user) && string.IsNullOrEmpty(pass))) {
-             await Navigation.PushAsync(new AppShell());
+        var user = Convert.ToString(UserName.Text);
+        var pass = Convert.ToString(PassUser.Text);
+        if (((!string.IsNullOrEmpty(user)) && (!string.IsNullOrEmpty(pass))))
+        {
+            if (user.Equals("admin") && pass.Equals("1234"))
+            {
+                await DisplayAlert("Informação", "Login com sucesso", "Ok");
+                UserName.Text = "";
+                PassUser.Text = "";
+                await Navigation.PushAsync(new AppShell());
+            }
+            else
+            {
+                await DisplayAlert("Atenção", "Usuario não encontrado", "Ok");
+            }
         }
         else
         {
-            await Shell.Current.DisplayAlert("", "Usuario ou senha invalida", "Ok");
+            await DisplayAlert("Atenção", "Usuário ou senha invalida", "Ok");
 
-        }
-        
-
+        }   
     }
 
     private async void RecuperarSenha(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new RecuperarUser());
-
     }
-
-
 }

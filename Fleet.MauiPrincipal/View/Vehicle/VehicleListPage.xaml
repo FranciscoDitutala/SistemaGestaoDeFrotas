@@ -14,60 +14,60 @@
 
       
         <HorizontalStackLayout Margin="20,10"  Grid.Row="0" >
-            <Button Text="Adicionar" StyleClass="FilledButton"
+            <Button Text="Adicionar" StyleClass="FilledButton"  
          HorizontalOptions="EndAndExpand" Clicked="GoToVehicleAddPage"  />
 
-          <Button Text="Listar" StyleClass="FilledButton"
-         HorizontalOptions="EndAndExpand" Command="{Binding CarregarVehiclesCommand}" />
+           <Button Text="Listar" StyleClass="FilledButton"
+                HorizontalOptions="EndAndExpand" Command="{Binding CarregarVehiclesCommand}" />
+            
+            <Button Text="Apagar" StyleClass="FilledButton"
+                HorizontalOptions="EndAndExpand" Command="{Binding RemoveSelectedCommand}" />
       
         </HorizontalStackLayout>
         <SearchBar Grid.Row="1"  x:Name="IdProcurar" Margin="20,20" Placeholder="Procurar"  
-                   HeightRequest="0"   SearchCommand="{Binding CarregarVehicleIDCommand}" ></SearchBar >
+                   HeightRequest="0"   ></SearchBar >
 
 
-        <ScrollView  Margin="20,0" Grid.Row="3" >
-            <CollectionView  x:Name="collectionVehicle" HeightRequest="500" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" BackgroundColor="WhiteSmoke" 
-                              WidthRequest="1100"  ItemsSource="{Binding Vehicles}" EmptyView="Lista Vazia" >
-                <CollectionView.ItemTemplate >
-                    <DataTemplate>
-                        <HorizontalStackLayout>
+        <ScrollView  Grid.Row="2"  >
 
-                            <Grid RowDefinitions="*" ColumnDefinitions="*,*,*,*,*,*,*,*,*">
-                                <Frame Grid.ColumnSpan="9" CornerRadius="0" BorderColor="Gray" Margin="4" BackgroundColor="White" >
-                                    <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodel:VehicleListPageViewModel}},
-                                         Path=DisplayActionCommand}" CommandParameter="{Binding .}">
-                                        </TapGestureRecognizer>
-                                    </Frame.GestureRecognizers>
-                                </Frame>
+            <material:DataGrid ItemsSource="{Binding Vehicles}" HorizontalOptions="Start" Margin="2"  BackgroundColor="WhiteSmoke" 
+                                LineSeparatorColor="Blue" SelectedItems="{Binding SelectedItems}" >
+                <material:DataGrid.EmptyView>
+                    <VerticalStackLayout Margin="80,20">
+                        <Image
+				                WidthRequest="40"
+				                HeightRequest="40"
+				                HorizontalOptions="Center"
+				                VerticalOptions="Center"
+				                Source="{FontImageSource FontFamily=MaterialOutlined, Glyph={x:Static m:MaterialOutlined.Backup_table}, Color={AppThemeBinding
+                                Light={StaticResource OnSurface}, Dark={StaticResource OnSurfaceDark}}}"/>
+                        <Label Text="No data available..." HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </material:DataGrid.EmptyView>
+                <material:DataGrid.Columns >
+                    <material:DataGridSelectionColumn />
+                    <material:DataGridColumn  Binding="{Binding Vin}" Title="Chassis"/>
+                    <material:DataGridColumn Binding="{Binding Cor}" Title="Marca"/>
+                    <material:DataGridColumn Binding="{Binding Model}" Title="Modelo" />
+                    <material:DataGridColumn Binding="{Binding Brand}" Title="Tipo"/>
+                    <material:DataGridColumn Binding="{Binding Variant}" Title="Potencia"/>
+                    <material:DataGridColumn Binding="{Binding Type}" Title="Combustivel" />
+                    <material:DataGridColumn Binding="{Binding Power}" Title="Data Registro"/>
+                    <material:DataGridColumn Binding="{Binding FuelConsumption}" Title="Consumo" />
+                    <material:DataGridColumn Binding="{Binding RegistrationDate}" Title="Registro"/>
+                    <!--<material:DataGridColumn Binding="{Binding Transmission}" Title="Transmissão"/>
+                    <material:DataGridColumn Binding="{Binding YearOfManufacture}" Title="Ano de Fabrico" />-->
+                   
+                    <!--<material:DataGridColumn Title="Actions" >
+                        <material:DataGridColumn.CellItemTemplate    >
+                            <DataTemplate>
 
-                                <!--<Label x:Name="Fuel"  Grid.Column="0" TextColor="#512BD4" Text="{Binding }"
-                                       MinimumWidthRequest="90"  FontSize="Medium"  FontAttributes="Bold"  Padding="10" />
-                                <Label  Grid.Column="1" FontSize="Medium" MinimumWidthRequest="90"  FontAttributes="Bold" 
-                                        TextColor="#512BD4" Text="{Binding BrandId }" Padding="10" />
-                                <Label Grid.Column="2" FontSize="Medium" MinimumWidthRequest="90" FontAttributes="Bold" 
-                                       TextColor="#512BD4" Text="{Binding  Transmission }" Padding="10" />
-                                <Label Grid.Column="3" FontSize="Medium" MinimumWidthRequest="90" FontAttributes="Bold" 
-                                       TextColor="#512BD4"  Text="{Binding ModelId }" Padding="10" />
-                                <Label  Grid.Column="4" FontSize="Medium" MinimumWidthRequest="100" FontAttributes="Bold" 
-                                        TextColor="#512BD4" Text="{Binding YearOfManufacture }" Padding="10"/>
-                                <Label  Grid.Column="5"  FontSize="Medium" MinimumWidthRequest="90" FontAttributes="Bold" 
-                                        TextColor="#512BD4"  Text="{Binding  Power }" Padding="10" />
-                                <Label  Grid.Column="6" FontSize="Medium" MinimumWidthRequest="90" FontAttributes="Bold"
-                                        TextColor="#512BD4" Text="{Binding  Type }" Padding="10"  />
-                                <Label  Grid.Column="7" FontSize="Medium" MinimumWidthRequest="90" FontAttributes="Bold" 
-                                        TextColor="#512BD4" Text="{Binding VariantId }" Padding="10" />
-                                <Label Grid.Column="8" FontSize="Medium" MinimumWidthRequest="120" FontAttributes="Bold" 
-                                       TextColor="#512BD4" Text="{Binding RegistrationDate }" Padding="10"/>-->
-                                
-                            </Grid>
-                           
-                        </HorizontalStackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-               
-
-            </CollectionView>
+                                <Button Text="Remover" Command="{Binding RemoveSelectedCommand}"/>
+                            </DataTemplate>
+                        </material:DataGridColumn.CellItemTemplate>
+                    </material:DataGridColumn>-->
+                </material:DataGrid.Columns>
+            </material:DataGrid>
         </ScrollView>
 
     </Grid>

@@ -8,10 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Fleet.MauiPrincipal.ViewModel
 {
-    public  class VehicleAssignViewModel: ObservableObject, INotifyPropertyChanged
+    public partial class VehicleAssignViewModel: ObservableObject, INotifyPropertyChanged
     {
         //[ObservableProperty]
         //public ObservableCollection _Items { get; set; }
@@ -20,6 +21,7 @@ namespace Fleet.MauiPrincipal.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        static Random random = new();
 
         private HttpClient Client;
         JsonSerializerOptions _SerializerOptions;
@@ -46,7 +48,29 @@ namespace Fleet.MauiPrincipal.ViewModel
                 OnPropertyChanged(nameof(Vehicles));
             }
         }
-         public VehicleAssignViewModel()
+
+
+        [ObservableProperty]
+        public int _Tipo;
+        [ObservableProperty]
+        public int _Orgao;
+        [ObservableProperty]
+        public string _Descricao;
+
+        public ObservableCollection<Vehicle> AtribuirItems { get; } = new();
+
+        private List<Assignment> _atribuir;
+        public List<Assignment> Atribuicoes
+        {
+            get { return _atribuir; }
+            set
+            {
+                _atribuir = value;
+                OnPropertyChanged(nameof(Atribuicoes));
+            }
+        }
+
+        public VehicleAssignViewModel()
         {
             Client = new HttpClient();
             _SerializerOptions = new JsonSerializerOptions
@@ -55,7 +79,9 @@ namespace Fleet.MauiPrincipal.ViewModel
             };
             CarregarVehiclesAsync();
             CarregarEmployee();
-            //Vehicles = new Vehicle { }
+            //CarregarAssignmentAsync();
+            //CadastrarAssignmentAsync();
+
 
         }
 
@@ -73,19 +99,6 @@ namespace Fleet.MauiPrincipal.ViewModel
 
                     Vehicles = data;
                 }
-
-            //Vehicles = new List<Vehicle>
-            //    { new Vehicle {
-            //        BrandId = 1,
-            //        ModelId = 1,
-            //        VariantId = 1,
-            //        YearOfManufacture = 2020,
-            //        Type = 1,
-            //        Power = 1,
-            //        FuelConsumption = 1,
-            //        Transmission = 0,
-            //        RegistrationDate = DateTime.Today
-            //    }};
 
         }
         // Metodo Carregar Empregado
@@ -105,6 +118,7 @@ namespace Fleet.MauiPrincipal.ViewModel
         }
 
         private List<Employee> _employees;
+      
         public List<Employee> Employees
         {
             get { return _employees; }
@@ -127,9 +141,58 @@ namespace Fleet.MauiPrincipal.ViewModel
                         (responseStream, _SerializerOptions);
 
                     Employees = data;
-                }
+                }        
+        }
 
-        
+        //public ICommand CadastrarAssignmentCommand => new Command(async () =>
+        //await  CadastrarAssignmentAsync()
+
+        //    );
+
+        //    public async Task CadastrarAssignmentAsync() { 
+        //        var url = $"{baseUrl}/FleetTransport/Assignment";
+        //        if (!string.IsNullOrEmpty(Descricao))
+        //        {
+        //            var Atribuir = new Assignment
+        //            {
+        //                Type = Tipo,
+        //                OrgaoId = Orgao,
+        //                Description = Descricao,
+        //                EmployeeId = selectedEmployee.Id,
+        //                VehicleId = selectedVehicle.Id
+
+        //            };
+        //            Console.Write("Entrou no if");
+        //            string json = JsonSerializer.Serialize<Assignment>(Atribuir, _SerializerOptions);
+        //            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+        //            var response = await Client.PostAsync(url, content);
+        //        //await AppShell.Current.DisplayAlert("Atenção", "Atribucao com sucesso ", "OK");
+        //       }
+        //    //else
+        //    //{
+        //    //    //await AppShell.Current.DisplayAlert("Atenção", "Atribucao Falhou", "OK");
+
+
+        //}
+
+        public ICommand CarregarAssignmentCommand => new Command(async () =>
+            await CarregarAssignmentAsync());
+        private async Task CarregarAssignmentAsync()
+        {
+            Atribuicoes = new List<Assignment>();
+            if (Tipo > 0)
+            {
+                var url = $"{baseUrl}/FleetTransport/Assignment/{Tipo}";
+
+                var response = await Client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                    using (var responseStream = await response.Content.ReadAsStreamAsync())
+                    {
+                        var data = await JsonSerializer.DeserializeAsync<List<Assignment>>
+                            (responseStream, _SerializerOptions);
+                        Atribuicoes = data;
+                    }
+            }
         }
     }
 }

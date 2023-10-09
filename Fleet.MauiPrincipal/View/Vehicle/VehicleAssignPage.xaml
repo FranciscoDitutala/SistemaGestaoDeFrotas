@@ -26,17 +26,22 @@
                           Glyph={x:Static m:MaterialRegular.Assignment}} "/>
 
                     <material:PickerField 
-                         Title="Vehiculo Atribuir" 
+                         Title="Funcionário a Atribuir" 
                          ItemsSource="{Binding Employees}"
                          ItemDisplayBinding="{Binding Name}"
                          SelectedItem="{Binding SelectedEmployee}"
                          Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Face}}"
- />
+                        
+                    />
+                    <material:TextField 
+                              Title="Descrição" 
+                                  Icon="{FontImageSource FontFamily=MaterialRegular,
+                              Glyph={x:Static m:MaterialRegular.Assignment}} "/>
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Grid.RowSpan="1" Grid.Column="1" Spacing="15"  Margin="10"  >
                     <material:PickerField 
-                        Title="Vehiculo Atribuir" 
+                        Title="Veículo Atribuir" 
                         ItemsSource="{Binding Vehicles}"
                         ItemDisplayBinding="{Binding Type}"
                         SelectedItem="{Binding SelectedVehicle}"
@@ -49,21 +54,52 @@
                 Glyph={x:Static m:MaterialRegular.Car_rental}}"/>
 
                 </VerticalStackLayout>
-           
-                <Grid Grid.Row="1" Grid.ColumnSpan="2"   
+
+                <Grid Grid.Row="2" Grid.ColumnSpan="2"   
                       RowDefinitions="*,*,*" ColumnDefinitions="*,*" Margin="15" >
-                    <Label Text="Descrição da Atribuição:  " Grid.Row="0" Margin="0,0,0,10" Padding="10,0,0,0"/>
-                    <input:AdvancedEntry   Grid.Row="1" WidthRequest="670" Placeholder="Descrição da Atribuição "
-                                           HorizontalOptions="StartAndExpand" CornerRadius="8" Margin="0,0,0,10" Padding="10,0,0,0" />
-                    <Button Grid.Row="2" Grid.Column="2" Text="Submit"  input:FormView.IsSubmitButton="True" 
-                         HeightRequest="60"  
-              />
+                    <Button Grid.Row="2" Grid.Column="0" Text="Atribuir Veículo"  input:FormView.IsSubmitButton="True" 
+                         HeightRequest="60"  />
+                    <Button Text="Recarregar" Command="{Binding CarregarAssignmentCommand}" 
+                            Grid.Row="2" Grid.Column="1" />
                 </Grid>
                 
             </Grid>
-            
 
-         
+            <material:DataGrid ItemsSource="{Binding Atribuicoes}" HorizontalOptions="Start" Margin="2"  BackgroundColor="WhiteSmoke" 
+                     LineSeparatorColor="Blue" Grid.Row="1" Grid.ColumnSpan="2"  >
+                <material:DataGrid.EmptyView>
+                    <VerticalStackLayout Margin="80,20">
+                        <Image
+		                WidthRequest="40"
+		                HeightRequest="40"
+		                HorizontalOptions="Center"
+		                VerticalOptions="Center"
+		                Source="{FontImageSource FontFamily=MaterialOutlined, Glyph={x:Static m:MaterialOutlined.Backup_table}, Color={AppThemeBinding
+                     Light={StaticResource OnSurface}, Dark={StaticResource OnSurfaceDark}}}"/>
+                        <Label Text="No data available..." HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </material:DataGrid.EmptyView>
+                <material:DataGrid.Columns >
+                    <material:DataGridSelectionColumn />
+                    <material:DataGridColumn  Binding="{Binding Type}" Title="Tipo Atribuição"/>
+                    <material:DataGridColumn Binding="{Binding OrgaoId}" Title="Orgão Atruidor"/>
+                    <material:DataGridColumn Binding="{Binding Description}" Title="Descrição" />
+                    <material:DataGridColumn Binding="{Binding EmployeeId}" Title="Funcionario"/>
+                    <material:DataGridColumn Binding="{Binding VehicleId}" Title="Veiculo"/>
+              
+                   
+                    <material:DataGridColumn Title="Actions" >
+                        <material:DataGridColumn.CellItemTemplate    >
+                            <DataTemplate>
+                                <Button Text="Remover"/>
+                                
+                            </DataTemplate>
+                        </material:DataGridColumn.CellItemTemplate>
+                    </material:DataGridColumn>
+                 
+                </material:DataGrid.Columns>
+            </material:DataGrid>
+
 
         </Grid>
 
