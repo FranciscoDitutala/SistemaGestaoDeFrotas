@@ -106,10 +106,13 @@ namespace Fleet.MauiPrincipal.ViewModel
             }
         }
 
-        //public async void GoToVehiclesAddCommand() {
-        //    await Shell.Current.GoToAsync(new VehicleAddPage());
+        public ICommand GoToVehicleAddPageCommand => new Command(async () =>
+             await GoToVehicleAddPageAsync());
+        public async Task  GoToVehicleAddPageAsync()
+        {
 
-        //}
+            //await Navigation.PushAsync(new AppShell());
+        }
 
 
 

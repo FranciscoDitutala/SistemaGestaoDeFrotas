@@ -12,10 +12,8 @@
                x:DataType="viewModel:LoginViewModel"
              NavigationPage.HasNavigationBar="False"
                Title="Login">
-          
-
-
-    <FlexLayout    FlowDirection="LeftToRight" Direction="Column" Wrap="Wrap" 
+    
+   <FlexLayout    FlowDirection="LeftToRight" Direction="Column" Wrap="Wrap" 
             JustifyContent="Center" AlignItems="Center"  AlignContent="Center" BackgroundColor="WhiteSmoke">
         <input:FormView Spacing="10" FlowDirection="LeftToRight">
             <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Margin="0,40,0,0">
@@ -39,7 +37,7 @@
                     <material:TextField WidthRequest="350"
                              Title="Senha" x:Name="PassUser"
                                   Icon="{FontImageSource FontFamily=MaterialRegular,
-                             Glyph={x:Static m:MaterialRegular.Email}}"/>
+                             Glyph={x:Static m:MaterialRegular.Password}}"/>
                  
                     <!--<material:TextField
                         x:Name="PassUser" WidthRequest="350"

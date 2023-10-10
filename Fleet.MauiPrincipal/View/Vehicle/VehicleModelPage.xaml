@@ -11,43 +11,57 @@
              x:DataType="viewmodel:VehicleModelPageViewModel"
              Title="VehicleModelPage">
 
-    <FlexLayout Margin="10"   FlowDirection="LeftToRight" Direction="Column" 
-              >
-        
-        <input:FormView Spacing="10" Margin="20,30" HeightRequest="300" >
-            <Grid RowDefinitions="*" ColumnDefinitions="*,5*"   >
-                <Image Source="nodata.png" HeightRequest="200" WidthRequest="200" Grid.Row="0" Grid.Column="0"  />
-                <VerticalStackLayout Grid.RowSpan="2" Grid.Column="1" Spacing="25" >
 
+    <Grid Margin="10"  
+         RowDefinitions="5*,*,8*" ColumnDefinitions="*,* "  >
+        <input:FormView  Grid.Row="0"   Grid.ColumnSpan="2" HorizontalOptions="Start" Spacing="20">
+            <Grid RowDefinitions="5*" ColumnDefinitions="4*,2*"   >
+
+                <VerticalStackLayout Grid.RowSpan="1" Grid.Column="0"  Spacing="15" Margin="10,10,0,0" HorizontalOptions="Start" >
                     <material:TextField Padding="10,0,0,0"
-                Title="Nome Completo" Text="{Binding ModelName}"
-                 Icon="{FontImageSource FontFamily=MaterialRegular,
-                Glyph={x:Static m:MaterialRegular.Car_rental}}"
-                />
-                    <material:TextField
-                Title="Nome Curto" Padding="10,0,0,0" Text="{Binding ArcronymModel}"
+                    Title="Nome do Modelo" WidthRequest="400" Text="{Binding NameModel}"
                      Icon="{FontImageSource FontFamily=MaterialRegular,
-                Glyph={x:Static m:MaterialRegular.Color_lens}}"/>
-                    <Button Text="Submit" input:FormView.IsSubmitButton="True" Margin="10,0,0,0"/>
-                    <Button Text="Listar" input:FormView.IsSubmitButton="True" Margin="10,0,0,0" Command="{Binding CarregarModelsCommand}" />
+                    Glyph={x:Static m:MaterialRegular.Car_rental}}"/>
+                    <material:TextField
+                    Title="Acrónimo" Padding="10,0,0,0" WidthRequest="400" Text="{Binding AcronymModel}"
+                         Icon="{FontImageSource FontFamily=MaterialRegular,
+                    Glyph={x:Static m:MaterialRegular.Color_lens}}"/>
+                    <material:TextField
+                     Title="Marca do Modelo" Padding="10,0,0,0" WidthRequest="400" Text="{Binding BrandModel}"
+                          Icon="{FontImageSource FontFamily=MaterialRegular,
+                     Glyph={x:Static m:MaterialRegular.Color_lens}}"/>
+                    
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="1" Grid.Row="1" HorizontalOptions="Start" WidthRequest="400"  Margin="15" Spacing="10" >
+                    <Button Text="Cadastrar Marca" WidthRequest="300" Grid.RowSpan="2" StyleClass="FilledButton" 
+                            HorizontalOptions="Start" Command="{Binding CadastraVehicleModelCommand}" />
+                    <Button Text="Listar"  StyleClass="FilledButton" WidthRequest="300" 
+                        HorizontalOptions="Start" Command="{Binding CarregarModelsCommand}"/>
+                    <Button Text="Remover"  StyleClass="FilledButton" WidthRequest="300" 
+                         HorizontalOptions="Start"/>
                 </VerticalStackLayout>
             </Grid>
         </input:FormView >
-        <VerticalStackLayout  BackgroundColor="white" HeightRequest="400" >
-            <SearchBar Margin="40,10" Text="Procurar" > </SearchBar>
-            <material:DataGrid ItemsSource="{Binding Modelo}" HorizontalOptions="Center" Margin="30">
-                <material:DataGrid.Columns>
-                    <material:DataGridColumn Binding="{Binding Name}" Title="Student Name"/>
+        <SearchBar Margin="10" Text="Procurar" Grid.ColumnSpan="2" BackgroundColor="WhiteSmoke" FontSize="Body" HeightRequest="50" Grid.Row="1" ></SearchBar>
+        <ScrollView Grid.ColumnSpan="2" Grid.Row="2" >
+            <Grid  BackgroundColor="WhiteSmoke" Margin="10,20,10,10"
+        RowDefinitions="*,*" ColumnDefinitions="*,*">
 
-                    <material:DataGridColumn Binding="{Binding VehicleBrandId}" Title="Student Age"/>
+                <material:DataGrid  Grid.ColumnSpan="2 " Grid.RowSpan="2" BackgroundColor="WhiteSmoke" ItemsSource="{Binding Models}" 
+                          HorizontalOptions="Start" Margin="2"
+                          LineSeparatorColor="Blue" >
+                    <material:DataGrid.Columns >
+                        <material:DataGridSelectionColumn />
+                        <material:DataGridColumn  Title="Nome " Binding="{Binding Name}" />
+                        <material:DataGridColumn  Title="Acronimo" Binding="{Binding Acronym}" />
+                        <material:DataGridColumn  Title="Marca" Binding="{Binding VehicleBrandId}" />
+                    </material:DataGrid.Columns>
+                </material:DataGrid>
 
-                    <material:DataGridColumn Binding="{Binding Enabled}" Title="Identity" />
-                </material:DataGrid.Columns>
-            </material:DataGrid>
-        </VerticalStackLayout>
+            </Grid>
 
-    </FlexLayout>
-
+        </ScrollView>
+    </Grid>
 
 
 </ContentPage>

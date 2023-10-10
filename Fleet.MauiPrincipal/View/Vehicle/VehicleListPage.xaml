@@ -10,12 +10,13 @@
              xmlns:viewmodel="clr-namespace:Fleet.MauiPrincipal.ViewModel"
              x:DataType="viewmodel:VehicleListPageViewModel"
              Title="VehicleListPage">
+    
     <Grid  RowDefinitions ="1.2*,*,6.5*" ColumnDefinitions="*" Margin="10">
 
       
         <HorizontalStackLayout Margin="20,10"  Grid.Row="0" >
             <Button Text="Adicionar" StyleClass="FilledButton"  
-         HorizontalOptions="EndAndExpand" Clicked="GoToVehicleAddPage"  />
+         HorizontalOptions="EndAndExpand"   />
 
            <Button Text="Listar" StyleClass="FilledButton"
                 HorizontalOptions="EndAndExpand" Command="{Binding CarregarVehiclesCommand}" />
@@ -45,18 +46,18 @@
                     </VerticalStackLayout>
                 </material:DataGrid.EmptyView>
                 <material:DataGrid.Columns >
-                    <material:DataGridSelectionColumn />
+                    <material:DataGridSelectionColumn Title="#" />
                     <material:DataGridColumn  Binding="{Binding Vin}" Title="Chassis"/>
-                    <material:DataGridColumn Binding="{Binding Cor}" Title="Marca"/>
+                    <material:DataGridColumn Binding="{Binding Cor}" Title="Cor"/>
                     <material:DataGridColumn Binding="{Binding Model}" Title="Modelo" />
-                    <material:DataGridColumn Binding="{Binding Brand}" Title="Tipo"/>
-                    <material:DataGridColumn Binding="{Binding Variant}" Title="Potencia"/>
-                    <material:DataGridColumn Binding="{Binding Type}" Title="Combustivel" />
-                    <material:DataGridColumn Binding="{Binding Power}" Title="Data Registro"/>
+                    <material:DataGridColumn Binding="{Binding Brand}" Title="Marca"/>
+                    <material:DataGridColumn Binding="{Binding Variant}" Title="Variante"/>
+                    <material:DataGridColumn Binding="{Binding Type}" Title="Tipo" />
+                    <material:DataGridColumn Binding="{Binding Power}" Title="Potencia"/>
                     <material:DataGridColumn Binding="{Binding FuelConsumption}" Title="Consumo" />
-                    <material:DataGridColumn Binding="{Binding RegistrationDate}" Title="Registro"/>
-                    <!--<material:DataGridColumn Binding="{Binding Transmission}" Title="Transmissão"/>
-                    <material:DataGridColumn Binding="{Binding YearOfManufacture}" Title="Ano de Fabrico" />-->
+                    <material:DataGridColumn Binding="{Binding YearOfManufacture}" Title="Ano Fabrico"/>
+                    <!--<material:DataGridColumn Binding="{Binding Transmission}" Title="Transmissão"/>-->
+                    <!--<material:DataGridColumn Binding="{Binding YearOfManufacture}" Title="Ano de Fabrico" />-->
                    
                     <!--<material:DataGridColumn Title="Actions" >
                         <material:DataGridColumn.CellItemTemplate    >

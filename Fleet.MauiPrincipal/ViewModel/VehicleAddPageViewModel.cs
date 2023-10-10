@@ -92,8 +92,8 @@ namespace Fleet.MauiPrincipal.ViewModel
                     Variant = Variante,
                     Brand = Brand,
                     Model = Model,
-                    Power = 2,
-                    Registration = "Teste",
+                    Power = Power,
+                    Registration = "" + Registro,
                     Transmission = TransmitionType,
                     FuelConsumption = FuelConsumption,
                     Type = VehicleType,
@@ -106,7 +106,8 @@ namespace Fleet.MauiPrincipal.ViewModel
                 string json = JsonSerializer.Serialize<Vehicle>(vehicle, _SerializerOptions);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await Client.PostAsync(url, content);
-                Debug.WriteLine("a COR DO VEICULO É " + json);
+                ////await AppShell.Current.DisplayAlert("Cadastrado com sucesso","O veiculo foi adicionado no sistema ","OK");
+                Debug.WriteLine("o veiculofoi cadastrado " + json);
                 //await CarregarVehiclesAsync();
             }
               Debug.WriteLine("Não entrou no if");

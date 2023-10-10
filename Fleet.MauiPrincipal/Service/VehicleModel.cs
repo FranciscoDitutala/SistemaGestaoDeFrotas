@@ -8,7 +8,7 @@ namespace Fleet.MauiPrincipal.Service
 {
     public class VehicleModel
     {
-        //public int id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Acronym { get; set; }
         public int VehicleBrandId { get; set; }

@@ -3,6 +3,7 @@ using Fleet.MauiPrincipal.Service;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -22,17 +23,16 @@ namespace Fleet.MauiPrincipal.ViewModel
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
-        [ObservableProperty]
-        public int _modelName;
-        [ObservableProperty]
-        public string _arcronymModel;
-
-
-
         static Random random = new();
+        [ObservableProperty]
+        public string _nameModel;
+        [ObservableProperty]
+        public string _acronymModel;
+        [ObservableProperty]
+        public int _brandModel;
         public ObservableCollection<VehicleModel> ModelItems { get; } = new();
-        private VehicleModel _modelo;
-        public VehicleModel Modelo { get; set; } = new();
+
+        //public VehicleModel Modelo { get; set; } = new();
         private List<VehicleModel> _models;
 
         public List<VehicleModel> Models 
@@ -47,44 +47,59 @@ namespace Fleet.MauiPrincipal.ViewModel
 
         public VehicleModelPageViewModel()
         {
-
+            
             Client = new HttpClient();
             _SerializerOptions = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             };
             CarregarModelsAsync();
-
-
         }
 
         public ICommand CarregarModelsCommand => new Command(async () =>
            await CarregarModelsAsync());
-      
         private async Task CarregarModelsAsync()
-            {
-                if (ModelName > 0)
+        {
+            Debug.WriteLine("Entrou no metodo carregar modelo");
+
+            Models = new List<VehicleModel>();
+            var url = $"{baseUrl}/FleetCommon/VehicleModel/1";
+            var response = await Client.GetAsync(url);
+
+            if (response.IsSuccessStatusCode)
+                using (var responseStream = await response.Content.ReadAsStreamAsync())
                 {
-                    //var modelId = Convert.ToInt32(ModelName);
-                    if (ModelName > 0)
-                    {
-                        var url = $"{baseUrl}/FleetCommon/VehicleModel/1";
-                        var response = await Client.GetAsync(url);
-
-                        if (response.IsSuccessStatusCode)
-                        {
-                            using (var responseStream = await response.Content.ReadAsStreamAsync())
-                            {
-                                var data = await JsonSerializer
-                                .DeserializeAsync<VehicleModel>(responseStream, _SerializerOptions);
-                                Modelo = data;
-                            }
-
-                        }
-                    }
-
-
+                    var data = await JsonSerializer.DeserializeAsync<List<VehicleModel>>
+                        (responseStream, _SerializerOptions);
+                    Models = data;
+                    Debug.WriteLine("As informacoes da lista " + Models);
                 }
-            }  
-       }
+        }
+
+
+        public ICommand CadastraVehicleModelCommand => new Command(async () =>
+            await CadastraVehicleModelAsync());
+
+        private async Task CadastraVehicleModelAsync()
+        {
+            if (!string.IsNullOrEmpty(NameModel))
+            {
+                var model = new VehicleModel
+                {
+                    Name = NameModel,
+                    Acronym = AcronymModel,
+                    VehicleBrandId = BrandModel,
+                };
+                var url = $"{baseUrl}/FleetCommon/VehicleModel";
+                string json = JsonSerializer.Serialize<VehicleModel>(model, _SerializerOptions);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await Client.PostAsync(url, content);
+                Debug.WriteLine("o veiculo Modelo foi cadastrado " + json);
+                await CarregarModelsAsync();
+            }
+        }
+
+
+
+    }
 }

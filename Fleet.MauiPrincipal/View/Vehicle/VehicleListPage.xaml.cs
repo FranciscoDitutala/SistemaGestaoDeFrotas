@@ -28,6 +28,7 @@ public partial class VehicleListPage : ContentPage
     private async void GoToVehicleAddPage(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new VehicleAddPage());
+       
     }
     private void SearchBar_SearchButtonPressed(object sender, EventArgs e)
     {

@@ -37,8 +37,8 @@ public partial class Login : ContentPage
             }
         }
         else
-        {
-            await DisplayAlert("Atenção", "Usuário ou senha invalida", "Ok");
+        { 
+            await DisplayAlert("Atenção", "Campos Obrigatórios em brancos", "Ok");
 
         }   
     }
