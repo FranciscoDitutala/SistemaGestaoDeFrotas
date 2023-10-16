@@ -29,8 +29,10 @@
                  Icon="{FontImageSource FontFamily=MaterialRegular,
                 Glyph={x:Static m:MaterialRegular.Color_lens}}"/>
 
-                <material:TextField Padding="10,0,0,0"
-                Title="Tipo do Veiculo" Text="{Binding VehicleType}"  
+                <material:PickerField Padding="10,0,0,0"
+                Title="Tipo do Veiculo" ItemsSource="{Binding VehicleTypes}"  
+                                     
+                                      SelectedItem="{Binding SelectedVehicleType}"
                      Icon="{FontImageSource FontFamily=MaterialRegular,
                 Glyph={x:Static m:MaterialRegular.Car_rental}}"/>
 
@@ -62,8 +64,7 @@
                        Title="Potencia do Veiculo" BindingContext="{Binding Power}"
                             Icon="{FontImageSource FontFamily=MaterialRegular,
                        Glyph={x:Static m:MaterialRegular.Settings_power}}"/>
-
-                          
+ 
             </VerticalStackLayout>
 
 
@@ -92,10 +93,8 @@
                 <Button Grid.Row="2" Grid.Column="2" Text="Cadastrar Veiculo"  input:FormView.IsSubmitButton="True" 
                       HeightRequest="60" Margin="10,0,0,10"  Command="{Binding CadastraVehicleCommand}"/>
 
-
             </VerticalStackLayout>
-
-           
+  
         </Grid>
                   
     </ScrollView>

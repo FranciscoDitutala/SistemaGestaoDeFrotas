@@ -15,15 +15,15 @@
 
       
         <HorizontalStackLayout Margin="20,10"  Grid.Row="0" >
-            <Button Text="Adicionar" StyleClass="FilledButton"  
-         HorizontalOptions="EndAndExpand"   />
+            <!--<Button Text="Adicionar" StyleClass="FilledButton"  
+         HorizontalOptions="EndAndExpand"  WidthRequest="200" CornerRadius="8"   />-->
 
-           <Button Text="Listar" StyleClass="FilledButton"
+            <Button Text="Listar" StyleClass="FilledButton"  WidthRequest="200" CornerRadius="8" 
                 HorizontalOptions="EndAndExpand" Command="{Binding CarregarVehiclesCommand}" />
             
             <Button Text="Apagar" StyleClass="FilledButton"
-                HorizontalOptions="EndAndExpand" Command="{Binding RemoveSelectedCommand}" />
-      
+                HorizontalOptions="EndAndExpand" Command="{Binding RemoveSelectedCommand}" WidthRequest="200" CornerRadius="8" />
+        
         </HorizontalStackLayout>
         <SearchBar Grid.Row="1"  x:Name="IdProcurar" Margin="20,20" Placeholder="Procurar"  
                    HeightRequest="0"   ></SearchBar >

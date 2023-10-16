@@ -55,6 +55,8 @@ namespace Fleet.MauiPrincipal
             builder.Services.AddTransient<RecuperarUser>();
             builder.Services.AddTransient<ListarUser>();
 
+            builder.Services.AddTransient<PartAddPage>();
+            builder.Services.AddTransient<PartListPage>();
             builder.Services.AddTransient<PartTypePage>();
             builder.Services.AddTransient<PartCategoriesPage>();
             builder.Services.AddTransient<PartCategoryPage>();

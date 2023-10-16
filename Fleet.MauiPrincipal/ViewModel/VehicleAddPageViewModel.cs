@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Fleet.MauiPrincipal.Service;
+using Fleet.MauiPrincipal.Service.Enums;
 using Fleet.MauiPrincipal.View.Vehicle;
 
 using Microsoft.Toolkit.Mvvm.Input;
@@ -7,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http.Json;
@@ -17,17 +19,12 @@ using System.Windows.Input;
 
 namespace Fleet.MauiPrincipal.ViewModel
 {
-    [QueryProperty(nameof(VehicleAddPage), "AddVehicle")]
-
     public partial class VehicleAddPageViewModel : ObservableObject
     {
         private HttpClient Client;
         JsonSerializerOptions _SerializerOptions;
         string baseUrl = "https://localhost:7111";
-        //[ObservableProperty]
-        //private Vehicle _addVehicle = new Vehicle();
-        //private readonly IVehicleService _vehicleService;
-
+ 
         [ObservableProperty]
         public string _Brand;
         [ObservableProperty]
@@ -54,12 +51,7 @@ namespace Fleet.MauiPrincipal.ViewModel
         public string _Model;
         [ObservableProperty]
         public int _DataFabrico;
-       
-
-        //[ObservableProperty]
-        //public DateTime _DataRegistro;
-
-
+      
         public VehicleAddPageViewModel()
         {
 
@@ -73,18 +65,15 @@ namespace Fleet.MauiPrincipal.ViewModel
 
         }
 
-
-        //public ICommand CarregarVehiclesCommand => new Command(async () =>
-        //await CarregarVehiclesAsync());
-        //private async Task CarregarVehiclesAsync()
-        //{
         public ICommand CadastraVehicleCommand => new Command(async () =>
         await CadastraVehicleAsync());
 
         private async Task CadastraVehicleAsync()
         {
+               
+
             if (!string.IsNullOrEmpty(Vin))
-            {
+                 {
                 var vehicle = new Vehicle
                 {
                     Vin = Vin,
@@ -112,9 +101,33 @@ namespace Fleet.MauiPrincipal.ViewModel
             }
               Debug.WriteLine("Não entrou no if");
         }
+    
        
 
-   
+
+        // Metodo Carregar Vehicle Type
+        private VehicleType _vehicleType;
+        public List<string> VehicleTypes
+        {
+            get
+            {
+                return Enum.GetNames(typeof(VehicleType)).Select(b => b).ToList();
+            }
+        }
+
+        private VehicleType _selectedVehicleType;
+        public VehicleType SelectedVehicleType
+        {
+            get {  return _selectedVehicleType; }
+            set
+            {
+                if (SelectedVehicleType != value)
+                {
+                    _selectedVehicleType = value;
+                    OnPropertyChanged(nameof(SelectedVehicleType));
+                }
+            }
+    }
 
 
         //public ICommand CarregarVehiclesCommand => new Command(async () =>

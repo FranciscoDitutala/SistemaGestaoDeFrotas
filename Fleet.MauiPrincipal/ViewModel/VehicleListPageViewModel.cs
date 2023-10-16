@@ -121,13 +121,13 @@ namespace Fleet.MauiPrincipal.ViewModel
         //public Vehicle _selectedItems;
 
         //public ICommand RemoveItemCommand => new Command(async () =>
-        //     await RemoveItemAsync ());
+        //     await RemoveItemAsync());
 
         //public async Task RemoveItemAsync()
         //{
         //    var item = SelectedItems.Id;
 
-        //    var  url = $"{baseUrl}/FleetTransport/Vehicle/{item}";
+        //    var url = $"{baseUrl}/FleetTransport/Vehicle/{item}";
         //    var response = await Client.DeleteAsync(url);
         //    await CarregarVehiclesAsync();
 

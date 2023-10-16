@@ -7,6 +7,13 @@
              x:DataType="viewmodel:PartPageViewModel"
              Title="Part Page">
     <TabBar>
+        <Tab Title="Peças">
+            <ShellContent Title="Peças Cadastradas "
+                 ContentTemplate="{DataTemplate views:PartAddPage}" />
+            <ShellContent Title="Adicionar Peças"
+                 ContentTemplate="{DataTemplate views:PartListPage}" />
+
+        </Tab>
         <Tab Title="Categorias De Peças">
             <ShellContent Title="Categorias "
                          ContentTemplate="{DataTemplate views:PartCategoriesPage}" />

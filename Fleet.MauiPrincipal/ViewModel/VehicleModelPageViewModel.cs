@@ -33,9 +33,9 @@ namespace Fleet.MauiPrincipal.ViewModel
         public ObservableCollection<VehicleModel> ModelItems { get; } = new();
 
         //public VehicleModel Modelo { get; set; } = new();
-        private List<VehicleModel> _models;
+        private VehicleModel _models;
 
-        public List<VehicleModel> Models 
+        public VehicleModel Models 
         {
             get { return _models; }
             set
@@ -62,20 +62,19 @@ namespace Fleet.MauiPrincipal.ViewModel
         {
             Debug.WriteLine("Entrou no metodo carregar modelo");
 
-            Models = new List<VehicleModel>();
-            var url = $"{baseUrl}/FleetCommon/VehicleModel/1";
+            Models = new VehicleModel();
+            var url = $"{baseUrl}/FleetCommon/VehicleModel/2";
             var response = await Client.GetAsync(url);
 
             if (response.IsSuccessStatusCode)
                 using (var responseStream = await response.Content.ReadAsStreamAsync())
                 {
-                    var data = await JsonSerializer.DeserializeAsync<List<VehicleModel>>
+                    var data = await JsonSerializer.DeserializeAsync<VehicleModel>
                         (responseStream, _SerializerOptions);
                     Models = data;
                     Debug.WriteLine("As informacoes da lista " + Models);
                 }
         }
-
 
         public ICommand CadastraVehicleModelCommand => new Command(async () =>
             await CadastraVehicleModelAsync());

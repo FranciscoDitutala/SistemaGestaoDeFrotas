@@ -1,9 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Fleet.MauiPrincipal.Service;
+using Fleet.MauiPrincipal.Service.Enums;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -14,8 +16,6 @@ namespace Fleet.MauiPrincipal.ViewModel
 {
     public partial class VehicleAssignViewModel: ObservableObject, INotifyPropertyChanged
     {
-        //[ObservableProperty]
-        //public ObservableCollection _Items { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
@@ -39,7 +39,7 @@ namespace Fleet.MauiPrincipal.ViewModel
                  
             }
         }
-       
+ 
         private List<Vehicle> _vehicles;
         public List<Vehicle> Vehicles
         {
@@ -49,11 +49,8 @@ namespace Fleet.MauiPrincipal.ViewModel
             }
         }
 
-
         [ObservableProperty]
-        public int _Tipo;
-        [ObservableProperty]
-        public int _Orgao;
+        public int _TipoAtribuir;
         [ObservableProperty]
         public string _Descricao;
 
@@ -79,7 +76,8 @@ namespace Fleet.MauiPrincipal.ViewModel
             };
             CarregarVehiclesAsync();
             CarregarEmployee();
-            //CarregarAssignmentAsync();
+            CarregarOrgao();
+            CarregarAssignmentAsync();
             //CadastrarAssignmentAsync();
 
 
@@ -144,6 +142,97 @@ namespace Fleet.MauiPrincipal.ViewModel
                 }        
         }
 
+
+        // Metodo Carregar Assigment Type
+   
+      
+        private AssignmentType _assign;
+        public List<string> Assign
+        {
+            get {return  Enum.GetNames(typeof(AssignmentType)).Select(b => b).ToList();
+            }
+        }
+        
+        private AssignmentType _selectedAssignType;
+        public AssignmentType SelectedAssignType
+        {
+            get { return _selectedAssignType; }
+            set
+            {
+                if (SelectedAssignType != value)
+                {
+                    _selectedAssignType = value;
+                    OnPropertyChanged(nameof(SelectedAssignType));
+                }
+
+            }
+        }
+
+        //public void DoSomethingAssign()
+        //{
+        //    switch (SelectedAssignType)
+        //    {
+        //        case "None":
+        //            _assign = AssignmentType.NONE;
+        //            break;
+        //        case "Role":
+        //            _assign = AssignmentType.NONE;
+        //            break;
+        //        case "Employee":
+        //            _assign = AssignmentType.NONE;
+        //            break;
+        //        case "Support":
+        //            _assign = AssignmentType.NONE;
+        //            break;
+        //            ...
+        //    }
+
+            //DoSomething(_assign);
+        //}
+
+        // Metodo Carregar Orgão
+
+        private Orgao _selectedOrgao;
+        public Orgao SelectedOrgao
+        {
+            get { return _selectedOrgao; }
+            set
+            {
+                if (SelectedOrgao != value)
+                {
+                    _selectedOrgao = value;
+                    OnPropertyChanged(nameof(SelectedOrgao));
+                }
+
+            }
+        }
+
+        private List<Orgao> _orgao;
+        public List<Orgao> Orgao
+        {
+            get { return _orgao; }
+            set
+            {
+                _orgao = value;
+                OnPropertyChanged(nameof(Orgao));
+            }
+        }
+        private async Task CarregarOrgao()
+        {
+            Orgao = new List<Orgao>();
+            var url = $"{baseUrl}/FleetTransport/Orgao/1";
+
+            var response = await Client.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+                using (var responseStream = await response.Content.ReadAsStreamAsync())
+                {
+                    var data = await JsonSerializer.DeserializeAsync<List<Orgao>>
+                        (responseStream, _SerializerOptions);
+
+                    Orgao = data;
+                }
+        }
+
         //public ICommand CadastrarAssignmentCommand => new Command(async () =>
         //await  CadastrarAssignmentAsync()
 
@@ -171,8 +260,6 @@ namespace Fleet.MauiPrincipal.ViewModel
         //    //else
         //    //{
         //    //    //await AppShell.Current.DisplayAlert("Atenção", "Atribucao Falhou", "OK");
-
-
         //}
 
         public ICommand CarregarAssignmentCommand => new Command(async () =>
@@ -180,9 +267,9 @@ namespace Fleet.MauiPrincipal.ViewModel
         private async Task CarregarAssignmentAsync()
         {
             Atribuicoes = new List<Assignment>();
-            if (Tipo > 0)
+            if (TipoAtribuir > 0)
             {
-                var url = $"{baseUrl}/FleetTransport/Assignment/{Tipo}";
+                var url = $"{baseUrl}/FleetTransport/Assignment/2";
 
                 var response = await Client.GetAsync(url);
                 if (response.IsSuccessStatusCode)

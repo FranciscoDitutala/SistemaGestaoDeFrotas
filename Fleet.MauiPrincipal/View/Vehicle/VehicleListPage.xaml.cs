@@ -15,7 +15,6 @@ public partial class VehicleListPage : ContentPage
         this.BindingContext = _viewModel;
      
     }
-
     protected override void OnAppearing()
     {
         base.OnAppearing();
@@ -24,7 +23,6 @@ public partial class VehicleListPage : ContentPage
         }
        
     }
-
     private async void GoToVehicleAddPage(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new VehicleAddPage());

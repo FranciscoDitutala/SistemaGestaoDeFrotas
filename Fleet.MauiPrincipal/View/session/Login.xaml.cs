@@ -47,4 +47,10 @@ public partial class Login : ContentPage
     {
         await Navigation.PushAsync(new RecuperarUser());
     }
+    //protected override void OnSizeAllocated (double pageWidth, double pageHeight)
+    //{
+    //    base.OnSizeAllocated(pageWidth, pageHeight);
+    //    const double aspectRatio = 1600 / 1441.0;
+    //    BackImage.WidthRequest = Math.Max(pageHeight * aspectRatio, pageWidth);
+    //}
 }

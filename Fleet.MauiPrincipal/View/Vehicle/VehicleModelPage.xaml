@@ -32,21 +32,21 @@
                      Glyph={x:Static m:MaterialRegular.Color_lens}}"/>
                     
                 </VerticalStackLayout>
-                <VerticalStackLayout Grid.Column="1" Grid.Row="1" HorizontalOptions="Start" WidthRequest="400"  Margin="15" Spacing="10" >
-                    <Button Text="Cadastrar Marca" WidthRequest="300" Grid.RowSpan="2" StyleClass="FilledButton" 
-                            HorizontalOptions="Start" Command="{Binding CadastraVehicleModelCommand}" />
-                    <Button Text="Listar"  StyleClass="FilledButton" WidthRequest="300" 
+                <VerticalStackLayout Grid.Column="1" Grid.Row="1" HorizontalOptions="Start" WidthRequest="400"  Margin="10" Spacing="10" >
+                    <Button Text="Cadastrar Marca" WidthRequest="200" Grid.RowSpan="2"  CornerRadius="8"
+                            HorizontalOptions="Start" Command="{Binding CadastraVehicleModelCommand}"  />
+                    <Button Text="Listar"  StyleClass="FilledButton" WidthRequest="200" CornerRadius="8"
                         HorizontalOptions="Start" Command="{Binding CarregarModelsCommand}"/>
-                    <Button Text="Remover"  StyleClass="FilledButton" WidthRequest="300" 
+                    <Button Text="Remover"  StyleClass="FilledButton" WidthRequest="200" CornerRadius="8"
                          HorizontalOptions="Start"/>
                 </VerticalStackLayout>
             </Grid>
         </input:FormView >
         <SearchBar Margin="10" Text="Procurar" Grid.ColumnSpan="2" BackgroundColor="WhiteSmoke" FontSize="Body" HeightRequest="50" Grid.Row="1" ></SearchBar>
+        
         <ScrollView Grid.ColumnSpan="2" Grid.Row="2" >
             <Grid  BackgroundColor="WhiteSmoke" Margin="10,20,10,10"
         RowDefinitions="*,*" ColumnDefinitions="*,*">
-
                 <material:DataGrid  Grid.ColumnSpan="2 " Grid.RowSpan="2" BackgroundColor="WhiteSmoke" ItemsSource="{Binding Models}" 
                           HorizontalOptions="Start" Margin="2"
                           LineSeparatorColor="Blue" >

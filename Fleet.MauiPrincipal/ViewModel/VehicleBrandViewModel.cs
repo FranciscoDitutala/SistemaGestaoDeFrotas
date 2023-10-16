@@ -39,11 +39,26 @@ namespace Fleet.MauiPrincipal.ViewModel
                 OnPropertyChanged(nameof(Brands));
             }
         }
+        private Image _logoImage;
+        public Image LogoBrands
+        {
+            get { return _logoImage; }
+            set
+            {
+                _logoImage = value;
+                OnPropertyChanged(nameof(LogoBrands));
+            }
+        }
+
 
         [ObservableProperty]
         public string _nameBrands;
         [ObservableProperty]
-        public Image _logoBrands;
+        public Image _logoBrand = new Image();
+
+
+        [ObservableProperty]
+        public string _logoName;
         [ObservableProperty]
         public string _companyBrands;
 
@@ -126,7 +141,7 @@ namespace Fleet.MauiPrincipal.ViewModel
                 {
                     Name = NameBrands,
                     Company = CompanyBrands,
-                    Logo = "nodata.png",
+                    Logo = LogoName,
                 };
                 var url = $"{baseUrl}/FleetCommon/VehicleBrand";
                 string json = JsonSerializer.Serialize<VehicleBrand>(brandItem, _SerializerOptions);
@@ -137,7 +152,25 @@ namespace Fleet.MauiPrincipal.ViewModel
             }
         }
 
-
+        public ICommand CarregarImagemCommand => new Command(async () =>
+         await CarregarImagem());
+        public async Task CarregarImagem()
+        {
+            var result = await FilePicker.PickAsync(
+                new PickOptions
+                {
+                    PickerTitle = "Logotipo",
+                    FileTypes = FilePickerFileType.Images
+                }
+                );
+            if (result == null)
+                return;
+            var stream = await result.OpenReadAsync();
+            LogoBrands = (new Image
+            {
+                Source = ImageSource.FromStream(() => stream)
+            });
+        }
 
     }
 }

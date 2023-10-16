@@ -1,4 +1,4 @@
-﻿namespace Fleet.Transport.Data.Entities.Enums
+﻿namespace Fleet.MauiPrincipal.Service.Enums
 {
     public enum DocumentType
     {
