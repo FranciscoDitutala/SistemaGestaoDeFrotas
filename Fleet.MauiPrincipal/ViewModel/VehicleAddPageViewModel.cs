@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using DynamicData;
 using Fleet.MauiPrincipal.Service;
 using Fleet.MauiPrincipal.Service.Enums;
 using Fleet.MauiPrincipal.View.Vehicle;
@@ -35,8 +36,8 @@ namespace Fleet.MauiPrincipal.ViewModel
         public string _Cor;
         [ObservableProperty]
         public string _Vin;
-        [ObservableProperty]
-        public int _VehicleType;
+        //[ObservableProperty]
+        //public VehicleType _vehicleType;
         [ObservableProperty]
         public int _Power;
         [ObservableProperty]
@@ -68,38 +69,39 @@ namespace Fleet.MauiPrincipal.ViewModel
         public ICommand CadastraVehicleCommand => new Command(async () =>
         await CadastraVehicleAsync());
 
+        public bool isNewItem = false;
         private async Task CadastraVehicleAsync()
         {
-               
-
+            var url = $"{baseUrl}/FleetTransport/Vehicle";
             if (!string.IsNullOrEmpty(Vin))
-                 {
-                var vehicle = new Vehicle
+            {
+              
+                    var vehicle = new Vehicle
                 {
-                    Vin = Vin,
-                    Cor = Cor,
-                    Variant = Variante,
-                    Brand = Brand,
-                    Model = Model,
-                    Power = Power,
-                    Registration = "" + Registro,
-                    Transmission = TransmitionType,
-                    FuelConsumption = FuelConsumption,
-                    Type = VehicleType,
-                    YearOfManufacture = DataFabrico,
-                    RegistrationDate =DateTime.Today
-                    
+                    Vin = Vin, Cor = Cor, Variant = Variante, Brand = Brand,Model = Model, Power = Power,
+                    Registration = "" + Registro, Transmission = TransmitionType,FuelConsumption = FuelConsumption,
+                    Type = (int)_selectedVehicleType, YearOfManufacture = DataFabrico,RegistrationDate = DateTime.Today
                 };
-                var url = $"{baseUrl}/FleetTransport/Vehicle";
-                Debug.WriteLine("a COR DO VEICULO É " + vehicle.Cor);
+                Debug.WriteLine("Testando enum o valo do type é" + ((int)_selectedVehicleType));
                 string json = JsonSerializer.Serialize<Vehicle>(vehicle, _SerializerOptions);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await Client.PostAsync(url, content);
-                ////await AppShell.Current.DisplayAlert("Cadastrado com sucesso","O veiculo foi adicionado no sistema ","OK");
-                Debug.WriteLine("o veiculofoi cadastrado " + json);
-                //await CarregarVehiclesAsync();
-            }
-              Debug.WriteLine("Não entrou no if");
+                //HttpResponseMessage response = null; 
+                //if (isNewItem)
+                //{      response = await Client.PostAsync(url, content);
+                //    await AppShell.Current.DisplayAlert("Informação", "Veiculo Cadastrado com sucesso!", "Ok");
+                //}
+                //else{   
+                //      response = await Client.PutAsync(url, content);
+                //     await AppShell.Current.DisplayAlert("Informação", "Veiculo atualizado com sucesso!" , "Ok");
+                //}
+                ////if (!response.IsSuccessStatusCode)
+                ////{
+                ////    await AppShell.Current.DisplayAlert("Informação", "A operação falhou!", "Ok");
+                ////}
+             }
+           else 
+            { Debug.WriteLine(" Campos Obrigatorios vazio!"); }
         }
     
        
@@ -107,6 +109,7 @@ namespace Fleet.MauiPrincipal.ViewModel
 
         // Metodo Carregar Vehicle Type
         private VehicleType _vehicleType;
+
         public List<string> VehicleTypes
         {
             get
@@ -116,15 +119,16 @@ namespace Fleet.MauiPrincipal.ViewModel
         }
 
         private VehicleType _selectedVehicleType;
-        public VehicleType SelectedVehicleType
+       
+        public VehicleType SelectedVehicleTypes
         {
             get {  return _selectedVehicleType; }
             set
             {
-                if (SelectedVehicleType != value)
+                if (SelectedVehicleTypes != value)
                 {
                     _selectedVehicleType = value;
-                    OnPropertyChanged(nameof(SelectedVehicleType));
+                    OnPropertyChanged(nameof(SelectedVehicleTypes));
                 }
             }
     }

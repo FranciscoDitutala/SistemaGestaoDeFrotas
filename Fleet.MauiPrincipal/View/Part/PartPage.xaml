@@ -7,6 +7,33 @@
              x:DataType="viewmodel:PartPageViewModel"
              Title="Part Page">
     <TabBar>
+        <Tab Title="Entradas de Peças">
+            <ShellContent Title="Lista de Entradas"
+                 ContentTemplate="{DataTemplate views:StockyEntriesPage}" />
+            <ShellContent Title="Add Entrada"
+                 ContentTemplate="{DataTemplate views:StockyEntryPage}" />
+
+        </Tab>
+        <Tab Title="Saidas de Peças">
+            <ShellContent Title="Lista de Saidas"
+                 ContentTemplate="{DataTemplate views:StockyOutsPage}" />
+            <ShellContent Title="Add Saidas"
+                 ContentTemplate="{DataTemplate views:StockyOutPage}" />
+
+        </Tab>
+
+        <Tab Title="Categorias De Peças">
+            <ShellContent Title="Categorias "
+                   ContentTemplate="{DataTemplate views:PartCategoriesPage}" />
+            <ShellContent Title="Add Categoria"
+                   ContentTemplate="{DataTemplate views:PartCategoryPage}" />
+
+        </Tab>
+
+        <Tab Title="Tipo de Peças">
+            <ShellContent 
+                   ContentTemplate="{DataTemplate views:PartTypePage}" />
+        </Tab>
         <Tab Title="Peças">
             <ShellContent Title="Peças Cadastradas "
                  ContentTemplate="{DataTemplate views:PartAddPage}" />
@@ -14,31 +41,7 @@
                  ContentTemplate="{DataTemplate views:PartListPage}" />
 
         </Tab>
-        <Tab Title="Categorias De Peças">
-            <ShellContent Title="Categorias "
-                         ContentTemplate="{DataTemplate views:PartCategoriesPage}" />
-            <ShellContent Title="Add Categoria"
-                         ContentTemplate="{DataTemplate views:PartCategoryPage}" />
-
-        </Tab>
-        <Tab Title="Entradas de Peças">
-            <ShellContent Title="Lista de Entradas"
-                         ContentTemplate="{DataTemplate views:StockyEntriesPage}" />
-            <ShellContent Title="Add Entrada"
-                         ContentTemplate="{DataTemplate views:StockyEntryPage}" />
-
-        </Tab>
-        <Tab Title="Saidas de Peças">
-            <ShellContent Title="Lista de Saidas"
-                         ContentTemplate="{DataTemplate views:StockyOutsPage}" />
-            <ShellContent Title="Add Saidas"
-                         ContentTemplate="{DataTemplate views:StockyOutPage}" />
-
-        </Tab>
-        <Tab Title="Tipo de Peças">
-            <ShellContent 
-                         ContentTemplate="{DataTemplate views:PartTypePage}" />
-        </Tab>
+      
         
     </TabBar>
 </Shell>

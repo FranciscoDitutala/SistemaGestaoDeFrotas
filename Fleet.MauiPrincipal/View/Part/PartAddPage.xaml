@@ -19,48 +19,35 @@
             <VerticalStackLayout Grid.RowSpan="1" Grid.Column="0" Spacing="15" Padding="10" >
 
                 <material:TextField Padding="10,0,0,0"
-            Title="UPC" Text="" 
+            Title="Codigo Univesral (UPC)" Text="" 
                 Icon="{FontImageSource FontFamily=MaterialRegular,
             Glyph={x:Static m:MaterialRegular.Numbers}} "/>
 
                 <material:TextField  Padding="10,0,0,0"
-            Title="SKU" Text="" 
+            Title="Codigo Local (SKU)" Text="" 
              Icon="{FontImageSource FontFamily=MaterialRegular,
             Glyph={x:Static m:MaterialRegular.Production_quantity_limits}}"/>
 
                 <material:TextField Padding="10,0,0,0"
-            Title="Tipo de Peça" Text=""  
+              Title="Tipo de Peça" Text=""  
                  Icon="{FontImageSource FontFamily=MaterialRegular,
             Glyph={x:Static m:MaterialRegular.Car_repair}}"/>
 
-                <material:TextField Padding="10,0,0,0"
-              Title="Marca da Peça" BindingContext=""
-                   Icon="{FontImageSource FontFamily=MaterialRegular,
-              Glyph={x:Static m:MaterialRegular.Car_rental}}"/>
-
-
             </VerticalStackLayout>
             <VerticalStackLayout Grid.RowSpan="1" Grid.Column="1" Spacing="15" Padding="10" >
-
                 <material:TextField Padding="10,0,0,0"
              Title="Modelo da peça" Text="" 
            Icon="{FontImageSource FontFamily=MaterialRegular,
            Glyph={x:Static m:MaterialRegular.Car_rental}} "/>
-
-                <material:TextField  Padding="10,0,0,0"
+                <material:TextField Padding="10,0,0,0"
+            Title="Marca da Peça" BindingContext=""
+                 Icon="{FontImageSource FontFamily=MaterialRegular,
+            Glyph={x:Static m:MaterialRegular.Car_rental}}"/>
+            <material:TextField  Padding="10,0,0,0"
                  Title="Descrição" Text="" 
                   Icon="{FontImageSource FontFamily=MaterialRegular,
                  Glyph={x:Static m:MaterialRegular.Description}}"/>
 
-                <material:TextField Padding="10,0,0,0"
-                 Title="Modelo Veículo" Text=""  
-                      Icon="{FontImageSource FontFamily=MaterialRegular,
-                 Glyph={x:Static m:MaterialRegular.Branding_watermark}}"/>
-
-                <material:TextField Padding="10,0,0,0"
-                   Title="Marca Ve+iculo" 
-                        Icon="{FontImageSource FontFamily=MaterialRegular,
-                   Glyph={x:Static m:MaterialRegular.Model_training}}"/>
 
                 <Button Grid.Row="1" Grid.Column="1" Text="Cadastrar Peça"  input:FormView.IsSubmitButton="True" 
                       HeightRequest="60" Margin="10,0,0,10" />

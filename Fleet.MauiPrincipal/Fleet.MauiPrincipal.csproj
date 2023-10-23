@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿ <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net7.0-android;net7.0-ios;net7.0-maccatalyst</TargetFrameworks>
@@ -49,62 +49,35 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\Images\nodata.png" />
-	  <None Remove="Resources\Images\Toolbar\add_64px.png" />
-	  <None Remove="Resources\Images\Toolbar\add_new_64px.png" />
-	  <None Remove="Resources\Images\Toolbar\brake_discs_64px.png" />
-	  <None Remove="Resources\Images\Toolbar\cancel_64px.png" />
-	  <None Remove="Resources\Images\Toolbar\car_64px.png" />
-	  <None Remove="Resources\Images\Toolbar\car_service_64.png" />
-	  <None Remove="Resources\Images\Toolbar\create_64px.png" />
-	  <None Remove="Resources\Images\Toolbar\edit_64px.png" />
-	  <None Remove="Resources\Images\Toolbar\move_stock_64px.png" />
-	  <None Remove="Resources\Images\Toolbar\new_product_64px.png" />
-	  <None Remove="Resources\Images\Toolbar\ok_64px.png" />
-	  <None Remove="Resources\Images\Toolbar\pencil_64px.png" />
-	  <None Remove="Resources\Images\Toolbar\save_64px.png" />
-	  <None Remove="Resources\Images\Toolbar\settings_64px.png" />
-	  <None Remove="Resources\Images\Toolbar\synchronize_64px.png" />
-	  <None Remove="Resources\Images\Toolbar\tools_64px.png" />
-	  <None Remove="Resources\Images\Toolbar\trolley_64px.png" />
+	  <AndroidResource Remove="Resources\Images\Toolbar\**" />
+	  <Compile Remove="Resources\Images\Toolbar\**" />
+	  <EmbeddedResource Remove="Resources\Images\Toolbar\**" />
+	  <MauiCss Remove="Resources\Images\Toolbar\**" />
+	  <MauiImage Remove="Resources\Images\Toolbar\**" />
+	  <MauiXaml Remove="Resources\Images\Toolbar\**" />
+	  <None Remove="Resources\Images\Toolbar\**" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiImage Include="Resources\Images\Toolbar\add_64px.png" />
-	  <MauiImage Include="Resources\Images\Toolbar\add_new_64px.png" />
-	  <MauiImage Include="Resources\Images\Toolbar\brake_discs_64px.png" />
-	  <MauiImage Include="Resources\Images\Toolbar\cancel_64px.png" />
-	  <MauiImage Include="Resources\Images\Toolbar\car_64px.png" />
-	  <MauiImage Include="Resources\Images\Toolbar\car_service_64.png" />
-	  <MauiImage Include="Resources\Images\Toolbar\create_64px.png" />
-	  <MauiImage Include="Resources\Images\Toolbar\edit_64px.png" />
-	  <MauiImage Include="Resources\Images\Toolbar\move_stock_64px.png" />
-	  <MauiImage Include="Resources\Images\Toolbar\new_product_64px.png" />
-	  <MauiImage Include="Resources\Images\Toolbar\ok_64px.png" />
-	  <MauiImage Include="Resources\Images\Toolbar\pencil_64px.png" />
-	  <MauiImage Include="Resources\Images\Toolbar\save_64px.png" />
-	  <MauiImage Include="Resources\Images\Toolbar\settings_64px.png" />
-	  <MauiImage Include="Resources\Images\Toolbar\synchronize_64px.png" />
-	  <MauiImage Include="Resources\Images\Toolbar\tools_64px.png" />
-	  <MauiImage Include="Resources\Images\Toolbar\trolley_64px.png" />
+	  <None Remove="Resources\Images\nodata.png" />
 	</ItemGroup>
 	
 	<ItemGroup>
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
 		<PackageReference Include="ColorPicker.Maui" Version="1.0.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
-		<PackageReference Include="Microsoft.Data.Sqlite.Core" Version="7.0.11" />
+		<PackageReference Include="Microsoft.Data.Sqlite.Core" Version="7.0.12" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
-		<PackageReference Include="Microsoft.Maui.Controls.Maps" Version="7.0.92" />
+		<PackageReference Include="Microsoft.Maui.Controls.Maps" Version="7.0.96" />
 		<PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.1.2" />
-		<PackageReference Include="ReactiveUI" Version="19.4.1" />
+		<PackageReference Include="ReactiveUI" Version="19.5.1" />
 		<PackageReference Include="SQLite" Version="3.13.0" />
 		<PackageReference Include="sqlite-net" Version="1.6.292" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
-		<PackageReference Include="SQLitePCLRaw.core" Version="2.1.5" />
-		<PackageReference Include="SQLitePCLRaw.lib.e_sqlite3" Version="2.1.5" />
+		<PackageReference Include="SQLitePCLRaw.core" Version="2.1.6" />
+		<PackageReference Include="SQLitePCLRaw.lib.e_sqlite3" Version="2.1.6" />
 		<PackageReference Include="UraniumUI" Version="2.5.6" />
 		<PackageReference Include="UraniumUI.Icons.FontAwesome" Version="2.5.6" />
 		<PackageReference Include="UraniumUI.Icons.MaterialIcons" Version="2.5.6" />

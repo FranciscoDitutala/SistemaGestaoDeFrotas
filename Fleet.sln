@@ -27,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleetException", "FleetExce
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fleet.MauiPrincipal", "Fleet.MauiPrincipal\Fleet.MauiPrincipal.csproj", "{C4D5E129-5BF7-44C6-A8AC-DA317BF5A76F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceTest", "ServiceTest\ServiceTest.csproj", "{4BBD82E1-D94C-41DA-9E78-5ED4DB4BCF6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceTest", "ServiceTest\ServiceTest.csproj", "{4BBD82E1-D94C-41DA-9E78-5ED4DB4BCF6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

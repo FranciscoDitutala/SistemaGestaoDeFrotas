@@ -12,6 +12,7 @@ namespace Fleet.MauiPrincipal.Service
         public string Name{get; set;}
         public string Company { get; set; }
         public string Logo { get; set; }
+        public bool Enabled { get; set; }
    
 
     }

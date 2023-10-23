@@ -4,8 +4,62 @@
              x:Class="Fleet.MauiPrincipal.View.Part.PartCategoriesPage"
              xmlns:viewModel="clr-namespace:Fleet.MauiPrincipal.ViewModel.Parts"
              x:DataType="viewModel:PartCategoriesViewModel"
+              xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome"
+             xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
+             xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+             xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui" 
              Title="PartCategoriesPage">
 
+    <Grid  RowDefinitions ="1.2*,*,6.5*" ColumnDefinitions="*" Margin="10">
+        <HorizontalStackLayout Margin="20,10"  Grid.Row="0" >
+            <Button Text="Listar" StyleClass="FilledButton"  WidthRequest="200" CornerRadius="8" 
+                HorizontalOptions="EndAndExpand" Command="{Binding CarregarPartCategoriesCommand}" />
 
-    
+            <Button Text="Apagar" StyleClass="FilledButton"
+                HorizontalOptions="EndAndExpand"  WidthRequest="200" CornerRadius="8" />
+
+        </HorizontalStackLayout>
+        <SearchBar Grid.Row="1"  Margin="20,20" Placeholder="Procurar"  
+                   HeightRequest="0"   ></SearchBar >
+        <ScrollView  Grid.Row="2">
+            <material:DataGrid ItemsSource="{Binding CategoriesItems}" HorizontalOptions="Start" Margin="2"  BackgroundColor="WhiteSmoke" 
+                      LineSeparatorColor="Blue" >
+              
+                <material:DataGrid.EmptyView>
+                    <VerticalStackLayout Margin="80,20">
+                        <Image
+			                WidthRequest="40"
+			                HeightRequest="40"
+			                HorizontalOptions="Center"
+			                VerticalOptions="Center"
+			                Source="{FontImageSource FontFamily=MaterialOutlined, Glyph={x:Static m:MaterialOutlined.Backup_table}, Color={AppThemeBinding
+                      Light={StaticResource OnSurface}, Dark={StaticResource OnSurfaceDark}}}"/>
+                        <Label Text="No data available..." HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </material:DataGrid.EmptyView>
+                <material:DataGrid.Columns >
+                    <material:DataGridSelectionColumn Title="#" />
+                    <material:DataGridColumn Title="Imagem" >
+                        <material:DataGridColumn.CellItemTemplate>
+                            <DataTemplate>
+                                <Image BackgroundColor="Aquamarine" Aspect="AspectFit" Source="{x:Binding Image}" />
+                            </DataTemplate>
+                        </material:DataGridColumn.CellItemTemplate>
+                    </material:DataGridColumn>
+                    <material:DataGridColumn Binding="{Binding Name}" Title="Nome"/>
+              <material:DataGridColumn Title="Actions" >
+                 <material:DataGridColumn.CellItemTemplate    >
+                     <DataTemplate>
+                         <Button Text="Remover" />
+                     </DataTemplate>
+                 </material:DataGridColumn.CellItemTemplate>
+             </material:DataGridColumn>
+                </material:DataGrid.Columns>
+            </material:DataGrid>
+
+        </ScrollView>
+
+    </Grid>
+
 </ContentPage>

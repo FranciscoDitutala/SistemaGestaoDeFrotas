@@ -30,9 +30,8 @@
                 Glyph={x:Static m:MaterialRegular.Color_lens}}"/>
 
                 <material:PickerField Padding="10,0,0,0"
-                Title="Tipo do Veiculo" ItemsSource="{Binding VehicleTypes}"  
-                                     
-                                      SelectedItem="{Binding SelectedVehicleType}"
+                Title="Tipo do Veiculo" ItemsSource="{Binding VehicleTypes}"     
+                                      SelectedItem="{Binding SelectedVehicleTypes}"
                      Icon="{FontImageSource FontFamily=MaterialRegular,
                 Glyph={x:Static m:MaterialRegular.Car_rental}}"/>
 

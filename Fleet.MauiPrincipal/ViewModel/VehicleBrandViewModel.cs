@@ -39,8 +39,8 @@ namespace Fleet.MauiPrincipal.ViewModel
                 OnPropertyChanged(nameof(Brands));
             }
         }
-        private Image _logoImage;
-        public Image LogoBrands
+        private string _logoImage;
+        public string LogoBrands
         {
             get { return _logoImage; }
             set
@@ -53,8 +53,6 @@ namespace Fleet.MauiPrincipal.ViewModel
 
         [ObservableProperty]
         public string _nameBrands;
-        [ObservableProperty]
-        public Image _logoBrand = new Image();
 
 
         [ObservableProperty]
@@ -126,34 +124,11 @@ namespace Fleet.MauiPrincipal.ViewModel
                     Debug.WriteLine("veiculo nao foi apagado");
                 }
 
-                await CarregarBrandsAsync();
+                //await CarregarBrandsAsync();
             }
         }
-
-
-        public ICommand CadastraBrandsModelCommand => new Command(async () =>
-          await CadastraBrandsModelAsync());
-        private async Task CadastraBrandsModelAsync()
-        {
-            if (!string.IsNullOrEmpty(NameBrands))
-            {
-                var brandItem = new VehicleBrand()
-                {
-                    Name = NameBrands,
-                    Company = CompanyBrands,
-                    Logo = LogoName,
-                };
-                var url = $"{baseUrl}/FleetCommon/VehicleBrand";
-                string json = JsonSerializer.Serialize<VehicleBrand>(brandItem, _SerializerOptions);
-                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                var response = await Client.PostAsync(url, content);
-                Debug.WriteLine("A marca foi cadastrado com sucesso " + json);
-                await CarregarBrandsAsync();
-            }
-        }
-
         public ICommand CarregarImagemCommand => new Command(async () =>
-         await CarregarImagem());
+            await CarregarImagem());
         public async Task CarregarImagem()
         {
             var result = await FilePicker.PickAsync(
@@ -166,11 +141,37 @@ namespace Fleet.MauiPrincipal.ViewModel
             if (result == null)
                 return;
             var stream = await result.OpenReadAsync();
-            LogoBrands = (new Image
-            {
-                Source = ImageSource.FromStream(() => stream)
-            });
+            LogoBrands = result.FullPath;
+          
         }
+
+        public ICommand CadastraBrandsModelCommand => new Command(async () =>
+          await CadastraBrandsModelAsync());
+        private async Task CadastraBrandsModelAsync()
+        {
+            if (!string.IsNullOrEmpty(NameBrands))
+            {
+                var brandItem = new VehicleBrand()
+                {
+                    Name = NameBrands,
+                    Company = CompanyBrands,
+                    Logo = LogoBrands,
+                    Enabled = false,
+                };
+                var url = $"{baseUrl}/FleetCommon/VehicleBrand";
+                string json = JsonSerializer.Serialize<VehicleBrand>(brandItem, _SerializerOptions);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await Client.PostAsync(url, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine("A marca foi cadastrado com sucesso " + json);
+                }
+                else { Debug.WriteLine("A marca nao foi cadastrado " + json); }
+               
+                //await CarregarBrandsAsync();
+            }
+        }
+   
 
     }
 }

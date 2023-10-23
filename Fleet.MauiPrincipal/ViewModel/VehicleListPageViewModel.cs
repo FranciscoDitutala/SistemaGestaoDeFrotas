@@ -55,7 +55,6 @@ namespace Fleet.MauiPrincipal.ViewModel
 
         }
   
-
         public ICommand CarregarVehiclesCommand => new Command(async () =>
              await CarregarVehiclesAsync());
         private async Task CarregarVehiclesAsync()
@@ -72,7 +71,6 @@ namespace Fleet.MauiPrincipal.ViewModel
 
                     Vehicles = data;
                 }
-
         }
 
         public ObservableCollection<Vehicle> Items { get; set; }
@@ -92,7 +90,7 @@ namespace Fleet.MauiPrincipal.ViewModel
 
                     //var teste = Items.Remove(item);
                     if (Items.Contains(item))
-                {
+                 {
                     var url = $"{baseUrl}/FleetTransport/Vehicle/{item.Id}";
                     var response = await Client.DeleteAsync(url);
                     Debug.WriteLine("A o veiculo foi apagado com id " + item.Id);

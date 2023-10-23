@@ -76,7 +76,6 @@ namespace Fleet.Principal.Controllers.TransportControllers
             return Ok(ans);
         }
 
-       
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateVehicle(int id, UpdateVehicleDto updateVehicleDto)
