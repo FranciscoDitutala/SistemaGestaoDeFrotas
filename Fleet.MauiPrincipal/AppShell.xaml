@@ -18,6 +18,7 @@
     BackgroundColor="Aqua"
     Shell.FlyoutBehavior="Locked"
     Shell.BackgroundColor="#512BD4"
+    
     Shell.TitleColor="#0B4CA1" >
 
     <Shell.FlyoutHeader>

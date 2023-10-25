@@ -24,37 +24,37 @@
                   <Grid  RowDefinitions="*" ColumnDefinitions="*,*,*" Grid.Row="1" Grid.ColumnSpan="2"  VerticalOptions="Center" ColumnSpacing="10"  Margin="10,0,10,0" >
                        <Grid BackgroundColor="#512BD4" Grid.Column="0"   ColumnSpacing="10" HeightRequest="120" RowDefinitions="3*,2*" ColumnDefinitions="*,*" Padding="15" >
                             <Image Source="vehicle_insurance_64px.png" Aspect="AspectFit" Grid.RowSpan="2" Grid.Column="0"  HeightRequest="60"  />
-                            <Label Text="Veiculos"  FontSize="Medium" FontFamily="Gilroy" TextColor="White" HorizontalOptions="Start" Grid.Row="1" Grid.Column="1"  VerticalOptions="Center" />
-                            <Label Text="50"  FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"  HorizontalOptions="Start" Grid.Row="0" Grid.Column="2" TextColor="White"  VerticalOptions="Center" />
+                <Label Text="Veiculos"  FontSize="Micro" FontFamily="Gilroy" TextColor="White" HorizontalOptions="Start" Grid.Row="1" Grid.Column="1"  VerticalOptions="Center" />
+                            <Label Text="20"  FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"  HorizontalOptions="Start" Grid.Row="0" Grid.Column="2" TextColor="White"  VerticalOptions="Center" />
                       </Grid>
                         <Grid BackgroundColor="#512BD4" Grid.Column="1"   ColumnSpacing="10" HeightRequest="120" RowDefinitions="3*,2*" ColumnDefinitions="*,*" Padding="15" >
                             <Image Source="vehicle_insurance_64px.png" Aspect="AspectFit" Grid.RowSpan="2" Grid.Column="0"  HeightRequest="60"  />
-                            <Label Text="Veiculos"  FontSize="Medium" FontFamily="Gilroy" TextColor="White" HorizontalOptions="Start" Grid.Row="1" Grid.Column="1"  VerticalOptions="Center" />
-                            <Label Text="50"  FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"  HorizontalOptions="Start" Grid.Row="0" Grid.Column="2" TextColor="White"  VerticalOptions="Center" />
+                <Label Text="Modelos"  FontSize="Micro" FontFamily="Gilroy" TextColor="White" HorizontalOptions="Start" Grid.Row="1" Grid.Column="1"  VerticalOptions="Center" />
+                            <Label Text="100"  FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"  HorizontalOptions="Start" Grid.Row="0" Grid.Column="2" TextColor="White"  VerticalOptions="Center" />
                         </Grid>
                         <Grid BackgroundColor="#512BD4" Grid.Column="2"   ColumnSpacing="10" HeightRequest="120" RowDefinitions="3*,2*" ColumnDefinitions="*,*" Padding="15" >
                             <Image Source="vehicle_insurance_64px.png" Aspect="AspectFit" Grid.RowSpan="2" Grid.Column="0"  HeightRequest="60"  />
-                            <Label Text="Veiculos"  FontSize="Medium" FontFamily="Gilroy" TextColor="White" HorizontalOptions="Start" Grid.Row="1" Grid.Column="1"  VerticalOptions="Center" />
-                            <Label Text="50"  FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"  HorizontalOptions="Start" Grid.Row="0" Grid.Column="2" TextColor="White"  VerticalOptions="Center" />
+                <Label Text="Marcas"  FontSize="Micro" FontFamily="Gilroy" TextColor="White" HorizontalOptions="Start" Grid.Row="1" Grid.Column="1"  VerticalOptions="Center" />
+                            <Label Text="50" FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"  HorizontalOptions="Start" Grid.Row="0" Grid.Column="2" TextColor="White"  VerticalOptions="Center" />
                         </Grid>
 
                </Grid>
 
 
         <Grid Grid.ColumnSpan="2" RowDefinitions="*" ColumnDefinitions="*,*,*" Grid.Row="2"  VerticalOptions="Center" ColumnSpacing="10" Margin="10,0,10,0" >
-            <Grid BackgroundColor="#512BD4" Grid.Column="0"   ColumnSpacing="10" HeightRequest="120" RowDefinitions="3*,2*" ColumnDefinitions="*,*" Padding="15" >
+            <Grid BackgroundColor="RoyalBlue" Grid.Column="0"   ColumnSpacing="10" HeightRequest="120" RowDefinitions="3*,2*" ColumnDefinitions="*,*" Padding="15" >
                 <Image Source="vehicle_insurance_64px.png" Aspect="AspectFit" Grid.RowSpan="2" Grid.Column="0"  HeightRequest="60"  />
-                <Label Text="Veiculos"  FontSize="Medium" FontFamily="Gilroy" TextColor="White" HorizontalOptions="Start" Grid.Row="1" Grid.Column="1"  VerticalOptions="Center" />
-                <Label Text="50"  FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"  HorizontalOptions="Start" Grid.Row="0" Grid.Column="2" TextColor="White"  VerticalOptions="Center" />
+                <Label Text="Stock Entrada"  FontSize="Micro" FontFamily="Gilroy" TextColor="White" HorizontalOptions="Start" Grid.Row="1" Grid.Column="1"  VerticalOptions="Center" />
+                <Label Text="10"  FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"  HorizontalOptions="Start" Grid.Row="0" Grid.Column="2" TextColor="White"  VerticalOptions="Center" />
             </Grid>
-            <Grid BackgroundColor="#512BD4" Grid.Column="1"    ColumnSpacing="10" HeightRequest="120" RowDefinitions="3*,2*" ColumnDefinitions="*,*" Padding="15" >
+            <Grid BackgroundColor="RoyalBlue" Grid.Column="1"    ColumnSpacing="10" HeightRequest="120" RowDefinitions="3*,2*" ColumnDefinitions="*,*" Padding="15" >
                 <Image Source="vehicle_insurance_64px.png" Aspect="AspectFit" Grid.RowSpan="2" Grid.Column="0"  HeightRequest="60"  />
-                <Label Text="Veiculos"  FontSize="Medium" FontFamily="Gilroy" TextColor="White" HorizontalOptions="Start" Grid.Row="1" Grid.Column="1"  VerticalOptions="Center" />
-                <Label Text="50"  FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"  HorizontalOptions="Start" Grid.Row="0" Grid.Column="2" TextColor="White"  VerticalOptions="Center" />
+                <Label Text="Stock Saida"  FontSize="Micro" FontFamily="Gilroy" TextColor="White" HorizontalOptions="Start" Grid.Row="1" Grid.Column="1"  VerticalOptions="Center" />
+                <Label Text="2"  FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"  HorizontalOptions="Start" Grid.Row="0" Grid.Column="2" TextColor="White"  VerticalOptions="Center" />
             </Grid>
-            <Grid BackgroundColor="#512BD4" Grid.Column="2"   ColumnSpacing="10" HeightRequest="120" RowDefinitions="3*,2*" ColumnDefinitions="*,*" Padding="15" >
+            <Grid BackgroundColor="RoyalBlue" Grid.Column="2"   ColumnSpacing="10" HeightRequest="120" RowDefinitions="3*,2*" ColumnDefinitions="*,*" Padding="15" >
                 <Image Source="vehicle_insurance_64px.png" Aspect="AspectFit" Grid.RowSpan="2" Grid.Column="0"  HeightRequest="60"  />
-                <Label Text="Veiculos"  FontSize="Medium" FontFamily="Gilroy" TextColor="White" HorizontalOptions="Start" Grid.Row="1" Grid.Column="1"  VerticalOptions="Center" />
+                <Label Text="Veiculos"  FontSize="Micro" FontFamily="Gilroy" TextColor="White" HorizontalOptions="Start" Grid.Row="1" Grid.Column="1"  VerticalOptions="Center" />
                 <Label Text="50"  FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"  HorizontalOptions="Start" Grid.Row="0" Grid.Column="2" TextColor="White"  VerticalOptions="Center" />
             </Grid>
 
@@ -63,18 +63,18 @@
         <Grid Grid.ColumnSpan="2" RowDefinitions="*" ColumnDefinitions="*,*,*" Grid.Row="3"  VerticalOptions="Center" ColumnSpacing="10" Margin="10,0,10,0" >
             <Grid BackgroundColor="#512BD4" Grid.Column="0"   ColumnSpacing="10" HeightRequest="120" RowDefinitions="3*,2*" ColumnDefinitions="*,*" Padding="15" >
                 <Image Source="vehicle_insurance_64px.png" Aspect="AspectFit" Grid.RowSpan="2" Grid.Column="0"  HeightRequest="60"  />
-                <Label Text="Veiculos"  FontSize="Medium" FontFamily="Gilroy" TextColor="White" HorizontalOptions="Start" Grid.Row="1" Grid.Column="1"  VerticalOptions="Center" />
-                <Label Text="50"  FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"  HorizontalOptions="Start" Grid.Row="0" Grid.Column="2" TextColor="White"  VerticalOptions="Center" />
+                <Label Text="Categorias de Peças"  FontSize="Micro" FontFamily="Gilroy" TextColor="White" HorizontalOptions="Start" Grid.Row="1" Grid.Column="1"  VerticalOptions="Center" />
+                <Label Text="150"  FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"  HorizontalOptions="Start" Grid.Row="0" Grid.Column="2" TextColor="White"  VerticalOptions="Center" />
             </Grid>
             <Grid BackgroundColor="#512BD4" Grid.Column="1"    ColumnSpacing="10" HeightRequest="120" RowDefinitions="3*,2*" ColumnDefinitions="*,*" Padding="15" >
                 <Image Source="vehicle_insurance_64px.png" Aspect="AspectFit" Grid.RowSpan="2" Grid.Column="0"  HeightRequest="60"  />
-                <Label Text="Veiculos"  FontSize="Medium" FontFamily="Gilroy" TextColor="White" HorizontalOptions="Start" Grid.Row="1" Grid.Column="1"  VerticalOptions="Center" />
+                <Label Text="Tipos de Categorias"  FontSize="Micro" FontFamily="Gilroy" TextColor="White" HorizontalOptions="Start" Grid.Row="1" Grid.Column="1"  VerticalOptions="Center" />
                 <Label Text="50"  FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"  HorizontalOptions="Start" Grid.Row="0" Grid.Column="2" TextColor="White"  VerticalOptions="Center" />
             </Grid>
             <Grid BackgroundColor="#512BD4" Grid.Column="2"   ColumnSpacing="10" HeightRequest="120" RowDefinitions="3*,2*" ColumnDefinitions="*,*" Padding="15" >
                 <Image Source="vehicle_insurance_64px.png" Aspect="AspectFit" Grid.RowSpan="2" Grid.Column="0"  HeightRequest="60"  />
-                <Label Text="Veiculos"  FontSize="Medium" FontFamily="Gilroy" TextColor="White" HorizontalOptions="Start" Grid.Row="1" Grid.Column="1"  VerticalOptions="Center" />
-                <Label Text="50"  FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"  HorizontalOptions="Start" Grid.Row="0" Grid.Column="2" TextColor="White"  VerticalOptions="Center" />
+                <Label Text="Tipos de Peças"  FontSize="Micro" FontFamily="Gilroy" TextColor="White" HorizontalOptions="Start" Grid.Row="1" Grid.Column="1"  VerticalOptions="Center" />
+                <Label Text="80"  FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"  HorizontalOptions="Start" Grid.Row="0" Grid.Column="2" TextColor="White"  VerticalOptions="Center" />
             </Grid>
 
         </Grid>
