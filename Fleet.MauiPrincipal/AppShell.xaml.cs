@@ -18,6 +18,8 @@ namespace Fleet.MauiPrincipal
             Routing.RegisterRoute(nameof(NavBarPage), typeof(NavBarPage));
             Routing.RegisterRoute(nameof(VehicleAssignPage), typeof(VehicleAssignPage));
 
+            Routing.RegisterRoute(nameof(VehicleAddPage), typeof(VehicleAddPage));
+
             //Routing.RegisterRoute(nameof(PartTypePage), typeof(PartTypePage));
             Routing.RegisterRoute(nameof(PartPage), typeof(PartPage));
             Routing.RegisterRoute(nameof(StockyEntryPage), typeof(StockyEntryPage));
@@ -27,7 +29,12 @@ namespace Fleet.MauiPrincipal
             Routing.RegisterRoute(nameof(CreateUser), typeof(CreateUser));
             Routing.RegisterRoute(nameof(RecuperarUser), typeof(RecuperarUser));
             Routing.RegisterRoute(nameof(ListarUser), typeof(ListarUser));
-          
+            Routing.RegisterRoute(nameof(StockyEntriesPage), typeof(StockyEntriesPage));
+            Routing.RegisterRoute(nameof(StockyOutsPage), typeof(StockyOutsPage));
+            Routing.RegisterRoute("VehicleDetailsPage", typeof(VehicleDetailsPage));
+
         }
-    }
+
+
+    }   
 }

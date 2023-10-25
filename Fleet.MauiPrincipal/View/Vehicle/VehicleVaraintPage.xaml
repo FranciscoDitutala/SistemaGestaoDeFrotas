@@ -10,6 +10,7 @@
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
              xmlns:viewModel="clr-namespace:Fleet.MauiPrincipal.ViewModel"
              x:DataType="viewModel:VehicleVariantViewModel"
+             NavigationPage.HasNavigationBar="False"   
              Title="VehicleVaraintPage">
     
     <ScrollView Margin="0,20,30,10"  FlowDirection="LeftToRight" >

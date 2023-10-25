@@ -10,6 +10,7 @@
              xmlns:controls="https://trungnt2910.github.io/schemas/maui/2022/colorpicker"
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
              x:DataType="viewModel:CreateUserViewModel"
+             NavigationPage.HasNavigationBar="False"
              Title="CreateUser">
     
     <FlexLayout    FlowDirection="LeftToRight" Direction="Column" Wrap="Wrap" 

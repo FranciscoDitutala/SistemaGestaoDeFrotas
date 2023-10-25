@@ -8,6 +8,10 @@ using Fleet.MauiPrincipal.ViewModel.Parts;
 using InputKit.Handlers;
 using Microsoft.Extensions.Logging;
 using UraniumUI;
+using Microsoft.Maui.Controls.Compatibility.Hosting;
+using Microsoft.Maui.Controls.Handlers.Compatibility;
+
+
 
 namespace Fleet.MauiPrincipal
 {
@@ -34,11 +38,14 @@ namespace Fleet.MauiPrincipal
             {
                 // Add following line:
                 handlers.AddInputKitHandlers(); // 👈
+                //handlers.AddCompatibilityRenderer(typeof(Shell), typeof(ShellRenderer));
             });
+            
+            //.ConfigureMauiHandlers((_, handlers) => handlers.AddCompatibilityRenderer(typeof(Shell), typeof(ShellRenderer)));
 
 
 #if DEBUG
-        builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
             builder.Services.AddTransient<VehicleBrandPage>();
             builder.Services.AddTransient<VehicleModelPage>();
@@ -86,6 +93,7 @@ namespace Fleet.MauiPrincipal
             builder.Services.AddTransient<VehicleVariantListViewModel>();
             builder.Services.AddTransient<VehicleModelPageViewModel>();
             builder.Services.AddTransient<VehicleAssignPage>();
+            builder.Services.AddTransient<VehicleDetailsPage>();
 
             return builder.Build();
         }

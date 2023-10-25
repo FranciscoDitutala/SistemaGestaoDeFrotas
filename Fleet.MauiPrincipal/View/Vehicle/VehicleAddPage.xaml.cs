@@ -9,6 +9,7 @@ public partial class VehicleAddPage : ContentPage
 
     public VehicleAddPage()
     {
+        InitializeComponent();
     }
 
     public VehicleAddPage(VehicleAddPageViewModel viewModel)
@@ -18,5 +19,10 @@ public partial class VehicleAddPage : ContentPage
         this.BindingContext = _viewModel;
 
     }
-    
+    private async void ReturnToListVehicle(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();
+    }
+
+   
 }

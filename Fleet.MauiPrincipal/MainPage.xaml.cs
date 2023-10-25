@@ -7,6 +7,7 @@
         public MainPage()
         {
             InitializeComponent();
+            //Navigation.PushAsync(new AppShell());
         }
 
        

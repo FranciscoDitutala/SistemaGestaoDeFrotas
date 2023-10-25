@@ -5,6 +5,7 @@
              xmlns:model="clr-namespace:Fleet.Parts;assembly=Fleet.Parts.Shared"
              xmlns:viewmodel="clr-namespace:Fleet.MauiPrincipal.ViewModel.Parts"
              x:DataType="viewmodel:PartCategoryViewModel"
+              NavigationPage.HasNavigationBar="False"
              Title="Part Categoria" >
     <VerticalStackLayout>
         <Label 

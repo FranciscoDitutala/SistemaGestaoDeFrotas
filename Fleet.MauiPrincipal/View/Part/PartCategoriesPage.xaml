@@ -9,6 +9,7 @@
              xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
              xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui" 
+              NavigationPage.HasNavigationBar="False"
              Title="PartCategoriesPage">
 
     <Grid  RowDefinitions ="1.2*,*,6.5*" ColumnDefinitions="*" Margin="10">

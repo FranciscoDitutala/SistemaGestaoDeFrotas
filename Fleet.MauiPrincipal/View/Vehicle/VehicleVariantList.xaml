@@ -9,6 +9,7 @@
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"    
              xmlns:viewmodel="clr-namespace:Fleet.MauiPrincipal.ViewModel"
              x:DataType="viewmodel:VehicleVariantListViewModel"
+             NavigationPage.HasNavigationBar="False"   
              Title="VehicleVariantList">
     <StackLayout Margin="10">
 

@@ -8,6 +8,11 @@ public partial class VehicleListPage : ContentPage
 {
     private VehicleListPageViewModel _viewModel;
 
+    public VehicleListPage()
+    {
+        InitializeComponent();
+    }
+
     public VehicleListPage(VehicleListPageViewModel viewModel)
     {
         InitializeComponent();
@@ -26,17 +31,29 @@ public partial class VehicleListPage : ContentPage
     private async void GoToVehicleAddPage(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new VehicleAddPage());
-       
+
+        //await Navigation.PushAsync(new VehicleAddPage());
+
+
     }
     private void SearchBar_SearchButtonPressed(object sender, EventArgs e)
     {
 
     }
-//    void OnCollectionViewSelectionChanged(object sender, SelectionChangedEventArgs e)
-//    {
-//        //string previous = (e.PreviousSelection.FirstOrDefault() as Vehicle)?.Vin;
-//        string current = (e.CurrentSelection.FirstOrDefault() as Vehicle?.Vin;
-       
-//}
+
+    private async void GoToVehicleDetails(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new VehicleDetailsPage());
+    }
+    private async void UpdateVehicle(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new VehicleAddPage());
+    }
+    //    void OnCollectionViewSelectionChanged(object sender, SelectionChangedEventArgs e)
+    //    {
+    //        //string previous = (e.PreviousSelection.FirstOrDefault() as Vehicle)?.Vin;
+    //        string current = (e.CurrentSelection.FirstOrDefault() as Vehicle?.Vin;
+
+    //}
 
 }

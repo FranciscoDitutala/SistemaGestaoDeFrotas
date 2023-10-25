@@ -4,11 +4,8 @@
              x:Class="Fleet.MauiPrincipal.View.Vehicle.VehiclePage"
              xmlns:views="clr-namespace:Fleet.MauiPrincipal.View.Vehicle"
              xmlns:viewmodel="clr-namespace:Fleet.MauiPrincipal.ViewModel"
-             x:DataType="viewmodel:VehiclePageViewModel"
-             
-          
-             
-             
+             x:DataType="viewmodel:VehiclePageViewModel" 
+           NavigationPage.HasNavigationBar="False"      
              >
     <TabBar >
         <Tab Title="Veiculo" > 

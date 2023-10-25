@@ -9,67 +9,91 @@
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"    
              xmlns:viewmodel="clr-namespace:Fleet.MauiPrincipal.ViewModel"
              x:DataType="viewmodel:VehicleListPageViewModel"
+             NavigationPage.HasNavigationBar="False"
              Title="VehicleListPage">
     
-    <Grid  RowDefinitions ="1.2*,*,6.5*" ColumnDefinitions="*" Margin="10">
-
-      
-        <HorizontalStackLayout Margin="20,10"  Grid.Row="0" >
-            <!--<Button Text="Adicionar" StyleClass="FilledButton"  
-         HorizontalOptions="EndAndExpand"  WidthRequest="200" CornerRadius="8"   />-->
-
-            <Button Text="Listar" StyleClass="FilledButton"  WidthRequest="200" CornerRadius="8" 
-                HorizontalOptions="EndAndExpand" Command="{Binding CarregarVehiclesCommand}" />
-            
-            <Button Text="Apagar" StyleClass="FilledButton"
-                HorizontalOptions="EndAndExpand" Command="{Binding RemoveSelectedCommand}" WidthRequest="200" CornerRadius="8" />
+    <Grid  RowDefinitions ="*" ColumnDefinitions="10*,*,5*" Margin="10">
         
-        </HorizontalStackLayout>
-        <SearchBar Grid.Row="1"  x:Name="IdProcurar" Margin="20,20" Placeholder="Procurar"  
-                   HeightRequest="0"   ></SearchBar >
+        <Grid Grid.RowSpan="3" Grid.ColumnSpan="1" RowDefinitions ="*,1*,8*,1*" ColumnDefinitions="9*,*"  HorizontalOptions="Start">
+            <Label Text="VEICULOS CADASTRADO" FontFamily="Gilroy" FontAttributes="Bold" FontSize="Title" Grid.Row="0" Grid.Column="0"
+             HorizontalOptions="Start" VerticalOptions="Center"  Margin="20,-70,0,0" TextColor="#512BD4" />
 
+            <SearchBar Grid.Row="1" Grid.ColumnSpan="1" x:Name="IdProcurar"  Placeholder="Procurar" WidthRequest="620" HorizontalOptions="Start" VerticalOptions="Start"
+         HeightRequest="0"  Margin="20,-40,0,0" BackgroundColor="WhiteSmoke" PlaceholderColor="#512BD4" ></SearchBar >
 
-        <ScrollView  Grid.Row="2"  >
+            <HorizontalStackLayout  Grid.Row="2" Grid.ColumnSpan="2"  Margin="0,-40,0,0" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand"
+                   >
+                <ScrollView   >
 
-            <material:DataGrid ItemsSource="{Binding Vehicles}" HorizontalOptions="Start" Margin="2"  BackgroundColor="WhiteSmoke" 
-                                LineSeparatorColor="Blue" SelectedItems="{Binding SelectedItems}" >
-                <material:DataGrid.EmptyView>
-                    <VerticalStackLayout Margin="80,20">
-                        <Image
-				                WidthRequest="40"
-				                HeightRequest="40"
-				                HorizontalOptions="Center"
-				                VerticalOptions="Center"
-				                Source="{FontImageSource FontFamily=MaterialOutlined, Glyph={x:Static m:MaterialOutlined.Backup_table}, Color={AppThemeBinding
-                                Light={StaticResource OnSurface}, Dark={StaticResource OnSurfaceDark}}}"/>
-                        <Label Text="No data available..." HorizontalOptions="Center"/>
-                    </VerticalStackLayout>
-                </material:DataGrid.EmptyView>
-                <material:DataGrid.Columns >
-                    <material:DataGridSelectionColumn Title="#" />
-                    <material:DataGridColumn  Binding="{Binding Vin}" Title="Chassis"/>
-                    <material:DataGridColumn Binding="{Binding Cor}" Title="Cor"/>
-                    <material:DataGridColumn Binding="{Binding Model}" Title="Modelo" />
-                    <material:DataGridColumn Binding="{Binding Brand}" Title="Marca"/>
-                    <material:DataGridColumn Binding="{Binding Variant}" Title="Variante"/>
-                    <material:DataGridColumn Binding="{Binding Type}" Title="Tipo" />
-                    <material:DataGridColumn Binding="{Binding Power}" Title="Potencia"/>
-                    <material:DataGridColumn Binding="{Binding FuelConsumption}" Title="Consumo" />
-                    <material:DataGridColumn Binding="{Binding YearOfManufacture}" Title="Ano Fabrico"/>
-                    <!--<material:DataGridColumn Binding="{Binding Transmission}" Title="Transmissão"/>-->
-                    <!--<material:DataGridColumn Binding="{Binding YearOfManufacture}" Title="Ano de Fabrico" />-->
-                   
-                    <!--<material:DataGridColumn Title="Actions" >
-                        <material:DataGridColumn.CellItemTemplate    >
-                            <DataTemplate>
+                    <material:DataGrid ItemsSource="{Binding Vehicles}"  Margin="20"  BackgroundColor="WhiteSmoke"
+                        LineSeparatorColor="#512BD4" SelectedItems="{Binding SelectedItems}" BorderColor="#512BD4"  >
+                        <material:DataGrid.EmptyView>
+                            <VerticalStackLayout Margin="80,20">
+                                <Image
+		                WidthRequest="40"
+		                HeightRequest="40"
+		                HorizontalOptions="Center"
+		                VerticalOptions="Center"
+		                Source="{FontImageSource FontFamily=MaterialOutlined, Glyph={x:Static m:MaterialOutlined.Backup_table}, Color={AppThemeBinding
+                        Light={StaticResource OnSurface}, Dark={StaticResource OnSurfaceDark}}}"/>
+                                <Label Text="No data available..." HorizontalOptions="Center"/>
+                            </VerticalStackLayout>
+                        </material:DataGrid.EmptyView>
+                        <material:DataGrid.Columns >
 
-                                <Button Text="Remover" Command="{Binding RemoveSelectedCommand}"/>
-                            </DataTemplate>
-                        </material:DataGridColumn.CellItemTemplate>
-                    </material:DataGridColumn>-->
-                </material:DataGrid.Columns>
-            </material:DataGrid>
-        </ScrollView>
+                            <material:DataGridColumn Binding="{Binding Vin}" Title="Chassis"/>
+                            <material:DataGridColumn Binding="{Binding Registration}" Title="Matrícula"/>
+                            <material:DataGridColumn Binding="{Binding Cor}" Title="Cor" />
+                            <material:DataGridColumn Binding="{Binding Brand}" Title="Marca"/>
+                            <material:DataGridColumn Binding="{Binding Model}" Title="Modelo"/>
 
+                            <material:DataGridColumn Title="Ação" >
+                                <material:DataGridColumn.CellItemTemplate    >
+                                    <DataTemplate>
+
+                                        <Button Text="Atualzar" Clicked="UpdateVehicle" />
+
+                                    </DataTemplate>
+                                </material:DataGridColumn.CellItemTemplate>
+
+                            </material:DataGridColumn>
+                            <material:DataGridColumn Title="Ação" >
+                                <material:DataGridColumn.CellItemTemplate    >
+                                    <DataTemplate>
+
+                                        <Button Text="Detalhes" Clicked="GoToVehicleDetails" />
+
+                                    </DataTemplate>
+                                </material:DataGridColumn.CellItemTemplate>
+
+                            </material:DataGridColumn>
+                        </material:DataGrid.Columns>
+                    </material:DataGrid>
+                </ScrollView>
+
+            </HorizontalStackLayout>
+
+            <Grid Grid.Row="3" Margin="20,0,0,0" RowDefinitions="*,*" ColumnDefinitions="*,*" BackgroundColor="WhiteSmoke" HorizontalOptions="Start" ColumnSpacing="10" >
+                <Button  CornerRadius="8" WidthRequest="200" TextColor="#512BD4" BorderColor="#512BD4"  FontSize="Medium" Text="Adicionar " HorizontalOptions="Start"
+                 Margin="10,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="add_64px.png" Clicked="GoToVehicleAddPage" >
+                </Button>
+                <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Refresh " HorizontalOptions="Start"
+                 Margin="10,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="update_64px.png"
+                         Grid.Column="1" Command="{Binding CarregarVehiclesCommand}" >
+                  </Button>
+                 
+            </Grid>
+
+        </Grid>
+
+         <Grid Grid.Column="2"  >
+            <Image Source="login.png" VerticalOptions="Start" Aspect="AspectFit"> 
+                
+            </Image>
+            
+        </Grid>
+        
+        
     </Grid>
+    
 </ContentPage>

@@ -39,5 +39,6 @@ namespace Fleet.MauiPrincipal
             return window;
 
         }
-    }
+
+     }
 }

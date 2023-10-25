@@ -10,67 +10,71 @@
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
              xmlns:viewModel="clr-namespace:Fleet.MauiPrincipal.ViewModel.Parts"
              x:DataType="viewModel:StockyEntryPageViewModel"
+              NavigationPage.HasNavigationBar="False"
              Title="Cadastrar Stock" 
-             BackgroundColor="WhiteSmoke"
+          
             
              >
-    <Grid RowDefinitions="1*,*,*,*" ColumnDefinitions="2*,*" ColumnSpacing="10" >
+    <Grid RowDefinitions="4*,7*,*,*" ColumnDefinitions="2*,*" ColumnSpacing="10" >
 
-        <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="5*,5*"  Grid.ColumnSpan="2" Margin="10,0,0,0" HeightRequest="230"
-              Grid.RowSpan="1"  RowSpacing="5" VerticalOptions="Start" HorizontalOptions="Start" >
+        <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="5*,5*"  Grid.ColumnSpan="2" Margin="10,0,0,0" HeightRequest="230"
+              Grid.RowSpan="1"  RowSpacing="5" VerticalOptions="Start" HorizontalOptions="Start"     >
+            <HorizontalStackLayout Margin="10,-30,0,0"  Grid.ColumnSpan="3" HeightRequest="60" VerticalOptions="Start" ZIndex="1"  Grid.Row="0"  >
+                <ImageButton   Source="return_64px.png" Aspect="AspectFill" Clicked="ReturnToListStockyEntry" WidthRequest="20" HeightRequest="20" 
+            Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Margin="10,0,0,20" />
+            </HorizontalStackLayout>
             
             <Border Grid.ColumnSpan="2" Grid.Row="0" Padding="10,10,0,10" 
-             Margin="10,0,20,10" Opacity="1" HeightRequest="90">
+             Margin="10,15,0,0" Opacity="1" HeightRequest="90">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="4"/>
                 </Border.StrokeShape>
                 <HorizontalStackLayout Grid.ColumnSpan="2"  Spacing="10">
                     <material:TextField Padding="10,10,0,0"
-                Title="Provedor" Text="" WidthRequest="300"
+                Title="Provedor" Text="" WidthRequest="300"  FontFamily="Gilroy"
                     Icon="{FontImageSource FontFamily=MaterialRegular,
                 Glyph={x:Static m:MaterialRegular.Perm_identity}} "/>
-                    <material:TextField  Padding="10,10,0,0"
-                Title="Descrição" Text="" WidthRequest="300"
+                    <material:TextField  Padding="10,10,0,0"  
+                Title="Descrição" Text="" WidthRequest="300"  FontFamily="Gilroy"
                  Icon="{FontImageSource FontFamily=MaterialRegular,
                 Glyph={x:Static m:MaterialRegular.Description}}"/>
-                    <material:TextField  Padding="10,10,0,0"
+                    <material:TextField  Padding="10,10,0,0"  FontFamily="Gilroy"
                        Title="Valor da Compra" Text="" WidthRequest="300"
                         Icon="{FontImageSource FontFamily=MaterialRegular,
                        Glyph={x:Static m:MaterialRegular.Shopping_cart_checkout}}"/>
-                    <ImageButton Source="save_64px.png" Margin="2" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="Center"
-                     />
+                    <!--<ImageButton Source="save_64px.png" Margin="2" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="Center"
+                     />-->
                 </HorizontalStackLayout>
 
             </Border>
-            <Border Grid.ColumnSpan="2" Grid.Row="1" Padding="10,0,0,0"  HeightRequest="100" WidthRequest="700"
+            <Border Grid.ColumnSpan="2" Grid.Row="1" Padding="10,0,0,0"  HeightRequest="100" WidthRequest="720"
            Margin="10,0,0,10" Opacity="1" HorizontalOptions="Start" >
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="4"/>
                 </Border.StrokeShape>
-
-                <VerticalStackLayout >
-                    <Label Text="Novo Artigo:" Margin="15,0,0,10"/>
+                
+                    <VerticalStackLayout >
+                    <Label Text="Adicionar Artigo no Stock:" Margin="15,0,0,0" FontFamily="Gilroy"/>
                     <HorizontalStackLayout  HorizontalOptions="Start" VerticalOptions="Center">
-                        <material:TextField Padding="10,0,0,0" WidthRequest="300"
-            Title="Codigo" Text="" 
+                        <material:TextField Padding="10,0,0,0" WidthRequest="300" Margin="0,10,0,0"
+                        Title="Código"  FontFamily="Gilroy"
                 Icon="{FontImageSource FontFamily=MaterialRegular,
             Glyph={x:Static m:MaterialRegular.Code}} "/>
-                        <material:TextField  Padding="10,0,0,0" WidthRequest="300"
-             Title="Quantidade" Text="" 
+                        <material:TextField  Padding="10,0,0,0" WidthRequest="300" Margin="0,10,0,0"
+             Title="Quantidade"  FontFamily="Gilroy"
              Icon="{FontImageSource FontFamily=MaterialRegular,
             Glyph={x:Static m:MaterialRegular.Production_quantity_limits}}"/>
 
-                        <ImageButton Source="add_64px.png" Margin="2" HeightRequest="46"
-                />
+                        <ImageButton Source="add_64px.png"  HeightRequest="46"  Margin="5,10,5,0"  />
+                        <ImageButton Source="update_64px.png" Margin="5,10,0,0" HeightRequest="46"    />
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
             </Border>
+            <Label Grid.Row="2" Text="Lista de Entradas" Padding="25,0,0,10"  FontAttributes="Bold"  TextColor="#512BD4"
+              FontSize="Title"   VerticalOptions="Start" HorizontalOptions="Start" FontFamily="Gilroy" />
         </Grid>
-        <Label Grid.Row="2" Text="Lista de entradas" Padding="25,0,0,10" FontFamily="Arial" FontAttributes="Bold" 
-               FontSize="Medium"   VerticalOptions="Start" HorizontalOptions="Start" />
-        <ScrollView  Grid.Row="2" Grid.ColumnSpan="2" Margin="10,30,10,10" HorizontalOptions="Start"
-                     VerticalOptions="Start" 
-                     WidthRequest="1030"  >
+       
+        <ScrollView  Grid.Row="1" Grid.ColumnSpan="2" Margin="10,30,10,10"   >
 
             <material:DataGrid HorizontalOptions="Start" Margin="20"  
                          LineSeparatorColor="Blue"  WidthRequest="1000" >
@@ -95,29 +99,24 @@
                 </material:DataGrid.Columns>
             </material:DataGrid>
         </ScrollView >
-        <!--<Border Grid.ColumnSpan="1" Grid.Row="1" Padding="10"  HeightRequest="100"
-                Margin="20,10,0,10" Opacity="1">
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="4"/>
-            </Border.StrokeShape>
+     
+       
+        <Grid Grid.Row="3" Grid.ColumnSpan="2" Margin="20,0,0,0" RowDefinitions="*,*" ColumnDefinitions="*,*,*"  HorizontalOptions="Start" ColumnSpacing="10" >
+            <Button  CornerRadius="8" WidthRequest="200" TextColor="#512BD4" BorderColor="#512BD4"  FontSize="Medium" Text="NovaPeça " HorizontalOptions="Start"
+           HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="add_64px.png" Clicked="GoToAddFleet" >
+            </Button>
+           
+            <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Guardar " 
+                 Margin="10,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="save_64px.png"
+              Grid.Column="1" Command="{Binding SalvarStockCommand}" >
+                
+            </Button>
+            <!--<Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Refresh " 
+                  Margin="10,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="update_64px.png"
+               Grid.Column="2" Command="{Binding CarregarVehiclesCommand}" >
+            </Button>-->
 
-            <VerticalStackLayout >
-                <Label Text="Novo Artigo:" Margin="15,0,0,10"/>
-                <HorizontalStackLayout  HorizontalOptions="Start" VerticalOptions="Center">
-                    <material:TextField Padding="10,0,0,0" WidthRequest="300"
-                Title="Codigo" Text="" 
-                    Icon="{FontImageSource FontFamily=MaterialRegular,
-                Glyph={x:Static m:MaterialRegular.Code}} "/>
-                    <material:TextField  Padding="10,0,0,0" WidthRequest="300"
-                 Title="Quantidade" Text="" 
-                 Icon="{FontImageSource FontFamily=MaterialRegular,
-                Glyph={x:Static m:MaterialRegular.Production_quantity_limits}}"/>
-
-                    <ImageButton Source="add_64px.png" Margin="2" HeightRequest="46"
-                        />
-                </HorizontalStackLayout>
-            </VerticalStackLayout>
-        </Border>-->
+        </Grid>
     </Grid>
     
     

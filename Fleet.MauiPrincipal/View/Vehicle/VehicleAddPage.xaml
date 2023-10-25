@@ -9,94 +9,107 @@
               xmlns:controls="https://trungnt2910.github.io/schemas/maui/2022/colorpicker"
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
              xmlns:viewModel="clr-namespace:Fleet.MauiPrincipal.ViewModel"
-             x:DataType="viewModel:VehicleAddPageViewModel"
-             Title="Cadastrar Veículos"  >
-
+              x:DataType="viewModel:VehicleAddPageViewModel"
+              NavigationPage.HasNavigationBar="False"
+              Title="Cadastrar Veículos"  >
     
-    <ScrollView Margin="0,20,20,50"  FlowDirection="LeftToRight" >
+        <Grid RowDefinitions="*,2*,5*,*" ColumnDefinitions="5*,5*,5*"  ColumnSpacing="5" RowSpacing="10" Margin="0,0,0,0"  >
+        <HorizontalStackLayout Margin="10,-20,0,0"  Grid.ColumnSpan="3" HeightRequest="60" VerticalOptions="Start" ZIndex="1"  Grid.Row="0"  >
+            <ImageButton   Source="return_64px.png" Aspect="AspectFill" Clicked="ReturnToListVehicle" WidthRequest="20" HeightRequest="20" 
+           Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Margin="10,0,0,20" />
+        </HorizontalStackLayout>
+        <!--<HorizontalStackLayout Grid.Row="1" Grid.ColumnSpan="3" HorizontalOptions="StartAndExpand">
+           
+        </HorizontalStackLayout>-->
+        <Image  Grid.Row="1" Grid.ColumnSpan="3"  Margin="20,-110,0,0" Source="monitorar.png" Aspect="AspectFill" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
+        <Grid Grid.ColumnSpan="3" Grid.Row="2" RowDefinitions="*,*,*" ColumnDefinitions="*,*,*" Margin="0,0,20,0" >
+             <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="15" Padding="10" VerticalOptions="Start">
 
-        <Grid RowDefinitions="*,*" ColumnDefinitions="5*,5*,5*"  ColumnSpacing="5"  >
-            
-            <VerticalStackLayout Grid.RowSpan="1" Grid.Column="0" Spacing="15" Padding="10" >
+                            <material:TextField Padding="10,0,0,0"
+                    Title="Nº do Chassis " Text="{Binding Vin}" FontFamily="Gilroy"
+                        Icon="{FontImageSource FontFamily=MaterialRegular,
+                    Glyph={x:Static m:MaterialRegular.Numbers}} "/>
 
-                <material:TextField Padding="10,0,0,0"
-                Title="Nº do Chassis " Text="{Binding Vin}" 
-                    Icon="{FontImageSource FontFamily=MaterialRegular,
-                Glyph={x:Static m:MaterialRegular.Numbers}} "/>
-
-                <material:TextField  Padding="10,0,0,0"
-                Title="Cor do Veículo" Text="{Binding Cor}" 
-                 Icon="{FontImageSource FontFamily=MaterialRegular,
-                Glyph={x:Static m:MaterialRegular.Color_lens}}"/>
-
-                <material:PickerField Padding="10,0,0,0"
-                Title="Tipo do Veiculo" ItemsSource="{Binding VehicleTypes}"     
-                                      SelectedItem="{Binding SelectedVehicleTypes}"
+                            <material:TextField  Padding="10,0,0,0"
+                    Title="Cor do Veículo" Text="{Binding Cor}" FontFamily="Gilroy"
                      Icon="{FontImageSource FontFamily=MaterialRegular,
-                Glyph={x:Static m:MaterialRegular.Car_rental}}"/>
+                    Glyph={x:Static m:MaterialRegular.Color_lens}}"/>
 
-                <material:TextField Padding="10,0,0,0"
-                  Title="Registro" BindingContext="{Binding Registro}"
-                       Icon="{FontImageSource FontFamily=MaterialRegular,
-                  Glyph={x:Static m:MaterialRegular.Mode_edit}}"/> 
+                <material:PickerField Padding="10,0,0,0" FontFamily="Gilroy"
+                    Title="Tipo do Veiculo" ItemsSource="{Binding VehicleTypes}"     
+                                          SelectedItem="{Binding SelectedVehicleTypes}"
+                         Icon="{FontImageSource FontFamily=MaterialRegular,
+                    Glyph={x:Static m:MaterialRegular.Car_rental}}"/>
 
-       
-             </VerticalStackLayout>
-            <VerticalStackLayout Grid.RowSpan="1" Grid.Column="1" Spacing="15" Padding="10" >
+                <material:TextField Padding="10,0,0,0"  FontFamily="Gilroy"
+                      Title="Matricula" BindingContext="{Binding Registro}"
+                           Icon="{FontImageSource FontFamily=MaterialRegular,
+                      Glyph={x:Static m:MaterialRegular.Code}}"/>
+                        </VerticalStackLayout>  
+                        <VerticalStackLayout Grid.RowSpan="1" Grid.Column="1" Spacing="15" Padding="10" >
 
-                <material:TextField Padding="10,0,0,0"
-     Title="Modelo do Veiculo" Text="{Binding Model}" 
-         Icon="{FontImageSource FontFamily=MaterialRegular,
+                <material:TextField Padding="10,0,0,0" FontFamily="Gilroy"
+                 Title="Modelo do Veiculo" Text="{Binding Model}" 
+                 Icon="{FontImageSource FontFamily=MaterialRegular,
                Glyph={x:Static m:MaterialRegular.Car_rental}} "/>
 
-                <material:TextField  Padding="10,0,0,0"
+                            <material:TextField  Padding="10,0,0,0"
                      Title="Marca do Veiculo" Text="{Binding Brand}" 
                       Icon="{FontImageSource FontFamily=MaterialRegular,
                      Glyph={x:Static m:MaterialRegular.Model_training}}"/>
 
-                                <material:TextField Padding="10,0,0,0"
+                <material:TextField Padding="10,0,0,0" FontFamily="Gilroy"
                      Title="Variante do Veiculo" Text="{Binding Variante}"  
                           Icon="{FontImageSource FontFamily=MaterialRegular,
                      Glyph={x:Static m:MaterialRegular.Car_rental}}"/>
 
-                                <material:TextField Padding="10,0,0,0"
+                <material:TextField Padding="10,0,0,0" FontFamily="Gilroy"
                        Title="Potencia do Veiculo" BindingContext="{Binding Power}"
                             Icon="{FontImageSource FontFamily=MaterialRegular,
                        Glyph={x:Static m:MaterialRegular.Settings_power}}"/>
- 
-            </VerticalStackLayout>
 
-
-            <VerticalStackLayout Grid.RowSpan="2" Grid.Column="2" Spacing="15" Padding="0,10,0,0"  >
-
-                <!--<material:DatePickerField Padding="10,0,0,0"
-                Title="Data de Registro" BindingContext="{Binding DataRegistro}"
-                     Icon="{FontImageSource FontFamily=MaterialRegular,
-                Glyph={x:Static m:MaterialRegular.Model_training}}"/>-->
-                <material:TextField  Padding="10,0,0,0"
-                Title="Data Fabrico" Text="{Binding DataFabrico}"
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.RowSpan="2" Grid.Column="2" Spacing="15" Padding="0,10,0,0"  >
+                <material:TextField  Padding="10,0,0,0" FontFamily="Gilroy"
+                Title="Ano de Fabrico" Text="{Binding DataFabrico}"
                      Icon="{FontImageSource FontFamily=MaterialRegular,
                 Glyph={x:Static m:MaterialRegular.Branding_watermark}}"/>
 
-                <material:TextField Padding="10,0,0,0"
-             Title="Transmissão " Text="{Binding TransmitionType}"
+                            <material:TextField Padding="10,0,0,0"
+             Title="Transmissão " Text="{Binding TransmitionType}" FontFamily="Gilroy"
                   Icon="{FontImageSource FontFamily=MaterialRegular,
              Glyph={x:Static m:MaterialRegular.Branding_watermark}}"/>
 
-                <material:TextField  Padding="10,0,0,0"
+                <material:TextField  Padding="10,0,0,0" FontFamily="Gilroy"
                 Title="Consumo de Combustivel" Text="{Binding FuelConsumption}"
                      Icon="{FontImageSource FontFamily=MaterialRegular,
                 Glyph={x:Static m:MaterialRegular.Branding_watermark}}"/>
+                          
 
+                        </VerticalStackLayout>
 
-                <Button Grid.Row="2" Grid.Column="2" Text="Cadastrar Veiculo"  input:FormView.IsSubmitButton="True" 
-                      HeightRequest="60" Margin="10,0,0,10"  Command="{Binding CadastraVehicleCommand}"/>
-
-            </VerticalStackLayout>
-  
         </Grid>
-                  
-    </ScrollView>
 
+        
+
+        <Grid Grid.Row="3" Grid.ColumnSpan="2" Margin="20,0,0,0" RowDefinitions="*,*" ColumnDefinitions="*,*,*"  HorizontalOptions="Start" ColumnSpacing="10" >
+            <Button  CornerRadius="8" WidthRequest="200" TextColor="#512BD4" BorderColor="#512BD4"  FontSize="Medium" Text="Salvar " HorizontalOptions="Start"
+        HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="save_64px.png" Command="{Binding CadastraVehicleCommand}" >
+            </Button>
+
+            <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Atualizar " 
+           Margin="10,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="update_64px.png"
+           Grid.Column="1" >
+
+            </Button>
+            <!--<Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Refresh " 
+            Margin="10,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="update_64px.png"
+         Grid.Column="2" Command="{Binding CarregarVehiclesCommand}" >
+      </Button>-->
+
+        </Grid>
+
+    </Grid>
+  
 
 </ContentPage>

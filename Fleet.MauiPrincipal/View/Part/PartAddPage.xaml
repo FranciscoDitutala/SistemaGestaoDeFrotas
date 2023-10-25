@@ -10,54 +10,112 @@
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
              xmlns:viewModel="clr-namespace:Fleet.MauiPrincipal.ViewModel.Parts"
              x:DataType="viewModel:PartAddPageViewModel"
+              NavigationPage.HasNavigationBar="False"
              Title="PartAddPage">
     
-    <ScrollView Margin="0,20,20,50"  FlowDirection="LeftToRight" >
 
-        <Grid RowDefinitions="*,*" ColumnDefinitions="5*,5*"  ColumnSpacing="5"  >
 
-            <VerticalStackLayout Grid.RowSpan="1" Grid.Column="0" Spacing="15" Padding="10" >
+        <Grid RowDefinitions="0.3*,3*,7*,*" ColumnDefinitions="5*,5*"  ColumnSpacing="5"  RowSpacing="10" >
+
+        <HorizontalStackLayout Margin="10,-10,0,0"  Grid.ColumnSpan="3" HeightRequest="60" Grid.Row="0" >
+            <ImageButton   Source="return_64px.png" Aspect="AspectFill" Clicked="ReturnToAddStock" WidthRequest="20" HeightRequest="20" 
+           Grid.Row="0" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Margin="10,0,0,20" />
+            
+        </HorizontalStackLayout>
+        <VerticalStackLayout Grid.Row="1" Grid.Column="0" Spacing="15" Padding="10" Margin="2" >
 
                 <material:TextField Padding="10,0,0,0"
-            Title="Codigo Univesral (UPC)" Text="" 
+            Title="Codigo Univesral (UPC)" Text="" FontFamily="Gilroy"
                 Icon="{FontImageSource FontFamily=MaterialRegular,
             Glyph={x:Static m:MaterialRegular.Numbers}} "/>
 
                 <material:TextField  Padding="10,0,0,0"
-            Title="Codigo Local (SKU)" Text="" 
+            Title="Codigo Local (SKU)" Text="" FontFamily="Gilroy"
              Icon="{FontImageSource FontFamily=MaterialRegular,
             Glyph={x:Static m:MaterialRegular.Production_quantity_limits}}"/>
 
                 <material:TextField Padding="10,0,0,0"
-              Title="Tipo de Peça" Text=""  
+              Title="Tipo de Peça" Text=""  FontFamily="Gilroy"
                  Icon="{FontImageSource FontFamily=MaterialRegular,
             Glyph={x:Static m:MaterialRegular.Car_repair}}"/>
 
             </VerticalStackLayout>
-            <VerticalStackLayout Grid.RowSpan="1" Grid.Column="1" Spacing="15" Padding="10" >
+            <VerticalStackLayout Grid.RowSpan="1" Grid.Column="1" Spacing="15" Padding="10" Margin="0,0,20,0" Grid.Row="1" >
                 <material:TextField Padding="10,0,0,0"
-             Title="Modelo da peça" Text="" 
+             Title="Modelo da peça" Text="" FontFamily="Gilroy"
            Icon="{FontImageSource FontFamily=MaterialRegular,
            Glyph={x:Static m:MaterialRegular.Car_rental}} "/>
                 <material:TextField Padding="10,0,0,0"
-            Title="Marca da Peça" BindingContext=""
+            Title="Marca da Peça" BindingContext="" FontFamily="Gilroy"
                  Icon="{FontImageSource FontFamily=MaterialRegular,
             Glyph={x:Static m:MaterialRegular.Car_rental}}"/>
             <material:TextField  Padding="10,0,0,0"
-                 Title="Descrição" Text="" 
+                 Title="Descrição" Text="" FontFamily="Gilroy"
                   Icon="{FontImageSource FontFamily=MaterialRegular,
                  Glyph={x:Static m:MaterialRegular.Description}}"/>
+   
+        </VerticalStackLayout>
+        <ScrollView Grid.Row="2" Grid.ColumnSpan="2" Margin="20" >
 
+            <material:DataGrid   Margin="20"  BackgroundColor="WhiteSmoke"
+         LineSeparatorColor="#512BD4"  BorderColor="#512BD4"  >
+                <material:DataGrid.EmptyView>
+                    <VerticalStackLayout Margin="80,20">
+                        <Image
+                     WidthRequest="40"
+                     HeightRequest="40"
+                     HorizontalOptions="Center"
+                     VerticalOptions="Center"
+                     Source="{FontImageSource FontFamily=MaterialOutlined, Glyph={x:Static m:MaterialOutlined.Backup_table}, Color={AppThemeBinding
+                     Light={StaticResource OnSurface}, Dark={StaticResource OnSurfaceDark}}}"/> 
+                        <Label Text="No data available..." HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </material:DataGrid.EmptyView>
+                <material:DataGrid.Columns >
 
-                <Button Grid.Row="1" Grid.Column="1" Text="Cadastrar Peça"  input:FormView.IsSubmitButton="True" 
-                      HeightRequest="60" Margin="10,0,0,10" />
+                    <!--<material:DataGridColumn Binding="{Binding Vin}" Title="Chassis"/>
+                    <material:DataGridColumn Binding="{Binding Registration}" Title="Matrícula"/>
+                    <material:DataGridColumn Binding="{Binding Cor}" Title="Cor" />
+                    <material:DataGridColumn Binding="{Binding Brand}" Title="Marca"/>
+                    <material:DataGridColumn Binding="{Binding Model}" Title="Modelo"/>-->
 
+                    <material:DataGridColumn Title="Ação" >
+                        <material:DataGridColumn.CellItemTemplate    >
+                            <DataTemplate>
 
+                                <Button Text="Atualzar"/>
 
-            </VerticalStackLayout>
+                            </DataTemplate>
+                        </material:DataGridColumn.CellItemTemplate>
+
+                    </material:DataGridColumn>
+                    <material:DataGridColumn Title="Ação" >
+                        <material:DataGridColumn.CellItemTemplate    >
+                            <DataTemplate>
+
+                                <Button Text="Detalhes"  />
+
+                            </DataTemplate>
+                        </material:DataGridColumn.CellItemTemplate>
+
+                    </material:DataGridColumn>
+                </material:DataGrid.Columns>
+            </material:DataGrid>
+        </ScrollView>
+
+        <Grid Grid.Row="3" Margin="20,0,0,0" RowDefinitions="*,*" ColumnDefinitions="*,*"  HorizontalOptions="Start" ColumnSpacing="10" >
+            <Button  CornerRadius="8" WidthRequest="200" TextColor="#512BD4" BorderColor="#512BD4"  FontSize="Medium" Text="Adicionar " HorizontalOptions="Start"
+                 Margin="10,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="add_64px.png"  >
+            </Button>
+            <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Refresh " HorizontalOptions="Start"
+                 Margin="10,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="update_64px.png"
+                         Grid.Column="1" >
+            </Button>
 
         </Grid>
 
-    </ScrollView>
 
+    </Grid>
+
+    
 </ContentPage>

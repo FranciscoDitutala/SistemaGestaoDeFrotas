@@ -59,7 +59,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\car_64px.png" />
+	  <None Remove="Resources\Images\dashboard_64px.png" />
+	  <None Remove="Resources\Images\list_64px.png" />
+	  <None Remove="Resources\Images\login_64px.png" />
+	  <None Remove="Resources\Images\logout_rounded_left_64px.png" />
 	  <None Remove="Resources\Images\nodata.png" />
+	  <None Remove="Resources\Images\out_of_stock_64px.png" />
+	  <None Remove="Resources\Images\password_64px.png" />
+	  <None Remove="Resources\Images\scan_stock_64px.png" />
+	  <None Remove="Resources\Images\show_property_64px.png" />
+	  <None Remove="Resources\Images\user_64px.png" />
 	</ItemGroup>
 	
 	<ItemGroup>
@@ -73,6 +83,7 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Maps" Version="7.0.96" />
 		<PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.1.2" />
 		<PackageReference Include="ReactiveUI" Version="19.5.1" />
+		<PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" Version="2.88.6" />
 		<PackageReference Include="SQLite" Version="3.13.0" />
 		<PackageReference Include="sqlite-net" Version="1.6.292" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
@@ -167,6 +178,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Vehicle\VehicleBrandPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Vehicle\VehicleDetailsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\Vehicle\VehicleListPage.xaml">

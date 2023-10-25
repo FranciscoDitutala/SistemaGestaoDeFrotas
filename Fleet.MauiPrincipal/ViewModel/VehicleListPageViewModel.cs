@@ -18,13 +18,9 @@ using System.Diagnostics;
 
 namespace Fleet.MauiPrincipal.ViewModel
 {
-    public partial class VehicleListPageViewModel : ObservableObject , INotifyPropertyChanged
+    public partial class VehicleListPageViewModel : ObservableObject 
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+       
         private HttpClient Client;
         JsonSerializerOptions _SerializerOptions;
         string baseUrl = "https://localhost:7111";
@@ -54,7 +50,6 @@ namespace Fleet.MauiPrincipal.ViewModel
 
 
         }
-  
         public ICommand CarregarVehiclesCommand => new Command(async () =>
              await CarregarVehiclesAsync());
         private async Task CarregarVehiclesAsync()
@@ -72,7 +67,6 @@ namespace Fleet.MauiPrincipal.ViewModel
                     Vehicles = data;
                 }
         }
-
         public ObservableCollection<Vehicle> Items { get; set; }
         public ObservableCollection<Vehicle> SelectedItems { get; set; } = new ObservableCollection<Vehicle>();
 
@@ -103,17 +97,25 @@ namespace Fleet.MauiPrincipal.ViewModel
                 await CarregarVehiclesAsync();
             }
         }
-
         public ICommand GoToVehicleAddPageCommand => new Command(async () =>
              await GoToVehicleAddPageAsync());
         public async Task  GoToVehicleAddPageAsync()
         {
-
+            //await Shell.Current.Go(new AppShell());
             //await Navigation.PushAsync(new AppShell());
         }
 
 
 
+        [ICommand]
+        public static async void UpdateVehicle()
+        {
+            await AppShell.Current.GoToAsync(nameof(VehicleDetailsPage));
+            //Debug.WriteLine("Entrou no sistema");
+
+
+
+        }
 
         //[ObservableProperty]
         //public Vehicle _selectedItems;

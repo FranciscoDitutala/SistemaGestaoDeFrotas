@@ -5,6 +5,7 @@
              xmlns:views="clr-namespace:Fleet.MauiPrincipal.View.Part"
              xmlns:viewmodel="clr-namespace:Fleet.MauiPrincipal.ViewModel.Parts"
              x:DataType="viewmodel:PartPageViewModel"
+        NavigationPage.HasNavigationBar="False"
              Title="Part Page">
     <TabBar>
         <Tab Title="Entradas de Peças">
