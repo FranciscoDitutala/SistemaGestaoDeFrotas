@@ -38,7 +38,7 @@ namespace Fleet.Transport.Data.Repositories
                 if (e.Id == id)
                     return e;
             }
-            return null;
+            return new Employee();
         }
     }
 }

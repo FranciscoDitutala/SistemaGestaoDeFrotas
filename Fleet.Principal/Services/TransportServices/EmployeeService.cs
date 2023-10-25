@@ -41,6 +41,7 @@ namespace Fleet.Principal.Services.TransportServices
         {
             var employee = await _employeeManagerClient.FindEmployeeAsync(new FindEmployeeRequest { Id = id });
 
+            if (employee.Id <= 0) return new EmployeeDto();
             return _mapper.Map<EmployeeDto>(employee);
         }
     }

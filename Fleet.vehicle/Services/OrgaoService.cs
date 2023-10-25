@@ -27,6 +27,8 @@ namespace Fleet.Transport.Services
         {
             var orgao= _repository.Find(request.Id);
 
+            if (orgao.Id <= 0) return new OrgaoPayload();
+
             return _mapper.Map<OrgaoPayload>(orgao);
         }
     }

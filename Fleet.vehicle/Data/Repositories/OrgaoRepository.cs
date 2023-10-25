@@ -36,7 +36,7 @@ namespace Fleet.Transport.Data.Repositories
                 if ( o.Id == id )
                     return o;
             }
-            return null;
+            return new Orgao();
         }
     }
 }

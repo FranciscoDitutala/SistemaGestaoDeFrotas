@@ -13,12 +13,13 @@ namespace Fleet.Principal.Controllers.TransportControllers
     public class VehicleController : ControllerBase
     {
         private readonly IVehicleService _vehicleService;
+        private readonly VehicleDetailService _vehicleDetailService;
         private readonly IMapper _mapper;
 
-        public VehicleController(IVehicleService vehicleService, 
-            IOrgaoService orgaoService, IEmployeeService employeeService, IMapper mapper)
+        public VehicleController(IVehicleService vehicleService, VehicleDetailService vehicleDetailService, IMapper mapper)
         {
             _vehicleService = vehicleService;
+            _vehicleDetailService = vehicleDetailService;
             _mapper = mapper;
         }
 
@@ -68,7 +69,16 @@ namespace Fleet.Principal.Controllers.TransportControllers
 
             return Ok(ans);
         }
-       
+        [HttpGet("GetVehicleDetail/{id}")]
+        public async Task<IActionResult> GetVehicleDetail(int id)
+        {
+
+            var ans = await _vehicleDetailService.FindVehicleDetail(id);
+            return Ok(ans);
+
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> Post(AddVehicleDto addVehicleDto)
         {

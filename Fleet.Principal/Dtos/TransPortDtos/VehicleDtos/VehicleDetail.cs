@@ -1,11 +1,10 @@
 ﻿using Fleet.Transport;
-using System.ComponentModel.DataAnnotations;
 
 namespace Fleet.Principal.Dtos.TransPortDtos.VehicleDtos
 {
-    public class VehicleDto
+    public class VehicleDetail
     {
-        public int Id { get; set; }
+
         public string? Vin { get; set; }
         public string? Registration { get; set; }
         public string? Brand { get; set; }
@@ -23,6 +22,8 @@ namespace Fleet.Principal.Dtos.TransPortDtos.VehicleDtos
         public double FuelConsumption { get; set; }
         public DateTime RegistrationDate { get; set; }
         public bool Assigned { get; set; }
-
+        public AssignmentType TypeAssigment { get; set; }
+        public string? Orgao { get; set; }
+        public string? Employee { get; set; }
     }
 }

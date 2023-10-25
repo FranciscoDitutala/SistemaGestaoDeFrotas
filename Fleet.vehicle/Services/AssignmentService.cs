@@ -76,7 +76,6 @@ namespace Fleet.Transport.Services
         public override async  Task<AssignmentPayload> RemoveAssignmentVehicle(FindAssignmentRequest request, ServerCallContext context)
         {
             var assignment = await _assignmentRepository.Entities.FindAsync(x => x.Id == request.Id);
-
             if(assignment != null)
             {
                 var vehicleId = assignment.VehicleId;
@@ -103,6 +102,8 @@ namespace Fleet.Transport.Services
         }
         public override async  Task<AssignmentPayload> UpdateAssignment(AssignmentPayload request, ServerCallContext context)
         {
+
+
             var assign = await _assignmentRepository.Entities.UpdateAsync(_mapper.Map<Assignment>(request));
             await _assignmentRepository.SaveAsync();
             return _mapper.Map<AssignmentPayload>(assign);
@@ -110,7 +111,9 @@ namespace Fleet.Transport.Services
 
         public override async Task<AssignmentPayload> FindAssignmentVehicle(FindAssignmentVehicleRequest request, ServerCallContext context)
         {
-            var assign = await _assignmentRepository.Entities.FindAsync(x => x.Active == true  && x.VehicleId == request.VehicleId);
+            var assign = await _assignmentRepository.Entities.FindAsync(x => x.Active == true  && x.VehicleId == request.VehicleId) ?? new Assignment();
+
+            if (assign.Id <= 0) return new AssignmentPayload();
 
             return _mapper.Map<AssignmentPayload>(assign);
         }

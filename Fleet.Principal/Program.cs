@@ -62,6 +62,7 @@ builder.Services.AddSingleton<IVehicleService, VehicleServices>();
 builder.Services.AddSingleton<IOrgaoService,OrgaoService>();
 builder.Services.AddSingleton<IEmployeeService, EmployeeService>();
 builder.Services.AddSingleton<IAssignmentService, AssignmentService>();
+builder.Services.AddSingleton<VehicleDetailService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -69,6 +69,9 @@ namespace Fleet.Principal.Services.TransportServices
         {
             var assign = await _assignmentManagerClient.FindAssignmentVehicleAsync(new FindAssignmentVehicleRequest { VehicleId = vehicleId });
 
+            if (assign.Id <= 0)
+                return new AssignmentDto();
+
             return _mapper.Map<AssignmentDto>(assign);
         }
     }

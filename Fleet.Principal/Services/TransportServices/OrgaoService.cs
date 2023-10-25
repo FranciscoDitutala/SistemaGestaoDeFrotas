@@ -39,6 +39,7 @@ namespace Fleet.Principal.Services.TransportServices
         {
             var orgao = await _orgaoManagerClient.FindOrgaoAsync(new FindOrgaoRequest { Id = id });
 
+            if(orgao.Id <=0) return new OrgaoDto();
             return _mapper.Map<OrgaoDto>(orgao);
         }
     }
