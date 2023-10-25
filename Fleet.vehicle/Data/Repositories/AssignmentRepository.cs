@@ -7,6 +7,7 @@ namespace Fleet.Transport.Data.Repositories
     {
         public AssignmentRepository(FleetTransportDbContext context) : base(context)
         {
+            
         }
     }
 }
