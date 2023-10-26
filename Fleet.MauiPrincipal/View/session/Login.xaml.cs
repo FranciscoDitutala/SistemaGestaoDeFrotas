@@ -4,44 +4,40 @@ namespace Fleet.MauiPrincipal.View.session;
 
 public partial class Login : ContentPage
 {
-	private LoginViewModel _viewModel;
+	//private LoginViewModel _viewModel;
 
+    
     public Login()
     {
         InitializeComponent();
+        //_viewModel = viewModel;
+        this.BindingContext = new LoginViewModel();
     }
 
-    public Login(LoginViewModel viewModel)
-    {
-        InitializeComponent();
-        _viewModel = viewModel;
-        this.BindingContext = _viewModel;
-    }
+    //private async void EntrarSistema(object sender, EventArgs e)
+    //{
+    //    var user = Convert.ToString(UserName.Text);
+    //    var pass = Convert.ToString(PassUser.Text);
+    //    if (((!string.IsNullOrEmpty(user)) && (!string.IsNullOrEmpty(pass))))
+    //    {
+    //        if (user.Equals("admin") && pass.Equals("1234"))
+    //        {
+    //            await DisplayAlert("Informação", "Login com sucesso", "Ok");
+    //            UserName.Text = "";
+    //            PassUser.Text = "";
+    //            await AppShell.Current.GoToAsync (nameof(AppShell));
+    //        }
+    //        else
+    //        {
+    //            await DisplayAlert("Atenção", "Usuario não encontrado", "Ok");
+    //        }
+    //    }
+    //    else
+    //    { 
+    //        await DisplayAlert("Atenção", "Campos Obrigatórios em brancos", "Ok");
 
-    private async void EntrarSistema(object sender, EventArgs e)
-    {
-        var user = Convert.ToString(UserName.Text);
-        var pass = Convert.ToString(PassUser.Text);
-        if (((!string.IsNullOrEmpty(user)) && (!string.IsNullOrEmpty(pass))))
-        {
-            if (user.Equals("admin") && pass.Equals("1234"))
-            {
-                await DisplayAlert("Informação", "Login com sucesso", "Ok");
-                UserName.Text = "";
-                PassUser.Text = "";
-                await Navigation.PushAsync(new AppShell());
-            }
-            else
-            {
-                await DisplayAlert("Atenção", "Usuario não encontrado", "Ok");
-            }
-        }
-        else
-        { 
-            await DisplayAlert("Atenção", "Campos Obrigatórios em brancos", "Ok");
-
-        }   
-    }
+    //    }   
+    //}
 
     private async void RecuperarSenha(object sender, EventArgs e)
     {

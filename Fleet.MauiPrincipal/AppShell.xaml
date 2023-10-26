@@ -14,66 +14,55 @@
      xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
     xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
       xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui" 
-     NavigationPage.HasNavigationBar="False"
-    BackgroundColor="Aqua"
-    Shell.FlyoutBehavior="Locked"
+     Shell.FlyoutBehavior="Locked"
+     FlyoutHeaderBehavior="CollapseOnScroll"
+   
+    FlyoutIcon="Home"
     Shell.BackgroundColor="#512BD4"
-    
+    FlyoutBackdrop="#66ffffff"  
     Shell.TitleColor="#0B4CA1" >
-
     <Shell.FlyoutHeader>
         <StackLayout BackgroundColor="#512BD4" HeightRequest="80"  VerticalOptions="Center" Padding="5" >
             <Label Text="Sistema de Gestão " FontSize="Large" TextColor="White" HorizontalOptions="Center" Margin="0,20,0,0" VerticalOptions="Center"
-                   FontFamily="Gilroy" />
+            FontFamily="Gilroy" />
         </StackLayout>
     </Shell.FlyoutHeader>
-    <FlyoutBase.ContextFlyout>
-        <MenuFlyout>
-            <MenuFlyoutSubItem Text="Ligth">
-                <MenuFlyoutItem Text="Black">
-                    
-                </MenuFlyoutItem>
-            </MenuFlyoutSubItem>
-        </MenuFlyout>
-    </FlyoutBase.ContextFlyout>
-    
-    <ShellContent 
-        Title="Dashboard" Icon="Dashboard_64px.png"
-        ContentTemplate="{DataTemplate main:MainPage}"
-        Route="MainPage"  />
-    <ShellContent 
-        Title="Gerir Stock" Icon="scan_stock_64px.png"
-        ContentTemplate="{DataTemplate part:StockyEntriesPage}"
-        Route="StockyEntriesPage" />
 
     <ShellContent 
-        Title="Gerir Veículos" Icon="car_64px.png"
-        ContentTemplate="{DataTemplate vehicle:VehicleListPage}"
-        Route="VehicleListPage" >
+            Title="Dashboard" Icon="Dashboard_64px.png"
+            ContentTemplate="{DataTemplate main:MainPage}"
+            Route="MainPage"  />
+    <ShellContent 
+            Title="Gerir Stock" Icon="scan_stock_64px.png"
+            ContentTemplate="{DataTemplate part:StockyEntriesPage}"
+            Route="StockyEntriesPage" />
+
+    <ShellContent 
+            Title="Gerir Veículos" Icon="car_64px.png"
+            ContentTemplate="{DataTemplate vehicle:VehicleListPage}"
+            Route="VehicleListPage" >
+    </ShellContent>
+
+    <ShellContent 
+            Title="Gerir Usuario" Icon="user_64px.png"
+            ContentTemplate="{DataTemplate user:CreateUser}"
+            Route="CreateUser" >
+        <Shell.MenuItemTemplate>
+            <DataTemplate>
+                <Grid ColumnDefinitions="0.2*,0.8*">
+                    <Image Source="save_64px.png"
+                           Margin="5"
+                           HeightRequest="45" />
+                    <Label Grid.Column="1"
+                           Text="DashBoard"
+                           FontAttributes="Italic"
+                           VerticalTextAlignment="Center" />
+                </Grid>
+            </DataTemplate>
+        </Shell.MenuItemTemplate>
+
     </ShellContent>
   
-    <!--<ShellContent 
-        Title="Atribuir Veiculos"
-        ContentTemplate="{DataTemplate vehicle:VehicleAssignPage}"
-        Route="VehicleAssignPage" />-->
-   <ShellContent 
-    Title="Gerir Usuario" Icon="user_64px.png"
-    ContentTemplate="{DataTemplate user:CreateUser}"
-    Route="CreateUser" >
-    <Shell.MenuItemTemplate>
-        <DataTemplate>
-            <Grid ColumnDefinitions="0.2*,0.8*">
-                <Image Source="save_64px.png"
-                       Margin="5"
-                       HeightRequest="45" />
-                <Label Grid.Column="1"
-                       Text="DashBoard"
-                       FontAttributes="Italic"
-                       VerticalTextAlignment="Center" />
-            </Grid>
-        </DataTemplate>
-    </Shell.MenuItemTemplate>
 
-   </ShellContent>
-
+    
 </Shell>

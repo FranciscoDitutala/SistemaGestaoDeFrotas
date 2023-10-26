@@ -2,9 +2,10 @@
 {
     public enum TransmissionType
     {
-        NONE = 0,
+        NENHUM = 0,
         MANUAL,
-        AUTOMATIC,
-        CVT
+        AUTOMÁTICO,
+        CVT,
+        AMT
     }
 }

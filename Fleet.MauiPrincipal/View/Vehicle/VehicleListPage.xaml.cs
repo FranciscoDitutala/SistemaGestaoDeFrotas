@@ -48,6 +48,10 @@ public partial class VehicleListPage : ContentPage
     private async void UpdateVehicle(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new VehicleAddPage());
+    } 
+    private async void GoToAssignVehicle(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new VehicleAssignPage());
     }
     //    void OnCollectionViewSelectionChanged(object sender, SelectionChangedEventArgs e)
     //    {

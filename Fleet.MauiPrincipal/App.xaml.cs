@@ -11,8 +11,8 @@ namespace Fleet.MauiPrincipal
         {
             InitializeComponent();
 
-            //MainPage = new AppShell();
-              MainPage = new NavigationPage( new Login());
+            //MainPage = new Login();
+            MainPage = new NavigationPage( new Login());
         }
         protected override Window CreateWindow(IActivationState activationState)
         {

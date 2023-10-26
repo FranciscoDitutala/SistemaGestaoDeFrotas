@@ -7,22 +7,27 @@ public partial class VehicleAddPage : ContentPage
 {	
      private VehicleAddPageViewModel _viewModel;
 
-    public VehicleAddPage()
-    {
-        InitializeComponent();
-    }
+    //public VehicleAddPage()
+    //{
+    //    InitializeComponent();
+    //}
 
-    public VehicleAddPage(VehicleAddPageViewModel viewModel)
+    public VehicleAddPage()
 	{
 		InitializeComponent();
-		_viewModel= viewModel;
-        this.BindingContext = _viewModel;
+		//_viewModel= viewModel;
+        this.BindingContext =new VehicleAddPageViewModel();
 
     }
     private async void ReturnToListVehicle(object sender, EventArgs e)
     {
         await Navigation.PopAsync();
-    }
+    } 
+    
+    //private async void ReturnToListVehicle(object sender, EventArgs e)
+    //{
+    //    await Navigation.PopAsync();
+    //}
 
    
 }

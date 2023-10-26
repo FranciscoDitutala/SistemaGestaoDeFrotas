@@ -2,10 +2,10 @@
 {
     public enum VehicleType
     {
-        NONE=0,
-        CAR,
-        MOTORCYCLE,
-        TRUCK,
-        BUS
+        NENHUM=0,
+        CARRO,
+        MOTORIZADA,
+        CAMINHÃO,
+        AUTOCARRO
     }
 }

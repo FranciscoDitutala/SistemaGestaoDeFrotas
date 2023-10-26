@@ -9,18 +9,19 @@
               xmlns:controls="https://trungnt2910.github.io/schemas/maui/2022/colorpicker"
                xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
               xmlns:viewModel="clr-namespace:Fleet.MauiPrincipal.ViewModel"
-                 x:DataType="viewModel:VehicleAssignViewModel"
+              x:DataType="viewModel:VehicleAssignViewModel"
               NavigationPage.HasNavigationBar="False"
-             Title="VehicleAssignPage">
+               Title="VehicleAssignPage">
    
-    <ScrollView Margin="0,20,20,50"  FlowDirection="LeftToRight" >
+  
 
-        <Grid RowDefinitions="2*,*,2*"     >
-
-            <Grid Grid.Row="0" Grid.ColumnSpan="3" 
-                  RowDefinitions="*,*" ColumnDefinitions="*,*"  >
+        <Grid RowDefinitions="3*,4*,*"     >
+        <ImageButton  Source="return_64px.png" Aspect="AspectFill" Clicked="ReturnToListVehicle" WidthRequest="20" HeightRequest="20" 
+                  Grid.Row="0" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" Margin="20,-30,0,0"/>
+        <Grid Grid.Row="0" Grid.ColumnSpan="3"  Margin="10,20,20,0"
+                  RowDefinitions="*,*" ColumnDefinitions="*,*" ColumnSpacing="10" >
                 
-                <VerticalStackLayout Grid.RowSpan="1" Grid.Column="0" Spacing="15" Padding="10,0,0,0" Margin="10" >
+                <VerticalStackLayout Grid.RowSpan="1" Grid.Column="0" Spacing="15" Padding="10,0,0,0"  >
                     <!--<material:TextField 
                           Title="Tipo de Atribuição" Text="{Binding Assign}"
                               Icon="{FontImageSource FontFamily=MaterialRegular,
@@ -48,7 +49,7 @@
                               Glyph={x:Static m:MaterialRegular.Assignment}} "/>
                 </VerticalStackLayout>
 
-                <VerticalStackLayout Grid.RowSpan="1" Grid.Column="1" Spacing="15"  Margin="10"  >
+                <VerticalStackLayout Grid.RowSpan="1" Grid.Column="1" Spacing="15"   >
                     <material:PickerField 
                         Title="Veículo Atribuir" 
                         ItemsSource="{Binding Vehicles}"
@@ -65,22 +66,20 @@
                             Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Car_rental}}"
 />
                 </VerticalStackLayout>
-                <Grid Grid.Row="2" Grid.ColumnSpan="2" Margin="20,10,10,15"  
-                      RowDefinitions="*" ColumnDefinitions="*,*,*" ColumnSpacing="15" >
-                    <!--<Button Grid.Row="2" Grid.Column="0" Text="Atribuir Veículo"  
-                         HeightRequest="60"  />
-                    <Button Grid.Row="2" Grid.Column="1" Text="Atribuir Veículo"  
-                         HeightRequest="60"  />-->
-                    <Button Grid.Row="2" Grid.Column="1" Text="Atribuir Veículo"   
-                         HeightRequest="60"  />
-                    <Button Grid.Row="2" Grid.Column="3" Text="Carregar Veículo"   
-                     HeightRequest="60" Command="{Binding CarregarAssignmentCommand}" />
-                    
-                </Grid>
-                
-            </Grid>
+           
+        </Grid>
 
-            <material:DataGrid ItemsSource="{Binding Atribuicoes}" HorizontalOptions="Start" Margin="2"  BackgroundColor="WhiteSmoke" 
+        <Grid Grid.Row="2" Margin="20,20,0,0" RowDefinitions="*,*" ColumnDefinitions="*,*" HorizontalOptions="Start" ColumnSpacing="10" >
+            <Button  CornerRadius="8" WidthRequest="200" TextColor="#512BD4" BorderColor="#512BD4"  FontSize="Medium" Text="Salvar " HorizontalOptions="Start"
+                 Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="save_64px.png" >
+            </Button>
+            <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Refresh " HorizontalOptions="Start"
+                 Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png"
+                         Grid.Column="1" Command="{Binding CarregarAssignmentCommand}" >
+            </Button>
+
+        </Grid>
+        <!--<material:DataGrid ItemsSource="{Binding Atribuicoes}" HorizontalOptions="Start" Margin="20,-40,20,0"  BackgroundColor="WhiteSmoke" 
                      LineSeparatorColor="Blue" Grid.Row="1" Grid.ColumnSpan="2"  >
                 <material:DataGrid.EmptyView>
                     <VerticalStackLayout Margin="80,20">
@@ -111,8 +110,63 @@
                     </material:DataGridColumn>
 
                 </material:DataGrid.Columns>
-            </material:DataGrid>
-        </Grid>
+            </material:DataGrid>-->
+        <Grid  Grid.Row="1" Grid.ColumnSpan="2"  Margin="20,-20,20,0"  >
+            <ScrollView  >
 
-    </ScrollView>
+                <material:DataGrid ItemsSource="{Binding Atribuicoes}"  BackgroundColor="WhiteSmoke" CornerRadius="0"
+                        LineSeparatorColor="#004D97"  BorderColor="#004D97" FlowDirection="LeftToRight" FlexLayout.Shrink="2"  >
+                    <material:DataGrid.EmptyView>
+                        <VerticalStackLayout Margin="80,20">
+                            <Image
+		                WidthRequest="40"
+		                HeightRequest="40"
+		                HorizontalOptions="Center"
+		                VerticalOptions="Center"
+		                Source="{FontImageSource FontFamily=MaterialOutlined, Glyph={x:Static m:MaterialOutlined.Backup_table}, Color={AppThemeBinding
+                        Light={StaticResource OnSurface}, Dark={StaticResource OnSurfaceDark}}}"/>
+                            <Label Text="No data available..." HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </material:DataGrid.EmptyView>
+
+                    <material:DataGrid.Columns >
+
+                        <material:DataGridColumn Binding="{Binding Type}" Title="Tipo "  />
+                        <material:DataGridColumn Binding="{Binding OrgaoId}" Title="Departamento"/>
+                        <material:DataGridColumn Binding="{Binding Description}" Title="Descrição" />
+                        <material:DataGridColumn Binding="{Binding EmployeeId}" Title="Funcionario"/>
+                        <material:DataGridColumn Binding="{Binding VehicleId}" Title="Veiculo"/>
+
+                        <material:DataGridColumn  >
+                            <material:DataGridColumn.CellItemTemplate    >
+                                <DataTemplate>
+
+                                    <Button  ImageSource="update_64px.png" Margin="0,0,10,0" Text="Atualizar" BackgroundColor="White" BorderColor="#512BD4" TextColor="#512BD4" FontSize="Micro"  FontFamily="Gilroy" />
+                                </DataTemplate>
+                            </material:DataGridColumn.CellItemTemplate>
+
+                        </material:DataGridColumn>
+                        <material:DataGridColumn Title="Ações"  >
+                            <material:DataGridColumn.CellItemTemplate    >
+                                <DataTemplate>
+                                    <Button  ImageSource="show_property_64px.png" Margin="10,0,0,0" Text="Detalhes" BackgroundColor="White" BorderColor="#512BD4" TextColor="#512BD4" FontSize="Micro" FontFamily="Gilroy" />
+                                </DataTemplate>
+                            </material:DataGridColumn.CellItemTemplate>
+                        </material:DataGridColumn>
+                        <material:DataGridColumn  >
+                            <material:DataGridColumn.CellItemTemplate    >
+                                <DataTemplate>
+                                    <Button  ImageSource="add_64px.png" Margin="10,0,0,0" Text="Atribuir" BackgroundColor="White" BorderColor="#512BD4" TextColor="#512BD4" FontSize="Micro" FontFamily="Gilroy" />
+                                </DataTemplate>
+                            </material:DataGridColumn.CellItemTemplate>
+
+                        </material:DataGridColumn>
+                    </material:DataGrid.Columns>
+                </material:DataGrid>
+            </ScrollView>
+
+        </Grid>
+    </Grid>
+
+   
 </ContentPage>
