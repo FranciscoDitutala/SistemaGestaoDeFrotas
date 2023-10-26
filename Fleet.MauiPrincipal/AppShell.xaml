@@ -15,16 +15,18 @@
     xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
       xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui" 
      Shell.FlyoutBehavior="Locked"
-     FlyoutHeaderBehavior="CollapseOnScroll"
-   
+    
+   Shell.BackgroundColor="Aqua"
     FlyoutIcon="Home"
-    Shell.BackgroundColor="#512BD4"
+    
     FlyoutBackdrop="#66ffffff"  
     Shell.TitleColor="#0B4CA1" >
     <Shell.FlyoutHeader>
         <StackLayout BackgroundColor="#512BD4" HeightRequest="80"  VerticalOptions="Center" Padding="5" >
-            <Label Text="Sistema de Gestão " FontSize="Large" TextColor="White" HorizontalOptions="Center" Margin="0,20,0,0" VerticalOptions="Center"
+            <Label Text="Sistema de Gestão " FontSize="Large" TextColor="White" HorizontalOptions="Center" Margin="0,10,0,0" VerticalOptions="Center"
             FontFamily="Gilroy" />
+            <Label Text=" de Frotas e Peças Sobressalentes " FontSize="Micro" TextColor="White" HorizontalOptions="Center" 
+FontFamily="Gilroy" />
         </StackLayout>
     </Shell.FlyoutHeader>
 

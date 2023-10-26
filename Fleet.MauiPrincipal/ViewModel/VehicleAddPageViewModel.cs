@@ -252,7 +252,7 @@ namespace Fleet.MauiPrincipal.ViewModel
             else
             { Debug.WriteLine(" Campos Obrigatorios vazio!"); }
               //await Shell.Current.GoToAsync(nameof(VehicleListPage));
-              await Application.Current.MainPage.Navigation.PopAsync();
+              //await Application.Current.MainPage.Navigation.PushAsync(new VehicleListPage());
         }
 
 

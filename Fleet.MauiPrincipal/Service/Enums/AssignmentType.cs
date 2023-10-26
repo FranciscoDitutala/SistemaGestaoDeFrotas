@@ -2,9 +2,9 @@
 {
     public enum AssignmentType
     {
-        NONE = 0,
-        ROLE,
-        EMPLOYEE,
-        SUPPORT
+        Nenhum = 0,
+        Role,
+        Funcionario,
+        Departamento
     }
 }
