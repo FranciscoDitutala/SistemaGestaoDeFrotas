@@ -16,4 +16,8 @@ public partial class PartCategoriesPage : ContentPage
     {
         //await Navigation.PushAsync(new PartListPage());
     }
+    private async void GoToPartCategory(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new PartCategoryPage());
+    }
 }
