@@ -2,7 +2,7 @@
 
 namespace Fleet.Transport.Data.Entities
 {
-    //dgdgdgdgdgdgdgdg
+
     public class Assignment
     {
         public int Id { get; set; }

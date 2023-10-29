@@ -25,5 +25,6 @@ namespace Fleet.Principal.Dtos.TransPortDtos.VehicleDtos
         public AssignmentType TypeAssigment { get; set; }
         public string? Orgao { get; set; }
         public string? Employee { get; set; }
+      
     }
 }

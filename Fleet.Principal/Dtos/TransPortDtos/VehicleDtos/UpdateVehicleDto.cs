@@ -22,6 +22,7 @@ namespace Fleet.Principal.Dtos.TransPortDtos.VehicleDtos
 
         public double FuelConsumption { get; set; }
         public DateTime RegistrationDate { get; set; }
+        public bool Assigned { get; set; }
 
     }
 }
