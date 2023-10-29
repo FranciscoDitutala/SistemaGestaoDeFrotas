@@ -21,6 +21,8 @@ namespace Fleet.Principal.Controllers.TransportControllers
         public async Task<IActionResult> Get(int id)
         {
             var ans =  await _assignmentService.FindAssignmentAsync(id);
+
+            if(ans.Id <=0) return NotFound(" atribuição não encontarda");
             return Ok(ans);
         }
 
@@ -33,7 +35,9 @@ namespace Fleet.Principal.Controllers.TransportControllers
         [HttpGet("GetAssignmentVehicle/{vehicleId}")]
         public async Task<IActionResult> GetAssignmentVehicle(int vehicleId)
         {
-            var ans = await _assignmentService.FindAssignmentVehicleAsync(vehicleId); 
+            var ans = await _assignmentService.FindAssignmentVehicleAsync(vehicleId);
+
+            if (ans.Id <= 0) return NotFound("O veiculo não esta atribuido");
             return Ok(ans);
         }
 
@@ -54,6 +58,8 @@ namespace Fleet.Principal.Controllers.TransportControllers
         public async Task<IActionResult> Delete(int id)
         {
             var ans = await _assignmentService.RemoveAssignmentVehicleAsync(id);
+
+            if (ans.Id <= 0) return NotFound("O veiculo não esta atribuido");
             return Ok(ans);
         }
     }

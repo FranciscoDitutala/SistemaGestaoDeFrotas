@@ -31,6 +31,8 @@ namespace Fleet.Principal.Services.TransportServices
         {
             var assign = await _assignmentManagerClient.FindAssignmentAsync( new FindAssignmentRequest { Id = id });
 
+            if (assign.Id <= 0) return new AssignmentDto();
+
             return _mapper.Map<AssignmentDto>(assign);
         }
 
@@ -52,6 +54,8 @@ namespace Fleet.Principal.Services.TransportServices
         public async Task<AssignmentDto> RemoveAssignmentVehicleAsync(int id)
         {
             var assign = await _assignmentManagerClient.RemoveAssignmentVehicleAsync(new FindAssignmentRequest { Id = id });
+
+            if (assign.Id <= 0) return new AssignmentDto();
 
             return _mapper.Map<AssignmentDto>(assign);
         }

@@ -4,6 +4,7 @@ using Fleet.Principal.Services.TransportServices.Interfaces;
 using Fleet.Transport;
 using Grpc.Core;
 using System.Collections.ObjectModel;
+using System.Security.Cryptography;
 
 namespace Fleet.Principal.Services.TransportServices
 {
@@ -28,7 +29,9 @@ namespace Fleet.Principal.Services.TransportServices
         public async Task<VehicleDto> DeleteVehicleAsync(int id)
         {
             var delete = await _vehicleManagerClient.DeleteVehicleAsync(new FindVehicleRequest { Id = id });
-            return new VehicleDto();
+
+            if (delete.Id <= 0) return new VehicleDto();
+            return _mapper.Map<VehicleDto>(delete);
         }
 
        
@@ -52,8 +55,15 @@ namespace Fleet.Principal.Services.TransportServices
 
         public async Task<VehicleDto> FindVehicleAsync(int id)
         {
+
+ 
            var vehicle = await _vehicleManagerClient.FindVehicleAsync(new FindVehicleRequest { Id = id });
-            return _mapper.Map<VehicleDto>(vehicle);
+
+            if (vehicle.Id <= 0) return new VehicleDto();
+               
+           return _mapper.Map<VehicleDto>(vehicle);
+        
+           
         }
 
         public async Task<VehicleDto> UpdateVehicleAsync(int id,UpdateVehicleDto vehicle)
@@ -84,36 +94,9 @@ namespace Fleet.Principal.Services.TransportServices
             return Vehicles;
         }
 
-        public async Task<IEnumerable<VehicleDto>> FindAllVehiclesByOrgaoAsync(int orgaoId)
-        {
-            using var list = _vehicleManagerClient.FindAllVehiclesByOrgao(new FindByOrgaoRequest { OrgaoId = orgaoId });
+        
 
-            if (Vehicles.Any())
-                Vehicles.Clear();
-
-            while (await list.ResponseStream.MoveNext())
-            {
-                var vehicle = list.ResponseStream.Current;
-                Vehicles.Add(_mapper.Map<VehicleDto>(vehicle));
-            }
-            return Vehicles;
-
-        }
-
-        public async Task<IEnumerable<VehicleDto>> FindAllVehiclesByEmployeeAsync(int employeeId)
-        {
-            using var list = _vehicleManagerClient.FindAllVehiclesByEmployee(new FindByEmployeeRequest { EmployeeId=employeeId});
-
-            if (Vehicles.Any())
-                Vehicles.Clear();
-
-            while (await list.ResponseStream.MoveNext())
-            {
-                var vehicle = list.ResponseStream.Current;
-                Vehicles.Add(_mapper.Map<VehicleDto>(vehicle));
-            }
-            return Vehicles;
-        }
+       
 
         public async Task<IEnumerable<VehicleDto>> FindAllVehiclesActiveAsync(bool Assigned)
         {

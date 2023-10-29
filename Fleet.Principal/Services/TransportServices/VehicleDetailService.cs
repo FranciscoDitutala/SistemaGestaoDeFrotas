@@ -28,6 +28,8 @@ namespace Fleet.Principal.Services.TransportServices
             var orgao = await _orgaoService.FindOrgao(assigment.OrgaoId);
             var employee = await _employeeService.FindEmployee(assigment.EmployeeId);
 
+            if (vehicle.Id <= 0) return new VehicleDetail();
+
             vehicleDetail.YearOfManufacture=vehicle.YearOfManufacture;
             vehicleDetail.Transmission= vehicle.Transmission;
             vehicleDetail.Variant = vehicle.Variant;
