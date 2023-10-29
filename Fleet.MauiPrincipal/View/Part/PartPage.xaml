@@ -1,48 +1,35 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Fleet.MauiPrincipal.View.Part.PartPage"
              xmlns:views="clr-namespace:Fleet.MauiPrincipal.View.Part"
              xmlns:viewmodel="clr-namespace:Fleet.MauiPrincipal.ViewModel.Parts"
              x:DataType="viewmodel:PartPageViewModel"
-        NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasNavigationBar="False"
+           
              Title="Part Page">
-    <TabBar>
-        <Tab Title="Entradas de Peças">
-            <ShellContent Title="Lista de Entradas"
-                 ContentTemplate="{DataTemplate views:StockyEntriesPage}" />
-            <ShellContent Title="Add Entrada"
-                 ContentTemplate="{DataTemplate views:StockyEntryPage}" />
 
-        </Tab>
-        <Tab Title="Saidas de Peças">
-            <ShellContent Title="Lista de Saidas"
-                 ContentTemplate="{DataTemplate views:StockyOutsPage}" />
-            <ShellContent Title="Add Saidas"
-                 ContentTemplate="{DataTemplate views:StockyOutPage}" />
 
-        </Tab>
+    <Grid RowDefinitions="3*,5*,2*,2*" ColumnDefinitions="*,*" RowSpacing="20" VerticalOptions="Start">
+        <Image Grid.ColumnSpan="2" Grid.Row="0" Aspect="AspectFill" Source="sobressalentes.png" Margin="0,-30,0,0"  />
+        <Label Text="Peças" TextColor="White" FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"
+        HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Margin="50,0,0,0"/>
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" ColumnDefinitions="*,*,*" Margin="0,60,0,0" >
+            <Button  CornerRadius="8" WidthRequest="200"  FontAttributes="Bold" TextColor="#512BD4"  FontSize="Large" Text="Peças " HorizontalOptions="Start"
+           Margin="20,0,0,0" HeightRequest="200" BackgroundColor="White" FontFamily="Gilroy" VerticalOptions="Center"  BorderColor="#512BD4" BorderWidth="3" Clicked="GoToPart"
+           Grid.Column="0" Grid.Row="0" />
+            <Button  CornerRadius="8" WidthRequest="200"  FontAttributes="Bold" TextColor="White"  FontSize="Large" Text="Entrada " HorizontalOptions="Start"  Clicked="GEntries"
+        Margin="20,0,0,0" HeightRequest="200" BackgroundColor="#512BD4" FontFamily="Gilroy" VerticalOptions="Center" 
+        Grid.Column="1" Grid.Row="0" />
+            <Button  CornerRadius="8" WidthRequest="200"  FontAttributes="Bold" TextColor="#512BD4"  FontSize="Large" Text="Saída " HorizontalOptions="Start"  Clicked="GoToOuts"
+            Margin="20,0,0,0" HeightRequest="200" BackgroundColor="White" FontFamily="Gilroy" VerticalOptions="Center"  BorderColor="#512BD4" BorderWidth="3"
+            Grid.Column="2" Grid.Row="0" />
 
-        <Tab Title="Categorias De Peças">
-            <ShellContent Title="Categorias "
-                   ContentTemplate="{DataTemplate views:PartCategoriesPage}" />
-            <ShellContent Title="Add Categoria"
-                   ContentTemplate="{DataTemplate views:PartCategoryPage}" />
 
-        </Tab>
 
-        <Tab Title="Tipo de Peças">
-            <ShellContent 
-                   ContentTemplate="{DataTemplate views:PartTypePage}" />
-        </Tab>
-        <Tab Title="Peças">
-            <ShellContent Title="Peças Cadastradas "
-                 ContentTemplate="{DataTemplate views:PartAddPage}" />
-            <ShellContent Title="Adicionar Peças"
-                 ContentTemplate="{DataTemplate views:PartListPage}" />
 
-        </Tab>
-      
-        
-    </TabBar>
-</Shell>
+        </Grid>
+       
+    </Grid>
+
+</ContentPage>

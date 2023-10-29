@@ -6,9 +6,13 @@ namespace Fleet.MauiPrincipal.View.Part;
 
 public partial class PartCategoryPage : ContentPage
 {
-	public PartCategoryPage(PartCategoryViewModel viewModel)
+    public PartCategoryPage()
+    {
+        InitializeComponent(); 
+    }
+    public PartCategoryPage(string TypeName)
 	{
 		InitializeComponent();
-        BindingContext = viewModel;
+        BindingContext = new PartCategoryViewModel(TypeName);
     }
 }

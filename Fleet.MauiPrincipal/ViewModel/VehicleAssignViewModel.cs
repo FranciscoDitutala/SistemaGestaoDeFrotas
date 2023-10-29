@@ -97,7 +97,6 @@ namespace Fleet.MauiPrincipal.ViewModel
 
                     Vehicles = data;
                 }
-
         }
         // Metodo Carregar Empregado
         private Employee selectedEmployee;
@@ -164,7 +163,6 @@ namespace Fleet.MauiPrincipal.ViewModel
                     _selectedAssignType = value;
                     OnPropertyChanged(nameof(SelectedAssignType));
                 }
-
             }
         }
 
@@ -220,7 +218,7 @@ namespace Fleet.MauiPrincipal.ViewModel
         private async Task CarregarOrgao()
         {
             Orgao = new List<Orgao>();
-            var url = $"{baseUrl}/FleetTransport/Orgao/1";
+            var url = $"{baseUrl}/FleetTransport/Orgao";
 
             var response = await Client.GetAsync(url);
             if (response.IsSuccessStatusCode)

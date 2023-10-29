@@ -70,6 +70,7 @@ namespace Fleet.MauiPrincipal.ViewModel
         public ObservableCollection<Vehicle> Items { get; set; }
         public ObservableCollection<Vehicle> SelectedItems { get; set; } = new ObservableCollection<Vehicle>();
 
+        public Vehicle parametroVehicle { get; set; }
         //public Vehicle SelectedItems { get; set; } = new Vehicle();
         //public ICommand RemoveSelectedCommand { get; set; }
 
@@ -85,6 +86,7 @@ namespace Fleet.MauiPrincipal.ViewModel
                     //var teste = Items.Remove(item);
                     if (Items.Contains(item))
                  {
+                    parametroVehicle = item;
                     var url = $"{baseUrl}/FleetTransport/Vehicle/{item.Id}";
                     var response = await Client.DeleteAsync(url);
                     Debug.WriteLine("A o veiculo foi apagado com id " + item.Id);
@@ -103,6 +105,12 @@ namespace Fleet.MauiPrincipal.ViewModel
         {
             //await Shell.Current.Go(new AppShell());
             //await Navigation.PushAsync(new AppShell());
+
+            //var navParam = new Dictionary<string, object>();
+            //navParam.Add("AddEmployee", employee);
+            //await AppShell.Current.GoToAsync(nameof(AddEmployee), navParam);
+            //GetEmployeesList();
+
         }
 
 
@@ -110,10 +118,47 @@ namespace Fleet.MauiPrincipal.ViewModel
         [ICommand]
         public static async void UpdateVehicle()
         {
-            await AppShell.Current.GoToAsync(nameof(VehicleDetailsPage));
+            await AppShell.Current.GoToAsync(nameof(VehicleDetailPage));
             //Debug.WriteLine("Entrou no sistema");
 
 
+        }
+        public ICommand GoToDetailsVehicleCommand => new Command(async () =>
+        await GoToVehicleDeataisAsync());
+        public async Task GoToVehicleDeataisAsync()
+        {
+            //await Shell.Current.Go(new AppShell());
+            //await Navigation.PushAsync(new AppShell());
+            Debug.WriteLine("Dentro do metodo veiculo details ");
+            //Items = new ObservableCollection<Vehicle>(_vehicles);
+            //foreach (var item in SelectedItems)
+            //{
+            //    if (Items.Contains(item))
+            //    {
+            //        parametroVehicle = item;
+            //        //var url = $"{baseUrl}/FleetTransport/Vehicle/{item.Id}";
+            //        //var response = await Client.DeleteAsync(url);
+            //        Debug.WriteLine("A o veiculo foi selecinado com id " + item.Vin);
+            //    }
+            //    else
+            //    {
+            //        Debug.WriteLine("veiculo nao foi Selecionado");
+            //    }
+
+            //    await CarregarVehiclesAsync();
+            //}
+            //await AppShell.Current.GoToAsync(nameof(VehicleDetailsPage));
+            var navParam = new Dictionary<string, object>();
+            navParam.Add("ItemsSelected", parametroVehicle);
+            ////await AppShell.Current.Navigation.PushAsync(new VehicleDetailsPage(), navParam);
+            ////await Shell.Current.Navigation.PushAsync(new VehicleDetailsPage(), navParam);
+            //await AppShell.Current.GoToAsync(nameof(VehicleDetailsPage), navParam);
+            await Shell.Current.GoToAsync(nameof(VehicleDetailPage), navParam);
+
+            ////await Application.Current.MainPage.Navigation.PushAsync(new VehicleDetailsPage(), navParam);
+            ////await AppShell.Current.GoToAsync(nameof(VehicleDetailsPage), navParam);
+
+            ////GetEmployeesList();
 
         }
 

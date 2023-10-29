@@ -61,7 +61,7 @@
                     <material:PickerField 
                             Title="Orgão" 
                             ItemsSource="{Binding Orgao}"
-                            ItemDisplayBinding="{Binding Name}"
+                            ItemDisplayBinding="{Binding Acronym}"
                             SelectedItem="{Binding SelectedOrgao}"
                             Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Car_rental}}"
 />

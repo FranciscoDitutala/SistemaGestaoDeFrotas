@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell
-    x:Class="Fleet.MauiPrincipal.AppShell"
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:Fleet.MauiPrincipal"
-    xmlns:part="clr-namespace:Fleet.MauiPrincipal.View.Part"
-    xmlns:vehicle="clr-namespace:Fleet.MauiPrincipal.View.Vehicle"
-    xmlns:views="clr-namespace:Fleet.MauiPrincipal.View"
-    xmlns:main="clr-namespace:Fleet.MauiPrincipal"
+        x:Class="Fleet.MauiPrincipal.AppShell"
+        xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:local="clr-namespace:Fleet.MauiPrincipal"
+        xmlns:part="clr-namespace:Fleet.MauiPrincipal.View.Part"
+        xmlns:vehicle="clr-namespace:Fleet.MauiPrincipal.View.Vehicle"
+        xmlns:views="clr-namespace:Fleet.MauiPrincipal.View"
+        xmlns:main="clr-namespace:Fleet.MauiPrincipal"
      xmlns:user="clr-namespace:Fleet.MauiPrincipal.View.session"
      xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
-    xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome"
+     xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome"
      xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
-    xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
-      xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui" 
+     xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+     xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui" 
      Shell.FlyoutBehavior="Locked"
     
    Shell.BackgroundColor="Aqua"
     FlyoutIcon="Home"
-    
-    FlyoutBackdrop="#66ffffff"  
+    FlyoutBackground="WhiteSmoke" 
     Shell.TitleColor="#0B4CA1" >
     <Shell.FlyoutHeader>
-        <StackLayout BackgroundColor="#512BD4" HeightRequest="80"  VerticalOptions="Center" Padding="5" >
-            <Label Text="Sistema de Gestão " FontSize="Large" TextColor="White" HorizontalOptions="Center" Margin="0,10,0,0" VerticalOptions="Center"
-            FontFamily="Gilroy" />
-            <Label Text=" de Frotas e Peças Sobressalentes " FontSize="Micro" TextColor="White" HorizontalOptions="Center" 
+        <StackLayout BackgroundColor="White" HeightRequest="195"  VerticalOptions="Center" Padding="5" >
+            <Label Text="SISTEMA DE GESTÃO " FontSize="Header" TextColor="#512BD4" HorizontalOptions="Center" Margin="0,10,0,0" VerticalOptions="Center"
+            FontFamily="Gilroy" FontAttributes="Bold" />
+            <Label Text="De Frotas e Peças Sobressalentes " FontSize="Medium" TextColor="#512BD4" HorizontalOptions="Start" Margin="30,0,0,0"
 FontFamily="Gilroy" />
         </StackLayout>
     </Shell.FlyoutHeader>
@@ -35,9 +34,9 @@ FontFamily="Gilroy" />
             ContentTemplate="{DataTemplate main:MainPage}"
             Route="MainPage"  />
     <ShellContent 
-            Title="Gerir Stock" Icon="scan_stock_64px.png"
-            ContentTemplate="{DataTemplate part:StockyEntriesPage}"
-            Route="StockyEntriesPage" />
+            Title="Gerir Peças" Icon="scan_stock_64px.png"
+            ContentTemplate="{DataTemplate part:PartPage}"
+            Route="PartPage" />
 
     <ShellContent 
             Title="Gerir Veículos" Icon="car_64px.png"
@@ -49,8 +48,8 @@ FontFamily="Gilroy" />
             Title="Gerir Usuario" Icon="user_64px.png"
             ContentTemplate="{DataTemplate user:CreateUser}"
             Route="CreateUser" >
-        <Shell.MenuItemTemplate>
-            <DataTemplate>
+        <!--<Shell.MenuItemTemplate>-->
+            <!--<DataTemplate>
                 <Grid ColumnDefinitions="0.2*,0.8*">
                     <Image Source="save_64px.png"
                            Margin="5"
@@ -61,7 +60,7 @@ FontFamily="Gilroy" />
                            VerticalTextAlignment="Center" />
                 </Grid>
             </DataTemplate>
-        </Shell.MenuItemTemplate>
+        </Shell.MenuItemTemplate>-->
 
     </ShellContent>
   

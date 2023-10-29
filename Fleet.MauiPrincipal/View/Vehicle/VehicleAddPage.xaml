@@ -68,7 +68,7 @@
 
                 <material:TextField Padding="10,0,0,0" FontFamily="Gilroy"
                        Title="Potencia do Veiculo" BindingContext="{Binding Power}"
-                            Icon="{FontImageSource FontFamily=MaterialRegular,
+                            Icon="{FontImageSource FontFamily=MaterialRegular, 
                        Glyph={x:Static m:MaterialRegular.Settings_power}}"/>
 
                         </VerticalStackLayout>

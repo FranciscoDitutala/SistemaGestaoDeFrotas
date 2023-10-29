@@ -10,7 +10,7 @@
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
              xmlns:viewModel="clr-namespace:Fleet.MauiPrincipal.ViewModel.Parts"
              x:DataType="viewModel:PartAddPageViewModel"
-              NavigationPage.HasNavigationBar="False"
+           
              Title="PartAddPage">
     
 
@@ -113,7 +113,6 @@
             </Button>
 
         </Grid>
-
 
     </Grid>
 

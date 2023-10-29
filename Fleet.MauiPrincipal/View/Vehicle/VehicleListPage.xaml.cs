@@ -6,18 +6,11 @@ namespace Fleet.MauiPrincipal.View.Vehicle;
 
 public partial class VehicleListPage : ContentPage
 {
-    private VehicleListPageViewModel _viewModel;
 
     public VehicleListPage()
     {
         InitializeComponent();
-    }
-
-    public VehicleListPage(VehicleListPageViewModel viewModel)
-    {
-        InitializeComponent();
-        _viewModel = viewModel;
-        this.BindingContext = _viewModel;
+        BindingContext = new VehicleListPageViewModel();
      
     }
     protected override void OnAppearing()
@@ -31,10 +24,6 @@ public partial class VehicleListPage : ContentPage
     private async void GoToVehicleAddPage(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new VehicleAddPage());
-
-        //await Navigation.PushAsync(new VehicleAddPage());
-
-
     }
     private void SearchBar_SearchButtonPressed(object sender, EventArgs e)
     {
@@ -43,7 +32,9 @@ public partial class VehicleListPage : ContentPage
 
     private async void GoToVehicleDetails(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new VehicleDetailsPage());
+
+        await Navigation.PushAsync(new VehicleDetailPage());
+        //await  Shell.Current.GoToAsync(nameof(VehicleDetailsPage));
     }
     private async void UpdateVehicle(object sender, EventArgs e)
     {

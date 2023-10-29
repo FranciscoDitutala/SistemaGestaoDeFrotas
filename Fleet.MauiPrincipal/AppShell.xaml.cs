@@ -31,7 +31,7 @@ namespace Fleet.MauiPrincipal
             Routing.RegisterRoute(nameof(ListarUser), typeof(ListarUser));
             Routing.RegisterRoute(nameof(StockyEntriesPage), typeof(StockyEntriesPage));
             Routing.RegisterRoute(nameof(StockyOutsPage), typeof(StockyOutsPage));
-            Routing.RegisterRoute("VehicleDetailsPage", typeof(VehicleDetailsPage));
+            Routing.RegisterRoute(nameof(VehicleDetailPage), typeof(VehicleDetailPage));
 
         }
 

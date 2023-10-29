@@ -4,10 +4,16 @@ namespace Fleet.MauiPrincipal.View.Part;
 
 public partial class PartCategoriesPage : ContentPage
 {
-	private PartCategoriesViewModel _viewmodel;
-	public PartCategoriesPage(PartCategoriesViewModel viewmodel)
+
+	public PartCategoriesPage()
 	{
 		InitializeComponent();
-		this.BindingContext = _viewmodel= viewmodel;
+		BindingContext = new PartCategoriesViewModel();
 	}
+
+    //ReturnToListVehicle
+    private async void ReturnToListVehicle(object sender, EventArgs e)
+    {
+        //await Navigation.PushAsync(new PartListPage());
+    }
 }

@@ -1,17 +1,97 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Fleet.MauiPrincipal.View.Part.PartCategoryPage"
-             xmlns:model="clr-namespace:Fleet.Parts;assembly=Fleet.Parts.Shared"
+             x:Class="Fleet.MauiPrincipal.View.Part.PartCategoryPage" 
              xmlns:viewmodel="clr-namespace:Fleet.MauiPrincipal.ViewModel.Parts"
-             x:DataType="viewmodel:PartCategoryViewModel"
-              NavigationPage.HasNavigationBar="False"
+             x:DataType="viewmodel:PartCategoryViewModel"      
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome"
+             xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
+             xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+             xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui" 
+             NavigationPage.HasNavigationBar="False"
+             
              Title="Part Categoria" >
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <Grid  RowDefinitions ="3*,*,7*,1*" ColumnDefinitions="*"  >
+
+        <ImageButton  Source="return_64px.png" Aspect="AspectFill" WidthRequest="20" HeightRequest="20"
+                    Grid.Row="0" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" Margin="10,-20,0,0" ZIndex="1"/>
+        <Image  Grid.Row="0" Aspect="AspectFill" Source="sobressalentes.png" Margin="0,-30,0,0"  />
+        <Label Text="Listar Categorias" TextColor="White" FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"
+        HorizontalOptions="Start" VerticalOptions="Start" Margin="20,40,0,0" />
+
+        <Grid  Grid.Row="2" Grid.ColumnSpan="2"  Margin="-20,-50,0,0"  >
+            <ScrollView  >
+
+                <material:DataGrid Margin="20,0,20,20"  BackgroundColor="WhiteSmoke" CornerRadius="0" ItemsSource="{Binding CategoriesItems}"
+                     LineSeparatorColor="#004D97" BorderColor="#004D97" FlowDirection="LeftToRight" FlexLayout.Shrink="2" SelectedItems="{Binding SelectedItems}"  >
+                    <material:DataGrid.EmptyView>
+                        <VerticalStackLayout Margin="80,20">
+                            <Image
+               WidthRequest="40"
+               HeightRequest="40"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Source="{FontImageSource FontFamily=MaterialOutlined, Glyph={x:Static m:MaterialOutlined.Backup_table}, Color={AppThemeBinding
+                     Light={StaticResource OnSurface}, Dark={StaticResource OnSurfaceDark}}}"/>
+                            <Label Text="Sem dados armazenados..." HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </material:DataGrid.EmptyView>
+
+                    <material:DataGrid.Columns >
+
+                        <!--<material:DataGridColumn Binding="{Binding Image}" Title="Matrícula"  />-->
+                        <material:DataGridColumn Binding="{Binding Name}" Title="Categorias "/>
+                        <!--<material:DataGridColumn Binding="{Binding Brand}" Title="Marca" />
+                     <material:DataGridColumn Binding="{Binding Model}" Title="Modelo"/>
+                     <material:DataGridColumn Binding="{Binding Type}" Title="Tipo"/>-->
+
+                        <material:DataGridColumn  >
+                            <material:DataGridColumn.CellItemTemplate    >
+                                <DataTemplate>
+
+                                    <Button  ImageSource="update_64px.png" Margin="0,0,10,0" Text="Atualizar" BackgroundColor="White"
+                                          BorderColor="#512BD4" TextColor="#512BD4" FontSize="Micro"   FontFamily="Gilroy" Command="{Binding CarregarPartTypeCategoriesCommand}" />
+                                </DataTemplate>
+                            </material:DataGridColumn.CellItemTemplate>
+
+                        </material:DataGridColumn>
+                        <material:DataGridColumn Title="Ações"  >
+                            <material:DataGridColumn.CellItemTemplate    >
+                                <DataTemplate>
+                                    <Button  ImageSource="show_property_64px.png" Margin="10,0,0,0" Text="Detalhes" BackgroundColor="White" BorderColor="#512BD4" TextColor="#512BD4"
+                                          FontSize="Micro"     FontFamily="Gilroy" />
+                                </DataTemplate>
+                            </material:DataGridColumn.CellItemTemplate>
+                        </material:DataGridColumn>
+                        <material:DataGridColumn  >
+                            <material:DataGridColumn.CellItemTemplate    >
+                                <DataTemplate>
+
+                                    <Button  ImageSource="add_64px.png" Margin="10,0,0,0" Text="Atribuir" BackgroundColor="White" BorderColor="#512BD4" 
+                                          TextColor="#512BD4" FontSize="Micro" FontFamily="Gilroy" />
+                                </DataTemplate>
+                            </material:DataGridColumn.CellItemTemplate>
+
+                        </material:DataGridColumn>
+                    </material:DataGrid.Columns>
+                </material:DataGrid>
+            </ScrollView>
+
+        </Grid>
+
+        <Grid Grid.Row="3" Margin="0,0,0,0" RowDefinitions="*,*" ColumnDefinitions="*,*" BackgroundColor="WhiteSmoke" HorizontalOptions="Start" ColumnSpacing="10" >
+            <Button  CornerRadius="8" WidthRequest="200" TextColor="#512BD4" BorderColor="#512BD4"  FontSize="Medium" Text="Adicionar " HorizontalOptions="Start"
+              Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="add_64px.png"  >
+            </Button>
+            <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Refresh " HorizontalOptions="Start"
+              Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png" Command="{Binding CarregarPartTypeCategoriesCommand}"
+                      Grid.Column="1" >
+            </Button>
+
+        </Grid>
+
+    </Grid>
+
 
 </ContentPage>

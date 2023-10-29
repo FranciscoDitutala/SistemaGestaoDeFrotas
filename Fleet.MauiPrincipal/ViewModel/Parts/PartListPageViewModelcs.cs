@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Fleet.MauiPrincipal.ViewModel.Parts
 {
-    public class PartListPageViewModelcs
+    public partial class PartListPageViewModelcs
     {
     }
 }
