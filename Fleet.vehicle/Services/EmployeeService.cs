@@ -31,6 +31,8 @@ namespace Fleet.Transport.Services
         public override async Task<EmployeePayload> FindEmployee(FindEmployeeRequest request, ServerCallContext context)
         {
             var employee = _repository.Find(request.Id);
+
+            if (employee.Id <= 0) return new EmployeePayload();
              return _mapper.Map<EmployeePayload>(employee);
 
         }

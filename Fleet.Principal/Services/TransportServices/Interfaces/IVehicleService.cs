@@ -11,8 +11,6 @@ namespace Fleet.Principal.Services.TransportServices.Interfaces
         public Task<VehicleDto> UpdateVehicleAsync(int id,UpdateVehicleDto vehicle);
         public Task<VehicleDto> DeleteVehicleAsync(int id);
         public Task<IEnumerable<VehicleDto>> FindAllVehiclesByTypeAsync(VehicleType type);
-        public Task<IEnumerable<VehicleDto>> FindAllVehiclesByOrgaoAsync(int orgoaId);
-        public Task<IEnumerable<VehicleDto>> FindAllVehiclesByEmployeeAsync(int employeeId);
         public Task<IEnumerable<VehicleDto>> FindAllVehiclesActiveAsync(bool active);
     }
 }

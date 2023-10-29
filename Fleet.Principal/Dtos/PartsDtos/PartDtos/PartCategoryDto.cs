@@ -7,7 +7,7 @@ namespace Fleet.Principal.Dtos.PartsDtos.PartDtos
 
         public string Name { get; set; } = default!;
 
-        public byte[] Image { get; set; } = default!;
+       // public byte[] Image { get; set; } = default!;
 
     }
 }

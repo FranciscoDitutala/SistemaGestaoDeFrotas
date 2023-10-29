@@ -62,8 +62,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\Fleet\Fleet.Common.Shared\Fleet.Common.Shared.csproj" />
-	  <ProjectReference Include="..\..\Fleet\Fleet.Parts.Shared\Fleet.Parts.Shared.csproj" />
+		<ProjectReference Include="..\Fleet.Common.Shared\Fleet.Common.Shared.csproj" />
+		<ProjectReference Include="..\Fleet.Parts.Shared\Fleet.Parts.Shared.csproj" />
 	</ItemGroup>
 
 	

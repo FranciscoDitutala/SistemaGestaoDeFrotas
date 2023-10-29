@@ -14,16 +14,16 @@ namespace Fleet.Transport.Data.Entities
         public string? Cor { get; set; }
 
         [Range(1900, 2099)]
-        public int  YearOfManufacture { get; set; }
-
-        [Required] 
-        public VehicleType Type  { get; set; }
-       
-        [Required]
-        public TransmissionType Transmission  { get; set; }
+        public int YearOfManufacture { get; set; }
 
         [Required]
-        [Range(1, int.MaxValue)]  
+        public VehicleType Type { get; set; }
+
+        [Required]
+        public TransmissionType Transmission { get; set; }
+
+        [Required]
+        [Range(1, int.MaxValue)]
         public int Power { get; set; }
 
         [Required]
@@ -31,8 +31,6 @@ namespace Fleet.Transport.Data.Entities
         public double FuelConsumption { get; set; }
         [Required]
         public DateTime RegistrationDate { get; set; }
-        public int OrgaoId { get; set; }
-        public int EmployeeId { get; set; }
         public bool Assigned { get; set; }
         List<Document> Documents { get; set; }= new List<Document>();
         List<Assignment> Assignments { get; set; } = new List<Assignment>();

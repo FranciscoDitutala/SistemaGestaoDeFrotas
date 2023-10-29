@@ -12,7 +12,7 @@ namespace Fleet.Transport.Services
         private readonly VehicleRepository _vehicleRepository;
         private readonly DocumentService _vehicleDocumentService;
         private readonly IMapper _mapper;
-        public VehiclePayload ans { get; set; } = new();   
+        public VehiclePayload Nulo { get; set; } = new();   
         public VehicleService(VehicleRepository vehicleRepository, DocumentService vehicleDocumentService, IMapper mapper) {
         
             _vehicleRepository = vehicleRepository;
@@ -32,14 +32,13 @@ namespace Fleet.Transport.Services
         {
               var vehicle = await _vehicleRepository.Entities.FindAsync(x => x.Id == request.Id);
 
-                if (vehicle == null)
-                {
-                    throw new DomainException("O Veiculo informado não existe");
-                }
+            if (vehicle == null) return Nulo;
+
                 await _vehicleRepository.Entities.DeleteAsync(request.Id);
                 await _vehicleDocumentService.DeleteAllDocumentById(request.Id);
                 await _vehicleRepository.SaveAsync();
-            return ans;
+            
+            return _mapper.Map<VehiclePayload>(vehicle);
 
         }
 
@@ -62,10 +61,8 @@ namespace Fleet.Transport.Services
         {
 
                 var vehicle = await _vehicleRepository.Entities.FindAsync(b => b.Id == request.Id);
-                if (vehicle == null)
-                {
-                    throw new DomainException("O Veiculo informado não existe");
-                }
+                if (vehicle == null) return Nulo;
+                
                 return _mapper.Map<VehiclePayload>(vehicle);
     
         }
@@ -82,22 +79,6 @@ namespace Fleet.Transport.Services
         {
 
             await foreach (var vehicle in _vehicleRepository.Entities.FilterAsync(x => x.Type == request.Type))
-            {
-                await responseStream.WriteAsync(_mapper.Map<VehiclePayload>(vehicle));
-            }
-        }
-
-        public override async Task FindAllVehiclesByOrgao(FindByOrgaoRequest request, IServerStreamWriter<VehiclePayload> responseStream, ServerCallContext context)
-        {
-            await foreach ( var vehicle in _vehicleRepository.Entities.FilterAsync(x=> x.OrgaoId == request.OrgaoId))
-            {
-                await responseStream.WriteAsync(_mapper.Map<VehiclePayload>(vehicle));
-            }
-        }
-
-        public override async Task FindAllVehiclesByEmployee(FindByEmployeeRequest request, IServerStreamWriter<VehiclePayload> responseStream, ServerCallContext context)
-        {
-            await foreach (var vehicle in _vehicleRepository.Entities.FilterAsync(x => x.EmployeeId == request.EmployeeId))
             {
                 await responseStream.WriteAsync(_mapper.Map<VehiclePayload>(vehicle));
             }

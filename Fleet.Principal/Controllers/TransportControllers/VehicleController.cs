@@ -13,12 +13,13 @@ namespace Fleet.Principal.Controllers.TransportControllers
     public class VehicleController : ControllerBase
     {
         private readonly IVehicleService _vehicleService;
+        private readonly VehicleDetailService _vehicleDetailService;
         private readonly IMapper _mapper;
 
-        public VehicleController(IVehicleService vehicleService, 
-            IOrgaoService orgaoService, IEmployeeService employeeService, IMapper mapper)
+        public VehicleController(IVehicleService vehicleService, VehicleDetailService vehicleDetailService, IMapper mapper)
         {
             _vehicleService = vehicleService;
+            _vehicleDetailService = vehicleDetailService;
             _mapper = mapper;
         }
 
@@ -27,6 +28,7 @@ namespace Fleet.Principal.Controllers.TransportControllers
         {
 
             var ans = await _vehicleService.FindVehicleAsync(id);
+            if (ans.Id <= 0) return NotFound("O veiculo não foi encontrado");
             return Ok(ans);
         }
         [HttpGet]
@@ -45,21 +47,7 @@ namespace Fleet.Principal.Controllers.TransportControllers
 
             return Ok(ans);
         }
-        [HttpGet("GetAllVehiclesbyOrgao/{orgaoId}")]
-        public async Task<IActionResult> GetAllVehiclesByOrgao(int orgaoId)
-        {
-            var ans = await _vehicleService.FindAllVehiclesByOrgaoAsync(orgaoId);
-
-            return Ok(ans);
-        }
-
-        [HttpGet("GetAllVehiclesbyEmployee/{employeeId}")]
-        public async Task<IActionResult> GetAllVehiclesByEmployee(int employeeId)
-        {
-            var ans = await _vehicleService.FindAllVehiclesByEmployeeAsync(employeeId);
-
-            return Ok(ans);
-        }
+       
 
         [HttpGet("GetAllVehiclesAssigned/{active}")]
         public async Task<IActionResult> GetAllVehiclesAssigned(bool active)
@@ -68,10 +56,24 @@ namespace Fleet.Principal.Controllers.TransportControllers
 
             return Ok(ans);
         }
-       
+        [HttpGet("GetVehicleDetail/{id}")]
+        public async Task<IActionResult> GetVehicleDetail(int id)
+        {
+
+            var ans = await _vehicleDetailService.FindVehicleDetail(id);
+            return Ok(ans);
+
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> Post(AddVehicleDto addVehicleDto)
         {
+            if( addVehicleDto == null)
+            {
+                return BadRequest(" O veículo não pode ser nullo, Prencher os campos obrigatorio");
+            }
+
             var ans = await _vehicleService.AddVehicleAsync(addVehicleDto);
             return Ok(ans);
         }
@@ -80,6 +82,10 @@ namespace Fleet.Principal.Controllers.TransportControllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateVehicle(int id, UpdateVehicleDto updateVehicleDto)
         {
+            if (updateVehicleDto == null)
+            {
+                return BadRequest(" O veículo não pode ser nullo, Prencher os campos obrigatorio");
+            }
             var ans = await _vehicleService.UpdateVehicleAsync(id, updateVehicleDto);
             return Ok(ans);
         }
@@ -89,6 +95,8 @@ namespace Fleet.Principal.Controllers.TransportControllers
         public async Task<IActionResult> Delete(int id)
         {
             var ans = await _vehicleService.DeleteVehicleAsync(id);
+
+            if (ans.Id <= 0) return BadRequest("O veiculo não foi encontrado ");
             return Ok(ans);
         }
 
