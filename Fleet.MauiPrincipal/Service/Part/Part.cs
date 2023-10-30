@@ -10,13 +10,14 @@ namespace Fleet.MauiPrincipal.Service.Part
 
     public class Part
     {
-        //public string Upc { get; set; }
-        //public string Sku { get; set; }
-        //public string PartTypeName { get; set; }
-        //public string Brand { get; set; }
-        //public string Model { get; set; }
-        //public string Description { get; set; }
-        ////public List<VehicleVariantFilter> VariantFilters { get; set; } = new();
+        public int Id { get; set; }
+        public string Upc { get; set; }
+        public string Sku { get; set; }
+        public string PartTypeName { get; set; }
+        public string Brand { get; set; }
+        public string Model { get; set; }
+        public string Description { get; set; }
+        //public List<VehicleVariantFilter> VariantFilters { get; set; } = new();
         //public Variantfilter[] VariantFilters { get; set; }
     }
 

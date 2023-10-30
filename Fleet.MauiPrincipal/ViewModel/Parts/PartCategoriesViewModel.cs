@@ -71,74 +71,49 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
                 OnPropertyChanged(nameof(PartCategoriesItems));
             }
         }
-
-        //public ObservableCollection<PartTypeCategory> Items { get; set; }
-        public ObservableCollection<PartTypeCategory> SelectedTypeCategoria { get; set; } = new ObservableCollection<PartTypeCategory>();
-        
-        public ICommand CarregarPartTypeCategoriesCommand => new Command(async () =>
-             await CarregarPartTypeCategoriesAsync());
-        private async Task CarregarPartTypeCategoriesAsync()
-        {
-            var typeName = SelectedItems.Name;
-            Debug.WriteLine("Entrou no metodo carregar TypeCategorias");
-            await Application.Current.MainPage.Navigation.PushAsync(new PartCategoryPage(typeName));
-            //PartCategoriesItems = new List<PartTypeCategory>();
-            //var url = $"{baseUrl}/FleetParts/Part/GetTypesByCategory/{SelectedItems.Name}";
-            //var response = await Client.GetAsync(url);
-            //if (response.IsSuccessStatusCode)
-            //    using (var responseStream = await response.Content.ReadAsStreamAsync())
-            //    {
-            //        var data = await JsonSerializer.DeserializeAsync<List<PartTypeCategory>>
-            //            (responseStream, _SerializerOptions);
-            //        PartCategoriesItems = data;
-            //        Debug.WriteLine("carregaregou categoria com sucesso " + PartCategoriesItems);
-            //    }
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //public ICommand CarregarCategoriesCommand => new Command(async () =>
-        //     await CarregarCategoriesAsync());
-        //private async Task CarregarCategoriesAsync()
-        //{
-
-        //    Items = new ObservableCollection<Categories>(_categoriesItems);
-        //    foreach (var item in SelectedItems)
-        //    {
-        //        Debug.WriteLine("O TAMANHO DO selecteed items" + SelectedItems.Count);
-
-        //        //var teste = Items.Remove(item);
-        //        if (Items.Contains(item))
-        //        {
-        //            var url = $"{baseUrl}/FleetParts/Part/GetTypesByCategory/{item.Name}";
-        //            var response = await Client.GetAsync(url);
-        //            if (response.IsSuccessStatusCode)
-        //                using (var responseStream = await response.Content.ReadAsStreamAsync())
-        //                {
-        //                    var data = await JsonSerializer.DeserializeAsync<List<Categories>>
-        //                        (responseStream, _SerializerOptions);
-        //                    CategoriesItems = data;
-        //                    Debug.WriteLine("carregaregou categoria com sucesso " + CategoriesItems);
-        //                }
-        //        }  
-        //    }
-              
-        //}
-
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //public ICommand CarregarCategoriesCommand => new Command(async () =>
+    //     await CarregarCategoriesAsync());
+    //private async Task CarregarCategoriesAsync()
+    //{
+
+    //    Items = new ObservableCollection<Categories>(_categoriesItems);
+    //    foreach (var item in SelectedItems)
+    //    {
+    //        Debug.WriteLine("O TAMANHO DO selecteed items" + SelectedItems.Count);
+
+    //        //var teste = Items.Remove(item);
+    //        if (Items.Contains(item))
+    //        {
+    //            var url = $"{baseUrl}/FleetParts/Part/GetTypesByCategory/{item.Name}";
+    //            var response = await Client.GetAsync(url);
+    //            if (response.IsSuccessStatusCode)
+    //                using (var responseStream = await response.Content.ReadAsStreamAsync())
+    //                {
+    //                    var data = await JsonSerializer.DeserializeAsync<List<Categories>>
+    //                        (responseStream, _SerializerOptions);
+    //                    CategoriesItems = data;
+    //                    Debug.WriteLine("carregaregou categoria com sucesso " + CategoriesItems);
+    //                }
+    //        }  
+    //    }
+
 }

@@ -23,7 +23,7 @@
         <Grid  Grid.Row="2" Grid.ColumnSpan="2"  Margin="-20,-50,0,0"  >
             <ScrollView  >
 
-                <material:DataGrid Margin="20,0,20,20"  BackgroundColor="WhiteSmoke" CornerRadius="0" ItemsSource="{Binding CategoriesItems}"
+                <material:DataGrid Margin="20,0,20,20"  BackgroundColor="WhiteSmoke" CornerRadius="0" ItemsSource="{Binding TypeCategoriesItems}"
                      LineSeparatorColor="#004D97" BorderColor="#004D97" FlowDirection="LeftToRight" FlexLayout.Shrink="2" SelectedItems="{Binding SelectedItems}"  >
                     <material:DataGrid.EmptyView>
                         <VerticalStackLayout Margin="80,20">

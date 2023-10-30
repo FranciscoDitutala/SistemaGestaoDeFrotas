@@ -67,7 +67,7 @@
                      Glyph={x:Static m:MaterialRegular.Car_rental}}"/>
 
                 <material:TextField Padding="10,0,0,0" FontFamily="Gilroy"
-                       Title="Potencia do Veiculo" BindingContext="{Binding Power}"
+                       Title="Potencia do Veiculo" Text="{Binding Power}"
                             Icon="{FontImageSource FontFamily=MaterialRegular, 
                        Glyph={x:Static m:MaterialRegular.Settings_power}}"/>
 
@@ -87,9 +87,7 @@
                 Title="Consumo de Combustivel" Text="{Binding FuelConsumption}"
                      Icon="{FontImageSource FontFamily=MaterialRegular,
                 Glyph={x:Static m:MaterialRegular.Local_gas_station}}"/>
-                          
-
-                        </VerticalStackLayout>
+                </VerticalStackLayout>
 
         </Grid>
 

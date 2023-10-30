@@ -27,7 +27,7 @@ namespace Fleet.MauiPrincipal.ViewModel
         string baseUrl = "https://localhost:7111";
  
         [ObservableProperty]
-        public string _Brand;
+        public string _brand;
         [ObservableProperty]
         public int _TransmitionType;
         [ObservableProperty]
@@ -39,19 +39,19 @@ namespace Fleet.MauiPrincipal.ViewModel
         [ObservableProperty]
         public int _vehicleTipo;
         [ObservableProperty]
-        public int _Power;
+        public int _power;
         [ObservableProperty]
-        public int _FuelConsumption;
+        public double _fuelConsumption;
         [ObservableProperty]
-        public string _Variante;
+        public string _variante;
         [ObservableProperty]
         public Vehicle _Vehicle;
         [ObservableProperty]
         public ObservableCollection<Vehicle> _Vehicles;
         [ObservableProperty]
-        public string _Model;
+        public string _model;
         [ObservableProperty]
-        public int _DataFabrico;
+        public int _dataFabrico;
       
         public VehicleAddPageViewModel()
         {
@@ -125,7 +125,6 @@ namespace Fleet.MauiPrincipal.ViewModel
                 
             }
         }
-
         private string _selectedTransmission;
         public string SelectedTransmissions
         {
@@ -157,7 +156,6 @@ namespace Fleet.MauiPrincipal.ViewModel
             }
 
         }
-        
         // Metodo Carregar Vehicle Marca  
         private ObservableCollection<VehicleBrand> _vehicleMarca;
         public ObservableCollection<VehicleBrand> VehicleMarcas
@@ -200,19 +198,17 @@ namespace Fleet.MauiPrincipal.ViewModel
 
         }
 
-
-
-        public ICommand CadastraVehicleCommand => new Command(async () =>
+     public ICommand CadastraVehicleCommand => new Command(async () =>
       await CadastraVehicleAsync());
 
-        public bool isNewItem = false;
+        //public bool isNewItem = false;
 
         private async Task CadastraVehicleAsync()
         {
-            var url = $"{baseUrl}/FleetTransport/Vehicle";
-            if (!string.IsNullOrEmpty(Vin))
+           
+            if (!string.IsNullOrEmpty(Vin) )
             {
-
+                Debug.WriteLine("Dentro do Vehicle");
                 var vehicle = new Vehicle
                 {
                     Vin = Vin,
@@ -220,7 +216,7 @@ namespace Fleet.MauiPrincipal.ViewModel
                     Variant = Variante,
                     Brand = _selectedMarca.Name,
                     Model = Model,
-                    Power = Power,
+                    Power =  Power,
                     Registration = Registro,
                     Transmission = TransmitionType,
                     FuelConsumption = FuelConsumption,
@@ -228,13 +224,31 @@ namespace Fleet.MauiPrincipal.ViewModel
                     YearOfManufacture = DataFabrico,
                     RegistrationDate = DateTime.Today
                 };
-                Debug.WriteLine("Testando enum o valo do type é" + VehicleTipo);
-                Debug.WriteLine("Testando  o valo do transmission é é" + TransmitionType);  
-                Debug.WriteLine("Testando  o valo do transmission é é" + _selectedMarca.Name);
+                //Debug.WriteLine("Testando enum o valo do Variante é " + vehicle.Vin);
+                //Debug.WriteLine("Testando enum o valo do type é " + vehicle.Type);
+                //Debug.WriteLine("Testando  o valo do transmission é é " + vehicle.Transmission);  
+                //Debug.WriteLine("Testando  o valo do Marca é é " + vehicle.Brand);
+                //Debug.WriteLine("Testando enum o valo do Modelo é" + vehicle.Model);
+                //Debug.WriteLine("Testando  o valo do Power é é " + vehicle.Power);
+                //Debug.WriteLine("Testando  o valo do Consumo é é " + vehicle.FuelConsumption);
+                //Debug.WriteLine("Testando enum o valo do Cor é " + vehicle.Cor);
+                //Debug.WriteLine("Testando  o valo do Data é " +vehicle.YearOfManufacture);
+                //Debug.WriteLine("Testando  o valo do Chassis é " + vehicle.RegistrationDate);
+                //Debug.WriteLine("O chassis do Veiculo é " + vehicle.Vin);
 
+                var url = $"{baseUrl}/FleetTransport/Vehicle";
                 string json = JsonSerializer.Serialize<Vehicle>(vehicle, _SerializerOptions);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
                 var response = await Client.PostAsync(url, content);
+                if (response.IsSuccessStatusCode) {
+                    Debug.WriteLine("Cadastrado com sucesso" + vehicle.Id);
+                    await Shell.Current.DisplayAlert("Ola", "O veiculo Foi Cadastrado com sucesso", "ok");
+                }
+                else
+                {
+                    Debug.WriteLine("Nao cadastrado o vehicle" + vehicle.Registration);
+                    await Shell.Current.DisplayAlert("Ola", "O veiculo nao Foi Cadastrado", "ok");
+                }
                 //HttpResponseMessage response = null; 
                 //if (isNewItem)
                 //{      response = await Client.PostAsync(url, content);
@@ -251,8 +265,9 @@ namespace Fleet.MauiPrincipal.ViewModel
             }
             else
             { Debug.WriteLine(" Campos Obrigatorios vazio!"); }
-              //await Shell.Current.GoToAsync(nameof(VehicleListPage));
-              //await Application.Current.MainPage.Navigation.PushAsync(new VehicleListPage());
+            //await Shell.Current.GoToAsync(nameof(VehicleListPage));
+            //await Application.Current.MainPage.Navigation.PushAsync(new VehicleListPage());
+         
         }
 
 

@@ -144,7 +144,6 @@ namespace Fleet.MauiPrincipal.ViewModel
             LogoBrands = result.FullPath;
           
         }
-
         public ICommand CadastraBrandsModelCommand => new Command(async () =>
           await CadastraBrandsModelAsync());
         private async Task CadastraBrandsModelAsync()

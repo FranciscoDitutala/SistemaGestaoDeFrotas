@@ -23,7 +23,7 @@
         <Grid  Grid.Row="2" Grid.ColumnSpan="2"  Margin="-20,-50,0,0"  >
             <ScrollView  >
 
-                <material:DataGrid Margin="20,0,20,20"  BackgroundColor="WhiteSmoke" CornerRadius="0" ItemsSource="{Binding CategoriesItems}"
+                <material:DataGrid Margin="20,0,20,20"  BackgroundColor="WhiteSmoke" CornerRadius="0" ItemsSource="{Binding CategoriesItems}" x:Name="GridCateroies"
                         LineSeparatorColor="#004D97" BorderColor="#004D97" FlowDirection="LeftToRight" FlexLayout.Shrink="2" SelectedItems="{Binding SelectedItems}"  >
                     <material:DataGrid.EmptyView>
                         <VerticalStackLayout Margin="80,20">
@@ -50,8 +50,8 @@
                             <material:DataGridColumn.CellItemTemplate    >
                                 <DataTemplate>
 
-                                    <Button  ImageSource="update_64px.png" Margin="0,0,10,0" Text="Atualizar" BackgroundColor="White"
-                                             BorderColor="#512BD4" TextColor="#512BD4" FontSize="Micro" Command="{Binding CarregarPartTypeCategoriesCommand}" FontFamily="Gilroy" />
+                                    <Button  ImageSource="update_64px.png" Margin="0,0,10,0" Text="SubCategorias" BackgroundColor="White" Clicked="Button_Clicked"
+                                             BorderColor="#512BD4" TextColor="#512BD4" FontSize="Micro" FontFamily="Gilroy" />
                                 </DataTemplate>
                             </material:DataGridColumn.CellItemTemplate>
 

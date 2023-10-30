@@ -20,8 +20,8 @@
         <Grid  Grid.Row="2" Grid.ColumnSpan="2"  Margin="-20,-50,0,0"  >
             <ScrollView  >
 
-                <material:DataGrid   Margin="20,0,20,20"  BackgroundColor="WhiteSmoke" CornerRadius="0" x:Name="GridList"
-                     LineSeparatorColor="#004D97" BorderColor="#004D97" FlowDirection="LeftToRight" FlexLayout.Shrink="2"  >
+                <material:DataGrid   Margin="20,0,20,20"  BackgroundColor="WhiteSmoke" CornerRadius="0" x:Name="GridList" ItemsSource="{Binding Parts}"
+                     LineSeparatorColor="#004D97" BorderColor="#004D97" FlowDirection="LeftToRight" FlexLayout.Shrink="2" SelectedItems="{Binding SelectedItems}" >
                     <material:DataGrid.EmptyView>
                         <VerticalStackLayout Margin="80,20">
                             <Image
@@ -37,10 +37,10 @@
 
                     <material:DataGrid.Columns >
 
-                        <material:DataGridColumn Title="Matrícula"  />
-                        <material:DataGridColumn  Title="Cor"/>
-                        <material:DataGridColumn  Title="Marca" />
-                        <material:DataGridColumn Title="Modelo"/>
+                        <material:DataGridColumn Binding="{Binding Upc}" Title="Matrícula"  />
+                        <material:DataGridColumn Binding="{Binding Sku}" Title="Cor"/>
+                        <material:DataGridColumn Binding="{Binding PartTypeName}" Title="Marca" />
+                        <material:DataGridColumn Binding="{Binding Brand}" Title="Modelo"/>
                         <!--<material:DataGridColumn Binding="{Binding Type}" Title="Tipo"/>-->
 
                         <material:DataGridColumn  >
@@ -82,7 +82,7 @@
             </Button>
             <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Refresh " HorizontalOptions="Start"
               Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png" 
-                      Grid.Column="1"  >
+                      Grid.Column="1" Command="{Binding CarregarVehiclesCommand}"  >
             </Button>
             <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Categorias" HorizontalOptions="Start"
          Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png"  Clicked="GoToCategories" 

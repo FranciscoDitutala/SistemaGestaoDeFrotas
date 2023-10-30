@@ -8,19 +8,18 @@ namespace Fleet.MauiPrincipal.Service
 {
     public class Vehicle
     {
-        //[PRIMAR]
         public int Id { get; set; }
         public string Vin { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
         public string Variant { get; set; }
+        public string Cor { get; set; }
         public string Registration { get; set; }
         public int YearOfManufacture { get; set; }
-        public string Cor { get; set; }
         public int Type { get; set; }
         public int Transmission { get; set; }
         public int Power { get; set; }
-        public int FuelConsumption { get; set; }
+        public double FuelConsumption { get; set; }
         public DateTime RegistrationDate { get; set; }
 
     }

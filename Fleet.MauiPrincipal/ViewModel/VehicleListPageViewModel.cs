@@ -93,6 +93,7 @@ namespace Fleet.MauiPrincipal.ViewModel
                 }
                 else
                 {
+                    
                     Debug.WriteLine("veiculo nao foi apagado");
                 }
 
@@ -112,7 +113,6 @@ namespace Fleet.MauiPrincipal.ViewModel
             //GetEmployeesList();
 
         }
-
 
 
         [ICommand]
