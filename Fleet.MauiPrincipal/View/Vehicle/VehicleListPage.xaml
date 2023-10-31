@@ -10,18 +10,18 @@
              xmlns:viewmodel="clr-namespace:Fleet.MauiPrincipal.ViewModel"
              x:DataType="viewmodel:VehicleListPageViewModel"
              NavigationPage.HasNavigationBar="False"
-             Title="VehicleListPage">
+             Title="Lista de Viaturas ">
 
     <Grid  RowDefinitions ="3*,*,7*,1*" ColumnDefinitions="*"  >
         <Image  Grid.Row="0" Aspect="AspectFill" Source="controlo.png" Margin="0,-30,0,0"  />
         <Label Text="Gerir Veículos" TextColor="White" FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"
            HorizontalOptions="Start" VerticalOptions="Start" Margin="20,40,0,0" />
         
-            <Grid  Grid.Row="2" Grid.ColumnSpan="2"  Margin="-20,-50,0,0"  >
-                <ScrollView  >
+            <Grid  Grid.Row="2" Grid.ColumnSpan="2"  Margin="-20,-50,0,0" HorizontalOptions="Start"  >
+                <ScrollView HorizontalOptions="Start"  >
 
-                <material:DataGrid ItemsSource="{Binding Vehicles}"  Margin="20,0,20,20"  BackgroundColor="WhiteSmoke" CornerRadius="0" x:Name="GridList"
-                        LineSeparatorColor="#004D97" SelectedItems="{Binding SelectedItems}" BorderColor="#004D97" FlowDirection="LeftToRight" FlexLayout.Shrink="2"  >
+                <material:DataGrid ItemsSource="{Binding Vehicles}"  Margin="20,0,20,20"  BackgroundColor="WhiteSmoke" CornerRadius="0" x:Name="GridList" HorizontalOptions="Start"
+                        LineSeparatorColor="#004D97" SelectedItems="{Binding SelectedItems}" BorderColor="#004D97" FlowDirection="LeftToRight" WidthRequest="600"   >
                     <material:DataGrid.EmptyView>
                         <VerticalStackLayout Margin="80,20">
                             <Image
@@ -36,58 +36,35 @@
                     </material:DataGrid.EmptyView>
                    
                 <material:DataGrid.Columns >
-
+                            <material:DataGridSelectionColumn Title="#"/>
                             <material:DataGridColumn Binding="{Binding Registration}" Title="Matrícula"  />
                             <material:DataGridColumn Binding="{Binding Cor}" Title="Cor"/>
                             <material:DataGridColumn Binding="{Binding Brand}" Title="Marca" />
                             <material:DataGridColumn Binding="{Binding Model}" Title="Modelo"/>
                             <material:DataGridColumn Binding="{Binding Type}" Title="Tipo"/>
-
-                            <material:DataGridColumn  >
-                                <material:DataGridColumn.CellItemTemplate    >
-                                    <DataTemplate>
-
-                                    <Button  ImageSource="update_64px.png" Margin="0,0,10,0" Text="Atualizar" BackgroundColor="White"
-                                             BorderColor="#512BD4" TextColor="#512BD4" FontSize="Micro"  Clicked="UpdateVehicle"  FontFamily="Gilroy" />
-                                </DataTemplate>
-                                </material:DataGridColumn.CellItemTemplate>
-
-                            </material:DataGridColumn>
-                            <material:DataGridColumn Title="Ações"  >
-                            <material:DataGridColumn.CellItemTemplate    >
-                                <DataTemplate>
-                                    <Button  ImageSource="show_property_64px.png" Margin="10,0,0,0" Text="Detalhes" BackgroundColor="White" BorderColor="#512BD4" TextColor="#512BD4"
-                                             FontSize="Micro"   Clicked="GoToVehicleDetails"  FontFamily="Gilroy" />
-                                </DataTemplate>
-                            </material:DataGridColumn.CellItemTemplate>
-                        </material:DataGridColumn>
-                        <material:DataGridColumn  >
-                            <material:DataGridColumn.CellItemTemplate    >
-                               <DataTemplate>
-                        
-                                    <Button  ImageSource="add_64px.png" Margin="10,0,0,0" Text="Atribuir" BackgroundColor="White" BorderColor="#512BD4" TextColor="#512BD4" FontSize="Micro" Clicked="GoToAssignVehicle"  FontFamily="Gilroy" />
-                                </DataTemplate>
-                            </material:DataGridColumn.CellItemTemplate>
-
-                        </material:DataGridColumn>
+   
                     </material:DataGrid.Columns>
                     </material:DataGrid>
                 </ScrollView>
 
             </Grid>
 
-            <Grid Grid.Row="3" Margin="0,0,0,0" RowDefinitions="*,*" ColumnDefinitions="*,*" BackgroundColor="WhiteSmoke" HorizontalOptions="Start" ColumnSpacing="10" >
+            <Grid Grid.Row="3" Margin="0,0,0,0" RowDefinitions="*,*" ColumnDefinitions="*,*,*" BackgroundColor="WhiteSmoke" HorizontalOptions="Start" ColumnSpacing="10" >
                 <Button  CornerRadius="8" WidthRequest="200" TextColor="#512BD4" BorderColor="#512BD4"  FontSize="Medium" Text="Adicionar " HorizontalOptions="Start"
                  Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="add_64px.png" Clicked="GoToVehicleAddPage"   >
                 </Button>
-                <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Refresh " HorizontalOptions="Start"
+                <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Listar " HorizontalOptions="Start"
                  Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png"
                          Grid.Column="1" Command="{Binding CarregarVehiclesCommand}" >
                   </Button>
-                 
-            </Grid>
-
+            <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Detalhes " HorizontalOptions="Start"
+              Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png"
+                      Grid.Column="2" Command="{Binding GoToVehicleDetalhesCommand}">
+            </Button>
+  
         </Grid>
+
+  </Grid>
 
      
 </ContentPage>

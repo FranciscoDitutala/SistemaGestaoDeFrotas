@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -14,37 +15,36 @@ using System.Windows.Input;
 
 namespace Fleet.MauiPrincipal.ViewModel
 {
-    public partial class VehicleAssignViewModel: ObservableObject, INotifyPropertyChanged
+    public partial class VehicleAssignViewModel : ObservableObject
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        static Random random = new();
 
         private HttpClient Client;
         JsonSerializerOptions _SerializerOptions;
         string baseUrl = "https://localhost:7111";
+
+        public int typeAssign;
         private Vehicle selectedVehicle;
         public Vehicle SelectedVehicle
         {
             get { return selectedVehicle; }
-            set {
-              if(SelectedVehicle != value)
+            set
+            {
+                if (SelectedVehicle != value)
                 {
                     selectedVehicle = value;
                     OnPropertyChanged(nameof(SelectedVehicle));
                 }
-                 
+
             }
         }
- 
+
         private List<Vehicle> _vehicles;
         public List<Vehicle> Vehicles
         {
             get { return _vehicles; }
-            set { _vehicles = value;
+            set
+            {
+                _vehicles = value;
                 OnPropertyChanged(nameof(Vehicles));
             }
         }
@@ -56,19 +56,22 @@ namespace Fleet.MauiPrincipal.ViewModel
 
         public ObservableCollection<Vehicle> AtribuirItems { get; } = new();
 
-        private List<Assignment> _atribuir;
+        private List<Assignment> _atribuicao;
         public List<Assignment> Atribuicoes
         {
-            get { return _atribuir; }
+            get { return _atribuicao; }
             set
             {
-                _atribuir = value;
+                _atribuicao = value;
                 OnPropertyChanged(nameof(Atribuicoes));
             }
         }
+        public Vehicle vehicleParameter { get; set; }
+        public Vehicle vehicle { get; set; }
 
-        public VehicleAssignViewModel()
+        public VehicleAssignViewModel(Vehicle vehicle)
         {
+            vehicleParameter = vehicle;
             Client = new HttpClient();
             _SerializerOptions = new JsonSerializerOptions
             {
@@ -78,11 +81,11 @@ namespace Fleet.MauiPrincipal.ViewModel
             CarregarEmployee();
             CarregarOrgao();
             CarregarAssignmentAsync();
-            //CadastrarAssignmentAsync();
-
-
+            CadastrarAssignmentAsync();
         }
 
+
+        //Metodo para carregar a Vehicle e anexar no Picker
         private async Task CarregarVehiclesAsync()
         {
             Vehicles = new List<Vehicle>();
@@ -97,7 +100,9 @@ namespace Fleet.MauiPrincipal.ViewModel
 
                     Vehicles = data;
                 }
+
         }
+
         // Metodo Carregar Empregado
         private Employee selectedEmployee;
         public Employee SelectedEmployee
@@ -115,7 +120,7 @@ namespace Fleet.MauiPrincipal.ViewModel
         }
 
         private List<Employee> _employees;
-      
+
         public List<Employee> Employees
         {
             get { return _employees; }
@@ -138,22 +143,24 @@ namespace Fleet.MauiPrincipal.ViewModel
                         (responseStream, _SerializerOptions);
 
                     Employees = data;
-                }        
+                }
         }
 
 
         // Metodo Carregar Assigment Type
-   
-      
-        private AssignmentType _assign;
+
+        private string _assign;
         public List<string> Assign
         {
-            get {return  Enum.GetNames(typeof(AssignmentType)).Select(b => b).ToList();
+            get
+            {
+                //return  Enum.GetNames(typeof(AssignmentType)).Select(b => b).ToList();
+                return new List<String> { "Nenhum", "Role", "Funcionario", "Departamento" };
             }
         }
-        
-        private AssignmentType _selectedAssignType;
-        public AssignmentType SelectedAssignType
+
+        private string _selectedAssignType;
+        public string SelectedAssignType
         {
             get { return _selectedAssignType; }
             set
@@ -162,31 +169,24 @@ namespace Fleet.MauiPrincipal.ViewModel
                 {
                     _selectedAssignType = value;
                     OnPropertyChanged(nameof(SelectedAssignType));
+                    if (_selectedAssignType.Equals("Role"))
+                    {
+                        typeAssign = 1;
+                    }
+                    else if (_selectedAssignType.Equals("Funcionario"))
+                    {
+                        typeAssign = 2;
+                    }
+                    else if (_selectedAssignType.Equals("Departamento"))
+                    {
+                        typeAssign = 3;
+                    }
+
+                    else { typeAssign = 0; }
                 }
             }
         }
 
-        //public void DoSomethingAssign()
-        //{
-        //    switch (SelectedAssignType)
-        //    {
-        //        case "None":
-        //            _assign = AssignmentType.NONE;
-        //            break;
-        //        case "Role":
-        //            _assign = AssignmentType.NONE;
-        //            break;
-        //        case "Employee":
-        //            _assign = AssignmentType.NONE;
-        //            break;
-        //        case "Support":
-        //            _assign = AssignmentType.NONE;
-        //            break;
-        //            ...
-        //    }
-
-            //DoSomething(_assign);
-        //}
 
         // Metodo Carregar Orgão
 
@@ -231,53 +231,62 @@ namespace Fleet.MauiPrincipal.ViewModel
                 }
         }
 
-        //public ICommand CadastrarAssignmentCommand => new Command(async () =>
-        //await  CadastrarAssignmentAsync()
+        // Cadastrar Atribuição
 
-        //    );
+        public ICommand CadastrarAssignmentCommand => new Command(async () =>
+       await CadastrarAssignmentAsync()
 
-        //    public async Task CadastrarAssignmentAsync() { 
-        //        var url = $"{baseUrl}/FleetTransport/Assignment";
-        //        if (!string.IsNullOrEmpty(Descricao))
-        //        {
-        //            var Atribuir = new Assignment
-        //            {
-        //                Type = Tipo,
-        //                OrgaoId = Orgao,
-        //                Description = Descricao,
-        //                EmployeeId = selectedEmployee.Id,
-        //                VehicleId = selectedVehicle.Id
+           );
 
-        //            };
-        //            Console.Write("Entrou no if");
-        //            string json = JsonSerializer.Serialize<Assignment>(Atribuir, _SerializerOptions);
-        //            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-        //            var response = await Client.PostAsync(url, content);
-        //        //await AppShell.Current.DisplayAlert("Atenção", "Atribucao com sucesso ", "OK");
-        //       }
-        //    //else
-        //    //{
-        //    //    //await AppShell.Current.DisplayAlert("Atenção", "Atribucao Falhou", "OK");
-        //}
+        public async Task CadastrarAssignmentAsync()
+        {
+            Debug.WriteLine("Entro no metodo cadastrar Atribuição");
+            var url = $"{baseUrl}/FleetTransport/Assignment";
+            if (selectedVehicle.Id > 0 )
+            {
+                var Atribuir = new Assignment
+                {
+                    Type = typeAssign,
+                    OrgaoId = _selectedOrgao.Id,
+                    Description = Descricao,
+                    EmployeeId = selectedEmployee.Id,
+                    VehicleId = selectedVehicle.Id
+
+                };
+                Debug.WriteLine("Entrou no if");
+                string json = JsonSerializer.Serialize<Assignment>(Atribuir, _SerializerOptions);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await Client.PostAsync(url, content);
+                if (response.IsSuccessStatusCode)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Atenção", "Atribucao feita com sucesso ", "OK");
+                }
+                else { await Application.Current.MainPage.DisplayAlert("Falhou", "Atribucao não feita  ", "OK"); }
+
+            }
+           
+        }
 
         public ICommand CarregarAssignmentCommand => new Command(async () =>
             await CarregarAssignmentAsync());
         private async Task CarregarAssignmentAsync()
         {
             Atribuicoes = new List<Assignment>();
-            if (TipoAtribuir > 0)
-            {
-                var url = $"{baseUrl}/FleetTransport/Assignment/2";
+            //if (TipoAtribuir > 0)
+            //{
+            var url = $"{baseUrl}/FleetTransport/Assignment/GetAssignmentVehicle/{vehicleParameter.Id}";
 
-                var response = await Client.GetAsync(url);
-                if (response.IsSuccessStatusCode)
-                    using (var responseStream = await response.Content.ReadAsStreamAsync())
-                    {
-                        var data = await JsonSerializer.DeserializeAsync<List<Assignment>>
-                            (responseStream, _SerializerOptions);
-                        Atribuicoes = data;
-                    }
-            }
+            var response = await Client.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+                using (var responseStream = await response.Content.ReadAsStreamAsync())
+                {
+                    var data = await JsonSerializer.DeserializeAsync<List<Assignment>>
+                        (responseStream, _SerializerOptions);
+                    Atribuicoes = data;
+                    Debug.WriteLine("Carregado com sucesso a lista de atribuiçoes " + Atribuicoes);
+                }
+
         }
     }
 }
+

@@ -1,3 +1,4 @@
+
 using Fleet.MauiPrincipal.ViewModel;
 
 namespace Fleet.MauiPrincipal.View.Vehicle;
@@ -5,15 +6,15 @@ namespace Fleet.MauiPrincipal.View.Vehicle;
 public partial class VehicleAssignPage : ContentPage
 {
 
-    //public VehicleAssignPage()
-    //{
-    //    InitializeComponent();
-    //}
-    //private VehicleAssignViewModel _viewModel;
-	public VehicleAssignPage()
-	{
+    public VehicleAssignPage()
+    {
+        InitializeComponent();
+    }
+   
+    public VehicleAssignPage(Fleet.MauiPrincipal.Service.Vehicle vehicle)
+	{ 
 		InitializeComponent();
-        this.BindingContext = new VehicleAssignViewModel();
+        this.BindingContext = new VehicleAssignViewModel(vehicle);
     }
     private async void ReturnToListVehicle(object sender, EventArgs e)
     {

@@ -4,10 +4,15 @@ namespace Fleet.MauiPrincipal.View.Vehicle;
 
 public partial class VehicleDetailPage : ContentPage
 {
-	public VehicleDetailPage()
+    public VehicleDetailPage()
+    {
+        InitializeComponent();
+      
+    }
+    public VehicleDetailPage(int Id)
 	{
 		InitializeComponent();
-        BindingContext = new Vehicle_DetailsViewModel();
+        BindingContext = new Vehicle_DetailsViewModel(Id);
     }
     private async void ReturnToListVehicle(object sender, EventArgs e)
     {

@@ -79,7 +79,7 @@
                 Glyph={x:Static m:MaterialRegular.Date_range}}"/>
 
                             <material:PickerField Padding="10,0,0,0"
-             Title="Transmissão " ItemsSource="{Binding VehicleTransmission, Mode=TwoWay}" SelectedItem="{Binding SelectedTransmissions}"  FontFamily="Gilroy" 
+             Title="Transmissão " ItemsSource="{Binding VehicleTransmission}" SelectedItem="{Binding SelectedTransmissions}"  FontFamily="Gilroy" 
                   Icon="{FontImageSource FontFamily=MaterialRegular,
              Glyph={x:Static m:MaterialRegular.Branding_watermark}}"/>
 

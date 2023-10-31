@@ -17,8 +17,6 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
         private HttpClient Client;
         JsonSerializerOptions _SerializerOptions;
         string baseUrl = "https://localhost:7111";
-
-        static Random random = new();
         public ObservableCollection<Part> PartItems { get; } = new();
 
         private List<Part> _part;
@@ -39,13 +37,13 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
             {
                 PropertyNameCaseInsensitive = true
             };
-            CarregarVehiclesAsync();
+            CarregarPartsAsync();
 
 
         }
         public ICommand CarregarVehiclesCommand => new Command(async () =>
-             await CarregarVehiclesAsync());
-        private async Task CarregarVehiclesAsync()
+             await CarregarPartsAsync());
+        private async Task CarregarPartsAsync()
         {
             Parts = new List<Part>();
             var url = $"{baseUrl}/FleetParts/Part/1";
@@ -89,7 +87,7 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
                     Debug.WriteLine("veiculo nao foi apagado");
                 }
 
-                await CarregarVehiclesAsync();
+                await CarregarPartsAsync();
             }
         }
         public ICommand GoToVehicleAddPageCommand => new Command(async () =>

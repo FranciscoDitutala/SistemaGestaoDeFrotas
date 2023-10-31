@@ -14,68 +14,68 @@
     <Grid RowDefinitions="*,7*,*" ColumnDefinitions="*,*,*"  >
 
 
-        <ImageButton  Source="return_64px.png" Aspect="AspectFill" Clicked="ReturnToListVehicle" WidthRequest="20" HeightRequest="20"
-                       Grid.Row="0" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" Margin="10,-20,0,0" ZIndex="1"/>
+        <!--<ImageButton  Source="return_64px.png" Aspect="AspectFill" Clicked="ReturnToListVehicle" WidthRequest="20" HeightRequest="20"
+                       Grid.Row="0" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" Margin="10,-20,0,0" ZIndex="1"/>-->
         <Grid Grid.Row="0" Grid.ColumnSpan="3" Margin="20,7,10,10"  >
-            <Label Margin="50,-20,30,23" Text="Informações do Veículo" FontFamily="Gilroy" FontAttributes="Bold" FontSize="Large" TextColor="#512BD4" />
+            <Label Margin="40,10,30,23" Text="Informações do Veículo" FontFamily="Gilroy" FontAttributes="Bold" FontSize="Large" TextColor="#512BD4" />
         </Grid>
-        <Grid Grid.ColumnSpan="3" Grid.Row="1" HorizontalOptions="Start"  Margin="0,-20,0,0">
+        <Grid Grid.ColumnSpan="3" Grid.Row="1" HorizontalOptions="Start"  Margin="40,-20,0,0">
             <VerticalStackLayout Margin="20,0,0,0" Spacing="8">
                 <HorizontalStackLayout Spacing="15">
                     <Label Text="Numero do Chassis:" FontFamily="Gilroy" FontSize="Medium"  HorizontalOptions="Start" />
-                    <Label Text="{Binding Matricula}" FontFamily="Gilroy" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" />
+                    <Label Text="{Binding Vehicles.Vin}" FontFamily="Gilroy" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" />
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Spacing="15">
-                    <Label Text="Ano de Fabrico:" FontFamily="Gilroy" FontSize="Medium"  HorizontalOptions="Start" />
-                    <Label Text="Estado da Atribuição" FontFamily="Gilroy" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" />
+                    <Label Text="Numero da Placa:" FontFamily="Gilroy" FontSize="Medium"  HorizontalOptions="Start" />
+                    <Label Text="{Binding Vehicles.Registration}" FontFamily="Gilroy" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" />
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Spacing="15">
                     <Label Text="Data de Registro:" FontFamily="Gilroy" FontSize="Medium"  HorizontalOptions="Start" />
-                    <Label Text="Estado da Atribuição" FontFamily="Gilroy" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" />
+                    <Label Text="{Binding Vehicles.RegistrationDate}" FontFamily="Gilroy" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" />
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Spacing="15">
                     <Label Text="Cor:" FontFamily="Gilroy" FontSize="Medium"  HorizontalOptions="Start" />
-                    <Label Text="Matricula" FontFamily="Gilroy" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" />
+                    <Label Text="{Binding Vehicles.Cor}" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" />
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Spacing="15">
                     <Label Text="Tipo:" FontFamily="Gilroy" FontSize="Medium"  HorizontalOptions="Start" />
-                    <Label Text="Matricula" FontFamily="Gilroy" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" />
+                    <Label Text="{Binding Vehicles.Type}" FontFamily="Gilroy" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" />
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Spacing="15">
                     <Label Text="Marca:" FontFamily="Gilroy" FontSize="Medium"  HorizontalOptions="Start" />
-                    <Label Text="Matricula" FontFamily="Gilroy" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" />
+                    <Label Text="{Binding Vehicles.Brand}" FontFamily="Gilroy" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" />
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Spacing="15">
                     <Label Text="Modelo:" FontFamily="Gilroy" FontSize="Medium"  HorizontalOptions="Start" />
-                    <Label Text="Matricula" FontFamily="Gilroy" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" />
+                    <Label Text="{Binding Vehicles.Model}" FontFamily="Gilroy" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" />
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Spacing="15">
                     <Label Text="Variante:" FontFamily="Gilroy" FontSize="Medium"  HorizontalOptions="Start" />
-                    <Label Text="Matricula" FontFamily="Gilroy" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" />
+                    <Label Text="{Binding Vehicles.Variant}" FontFamily="Gilroy" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" />
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Spacing="15">
                     <Label Text="Potencia:" FontFamily="Gilroy" FontSize="Medium"  HorizontalOptions="Start" />
-                    <Label Text="Matricula" FontFamily="Gilroy" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" />
+                    <Label Text="{Binding Vehicles.Power}" FontFamily="Gilroy" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" />
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Spacing="15">
                     <Label Text="Tipo de Viatura:" FontFamily="Gilroy" FontSize="Medium"  HorizontalOptions="Start" />
-                    <Label Text="Matricula" FontFamily="Gilroy" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" />
+                    <Label Text="{Binding Vehicles.Type}" FontFamily="Gilroy" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" />
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Spacing="15">
                     <Label Text="Tipo de Transmissão:" FontFamily="Gilroy" FontSize="Medium"  HorizontalOptions="Start" />
-                    <Label Text="Matricula" FontFamily="Gilroy" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" />
+                    <Label Text="{Binding Vehicles.Transmission}" FontFamily="Gilroy" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" />
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Spacing="15">
                     <Label Text="Consumo de Combustivel Km/h:" FontFamily="Gilroy" FontSize="Medium"  HorizontalOptions="Start" />
-                    <Label Text="Matricula" FontFamily="Gilroy" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" />
+                    <Label Text="{Binding Vehicles.FuelConsumption}" FontFamily="Gilroy" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" />
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Spacing="15">
-                    <Label Text="Tipo de Atração:" FontFamily="Gilroy" FontSize="Medium"  HorizontalOptions="Start" />
-                    <Label Text="Matricula" FontFamily="Gilroy" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" />
+                    <Label Text="Data de Fabrico:" FontFamily="Gilroy" FontSize="Medium"  HorizontalOptions="Start" />
+                    <Label Text="{Binding Vehicles.YearOfManufacture}" FontFamily="Gilroy" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" />
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Spacing="15">
                     <Label Text="Estado da tribuição:" FontFamily="Gilroy" FontSize="Medium"  HorizontalOptions="Start" />
-                    <Label Text="Estado da Atribuição" FontFamily="Gilroy" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" />
+                    <Label Text="{Binding Vehicles.Assigned}" FontFamily="Gilroy" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="Start" />
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Spacing="15">
                     <Label Text="Funcionario:" FontFamily="Gilroy" FontSize="Medium"  HorizontalOptions="Start" />
@@ -92,15 +92,15 @@
         </Grid>
         <Grid Grid.Row="3" Grid.ColumnSpan="2" Margin="20,0,0,0" RowDefinitions="*,*" ColumnDefinitions="*,*,*"  HorizontalOptions="Start" ColumnSpacing="10" >
             <Button  CornerRadius="8" WidthRequest="200" TextColor="white" BackgroundColor="Red"  FontSize="Medium" Text="Deletar " HorizontalOptions="Start"
-        HeightRequest="50"  FontFamily="Gilroy" ImageSource="delete_64px.png"   >
+        HeightRequest="50"  FontFamily="Gilroy" ImageSource="delete_64px.png"  Command="{Binding RemoveSelectedCommand}"  >
             </Button>
 
             <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Atualizar " 
-      Margin="10,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="update_64px.png"
-   Grid.Column="1" >
+                      Margin="10,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="update_64px.png" Command="{Binding GoToUpdateVehicleCommand}"
+                   Grid.Column="1" >    
             </Button>
             <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Atribuir " 
-               Margin="10,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="update_64px.png"
+               Margin="10,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="update_64px.png" Command="{Binding GoToAssignVehicleCommand}"
             Grid.Column="2" >
             </Button>
 
