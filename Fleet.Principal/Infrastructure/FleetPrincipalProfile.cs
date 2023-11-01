@@ -53,20 +53,23 @@ namespace Fleet.Principal.Infrastructure
             //PartMapper
             CreateMap<PartPayload, PartDto>().ReverseMap();
             CreateMap<AddPartDto, CreatePartRequest>().ReverseMap();
-                 //.ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
-       
+            //.ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+           
+
             CreateMap<PartCategoryPayload,PartCategoryDto>();
             CreateMap<PartTypePayload,PartTypeByCategoryDto>();
             CreateMap<PartTypePayload, PartTypeDto>();
 
             //StockyEntry
-            CreateMap<StockEntryDto,StockEntryPayload>().ReverseMap();
+            CreateMap<StockEntryDto, StockEntryPayload>().ReverseMap();
             CreateMap<StockOutLine, StockOutLinePayload>()
             .ReverseMap();
             CreateMap<StockEntryLine, StockEntryLinePayload>()
             .ReverseMap();
             CreateMap<CreateStockEntryDto, CreateStockEntryRequest>();
             CreateMap<UpdateStockEntryDto, UpdateStockEntryRequest>();
+            CreateMap<UpdateStockEntryDto, StockEntryPayload>();
+            CreateMap<UpdateStockEntryRequest, StockEntryPayload>().ReverseMap();
 
 
             //VehicleMapper

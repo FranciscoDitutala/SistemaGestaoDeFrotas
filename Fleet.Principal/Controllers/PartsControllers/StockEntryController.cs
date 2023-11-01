@@ -52,11 +52,11 @@ namespace Fleet.Principal.Controllers.PartsControllers
             return Ok(ans);
         }
 
-        [HttpDelete("DeleteStockEntry/{id}")]
+        /*[HttpDelete("DeleteStockEntry/{id}")]
         public async Task<IActionResult> Delete( int id)
         {
             var ans = await _stockEntryService.DeleteAsync(id); return Ok("Eliminado com sucesso");
-        }
+        }*/
     }
     
 }

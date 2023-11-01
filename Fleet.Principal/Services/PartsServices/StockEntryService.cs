@@ -60,11 +60,12 @@ namespace Fleet.Principal.Services.PartsServices
 
         public async Task<StockEntryDto> UpdateAsync(int id, UpdateStockEntryDto updateStockyEntryDto)
         {
-            var entry =await  _stockEntryManagerClient.findAsync(new FindStockEntryRequest { Id = id });
-
+            var entry = await  _stockEntryManagerClient.findAsync(new FindStockEntryRequest { Id = id });
             var update = _mapper.Map(updateStockyEntryDto, entry);
 
-            return _mapper.Map<StockEntryDto>(update);
+            var updated= await _stockEntryManagerClient.UpdateAsync(_mapper.Map<UpdateStockEntryRequest>(update));
+
+            return _mapper.Map<StockEntryDto>(updated);
 
         }
 
