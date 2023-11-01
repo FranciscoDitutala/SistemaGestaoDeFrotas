@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Fleet.Principal.Controllers.PartsControllers
 {
 
-    /*
+    
     [ApiController]
     [Route("FleetParts/[controller]")]
     public class StockEntryController : ControllerBase
@@ -42,7 +42,7 @@ namespace Fleet.Principal.Controllers.PartsControllers
         public async Task<IActionResult> Post(CreateStockEntryDto createStockEntryDto)
         {
             var ans = await _stockEntryService.CreateAsync(createStockEntryDto);
-            return Ok("StockEntry criada com sucesso");
+            return Ok(ans);
         }
 
         [HttpPut("UpdateStockEntry/{id}")]
@@ -52,11 +52,11 @@ namespace Fleet.Principal.Controllers.PartsControllers
             return Ok(ans);
         }
 
-        [HttpDelete("DeleteStockEntry/{id}")]
+        /*[HttpDelete("DeleteStockEntry/{id}")]
         public async Task<IActionResult> Delete( int id)
         {
             var ans = await _stockEntryService.DeleteAsync(id); return Ok("Eliminado com sucesso");
-        }
+        }*/
     }
-    */
+    
 }

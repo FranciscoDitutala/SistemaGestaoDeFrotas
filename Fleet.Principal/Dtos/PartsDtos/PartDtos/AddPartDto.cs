@@ -14,8 +14,8 @@ namespace Fleet.Principal.Dtos.PartsDtos.PartDtos
         public string Brand { get; set; } = string.Empty;
 
         public string Model { get; set; } = string.Empty;
-        public string Description { get; set; } = string.Empty;
-
-        public List<VehicleVariantFilter> VariantFilters { get; set; } = new();
+        //public string Description { get; set; } = string.Empty;
+        //public List<VehicleVariantFilter> VariantFilters { get; set; } = new();
+        public decimal StockQty { get; set; }
     }
 }

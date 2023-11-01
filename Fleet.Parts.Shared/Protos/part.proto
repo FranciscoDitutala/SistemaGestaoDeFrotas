@@ -61,6 +61,7 @@ message CreatePartRequest {
   string model = 5;
   string description = 6;
   repeated VehicleVariantFilterPayload variant_filters = 7;
+  CustomTypes.DecimalValue stock_qty = 8;
 }
 
 message PartPayload {
