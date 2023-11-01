@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Fleet.Principal.Controllers.PartsControllers
 {
 
-    /*
+    
     [ApiController]
     [Route("FleetParts/[controller]")]
     public class StockEntryController : ControllerBase
@@ -58,5 +58,5 @@ namespace Fleet.Principal.Controllers.PartsControllers
             var ans = await _stockEntryService.DeleteAsync(id); return Ok("Eliminado com sucesso");
         }
     }
-    */
+    
 }

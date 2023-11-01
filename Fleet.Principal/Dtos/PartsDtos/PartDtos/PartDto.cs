@@ -19,7 +19,7 @@ namespace Fleet.Principal.Dtos.PartsDtos.PartDtos
 
         public string Description { get; set; } = string.Empty;
 
-        public List<VehicleVariantFilter> VariantFilters { get; set; } = new();
+       public List<VehicleVariantFilter> VariantFilters { get; set; } = new();
         public decimal StockQty { get; set; }
     }
 }

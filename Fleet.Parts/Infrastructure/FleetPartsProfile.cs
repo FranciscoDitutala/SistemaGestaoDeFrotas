@@ -13,7 +13,7 @@ public class FleetPartsProfile : Profile
 
         CreateMap<VehicleVariantFilter, VehicleVariantFilter>();
         CreateMap<VehicleVariantFilter, VehicleVariantFilterPayload>()
-            .ReverseMap();
+           .ReverseMap();
 
         CreateMap<Part, Part>();
         CreateMap<CreatePartRequest, Part>();

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Fleet.Parts.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class partsmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -94,8 +94,7 @@ namespace Fleet.Parts.Migrations
                     Brand = table.Column<string>(type: "nvarchar(127)", maxLength: 127, nullable: false),
                     Model = table.Column<string>(type: "nvarchar(127)", maxLength: 127, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(1023)", maxLength: 1023, nullable: false),
-                    StockQty = table.Column<decimal>(type: "decimal(27,9)", precision: 27, scale: 9, nullable: false),
-                    VariantFilters = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    StockQty = table.Column<decimal>(type: "decimal(27,9)", precision: 27, scale: 9, nullable: false)
                 },
                 constraints: table =>
                 {

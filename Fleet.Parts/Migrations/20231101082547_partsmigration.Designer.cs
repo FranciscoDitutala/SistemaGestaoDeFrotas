@@ -4,6 +4,7 @@ using Fleet.Parts.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fleet.Parts.Migrations
 {
     [DbContext(typeof(FleetPartsDbContext))]
-    partial class FleetPartsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231101082547_partsmigration")]
+    partial class partsmigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -235,33 +238,6 @@ namespace Fleet.Parts.Migrations
                         .HasForeignKey("PartTypeName")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.OwnsMany("Fleet.Parts.Data.VehicleVariantFilter", "VariantFilters", b1 =>
-                        {
-                            b1.Property<string>("PartUPC")
-                                .HasColumnType("nvarchar(31)");
-
-                            b1.Property<int>("Id")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("int");
-
-                            b1.Property<int>("VehicleBrandId")
-                                .HasColumnType("int");
-
-                            b1.Property<int>("VehicleModelId")
-                                .HasColumnType("int");
-
-                            b1.HasKey("PartUPC", "Id");
-
-                            b1.ToTable("Parts");
-
-                            b1.ToJson("VariantFilters");
-
-                            b1.WithOwner()
-                                .HasForeignKey("PartUPC");
-                        });
-
-                    b.Navigation("VariantFilters");
                 });
 
             modelBuilder.Entity("Fleet.Parts.Data.PartTypeCategory", b =>
