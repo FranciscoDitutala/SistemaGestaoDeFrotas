@@ -42,7 +42,7 @@ namespace Fleet.Principal.Controllers.PartsControllers
         public async Task<IActionResult> Post(CreateStockEntryDto createStockEntryDto)
         {
             var ans = await _stockEntryService.CreateAsync(createStockEntryDto);
-            return Ok("StockEntry criada com sucesso");
+            return Ok(ans);
         }
 
         [HttpPut("UpdateStockEntry/{id}")]

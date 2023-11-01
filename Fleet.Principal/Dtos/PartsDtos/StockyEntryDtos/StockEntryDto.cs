@@ -22,6 +22,7 @@ namespace Fleet.Principal.Dtos.PartsDtos.StockyEntryDtos
 
         public List<StockEntryLine> Lines { get; set; } = new();
 
+        
         [MaxLength(1024)]
         public List<DocumentMetadata> Documents { get; set; } = new();
 
@@ -36,5 +37,6 @@ namespace Fleet.Principal.Dtos.PartsDtos.StockyEntryDtos
         {
             return HashCode.Combine(Id, Documents);
         }
+        
     }
 }

@@ -13,7 +13,7 @@ namespace Fleet.Principal.Dtos.PartsDtos.StockyEntryDtos
         public decimal TotalValue { get; set; }
 
         public List<StockEntryLine> Lines { get; set; } = new();
-        public List<DocumentMetadata> Documents { get; set; } = new();
+        //public List<DocumentMetadata> Documents { get; set; } = new();
 
     }
 }
