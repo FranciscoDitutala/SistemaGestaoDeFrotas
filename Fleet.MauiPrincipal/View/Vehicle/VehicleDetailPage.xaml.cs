@@ -19,4 +19,8 @@ public partial class VehicleDetailPage : ContentPage
         await Navigation.PopAsync();
     }
 
+    private async void GoToAddVehicle(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new VehicleAddPage());
+    }
 }

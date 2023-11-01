@@ -80,7 +80,7 @@ namespace Fleet.MauiPrincipal.ViewModel
                 {
                     await Application.Current.MainPage.Navigation.PushAsync(new VehicleDetailPage(item.Id));
                 }
-                else { await Application.Current.MainPage.DisplayAlert("Atencao ","Nao teve exito a funcao",""); }
+                //else { await Application.Current.MainPage.DisplayAlert("Atencao ","Nao teve exito a funcao","Ok"); }
               
             } 
         }

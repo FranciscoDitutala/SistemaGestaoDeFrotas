@@ -242,7 +242,7 @@ namespace Fleet.MauiPrincipal.ViewModel
         {
             Debug.WriteLine("Entro no metodo cadastrar Atribuição");
             var url = $"{baseUrl}/FleetTransport/Assignment";
-            if (selectedVehicle.Id > 0 )
+            if (selectedVehicle.Id > 0)
             {
                 var Atribuir = new Assignment
                 {
@@ -260,13 +260,14 @@ namespace Fleet.MauiPrincipal.ViewModel
                 if (response.IsSuccessStatusCode)
                 {
                     await Application.Current.MainPage.DisplayAlert("Atenção", "Atribucao feita com sucesso ", "OK");
+                    teste = Atribuir.Id;
                 }
                 else { await Application.Current.MainPage.DisplayAlert("Falhou", "Atribucao não feita  ", "OK"); }
 
             }
-           
-        }
 
+        }
+        public int teste { get; set; }
         public ICommand CarregarAssignmentCommand => new Command(async () =>
             await CarregarAssignmentAsync());
         private async Task CarregarAssignmentAsync()
@@ -274,7 +275,7 @@ namespace Fleet.MauiPrincipal.ViewModel
             Atribuicoes = new List<Assignment>();
             //if (TipoAtribuir > 0)
             //{
-            var url = $"{baseUrl}/FleetTransport/Assignment/GetAssignmentVehicle/{vehicleParameter.Id}";
+            var url = $"{baseUrl}/FleetTransport/Assignment/GetAssignmentVehicle/{teste}";
 
             var response = await Client.GetAsync(url);
             if (response.IsSuccessStatusCode)
@@ -286,6 +287,12 @@ namespace Fleet.MauiPrincipal.ViewModel
                     Debug.WriteLine("Carregado com sucesso a lista de atribuiçoes " + Atribuicoes);
                 }
 
+        }
+        public ICommand DeletarAssignmentCommand => new Command(async () =>
+           await DeletarAssignmentAsync());
+        private async Task DeletarAssignmentAsync()
+        {
+            await Application.Current.MainPage.DisplayAlert("Atenção", "Atribucao feita com sucesso ", "OK");
         }
     }
 }

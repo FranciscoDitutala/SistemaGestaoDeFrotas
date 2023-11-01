@@ -199,8 +199,6 @@ namespace Fleet.MauiPrincipal.ViewModel
      public ICommand CadastraVehicleCommand => new Command(async () =>
       await CadastraVehicleAsync());
 
-        //public bool isNewItem = false;
-
         private async Task CadastraVehicleAsync()
         {
            
@@ -247,77 +245,12 @@ namespace Fleet.MauiPrincipal.ViewModel
                     await Application.Current.MainPage.DisplayAlert("Falhou ", "Veiculo nao foi cadastrado nem atualizado!", "Ok");
                 }
 
-
-
-
-
-                //if (response.IsSuccessStatusCode) { 
-                //    await Application.Current.MainPage.DisplayAlert("Ola", "O veiculo Foi Cadastrado com sucesso", "ok");
-                //}
-                //else
-                //{
-                //    await Application.Current.MainPage.DisplayAlert("Ola", "O veiculo não Foi Cadastrado com sucesso", "ok");
-                //}
             }
-                //HttpResponseMessage response = null; 
-                //if (isNewItem)
-                //{      response = await Client.PostAsync(url, content);
-                //    await AppShell.Current.DisplayAlert("Informação", "Veiculo Cadastrado com sucesso!", "Ok");
-                //}
-                //else{   
-                //      response = await Client.PutAsync(url, content);
-                //     await AppShell.Current.DisplayAlert("Informação", "Veiculo atualizado com sucesso!" , "Ok");
-                //}
-                ////if (!response.IsSuccessStatusCode)
-                ////{
-                ////    await AppShell.Current.DisplayAlert("Informação", "A operação falhou!", "Ok");
-                ////}
-            //}
+                
             else
             { Debug.WriteLine(" Campos Obrigatorios vazio!"); }
-            //await Shell.Current.GoToAsync(nameof(VehicleListPage));
-            //await Application.Current.MainPage.Navigation.PushAsync(new VehicleListPage());
          
         }
-
-
-        //public ICommand CarregarVehiclesCommand => new Command(async () =>
-        //await CarregarVehiclesAsync());
-        //private async Task CarregarVehiclesAsync()
-        //{
-        //    //var url= $"{baseUrl}FleetTransport/Vehicle";
-
-        //    var response = await Client.GetAsync(Client.BaseAddress);
-        //    Console.WriteLine("dados do data" + response);
-        //    if (response.IsSuccessStatusCode)
-        //         using( var responseStream = await response.Content.ReadAsStreamAsync())
-        //        {
-        //            Console.WriteLine("dados do response" + response);
-        //            var data = await JsonSerializer.DeserializeAsync<ObservableCollection<Vehicle>>
-        //                (responseStream, _SerializerOptions);
-        //            Console.WriteLine("dados do data" + data);
-        //            Vehicles = data;
-        //        }
-        //}
-
-        //   public ICommand CarregarVehicleIDCommand =>
-        //       new Command(async () =>
-        //   {
-        //   var vehicleID = Convert.ToInt32(VID);
-        //   if (vehicleID > 0) {
-        //       var url = $"{baseUrl}/FleetTransport/Vehicle/{VID}";
-        //       var response = await Client.GetAsync(url);
-        //       if (response.IsSuccessStatusCode)
-        //       {
-        //           using (var responseStream = await response.Content.ReadAsStreamAsync())
-        //       {
-        //                   var data = await JsonSerializer.DeserializeAsync<Vehicle>(responseStream, _SerializerOptions);
-        //                   Vehicle = data;
-        //       }
-        //           }
-        //          } 
-        //   });
-
         //   public ICommand SalvarVehicleCommand => new Command(async () =>
         //   {
         //       var url = $"{baseUrl}/FleetTransport/Vehicle";
@@ -343,33 +276,6 @@ namespace Fleet.MauiPrincipal.ViewModel
         //       }
         //   }
         //   );
-
-        //   public ICommand UpdateVehicleCommand => new Command(async () =>
-        //   {
-
-        //       if ((VID > 0) && (Marca > 0) & (Modelo>0) && (TransmitionType>0) && (Variante>0))
-        //       {
-        //           var vehicle = Vehicles.FirstOrDefault(x => x.Id == VID);
-        //           var url = $"{baseUrl}/FleetTransport/Vehicle/{VID}";
-
-        //           vehicle.Id = VID;
-        //           vehicle.BrandId = Marca;
-        //           vehicle.ModelId = Modelo;
-        //           vehicle.Power = Power;
-        //           vehicle.TransmissionType = TransmitionType;
-        //           vehicle.FuelConsumption = FuelConsumption;
-        //           vehicle.VariantId = Variante;
-        //           vehicle.TypeVehicle = TypeVehicle;
-        //           vehicle.YearOfManufacture = DataFabrico;
-        //           vehicle.RegistrationDate = DataRegistro;
-
-        //           string json = JsonSerializer.Serialize<Vehicle>(vehicle, _SerializerOptions);
-        //           StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-        //           var response = await Client.PutAsync(url, content);
-        //           await CarregarVehiclesAsync();
-        //       }
-        //   }
-        //);
 
 
     }

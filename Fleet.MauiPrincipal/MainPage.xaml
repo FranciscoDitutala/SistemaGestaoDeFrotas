@@ -8,8 +8,8 @@
              xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
              xmlns:controls="https://trungnt2910.github.io/schemas/maui/2022/colorpicker"
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
-             xmlns:viewModel="clr-namespace:Fleet.MauiPrincipal.ViewModel.Parts"
-             x:DataType="viewModel:StockyEntryPageViewModel"
+             xmlns:viewModel="clr-namespace:Fleet.MauiPrincipal.ViewModel"
+             x:DataType="viewModel:MainPageViewModel"
               NavigationPage.HasNavigationBar="False"
             
              Title="DashBoard" >
@@ -25,17 +25,17 @@
                        <Grid BackgroundColor="#512BD4" Grid.Column="0"   ColumnSpacing="10" HeightRequest="120" RowDefinitions="3*,2*" ColumnDefinitions="*,*" Padding="15" >
                             <Image Source="vehicle_insurance_64px.png" Aspect="AspectFit" Grid.RowSpan="2" Grid.Column="0"  HeightRequest="60"  />
                 <Label Text="Veiculos"  FontSize="Micro" FontFamily="Gilroy" TextColor="White" HorizontalOptions="Start" Grid.Row="1" Grid.Column="1"  VerticalOptions="Center" />
-                            <Label Text="20"  FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"  HorizontalOptions="Start" Grid.Row="0" Grid.Column="2" TextColor="White"  VerticalOptions="Center" />
+                <Label Text="{Binding Vehicles.Count}"  FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"  HorizontalOptions="Start" Grid.Row="0" Grid.Column="2" TextColor="White"  VerticalOptions="Center" />
                       </Grid>
                         <Grid BackgroundColor="#512BD4" Grid.Column="1"   ColumnSpacing="10" HeightRequest="120" RowDefinitions="3*,2*" ColumnDefinitions="*,*" Padding="15" >
                             <Image Source="vehicle_insurance_64px.png" Aspect="AspectFit" Grid.RowSpan="2" Grid.Column="0"  HeightRequest="60"  />
-                <Label Text="Modelos"  FontSize="Micro" FontFamily="Gilroy" TextColor="White" HorizontalOptions="Start" Grid.Row="1" Grid.Column="1"  VerticalOptions="Center" />
-                            <Label Text="100"  FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"  HorizontalOptions="Start" Grid.Row="0" Grid.Column="2" TextColor="White"  VerticalOptions="Center" />
+                <Label Text="Vehiculos Atribuidos"  FontSize="Micro" FontFamily="Gilroy" TextColor="White" HorizontalOptions="Start" Grid.Row="1" Grid.Column="1"  VerticalOptions="Center" />
+                <Label Text="{Binding Atribuicoes.Count}"  FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"  HorizontalOptions="Start" Grid.Row="0" Grid.Column="2" TextColor="White"  VerticalOptions="Center" />
                         </Grid>
                         <Grid BackgroundColor="#512BD4" Grid.Column="2"   ColumnSpacing="10" HeightRequest="120" RowDefinitions="3*,2*" ColumnDefinitions="*,*" Padding="15" >
                             <Image Source="vehicle_insurance_64px.png" Aspect="AspectFit" Grid.RowSpan="2" Grid.Column="0"  HeightRequest="60"  />
                 <Label Text="Marcas"  FontSize="Micro" FontFamily="Gilroy" TextColor="White" HorizontalOptions="Start" Grid.Row="1" Grid.Column="1"  VerticalOptions="Center" />
-                            <Label Text="50" FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"  HorizontalOptions="Start" Grid.Row="0" Grid.Column="2" TextColor="White"  VerticalOptions="Center" />
+                <Label Text="{Binding VehicleMarcas.Count}" FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"  HorizontalOptions="Start" Grid.Row="0" Grid.Column="2" TextColor="White"  VerticalOptions="Center" />
                         </Grid>
 
                </Grid>

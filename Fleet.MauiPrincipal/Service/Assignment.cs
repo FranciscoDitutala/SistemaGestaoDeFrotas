@@ -15,6 +15,8 @@ namespace Fleet.MauiPrincipal.Service
         public int OrgaoId { get; set; }
         public int EmployeeId { get; set; }
         public string Description { get; set; }
+    
+
         //public bool Active { get; set; } = true;
         //public DateTime DateOfAssignment { get; set; }
         //public DateTime EndDateOfAssignment { get; set; }
