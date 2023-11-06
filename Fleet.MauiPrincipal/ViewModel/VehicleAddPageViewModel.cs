@@ -231,6 +231,7 @@ namespace Fleet.MauiPrincipal.ViewModel
                     Type = VehicleTipo,
                     YearOfManufacture = DataFabrico,
                     RegistrationDate = DateTime.Today,
+                    //Assigned = false;
                 };
                 string json = JsonSerializer.Serialize<Vehicle>(vehicle, _SerializerOptions);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");

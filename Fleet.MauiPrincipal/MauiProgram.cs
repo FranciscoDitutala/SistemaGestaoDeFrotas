@@ -97,6 +97,8 @@ namespace Fleet.MauiPrincipal
             builder.Services.AddTransient<VehicleAssignPage>();
             builder.Services.AddTransient<VehicleDetailPage>();
             builder.Services.AddTransient<Vehicle_DetailsViewModel>();
+            builder.Services.AddTransient<PartAddFirstParge>();
+            builder.Services.AddTransient<PartAddFirstPargeViewModel>();
             return builder.Build();
         }
     }

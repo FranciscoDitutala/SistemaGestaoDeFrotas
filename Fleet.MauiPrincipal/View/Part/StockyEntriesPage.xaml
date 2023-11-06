@@ -2,30 +2,57 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Fleet.MauiPrincipal.View.Part.StockyEntriesPage"
-                 xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
-             xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome"
+              xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+            xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome"
            xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
            xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
            xmlns:controls="https://trungnt2910.github.io/schemas/maui/2022/colorpicker"
            xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
            xmlns:viewModel="clr-namespace:Fleet.MauiPrincipal.ViewModel.Parts"
            x:DataType="viewModel:StockyEntriesPageViewModel"
-             NavigationPage.HasNavigationBar="False"
+            NavigationPage.HasNavigationBar="False"
              Title="StockyEntriesPage">
 
     <Grid RowDefinitions="4*,7*,*,*" ColumnDefinitions="2*,*" ColumnSpacing="10" >
-        <Label Grid.Row="0" Text="Lista de Entradas" Padding="25,0,0,10"  FontAttributes="Bold"  TextColor="#512BD4"
-              FontSize="Title"   VerticalOptions="Start" HorizontalOptions="Start" FontFamily="Gilroy" />
+        <Label Grid.Row="0" Text="Lista de Entradas" Padding="25,0,0,10"  FontAttributes="Bold"  TextColor="White"
+              FontSize="Header"   VerticalOptions="EndAndExpand" HorizontalOptions="Start" FontFamily="Gilroy" ZIndex="1" />
+        <Image  Grid.Row="0" Grid.ColumnSpan="3"  Margin="0,-30,0,0" Source="monitorar.png" Aspect="AspectFill" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
+        <Grid  Grid.Row="1" Grid.ColumnSpan="2"  Margin="0,20,0,0" HorizontalOptions="Start"  >
+            <ScrollView HorizontalOptions="Start"  >
+                <material:DataGrid ItemsSource="{Binding Stock}"  Margin="10,0,20,20"  BackgroundColor="WhiteSmoke" CornerRadius="0"  
+                  LineSeparatorColor="#004D97" SelectedItems="{Binding SelectedItems}" BorderColor="#004D97"     >
+                    <material:DataGrid.EmptyView>
+                        <VerticalStackLayout Margin="80,20">
+                            <Image
+                                 WidthRequest="40"
+                                 HeightRequest="40"
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Center"
+                                 Source="{FontImageSource FontFamily=MaterialOutlined, Glyph={x:Static m:MaterialOutlined.Backup_table}, Color={AppThemeBinding
+                                 Light={StaticResource OnSurface}, Dark={StaticResource OnSurfaceDark}}}"/>
+                            <Label Text="Sem dados armazenados..." HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </material:DataGrid.EmptyView>
+                    <material:DataGrid.Columns >
+                        <material:DataGridSelectionColumn Title="#"/>
+                        <material:DataGridColumn Binding="{Binding ProvidersInfo}" Title="Provedor"  />
+                        <material:DataGridColumn Binding="{Binding Notes}" Title="Descrição"/>
+                        <material:DataGridColumn Binding="{Binding TotalValue}" Title="Valor da Compra" />
+                
+                    </material:DataGrid.Columns>
+                </material:DataGrid>
+            </ScrollView>
 
+        </Grid>
 
         <Grid Grid.Row="3" Grid.ColumnSpan="2" Margin="20,0,0,0" RowDefinitions="*,*" ColumnDefinitions="*,*,*"  HorizontalOptions="Start" ColumnSpacing="10" >
             <Button  CornerRadius="8" WidthRequest="200" TextColor="#512BD4" BorderColor="#512BD4"  FontSize="Medium" Text="Entrada " HorizontalOptions="Start"
            HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="add_64px.png" Clicked="GoToAddStock" >
             </Button>
 
-            <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Carregar " 
+            <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Refresh " 
                  Margin="10,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="update_64px.png"
-              Grid.Column="1" >
+              Grid.Column="1" Command="{Binding CarregarStocksCommand}" >
 
             </Button>
             <!--<Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Refresh " 

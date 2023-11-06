@@ -158,6 +158,7 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
                     Debug.WriteLine("Cadastrado com sucesso" + part.Id);
                     await Application.Current.MainPage.DisplayAlert("Sucesso", "Cadastro feito", "Ok");
                     await Application.Current.MainPage.Navigation.PopAsync();
+                    await Application.Current.MainPage.Navigation.PopAsync();
                 }
             } else { await Application.Current.MainPage.DisplayAlert("Atenção","Campos Obrigatorios em branco","Ok"); }    
         }

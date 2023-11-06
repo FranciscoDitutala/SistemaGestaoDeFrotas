@@ -42,6 +42,7 @@
                             <material:DataGridColumn Binding="{Binding Brand}" Title="Marca" />
                             <material:DataGridColumn Binding="{Binding Model}" Title="Modelo"/>
                             <material:DataGridColumn Binding="{Binding Type}" Title="Tipo"/>
+                            <material:DataGridColumn Binding="{Binding Assigned}" Title="Tipo"/>
    
                     </material:DataGrid.Columns>
                     </material:DataGrid>

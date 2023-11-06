@@ -130,6 +130,9 @@
 	  <MauiXaml Update="View\NavBarPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="View\Part\PartAddFirstParge.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\Part\PartAddPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
