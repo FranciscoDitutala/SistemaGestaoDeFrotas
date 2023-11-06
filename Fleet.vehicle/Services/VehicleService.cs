@@ -75,7 +75,7 @@ namespace Fleet.Transport.Services
            
         }
 
-        public override async Task FindAllVehiclesByType(FindByTypeRequest request, IServerStreamWriter<VehiclePayload> responseStream, ServerCallContext context)
+      /*  public override async Task FindAllVehiclesByType(FindByTypeRequest request, IServerStreamWriter<VehiclePayload> responseStream, ServerCallContext context)
         {
 
             await foreach (var vehicle in _vehicleRepository.Entities.FilterAsync(x => x.Type == request.Type))
@@ -83,10 +83,18 @@ namespace Fleet.Transport.Services
                 await responseStream.WriteAsync(_mapper.Map<VehiclePayload>(vehicle));
             }
         }
-
+      */
         public override async Task FindAllVehiclesAssigned(FindAllVehiclesAssignedRequest request, IServerStreamWriter<VehiclePayload> responseStream, ServerCallContext context)
         {
             await foreach (var vehicle in _vehicleRepository.Entities.FilterAsync(x => x.Assigned == request.Assigned))
+            {
+                await responseStream.WriteAsync(_mapper.Map<VehiclePayload>(vehicle));
+            }
+        }
+        public override  async  Task FindVehicles(FindVehiclesRequest request, IServerStreamWriter<VehiclePayload> responseStream, ServerCallContext context)
+        {
+            await foreach (var vehicle in _vehicleRepository.Entities.FilterAsync(x => x.Registration== request.Filter || 
+            x.Brand==request.Filter || x.Cor==request.Filter  || x.Type == request.Filter || x.Vin == x.Vin))
             {
                 await responseStream.WriteAsync(_mapper.Map<VehiclePayload>(vehicle));
             }

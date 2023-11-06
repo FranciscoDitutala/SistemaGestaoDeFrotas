@@ -12,9 +12,9 @@ namespace Fleet.Principal.Dtos.TransPortDtos.VehicleDtos
         public string? Cor { get; set; }
         public int YearOfManufacture { get; set; }
 
-        public VehicleType Type { get; set; }
+        public string? Type { get; set; }
 
-        public TransmissionType Transmission { get; set; }
+        public string ? Transmission { get; set; }
 
         public int Power { get; set; }
 

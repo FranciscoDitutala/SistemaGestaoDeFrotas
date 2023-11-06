@@ -13,16 +13,16 @@ namespace Fleet.Principal.Dtos.TransPortDtos.VehicleDtos
         public string? Cor { get; set; }
         public int YearOfManufacture { get; set; }
 
-        public VehicleType Type { get; set; }
+        public string? Type { get; set; }
 
-        public TransmissionType Transmission { get; set; }
+        public string? Transmission { get; set; }
 
         public int Power { get; set; }
 
         public double FuelConsumption { get; set; }
         public DateTime RegistrationDate { get; set; }
         public bool Assigned { get; set; }
-        public AssignmentType TypeAssigment { get; set; }
+        public string? TypeAssigment { get; set; }
         public string? Orgao { get; set; }
         public string? Employee { get; set; }
       

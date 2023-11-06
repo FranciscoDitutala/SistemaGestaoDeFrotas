@@ -76,7 +76,8 @@ namespace Fleet.Principal.Infrastructure
             CreateMap<VehicleDto, VehiclePayload>().ReverseMap();
                  CreateMap<VehicleDto, VehiclePayload>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
-            CreateMap<AddVehicleDto, VehiclePayload>().ReverseMap();
+            CreateMap<AddVehicleDto, VehiclePayload>().ForMember(dest => dest.Assigned, opt => opt.MapFrom((src, dest, destMember, context) =>
+                    false));
             CreateMap<UpdateVehicleDto, VehiclePayload>().ReverseMap();
             CreateMap<UpdateVehicleDto, VehiclePayload>()
                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));

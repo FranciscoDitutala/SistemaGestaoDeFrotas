@@ -78,8 +78,8 @@ namespace Fleet.Principal.Services.TransportServices
 
         }
 
-     
-        public async Task<IEnumerable<VehicleDto>> FindAllVehiclesByTypeAsync(VehicleType type)
+     /*
+        public async Task<IEnumerable<VehicleDto>> FindAllVehiclesByTypeAsync(string type)
         {
             using var list = _vehicleManagerClient.FindAllVehiclesByType(new FindByTypeRequest { Type = type });
 
@@ -93,6 +93,7 @@ namespace Fleet.Principal.Services.TransportServices
             }
             return Vehicles;
         }
+     */
 
         
 
@@ -110,6 +111,23 @@ namespace Fleet.Principal.Services.TransportServices
                 var vehicle = list.ResponseStream.Current;
                 Vehicles.Add(_mapper.Map<VehicleDto>(vehicle));
             }
+            return Vehicles;
+        }
+
+        public async Task<IEnumerable<VehicleDto>> FindVehiclesAsync(string filter)
+        {
+
+            using var list = _vehicleManagerClient.FindVehicles(new FindVehiclesRequest { Filter = filter});
+
+            if (Vehicles.Any())
+                Vehicles.Clear();
+
+            while (await list.ResponseStream.MoveNext())
+            {
+                var vehicle = list.ResponseStream.Current;
+                Vehicles.Add(_mapper.Map<VehicleDto>(vehicle));
+            }
+
             return Vehicles;
         }
     }

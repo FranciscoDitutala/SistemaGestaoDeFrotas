@@ -34,10 +34,10 @@ enum AssignmentType{
 
 message AssignmentPayload{
 	  int32 id=1;
-	  AssignmentType type=2;
+	  string type=2;
       int32 vehicle_id=3;
 	  int32 orgao_id=4;
-	   int32 employee_id=5;
+	  int32 employee_id=5;
 	  string description=6;
 	  bool active = 7;
 	  google.protobuf.Timestamp  date_of_assignment=8;

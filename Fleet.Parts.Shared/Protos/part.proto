@@ -13,6 +13,7 @@ service PartManager {
   
   rpc FindCategories (FindCategoriesRequest) returns (stream PartCategoryPayload);
   rpc FindTypesByCategory (FindTypesByCategoryRequest) returns (stream PartTypePayload);
+  rpc FindAllPart (FindPartsRequest) returns (stream PartPayload);
 }
 
 message FindCategoriesRequest {
@@ -26,6 +27,9 @@ message FindTypesByCategoryRequest {
 
 message FindPartRequest {
   string code = 1;
+}
+message FindPartsRequest {
+
 }
 
 message FindPartsByTypeRequest {

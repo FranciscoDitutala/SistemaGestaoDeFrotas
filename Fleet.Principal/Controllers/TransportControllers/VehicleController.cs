@@ -40,16 +40,24 @@ namespace Fleet.Principal.Controllers.TransportControllers
         }
 
        
+        /*
         [HttpGet("GetAllVehiclesbyType/{type}")]
-        public async Task<IActionResult> GetAllVehiclesByType(int type)
+        public async Task<IActionResult> GetAllVehiclesByType(string type)
         {
-            var ans = await _vehicleService.FindAllVehiclesByTypeAsync((VehicleType) type);
+            var ans = await _vehicleService.FindAllVehiclesByTypeAsync( type);
 
             return Ok(ans);
         }
-       
+        */
+        [HttpGet("GetVehicles/{filter}")]
+        public async Task<IActionResult> GetVehicles(string filter)
+        {
+            var ans = await _vehicleService.FindVehiclesAsync(filter);
+            return Ok(ans);
+        }
 
-        [HttpGet("GetAllVehiclesAssigned/{active}")]
+
+         [HttpGet("GetAllVehiclesAssigned/{active}")]
         public async Task<IActionResult> GetAllVehiclesAssigned(bool active)
         {
             var ans = await _vehicleService.FindAllVehiclesActiveAsync(active);
@@ -64,6 +72,7 @@ namespace Fleet.Principal.Controllers.TransportControllers
             return Ok(ans);
 
         }
+     
 
 
         [HttpPost]

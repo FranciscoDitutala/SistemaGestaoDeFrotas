@@ -10,7 +10,8 @@ namespace Fleet.Principal.Services.TransportServices.Interfaces
         public Task<VehicleDto> AddVehicleAsync(AddVehicleDto vehicle);
         public Task<VehicleDto> UpdateVehicleAsync(int id,UpdateVehicleDto vehicle);
         public Task<VehicleDto> DeleteVehicleAsync(int id);
-        public Task<IEnumerable<VehicleDto>> FindAllVehiclesByTypeAsync(VehicleType type);
+        //public Task<IEnumerable<VehicleDto>> FindAllVehiclesByTypeAsync(string type);
         public Task<IEnumerable<VehicleDto>> FindAllVehiclesActiveAsync(bool active);
+        public Task<IEnumerable<VehicleDto>> FindVehiclesAsync(string filter);
     }
 }

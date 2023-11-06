@@ -82,4 +82,12 @@ public class PartService : PartManager.PartManagerBase
         await _partRepository.SaveAsync();
         return _mapper.Map<PartPayload>(part);
     }
+
+    public override async  Task FindAllPart(FindPartsRequest request, IServerStreamWriter<PartPayload> responseStream, ServerCallContext context)
+    {
+        await foreach (var part in _partRepository.Entities.FilterAsync())
+        {
+            await responseStream.WriteAsync(_mapper.Map<PartPayload>(part));
+        }
+    }
 }

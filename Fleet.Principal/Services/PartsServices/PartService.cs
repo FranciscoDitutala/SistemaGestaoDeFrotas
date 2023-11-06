@@ -88,5 +88,20 @@ namespace Fleet.Principal.Services.PartsServices
         {
             throw new NotImplementedException();
         }
+
+        public ObservableCollection<PartDto> Parts { get; } = new();
+        public  async Task<IEnumerable<PartDto>> FindAllPartAsync()
+        {
+            using var list = _partManagerClient.FindAllPart(new FindPartsRequest ());
+
+            if (Parts.Any())
+                Parts.Clear();
+            while (await list.ResponseStream.MoveNext())
+            {
+                var part = list.ResponseStream.Current;
+                Parts.Add(_mapper.Map<PartDto>(part));
+            }
+            return Parts;
+        }
     }
 }

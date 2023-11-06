@@ -17,5 +17,6 @@ namespace Fleet.Principal.Services.PartsServices.Interfaces
         public Task<IEnumerable<PartCategoryDto>> FindCategoriesAsync(string filter);
 
         public Task<IEnumerable<PartTypeDto>> FindTypesByCategoryAsync(string partyCategoryName, string filter);
+        public Task<IEnumerable<PartDto>> FindAllPartAsync();
     }
 }

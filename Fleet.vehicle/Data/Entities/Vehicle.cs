@@ -17,10 +17,10 @@ namespace Fleet.Transport.Data.Entities
         public int YearOfManufacture { get; set; }
 
         [Required]
-        public VehicleType Type { get; set; }
+        public string? Type { get; set; }
 
         [Required]
-        public TransmissionType Transmission { get; set; }
+        public string? Transmission { get; set; }
 
         [Required]
         [Range(1, int.MaxValue)]
