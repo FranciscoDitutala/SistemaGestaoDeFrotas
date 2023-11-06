@@ -31,7 +31,12 @@ namespace Fleet.Principal.Controllers.TransportControllers
             var ans = await _employeeService.FindAllEmployees();
             return Ok(ans);
         }
-
+        [HttpGet("getEmployesById/{orgaoId}")]
+        public async Task<IActionResult> GetEmployesById(int orgaoId)
+        {
+            var ans = await _employeeService.FindEmployeeById(orgaoId);
+            return Ok(ans);
+        }
 
     }
 }

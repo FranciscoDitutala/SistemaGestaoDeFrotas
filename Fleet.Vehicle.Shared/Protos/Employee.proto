@@ -7,11 +7,14 @@ option csharp_namespace="Fleet.Transport";
 service EmployeeManager{
 	rpc FindAllEmployees(FindAllEmployeesRequest) returns (stream EmployeePayload);
 	rpc FindEmployee(FindEmployeeRequest) returns (EmployeePayload);
+	rpc FindAllEmployeesbyId(FindEmployeesRequest) returns (stream EmployeePayload);
 }
 
 message FindAllEmployeesRequest{
 }
-
+message FindEmployeesRequest{
+	int32 orgao_id=1;
+}
 message FindEmployeeRequest{
 	int32 id=1;
 }

@@ -44,5 +44,22 @@ namespace Fleet.Principal.Services.TransportServices
             if (employee.Id <= 0) return new EmployeeDto();
             return _mapper.Map<EmployeeDto>(employee);
         }
+
+        public async Task<IEnumerable<EmployeeDto>> FindEmployeeById(int orgaoId)
+        {
+            using var list = _employeeManagerClient.FindAllEmployeesbyId(new FindEmployeesRequest { OrgaoId = orgaoId});
+
+            if (employees.Any())
+                employees.Clear();
+
+            while (await list.ResponseStream.MoveNext())
+            {
+                var orgao = list.ResponseStream.Current;
+
+                employees.Add(_mapper.Map<EmployeeDto>(orgao));
+            }
+
+            return employees;
+        }
     }
 }

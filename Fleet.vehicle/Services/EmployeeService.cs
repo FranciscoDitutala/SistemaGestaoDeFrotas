@@ -36,5 +36,16 @@ namespace Fleet.Transport.Services
              return _mapper.Map<EmployeePayload>(employee);
 
         }
+        public override async Task FindAllEmployeesbyId(FindEmployeesRequest request, IServerStreamWriter<EmployeePayload> responseStream, ServerCallContext context)
+        {
+            var employees = _repository.Employees;
+
+            foreach (var employee in employees)
+            {
+
+                if(employee.OrgaoId != request.OrgaoId) continue;
+                await responseStream.WriteAsync(_mapper.Map<EmployeePayload>(employee));
+            }
+        }
     }
 }

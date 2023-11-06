@@ -6,6 +6,8 @@
         public string? Name { get; set; }
         public int Nif { get; set; }
 
+        public int OrgaoId { get; set; }
+
         //List<Vehicle> Vehicles { get; set; } = new List<Vehicle>();
         List<Assignment> Assignment { get; set; } = new List<Assignment>();
 
