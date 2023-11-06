@@ -111,6 +111,42 @@ namespace CustomerApi.Controllers
             }
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });
         }
+        [HttpDelete]
+        [Route("delete-user")]
+        public async Task<IActionResult> DeleteUser([FromBody] RegisterModel model)
+        {
+            var user = await _userManager.FindByNameAsync(model.Username);
+            if (user != null)
+            {
+                var result = await _userManager.DeleteAsync(user);
+                if (result.Succeeded)
+                {
+                    return Ok(new Response { Status = "Success", Message = "User deleted successfully!" });
+                }
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User deletion failed!" });
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
+        [Route("edit-password")]
+        public async Task<IActionResult> EditPassword([FromBody] RegisterModel model)
+        {
+            var user = await _userManager.FindByNameAsync(model.Username);
+            if (user != null)
+            {
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var result = await _userManager.ResetPasswordAsync(user, token, model.Password);
+                if (result.Succeeded)
+                {
+                    return Ok(new Response { Status = "Success", Message = "Password updated successfully!" });
+                }
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Password update failed!" });
+            }
+            return NotFound();
+        }
+
+
 
         private JwtSecurityToken GetToken(List<Claim> authClaims)
         {
