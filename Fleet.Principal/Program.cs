@@ -1,5 +1,6 @@
 using Fleet.Common;
 using Fleet.Parts;
+using Fleet.Principal.Data;
 using Fleet.Principal.Infrastructure;
 using Fleet.Principal.Services.CommonServices;
 using Fleet.Principal.Services.CommonServices.Interfaces;
@@ -9,6 +10,11 @@ using Fleet.Principal.Services.TransportServices;
 using Fleet.Principal.Services.TransportServices.Interfaces;
 using Fleet.Transport;
 using Grpc.Net.Client;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 //string CommonBaseAddress = "http://127.0.0.1:5107"; //TODO: Get from Configuration in production
 //string PartsBaseAddress = "http://127.0.0.1:5124"; //TODO: Get from Configuration in production
@@ -21,6 +27,42 @@ string CommonBaseAddress = "http://127.0.0.1:5107"; //TODO: Get from Configurati
 string PartsBaseAddress = "http://127.0.0.1:5124"; //TODO: Get from Configuration in production
 string TransportBaseAddress = "http://127.0.0.1:5125";
 var builder = WebApplication.CreateBuilder(args);
+
+
+ConfigurationManager configuration = builder.Configuration;
+
+// Add services to the container.
+
+// For Entity Framework
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("FleetPrincipalDbConnection")));
+
+// For Identity
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+
+// Adding Authentication
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+
+// Adding Jwt Bearer
+.AddJwtBearer(options =>
+{
+    options.SaveToken = true;
+    options.RequireHttpsMetadata = false;
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidAudience = configuration["JWT:ValidAudience"],
+        ValidIssuer = configuration["JWT:ValidIssuer"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Secret"]))
+    };
+});
 
 // Add services to the container.
 
