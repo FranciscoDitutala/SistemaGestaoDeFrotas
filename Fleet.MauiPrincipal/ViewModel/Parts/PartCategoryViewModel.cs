@@ -9,12 +9,10 @@ using CommunityToolkit.Mvvm.Collections;
 using System.Text.Json;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
-
-
+using Fleet.MauiPrincipal.View.Part;
 
 namespace Fleet.MauiPrincipal.ViewModel.Parts
 {
-    
     public partial class PartCategoryViewModel: ObservableObject
     {
         private HttpClient Client;
@@ -22,8 +20,8 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
         string baseUrl = "https://localhost:7111";
 
         public PartTypeCategory categoria;
-        public string partTypename;
-        private List<PartTypeCategory> _typeVategoriesItems;
+        public Categories partTypename = new Categories();
+    private List<PartTypeCategory> _typeVategoriesItems;
         public List<PartTypeCategory> TypeCategoriesItems
         {
             get { return _typeVategoriesItems; }
@@ -33,7 +31,7 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
                 OnPropertyChanged(nameof(TypeCategoriesItems));
             }
         }
-        public PartCategoryViewModel(string TypeNameCategory)
+        public PartCategoryViewModel(Categories TypeNameCategory)
         {
             partTypename = TypeNameCategory;
             Client = new HttpClient();
@@ -41,20 +39,32 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
             {
                 PropertyNameCaseInsensitive = true
             };
-
             CarregarPartTypeCategoriesAsync();
         }
 
         public ObservableCollection<PartTypeCategory> Items { get; set; }
         public ObservableCollection<PartTypeCategory> SelectedItems { get; set; } = new ObservableCollection<PartTypeCategory>();
+        public ICommand CarregarPartsCommand => new Command(async () =>
+             await CarregarPartsAsync());
+        private async Task CarregarPartsAsync()
+        {
+            Items = new ObservableCollection<PartTypeCategory>(_typeVategoriesItems);
+            foreach (var item in SelectedItems)
+            {
+                //var teste = Items.Remove(item);
+                if (Items.Contains(item))
+                {
+                    await Application.Current.MainPage.Navigation.PushAsync(new PartListPage(item));
+                }
+                //else { await Application.Current.MainPage.DisplayAlert("Atencao ","Nao teve exito a funcao","Ok"); }
+            }
+        }
         public ICommand CarregarPartTypeCategoriesCommand => new Command(async () =>
              await CarregarPartTypeCategoriesAsync());
         private async Task CarregarPartTypeCategoriesAsync()
         {
-            Debug.WriteLine("Entrou no metodo carregar TypeCategorias da partCategoriasViewModel " +
-                "o valor do parametro é" + partTypename);
             TypeCategoriesItems = new List<PartTypeCategory>();
-            var url = $"{baseUrl}/FleetParts/Part/GetTypesByCategory/{partTypename}";
+            var url = $"{baseUrl}/FleetParts/Part/GetTypesByCategory/{partTypename.Name}";
             var response = await Client.GetAsync(url);
             if (response.IsSuccessStatusCode)
                 using (var responseStream = await response.Content.ReadAsStreamAsync())

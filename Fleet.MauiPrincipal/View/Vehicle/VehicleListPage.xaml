@@ -51,7 +51,7 @@
 
             <Grid Grid.Row="3" Margin="0,0,0,0" RowDefinitions="*,*" ColumnDefinitions="*,*,*" BackgroundColor="WhiteSmoke" HorizontalOptions="Start" ColumnSpacing="10" >
                 <Button  CornerRadius="8" WidthRequest="200" TextColor="#512BD4" BorderColor="#512BD4"  FontSize="Medium" Text="Adicionar " HorizontalOptions="Start"
-                 Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="add_64px.png" Clicked="GoToVehicleAddPage"   >
+                 Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="add_64px.png" Command="{Binding GoToAddVehicleCommand}"  >
                 </Button>
                 <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Listar " HorizontalOptions="Start"
                  Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png"

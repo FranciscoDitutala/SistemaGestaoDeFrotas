@@ -16,8 +16,8 @@ namespace Fleet.MauiPrincipal.Service.Part
         public string PartTypeName { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
-        public string Description { get; set; }
-        //public List<VehicleVariantFilter> VariantFilters { get; set; } = new();
+        public int StockQty { get; set; }
+       
         //public Variantfilter[] VariantFilters { get; set; }
     }
 

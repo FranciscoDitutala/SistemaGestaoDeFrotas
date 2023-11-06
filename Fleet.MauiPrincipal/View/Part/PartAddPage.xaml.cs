@@ -1,27 +1,22 @@
+using Fleet.MauiPrincipal.Service.Part;
 using Fleet.MauiPrincipal.ViewModel.Parts;
 
 namespace Fleet.MauiPrincipal.View.Part;
 
 public partial class PartAddPage : ContentPage
 {
-	public PartAddPage()
-	{
-		InitializeComponent();
-	}
-
-    private PartAddPageViewModel _viewModel;
-    public PartAddPage(PartAddPageViewModel viewModel)
+    public PartAddPage()
     {
         InitializeComponent();
-        this.BindingContext = _viewModel = viewModel;
     }
-
+    public PartAddPage(string upc, Categories categoria , int Quant )
+    {
+        InitializeComponent();
+        this.BindingContext = new PartAddPageViewModel(upc, categoria, Quant);
+    }
     private async void ReturnToAddStock(object sender, EventArgs e)
     {
-        //await AppShell.Current.GoToAsync(nameof(StockyEntryPage));
-        //await Navigation.PopAsync();
-        //  await Navigation.PopAsync();
-        //await Navigation.PushAsync(StockyEntryPage());
+ 
         await Navigation.PushAsync(new StockyEntryPage());
     }
 }

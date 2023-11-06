@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Fleet.MauiPrincipal.Service;
+using Fleet.MauiPrincipal.View;
 using Fleet.MauiPrincipal.Service.Enums;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Fleet.MauiPrincipal.View.Vehicle;
 
 namespace Fleet.MauiPrincipal.ViewModel
 {
@@ -81,7 +83,7 @@ namespace Fleet.MauiPrincipal.ViewModel
             CarregarEmployee();
             CarregarOrgao();
             CarregarAssignmentAsync();
-            CadastrarAssignmentAsync();
+           
         }
 
 
@@ -260,6 +262,7 @@ namespace Fleet.MauiPrincipal.ViewModel
                 if (response.IsSuccessStatusCode)
                 {
                     await Application.Current.MainPage.DisplayAlert("Atenção", "Atribucao feita com sucesso ", "OK");
+                    await Application.Current.MainPage.Navigation.PushAsync(new VehicleDetailPage(selectedVehicle.Id));
                     teste = Atribuir.Id;
                 }
                 else { await Application.Current.MainPage.DisplayAlert("Falhou", "Atribucao não feita  ", "OK"); }
@@ -273,10 +276,7 @@ namespace Fleet.MauiPrincipal.ViewModel
         private async Task CarregarAssignmentAsync()
         {
             Atribuicoes = new List<Assignment>();
-            //if (TipoAtribuir > 0)
-            //{
-            var url = $"{baseUrl}/FleetTransport/Assignment/GetAssignmentVehicle/{teste}";
-
+            var url = $"{baseUrl}/FleetTransport/Assignment/1";
             var response = await Client.GetAsync(url);
             if (response.IsSuccessStatusCode)
                 using (var responseStream = await response.Content.ReadAsStreamAsync())

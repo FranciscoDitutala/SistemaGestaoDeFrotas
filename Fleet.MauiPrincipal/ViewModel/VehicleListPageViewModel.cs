@@ -84,31 +84,12 @@ namespace Fleet.MauiPrincipal.ViewModel
               
             } 
         }
-
-        [ICommand]
-        public static async void UpdateVehicle()
+        public ICommand GoToAddVehicleCommand => new Command(async () =>
+             await GoToAddVehicleAsync());
+        private async Task GoToAddVehicleAsync()
         {
-            await AppShell.Current.GoToAsync(nameof(VehicleDetailPage));
-            //Debug.WriteLine("Entrou no sistema");
-
-
+            Vehicle v = new Vehicle();
+            await Application.Current.MainPage.Navigation.PushAsync(new VehicleAddPage(v));
         }
-       
-        //[ObservableProperty]
-        //public Vehicle _selectedItems;
-
-        //public ICommand RemoveItemCommand => new Command(async () =>
-        //     await RemoveItemAsync());
-
-        //public async Task RemoveItemAsync()
-        //{
-        //    var item = SelectedItems.Id;
-
-        //    var url = $"{baseUrl}/FleetTransport/Vehicle/{item}";
-        //    var response = await Client.DeleteAsync(url);
-        //    await CarregarVehiclesAsync();
-
-        //}
-
     }
 }

@@ -37,25 +37,24 @@
                             <Label Text="Sem dados armazenados..." HorizontalOptions="Center"/>
                         </VerticalStackLayout>
                     </material:DataGrid.EmptyView>
-
+                  
                     <material:DataGrid.Columns >
-
+                        <material:DataGridSelectionColumn Title="#"/>
                         <!--<material:DataGridColumn Binding="{Binding Image}" Title="Matrícula"  />-->
                         <material:DataGridColumn Binding="{Binding Name}" Title="Categorias "/>
                         <!--<material:DataGridColumn Binding="{Binding Brand}" Title="Marca" />
                         <material:DataGridColumn Binding="{Binding Model}" Title="Modelo"/>
                         <material:DataGridColumn Binding="{Binding Type}" Title="Tipo"/>-->
-
                         <material:DataGridColumn  >
                             <material:DataGridColumn.CellItemTemplate    >
                                 <DataTemplate>
-
-                                    <Button  ImageSource="update_64px.png" Margin="0,0,10,0" Text="SubCategorias" BackgroundColor="White" Clicked="Button_Clicked"
-                                             BorderColor="#512BD4" TextColor="#512BD4" FontSize="Micro" FontFamily="Gilroy" />
+                                    <Button  ImageSource="update_64px.png" Margin="0,0,10,0" Text="SubCategorias" BackgroundColor="White" 
+                                             BorderColor="#512BD4" TextColor="#512BD4" FontSize="Micro" FontFamily="Gilroy"
+                                             Command="{Binding GoToPartTypeNameCommand}"  Grid.Column="1"  />
                                 </DataTemplate>
                             </material:DataGridColumn.CellItemTemplate>
 
-                        </material:DataGridColumn>
+                        <!--</material:DataGridColumn>
                         <material:DataGridColumn Title="Ações"  >
                             <material:DataGridColumn.CellItemTemplate    >
                                 <DataTemplate>
@@ -71,7 +70,7 @@
                                     <Button  ImageSource="add_64px.png" Margin="10,0,0,0" Text="Atribuir" BackgroundColor="White" BorderColor="#512BD4" 
                                              TextColor="#512BD4" FontSize="Micro" FontFamily="Gilroy" />
                                 </DataTemplate>
-                            </material:DataGridColumn.CellItemTemplate>
+                            </material:DataGridColumn.CellItemTemplate>-->
 
                         </material:DataGridColumn>
                     </material:DataGrid.Columns>
@@ -81,8 +80,8 @@
         </Grid>
 
         <Grid Grid.Row="3" Margin="0,0,0,0" RowDefinitions="*,*" ColumnDefinitions="*,*" BackgroundColor="WhiteSmoke" HorizontalOptions="Start" ColumnSpacing="10" >
-            <Button  CornerRadius="8" WidthRequest="200" TextColor="#512BD4" BorderColor="#512BD4"  FontSize="Medium" Text="Adicionar " HorizontalOptions="Start"
-                 Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="add_64px.png"  >
+            <Button  CornerRadius="8" WidthRequest="200" TextColor="#512BD4" BorderColor="#512BD4"  FontSize="Medium" Text="Subcategoria " HorizontalOptions="Start"
+                 Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="add_64px.png" Command="{Binding GoToPartTypeNameCommand}"   >
             </Button>
             <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Refresh " HorizontalOptions="Start"
                  Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png" Command="{Binding CarregarPartCategoriesCommand}"

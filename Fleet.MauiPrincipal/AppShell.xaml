@@ -48,22 +48,6 @@ FontFamily="Gilroy" />
             Title="Gerir Usuario" Icon="user_64px.png"
             ContentTemplate="{DataTemplate user:CreateUser}"
             Route="CreateUser" >
-        <!--<Shell.MenuItemTemplate>-->
-            <!--<DataTemplate>
-                <Grid ColumnDefinitions="0.2*,0.8*">
-                    <Image Source="save_64px.png"
-                           Margin="5"
-                           HeightRequest="45" />
-                    <Label Grid.Column="1"
-                           Text="DashBoard"
-                           FontAttributes="Italic"
-                           VerticalTextAlignment="Center" />
-                </Grid>
-            </DataTemplate>
-        </Shell.MenuItemTemplate>-->
-
     </ShellContent>
-  
-
-    
+   
 </Shell>

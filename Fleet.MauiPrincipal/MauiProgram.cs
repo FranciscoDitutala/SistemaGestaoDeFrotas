@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using UraniumUI;
 using Microsoft.Maui.Controls.Compatibility.Hosting;
 using Microsoft.Maui.Controls.Handlers.Compatibility;
+using Syncfusion.Maui.Core.Hosting;
 
 
 
@@ -23,8 +24,8 @@ namespace Fleet.MauiPrincipal
             builder
                 .UseUraniumUI()
                 .UseUraniumUIMaterial()
+                .ConfigureSyncfusionCore()
                 .UseMauiApp<App>()
-                
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -64,6 +65,7 @@ namespace Fleet.MauiPrincipal
 
             builder.Services.AddTransient<PartAddPage>();
             builder.Services.AddTransient<PartListPage>();
+            builder.Services.AddTransient<PartDetailsPage>();
             builder.Services.AddTransient<PartTypePage>();
             builder.Services.AddTransient<PartCategoriesPage>();
             builder.Services.AddTransient<PartCategoryPage>();
@@ -72,7 +74,7 @@ namespace Fleet.MauiPrincipal
             builder.Services.AddTransient<StockyEntryPage>();
             builder.Services.AddTransient<StockyOutPage>();
             builder.Services.AddTransient<StockyOutsPage>();
-
+            builder.Services.AddTransient<PartDetailsPageViewModel>();
             builder.Services.AddTransient<PartCategoryViewModel>();
             builder.Services.AddTransient<PartCategoriesViewModel>();
             builder.Services.AddTransient<StockyOutsPageViewModel>();
@@ -94,6 +96,7 @@ namespace Fleet.MauiPrincipal
             builder.Services.AddTransient<VehicleModelPageViewModel>();
             builder.Services.AddTransient<VehicleAssignPage>();
             builder.Services.AddTransient<VehicleDetailPage>();
+            builder.Services.AddTransient<Vehicle_DetailsViewModel>();
             return builder.Build();
         }
     }

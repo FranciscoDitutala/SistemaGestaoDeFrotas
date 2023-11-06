@@ -79,7 +79,6 @@ namespace Fleet.MauiPrincipal.ViewModel
                     { EstadoAtribuicao = "Atribuido"; }
                     else { EstadoAtribuicao = "Não Atribuido"; }
                     Debug.WriteLine("A matricula do veiculo é " + Vehicles.Registration);
-
                 }
         }
 
@@ -87,7 +86,7 @@ namespace Fleet.MauiPrincipal.ViewModel
              await GoToUpdateVehicleAsync());
         private async Task GoToUpdateVehicleAsync()
         {
-            //await Application.Current.MainPage.Navigation.PushAsync(new VehicleAddPage(Vehicles));
+            await Application.Current.MainPage.Navigation.PushAsync(new VehicleAddPage(Vehicles));
         }
 
         public ICommand GoToAssignVehicleCommand => new Command(async () =>
@@ -211,6 +210,6 @@ namespace Fleet.MauiPrincipal.ViewModel
         public ICommand RefreshCommand => new Command(async () =>
              await CarregarEmployee());
        
-    }
+       }
 
 }

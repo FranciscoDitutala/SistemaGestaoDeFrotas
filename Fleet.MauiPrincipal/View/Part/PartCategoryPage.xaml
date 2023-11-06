@@ -17,7 +17,7 @@
         <ImageButton  Source="return_64px.png" Aspect="AspectFill" WidthRequest="20" HeightRequest="20"
                     Grid.Row="0" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" Margin="10,-20,0,0" ZIndex="1"/>
         <Image  Grid.Row="0" Aspect="AspectFill" Source="sobressalentes.png" Margin="0,-30,0,0"  />
-        <Label Text="Listar Categorias" TextColor="White" FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"
+        <Label Text="Listar SubCategorias" TextColor="White" FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"
         HorizontalOptions="Start" VerticalOptions="Start" Margin="20,40,0,0" />
 
         <Grid  Grid.Row="2" Grid.ColumnSpan="2"  Margin="-20,-50,0,0"  >
@@ -39,37 +39,15 @@
                     </material:DataGrid.EmptyView>
 
                     <material:DataGrid.Columns >
-
-                        <!--<material:DataGridColumn Binding="{Binding Image}" Title="Matrícula"  />-->
-                        <material:DataGridColumn Binding="{Binding Name}" Title="Categorias "/>
-                        <!--<material:DataGridColumn Binding="{Binding Brand}" Title="Marca" />
-                     <material:DataGridColumn Binding="{Binding Model}" Title="Modelo"/>
-                     <material:DataGridColumn Binding="{Binding Type}" Title="Tipo"/>-->
-
+                        <material:DataGridSelectionColumn Title="#"/>
+                        <material:DataGridColumn Binding="{Binding Name}" Title="Nome "/>
+                        <material:DataGridColumn Binding="{Binding SubCategory}" Title="Sub Categorias" />
                         <material:DataGridColumn  >
                             <material:DataGridColumn.CellItemTemplate    >
                                 <DataTemplate>
 
                                     <Button  ImageSource="update_64px.png" Margin="0,0,10,0" Text="Atualizar" BackgroundColor="White"
-                                          BorderColor="#512BD4" TextColor="#512BD4" FontSize="Micro"   FontFamily="Gilroy" Command="{Binding CarregarPartTypeCategoriesCommand}" />
-                                </DataTemplate>
-                            </material:DataGridColumn.CellItemTemplate>
-
-                        </material:DataGridColumn>
-                        <material:DataGridColumn Title="Ações"  >
-                            <material:DataGridColumn.CellItemTemplate    >
-                                <DataTemplate>
-                                    <Button  ImageSource="show_property_64px.png" Margin="10,0,0,0" Text="Detalhes" BackgroundColor="White" BorderColor="#512BD4" TextColor="#512BD4"
-                                          FontSize="Micro"     FontFamily="Gilroy" />
-                                </DataTemplate>
-                            </material:DataGridColumn.CellItemTemplate>
-                        </material:DataGridColumn>
-                        <material:DataGridColumn  >
-                            <material:DataGridColumn.CellItemTemplate    >
-                                <DataTemplate>
-
-                                    <Button  ImageSource="add_64px.png" Margin="10,0,0,0" Text="Atribuir" BackgroundColor="White" BorderColor="#512BD4" 
-                                          TextColor="#512BD4" FontSize="Micro" FontFamily="Gilroy" />
+                                          BorderColor="#512BD4" TextColor="#512BD4" FontSize="Micro"   FontFamily="Gilroy"  />
                                 </DataTemplate>
                             </material:DataGridColumn.CellItemTemplate>
 
@@ -80,13 +58,17 @@
 
         </Grid>
 
-        <Grid Grid.Row="3" Margin="0,0,0,0" RowDefinitions="*,*" ColumnDefinitions="*,*" BackgroundColor="WhiteSmoke" HorizontalOptions="Start" ColumnSpacing="10" >
+        <Grid Grid.Row="3" Margin="0,0,0,0" RowDefinitions="*,*" ColumnDefinitions="*,*,*" BackgroundColor="WhiteSmoke" HorizontalOptions="Start" ColumnSpacing="10" >
             <Button  CornerRadius="8" WidthRequest="200" TextColor="#512BD4" BorderColor="#512BD4"  FontSize="Medium" Text="Adicionar " HorizontalOptions="Start"
               Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="add_64px.png"  >
             </Button>
             <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Refresh " HorizontalOptions="Start"
               Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png" Command="{Binding CarregarPartTypeCategoriesCommand}"
                       Grid.Column="1" >
+            </Button>
+            <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Peças " HorizontalOptions="Start"
+           Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png" Command="{Binding CarregarPartsCommand}"
+          Grid.Column="2" >
             </Button>
 
         </Grid>

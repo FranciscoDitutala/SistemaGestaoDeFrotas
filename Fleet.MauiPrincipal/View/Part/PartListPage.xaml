@@ -10,6 +10,7 @@
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
              xmlns:viewModel="clr-namespace:Fleet.MauiPrincipal.ViewModel.Parts"
              x:DataType="viewModel:PartListPageViewModelcs"
+             NavigationPage.HasNavigationBar="False"
              
              Title="PartListPage">
     <Grid  RowDefinitions ="3*,*,7*,1*" ColumnDefinitions="*"  >
@@ -21,7 +22,7 @@
             <ScrollView  >
 
                 <material:DataGrid   Margin="20,0,20,20"  BackgroundColor="WhiteSmoke" CornerRadius="0" x:Name="GridList" ItemsSource="{Binding Parts}"
-                     LineSeparatorColor="#004D97" BorderColor="#004D97" FlowDirection="LeftToRight" FlexLayout.Shrink="2" SelectedItems="{Binding SelectedItems}" >
+                     LineSeparatorColor="#004D97" BorderColor="#004D97" FlowDirection="LeftToRight" FlexLayout.Shrink="2" SelectedItems="{Binding SelectedItems}"  >
                     <material:DataGrid.EmptyView>
                         <VerticalStackLayout Margin="80,20">
                             <Image
@@ -36,59 +37,36 @@
                     </material:DataGrid.EmptyView>
 
                     <material:DataGrid.Columns >
-
-                        <material:DataGridColumn Binding="{Binding Upc}" Title="Matrícula"  />
-                        <material:DataGridColumn Binding="{Binding Sku}" Title="Cor"/>
-                        <material:DataGridColumn Binding="{Binding PartTypeName}" Title="Marca" />
-                        <material:DataGridColumn Binding="{Binding Brand}" Title="Modelo"/>
-                        <!--<material:DataGridColumn Binding="{Binding Type}" Title="Tipo"/>-->
-
-                        <material:DataGridColumn  >
-                            <material:DataGridColumn.CellItemTemplate    >
-                                <DataTemplate>
-
-                                    <Button  ImageSource="update_64px.png" Margin="0,0,10,0" Text="Atualizar" BackgroundColor="White"
-                                          BorderColor="#512BD4" TextColor="#512BD4" FontSize="Micro"    FontFamily="Gilroy" />
-                                </DataTemplate>
-                            </material:DataGridColumn.CellItemTemplate>
-
-                        </material:DataGridColumn>
+                        <material:DataGridSelectionColumn Title="#"  >
+                            
+                        </material:DataGridSelectionColumn>
+                            <material:DataGridColumn Binding="{Binding Upc}" Title="Codigo Universal"  />
+                        <material:DataGridColumn Binding="{Binding Sku}" Title="Codigo Nacional"/>
+                        <material:DataGridColumn Binding="{Binding PartTypeName}" Title="SubCategoria" />
+                        <material:DataGridColumn Binding="{Binding Brand}" Title="Marca"/>
                         <material:DataGridColumn Title="Ações"  >
                             <material:DataGridColumn.CellItemTemplate    >
                                 <DataTemplate>
                                     <Button  ImageSource="show_property_64px.png" Margin="10,0,0,0" Text="Detalhes" BackgroundColor="White" BorderColor="#512BD4" TextColor="#512BD4"
-                                          FontSize="Micro"    FontFamily="Gilroy" />
+                                          FontSize="Micro"    FontFamily="Gilroy" Command="{Binding CarregarPartsCommand}" />
                                 </DataTemplate>
                             </material:DataGridColumn.CellItemTemplate>
                         </material:DataGridColumn>
-                        <material:DataGridColumn  >
-                            <material:DataGridColumn.CellItemTemplate    >
-                                <DataTemplate>
-
-                                    <Button  ImageSource="add_64px.png" Margin="10,0,0,0" Text="Atribuir" BackgroundColor="White" BorderColor="#512BD4" TextColor="#512BD4" FontSize="Micro"  FontFamily="Gilroy" />
-                                </DataTemplate>
-                            </material:DataGridColumn.CellItemTemplate>
-
-                        </material:DataGridColumn>
-                    </material:DataGrid.Columns>
+                      </material:DataGrid.Columns>
                 </material:DataGrid>
             </ScrollView>
 
         </Grid>
 
         <Grid Grid.Row="3" Margin="0,0,0,0" RowDefinitions="*,*" ColumnDefinitions="*,*,*" BackgroundColor="WhiteSmoke" HorizontalOptions="Start" ColumnSpacing="10" >
-            <Button  CornerRadius="8" WidthRequest="200" TextColor="#512BD4" BorderColor="#512BD4"  FontSize="Medium" Text="Adicionar " HorizontalOptions="Start"
-              Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="add_64px.png" Clicked="GoToPartAddPage"  >
-            </Button>
-            <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Refresh " HorizontalOptions="Start"
+            <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Peças " HorizontalOptions="Start"
               Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png" 
-                      Grid.Column="1" Command="{Binding CarregarVehiclesCommand}"  >
+                      Grid.Column="0" Command="{Binding CarregarPartsCommand}"  >
             </Button>
-            <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Categorias" HorizontalOptions="Start"
-         Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png"  Clicked="GoToCategories" 
-          Grid.Column="2"  >
+            <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Detalhes " HorizontalOptions="Start"
+                Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png" 
+                 Grid.Column="1" Command="{Binding GoToPartDetalhesCommand}"  >
             </Button>
-
         </Grid>
 
     </Grid>

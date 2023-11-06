@@ -39,8 +39,8 @@ namespace Fleet.MauiPrincipal.Service
         //public int EmployeId { get; set; }
         //public int OrgaoId { get; set; }
 
-        List<Document> Documents { get; set; } = new List<Document>();
-        List<Assignment> Assignments { get; set; } = new List<Assignment>();
+        //List<Document> Documents { get; set; } = new List<Document>();
+        //List<Assignment> Assignments { get; set; } = new List<Assignment>();
 
     }
 

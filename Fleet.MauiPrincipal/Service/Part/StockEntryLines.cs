@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Fleet.MauiPrincipal.Service.Part
 {
-    public class Categories
+    public class StockEntryLines
     {
-        public string Name { get; set; }
-        //public string Image { get; set; }
-        public byte[] Image { get; set; }
+        public string PartUpc { get;set; }
+        public int Quantity { get;set; }        
     }
 }

@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Fleet.MauiPrincipal.Service.Part;
+using Fleet.MauiPrincipal.View.Part;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,7 +19,7 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
         JsonSerializerOptions _SerializerOptions;
         string baseUrl = "https://localhost:7111";
         public ObservableCollection<Part> PartItems { get; } = new();
-
+        public PartTypeCategory typeCategory;
         private List<Part> _part;
         public List<Part> Parts
         {
@@ -30,23 +31,22 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
             }
         }
 
-        public PartListPageViewModelcs ()
+        public PartListPageViewModelcs (PartTypeCategory TypeCategory)
         {
+            typeCategory = TypeCategory;
             Client = new HttpClient();
             _SerializerOptions = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             };
             CarregarPartsAsync();
-
-
         }
-        public ICommand CarregarVehiclesCommand => new Command(async () =>
+        public ICommand CarregarPartsCommand => new Command(async () =>
              await CarregarPartsAsync());
         private async Task CarregarPartsAsync()
         {
             Parts = new List<Part>();
-            var url = $"{baseUrl}/FleetParts/Part/1";
+            var url = $"{baseUrl}/FleetParts/Part/GetPartsByType/{typeCategory.Name}";
 
             var response = await Client.GetAsync(url);
             if (response.IsSuccessStatusCode)
@@ -59,49 +59,20 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
                 }
         }
         public ObservableCollection<Part> Items { get; set; }
-        public ObservableCollection<Part> SelectedItems { get; set; } = new ObservableCollection<Part>();
-
+        public Part SelectedItems { get; set; } = new Part();
         public Part parametroVehicle { get; set; }
-        //public Part SelectedItems { get; set; } = new Part();
-        //public ICommand RemoveSelectedCommand { get; set; }
-
-        public ICommand RemoveSelectedCommand => new Command(async () =>
-             await DeletarVehiclesAsync());
-        private async Task DeletarVehiclesAsync()
+        public ICommand GoToPartDetalhesCommand => new Command(async () =>
+             await GoToPartDetalhesAsync());
+        public async Task GoToPartDetalhesAsync()
         {
             Items = new ObservableCollection<Part>(_part);
-            foreach (var item in SelectedItems)
+            foreach (var item in Items)
             {
-                Debug.WriteLine("O TAMANHO DO selecteed items" + SelectedItems.Count);
-
-                //var teste = Items.Remove(item);
-                if (Items.Contains(item))
+                if (item.Id.Equals(SelectedItems.Id))
                 {
-                    parametroVehicle = item;
-                    var url = $"{baseUrl}/FleetTransport/Vehicle/{item.Id}";
-                    var response = await Client.DeleteAsync(url);
-                    Debug.WriteLine("A o veiculo foi apagado com id " + item.Id);
+                    await Application.Current.MainPage.Navigation.PushAsync(new PartDetailsPage(item.Upc));
                 }
-                else
-                {
-                    Debug.WriteLine("veiculo nao foi apagado");
-                }
-
-                await CarregarPartsAsync();
             }
-        }
-        public ICommand GoToVehicleAddPageCommand => new Command(async () =>
-             await GoToVehicleAddPageAsync());
-        public async Task GoToVehicleAddPageAsync()
-        {
-            //await Shell.Current.Go(new AppShell());
-            //await Navigation.PushAsync(new AppShell());
-
-            //var navParam = new Dictionary<string, object>();
-            //navParam.Add("AddEmployee", employee);
-            //await AppShell.Current.GoToAsync(nameof(AddEmployee), navParam);
-            //GetEmployeesList();
-
         }
 
     }
