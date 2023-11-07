@@ -138,6 +138,12 @@ public class StockOutService : StockOutManager.StockOutManagerBase
         return await UpdateLines(_mapper.Map<StockOutPayload>(stockOut));
     }
 
+    public override async  Task<StockOutPayload> Find(FindStockOutRequest request, ServerCallContext context)
+    {
+        var stockout = await _stockOutRepository.Entities.FindAsync(x => x.Id == request.Id);
+        return _mapper.Map<StockOutPayload>(stockout);
+
+    }
     private async Task<bool> IsStockOutValid(StockOut stockOut)
     {
         var valid = stockOut.RequestedLines.Any();

@@ -7,6 +7,7 @@ using Fleet.Principal.Dtos.CommonDtos.Owned;
 using Fleet.Principal.Dtos.CommonDtos.VariantDtos;
 using Fleet.Principal.Dtos.PartsDtos.Owned;
 using Fleet.Principal.Dtos.PartsDtos.PartDtos;
+using Fleet.Principal.Dtos.PartsDtos.StockOutDtos;
 using Fleet.Principal.Dtos.PartsDtos.StockyEntryDtos;
 using Fleet.Principal.Dtos.TransPortDtos;
 using Fleet.Principal.Dtos.TransPortDtos.AssignmentDtos;
@@ -71,6 +72,12 @@ namespace Fleet.Principal.Infrastructure
             CreateMap<UpdateStockEntryDto, StockEntryPayload>();
             CreateMap<UpdateStockEntryRequest, StockEntryPayload>().ReverseMap();
 
+            //Stockout
+            CreateMap<StockOutDto, StockOutPayload>().ReverseMap();
+            CreateMap<AddStockOutDto, CreateStockOutRequest>();
+            CreateMap<UpdateStockOutDto, UpdateStockOutRequest>();
+            CreateMap<UpdateStockOutDto, StockOutPayload>();
+            CreateMap<UpdateStockOutRequest, StockOutPayload>().ReverseMap();
 
             //VehicleMapper
             CreateMap<VehicleDto, VehiclePayload>().ReverseMap();

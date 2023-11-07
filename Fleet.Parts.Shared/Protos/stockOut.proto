@@ -11,12 +11,17 @@ service StockOutManager {
   rpc FindAll (FindAllStockOutRequest) returns (stream StockOutPayload);
   rpc Update (UpdateStockOutRequest) returns (StockOutPayload);
   rpc Delete (DeleteStockOutRequest) returns (StockOutPayload);
+  rpc Find (FindStockOutRequest) returns (StockOutPayload);
+
 
   rpc Approve (StockOutApproveRequest) returns (StockOutPayload);
   rpc Cancel (StockOutCancelRequest) returns (StockOutPayload);
   rpc Deliver (StockOutODeliverRequest) returns (StockOutPayload);
 }
 
+message FindStockOutRequest{
+	int32 id =1;
+}
 message FindAllStockOutRequest {
   bool by_date_range = 1;
   google.protobuf.Timestamp from_date = 2;

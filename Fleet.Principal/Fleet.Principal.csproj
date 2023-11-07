@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Dtos\PartsDtos\StockyEntryDtos\UpdateStockEntryDto\**" />
+    <Content Remove="Dtos\PartsDtos\StockyEntryDtos\UpdateStockEntryDto\**" />
+    <EmbeddedResource Remove="Dtos\PartsDtos\StockyEntryDtos\UpdateStockEntryDto\**" />
+    <None Remove="Dtos\PartsDtos\StockyEntryDtos\UpdateStockEntryDto\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
 	 <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
 	 <PackageReference Include="Grpc" Version="2.46.6" />
@@ -32,7 +39,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\PartsDtos\StockyEntryDtos\UpdateStockEntryDto\" />
     <Folder Include="Dtos\TransPortDtos\DocumentDtos\Lixo\" />
   </ItemGroup>
 
