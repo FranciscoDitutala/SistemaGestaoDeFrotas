@@ -38,6 +38,15 @@ namespace Fleet.Principal.Controllers.PartsControllers
 
         }
 
+        [HttpGet("GetStockEntriesByDate")]
+        public async Task<IActionResult> GetStockByDate(DateTime dateTime1, DateTime dateTime2)
+        {
+
+            var ans = await _stockEntryService.FindAllAsync(true, dateTime1, dateTime2);
+            return ans != null ? Ok(ans) : BadRequest("stockyEntry não encontrado");
+
+        }
+
         [HttpPost("AddStockEntry")]
         public async Task<IActionResult> Post(CreateStockEntryDto createStockEntryDto)
         {

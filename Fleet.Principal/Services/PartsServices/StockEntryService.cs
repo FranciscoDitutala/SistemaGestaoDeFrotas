@@ -38,7 +38,9 @@ namespace Fleet.Principal.Services.PartsServices
         {
             using var list = _stockEntryManagerClient.FindAll(new FindStockEntriesRequest
             {
-                ByDateRange = false
+                ByDateRange = dateRange, 
+                FromDate=_mapper.Map<Timestamp>(fromDate),
+                ToDate= _mapper.Map<Timestamp>(fromDate)
             });
 
             if(stockEntryDtos.Any())
