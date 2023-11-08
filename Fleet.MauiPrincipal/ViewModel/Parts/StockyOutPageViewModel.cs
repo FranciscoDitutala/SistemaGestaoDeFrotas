@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fleet.MauiPrincipal.Service.Part;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,10 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
 {
     public class StockyOutPageViewModel
     {
+
+        public StockyOutPageViewModel(StockyOut Outs)
+        {
+
+        }
     }
 }

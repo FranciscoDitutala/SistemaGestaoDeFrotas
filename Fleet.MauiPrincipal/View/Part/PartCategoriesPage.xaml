@@ -46,13 +46,13 @@
                         <material:DataGridColumn Binding="{Binding Model}" Title="Modelo"/>
                         <material:DataGridColumn Binding="{Binding Type}" Title="Tipo"/>-->
                         <material:DataGridColumn  >
-                            <material:DataGridColumn.CellItemTemplate    >
+                            <!--<material:DataGridColumn.CellItemTemplate    >
                                 <DataTemplate>
                                     <Button  ImageSource="update_64px.png" Margin="0,0,10,0" Text="SubCategorias" BackgroundColor="White" 
                                              BorderColor="#512BD4" TextColor="#512BD4" FontSize="Micro" FontFamily="Gilroy"
                                              Command="{Binding GoToPartTypeNameCommand}"  Grid.Column="1"  />
                                 </DataTemplate>
-                            </material:DataGridColumn.CellItemTemplate>
+                            </material:DataGridColumn.CellItemTemplate>-->
 
                         <!--</material:DataGridColumn>
                         <material:DataGridColumn Title="Ações"  >

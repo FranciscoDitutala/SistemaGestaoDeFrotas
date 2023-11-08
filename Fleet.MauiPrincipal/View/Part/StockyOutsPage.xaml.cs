@@ -4,9 +4,9 @@ namespace Fleet.MauiPrincipal.View.Part;
 
 public partial class StockyOutsPage : ContentPage
 {
-	public StockyOutsPage(StockyOutsPageViewModel viewmodel)
+	public StockyOutsPage( )
 	{
 		InitializeComponent();
-		BindingContext= viewmodel;
+		BindingContext= new StockyOutsPageViewModel();
 	}
 }

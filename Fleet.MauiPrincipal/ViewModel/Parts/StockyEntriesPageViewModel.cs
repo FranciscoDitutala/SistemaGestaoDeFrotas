@@ -13,13 +13,16 @@ using System.Windows.Input;
 
 namespace Fleet.MauiPrincipal.ViewModel.Parts
 {
-    public class StockyEntriesPageViewModel:ObservableObject
+    public partial class StockyEntriesPageViewModel:ObservableObject
     {
         private HttpClient Client;
         JsonSerializerOptions _SerializerOptions;
         string baseUrl = "https://localhost:7111";
+       
+      
         public StockyEntriesPageViewModel()
         {
+            //SelectedBeginDate = DateTime;
             Client = new HttpClient();
             _SerializerOptions = new JsonSerializerOptions
             {
@@ -35,6 +38,19 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
             {
                 _stock = value;
                 OnPropertyChanged(nameof(Stock));
+            }
+        }
+        private StockEntry _entrada;
+        public StockEntry Entrada
+        {
+            get { return _entrada; }
+            set
+            {
+                if (_entrada != value)
+                {
+                    _entrada = value;
+                    OnPropertyChanged(nameof(Entrada));
+                }
             }
         }
 
@@ -55,15 +71,50 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
                 }
             Debug.WriteLine("Dentro do stock");
         }
+        public ICommand CarregarStocksByDateCommand => new Command(async () =>
+             await CarregarStocksByDateAsync());
+        private async Task CarregarStocksByDateAsync()
+        {
+            Entrada = new StockEntry();
+            var url = $"{baseUrl}/FleetParts/StockEntry/GetStockEntriesByDate";
+            var response = await Client.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+                using (var responseStream = await response.Content.ReadAsStreamAsync())
+                {
+                    var data = await JsonSerializer.DeserializeAsync<StockEntry>
+                        (responseStream, _SerializerOptions);
+                    Entrada = data;
+                    Debug.WriteLine("Carregou com stock  sucesso");
+                }
+            Debug.WriteLine("Dentro do stock");
+        }
         public ObservableCollection<StockEntry> Items { get; set; }
         public ObservableCollection<StockEntry> SelectedItems { get; set; } = new ObservableCollection<StockEntry>();
 
-        public ICommand GoToVehicleAddPageCommand => new Command(async () =>
-           await GoToVehicleAddPageAsync());
-        public async Task GoToVehicleAddPageAsync()
+        public ICommand GoToStockDetailsCommand => new Command(async () =>
+           await GoToStockDetailsAsync());
+        public async Task GoToStockDetailsAsync()
         {
-            //await Shell.Current.Go(new AppShell());
-            //await Navigation.PushAsync(new AppShell());
+            Items = new ObservableCollection<StockEntry>(_stock);
+            foreach (var item in SelectedItems)
+            {
+                //var teste = Items.Remove(item);
+                if (Items.Contains(item))
+                {
+                    await Application.Current.MainPage.Navigation.PushAsync(new StockDetailsPage(item.Id));
+                }
+
+            }
         }
+        public ICommand GoToAddStockCommand => new Command(async () =>
+          await GoToAddStockAsync());
+        public async Task GoToAddStockAsync()
+        {
+            StockEntry v = new StockEntry();
+            await Application.Current.MainPage.Navigation.PushAsync(new StockyEntryPage(v));
+        }
+
+      
+
     }
 }

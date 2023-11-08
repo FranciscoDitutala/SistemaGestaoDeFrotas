@@ -19,8 +19,8 @@ public partial class PartPage: ContentPage
     {
         await Navigation.PushAsync(new PartCategoriesPage());
     }
-    private async void GoToOuts(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new StockyOutPage());
-    }
+    //private async void GoToOuts(object sender, EventArgs e)
+    //{
+    //    await Navigation.PushAsync(new StockyOutPage());
+    //}
 }

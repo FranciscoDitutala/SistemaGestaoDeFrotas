@@ -25,6 +25,10 @@ namespace Fleet.MauiPrincipal.ViewModel
         JsonSerializerOptions _SerializerOptions;
         string baseUrl = "https://localhost:7111";
         public ObservableCollection<Vehicle> VehicleItems { get; } = new();
+        [ObservableProperty]
+        public string _filter;  
+        [ObservableProperty]
+        public string _assignedState;
 
         private List<Vehicle> _vehicles;
         public List<Vehicle> Vehicles
@@ -32,8 +36,17 @@ namespace Fleet.MauiPrincipal.ViewModel
             get { return _vehicles; }
             set
             {
-                _vehicles = value;
+                _vehicles = value; 
                 OnPropertyChanged(nameof(Vehicles));
+            }
+        } private List<Vehicle> _vehiclesFilter;
+        public List<Vehicle> VehiclesFilter
+        {
+            get { return _vehiclesFilter; ; }
+            set
+            {
+                _vehiclesFilter = value; 
+                OnPropertyChanged(nameof(VehiclesFilter));
             }
         }
 
@@ -44,9 +57,30 @@ namespace Fleet.MauiPrincipal.ViewModel
             {
                 PropertyNameCaseInsensitive = true
             };
+
             CarregarVehiclesAsync();
+            //CarregarVehiclesFilterAsync();
 
 
+        }
+        public ICommand CarregarVehiclesFilterCommand => new Command(async () =>
+             await CarregarVehiclesFilterAsync());
+        private async Task CarregarVehiclesFilterAsync()
+        {
+            Vehicles = new List<Vehicle>();
+            var url = $"{baseUrl}/FleetTransport/Vehicle/GetVehicles/{Filter}";
+
+            var response = await Client.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+                using (var responseStream = await response.Content.ReadAsStreamAsync())
+                {
+                    var data = await JsonSerializer.DeserializeAsync<List<Vehicle>>
+                        (responseStream, _SerializerOptions);
+
+                    Vehicles = data;
+                    Debug.WriteLine("Carregou filter");
+
+                }
         }
         public ICommand CarregarVehiclesCommand => new Command(async () =>
              await CarregarVehiclesAsync());
@@ -63,7 +97,19 @@ namespace Fleet.MauiPrincipal.ViewModel
                         (responseStream, _SerializerOptions);
 
                     Vehicles = data;
+                    VerifyAssigned();
                 }
+        }
+        public void VerifyAssigned()
+        {
+            //foreach (var item in Vehicles)
+            //{
+            //    if (item.Assigned.Equals(false))
+            //    {
+            //        item.Assigned = (string)"Não Atribuido";
+            //    }
+            //    else { AssignedState = "Atribuido"; }
+            //}
         }
         public ObservableCollection<Vehicle> Items { get; set; }
         public ObservableCollection<Vehicle> SelectedItems { get; set; } = new ObservableCollection<Vehicle>();
@@ -75,13 +121,10 @@ namespace Fleet.MauiPrincipal.ViewModel
             Items = new ObservableCollection<Vehicle>(_vehicles);
             foreach (var item in SelectedItems)
             {
-                //var teste = Items.Remove(item);
                 if (Items.Contains(item))
                 {
                     await Application.Current.MainPage.Navigation.PushAsync(new VehicleDetailPage(item.Id));
                 }
-                //else { await Application.Current.MainPage.DisplayAlert("Atencao ","Nao teve exito a funcao","Ok"); }
-              
             } 
         }
         public ICommand GoToAddVehicleCommand => new Command(async () =>

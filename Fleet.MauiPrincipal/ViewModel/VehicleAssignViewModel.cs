@@ -171,20 +171,6 @@ namespace Fleet.MauiPrincipal.ViewModel
                 {
                     _selectedAssignType = value;
                     OnPropertyChanged(nameof(SelectedAssignType));
-                    if (_selectedAssignType.Equals("Role"))
-                    {
-                        typeAssign = 1;
-                    }
-                    else if (_selectedAssignType.Equals("Funcionario"))
-                    {
-                        typeAssign = 2;
-                    }
-                    else if (_selectedAssignType.Equals("Departamento"))
-                    {
-                        typeAssign = 3;
-                    }
-
-                    else { typeAssign = 0; }
                 }
             }
         }
@@ -248,7 +234,7 @@ namespace Fleet.MauiPrincipal.ViewModel
             {
                 var Atribuir = new Assignment
                 {
-                    Type = typeAssign,
+                    Type = SelectedAssignType,
                     OrgaoId = _selectedOrgao.Id,
                     Description = Descricao,
                     EmployeeId = selectedEmployee.Id,

@@ -11,8 +11,7 @@ using UraniumUI;
 using Microsoft.Maui.Controls.Compatibility.Hosting;
 using Microsoft.Maui.Controls.Handlers.Compatibility;
 using Syncfusion.Maui.Core.Hosting;
-
-
+using CommunityToolkit.Maui;
 
 namespace Fleet.MauiPrincipal
 {
@@ -21,30 +20,20 @@ namespace Fleet.MauiPrincipal
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
-            builder
-                .UseUraniumUI()
-                .UseUraniumUIMaterial()
-                .ConfigureSyncfusionCore()
-                .UseMauiApp<App>()
-                .ConfigureFonts(fonts =>
-                {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                    fonts.AddMaterialIconFonts();
-                    fonts.AddFontAwesomeIconFonts();
-                });
-            builder
-            .UseMauiApp<App>()
-            .ConfigureMauiHandlers(handlers =>
+            builder.UseUraniumUI().UseUraniumUIMaterial().ConfigureSyncfusionCore().UseMauiApp<App>().ConfigureFonts(fonts =>
+            {
+                fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                fonts.AddMaterialIconFonts();
+                fonts.AddFontAwesomeIconFonts();
+            }).UseMauiCommunityToolkit();
+            builder.UseMauiApp<App>().ConfigureMauiHandlers(handlers =>
             {
                 // Add following line:
                 handlers.AddInputKitHandlers(); // 👈
-                //handlers.AddCompatibilityRenderer(typeof(Shell), typeof(ShellRenderer));
+            //handlers.AddCompatibilityRenderer(typeof(Shell), typeof(ShellRenderer));
             });
-            
             //.ConfigureMauiHandlers((_, handlers) => handlers.AddCompatibilityRenderer(typeof(Shell), typeof(ShellRenderer)));
-
-
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
@@ -57,12 +46,10 @@ namespace Fleet.MauiPrincipal
             builder.Services.AddTransient<NavBarPage>();
             builder.Services.AddTransient<Login>();
             builder.Services.AddTransient<CreateUser>();
-
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<CreateUserViewModel>();
             builder.Services.AddTransient<RecuperarUser>();
             builder.Services.AddTransient<ListarUser>();
-
             builder.Services.AddTransient<PartAddPage>();
             builder.Services.AddTransient<PartListPage>();
             builder.Services.AddTransient<PartDetailsPage>();
@@ -82,9 +69,9 @@ namespace Fleet.MauiPrincipal
             builder.Services.AddTransient<PartTypePageViewModel>();
             builder.Services.AddTransient<StockyEntriesPageViewModel>();
             builder.Services.AddTransient<StockyEntryPageViewModel>();
-           builder.Services.AddTransient<PartPageViewModel>();
-
-
+            builder.Services.AddTransient<PartPageViewModel>();
+            builder.Services.AddTransient<StockDetailsViewModel>();
+            builder.Services.AddTransient<StockDetailsPage>();
             builder.Services.AddTransient<VehiclePageViewModel>();
             builder.Services.AddTransient<VehicleBrandViewModel>();
             builder.Services.AddTransient<VehicleVariantViewModel>();

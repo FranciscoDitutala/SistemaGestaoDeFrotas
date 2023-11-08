@@ -14,8 +14,8 @@ public partial class StockyEntriesPage : ContentPage
         InitializeComponent();
         this.BindingContext = new StockyEntriesPageViewModel();
     }
-    private async void GoToAddStock(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new StockyEntryPage());
-    }
+    //private async void GoToAddStock(object sender, EventArgs e)
+    //{ 
+    //    await Navigation.PushAsync(new StockyEntryPage(v));
+    //}
 }

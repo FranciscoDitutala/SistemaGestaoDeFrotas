@@ -3,6 +3,7 @@ using DynamicData;
 using Fleet.MauiPrincipal.Service;
 using Fleet.MauiPrincipal.Service.Enums;
 using Fleet.MauiPrincipal.View.Vehicle;
+
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace Fleet.MauiPrincipal.ViewModel
         [ObservableProperty]
         public string _brand;
         [ObservableProperty]
-        public int _transmitionType;
+        public string _transmitionType;
         [ObservableProperty]
         public string _registration;
         [ObservableProperty]
@@ -35,7 +36,7 @@ namespace Fleet.MauiPrincipal.ViewModel
         [ObservableProperty]
         public string _vin;
         [ObservableProperty]
-        public int _vehicleTipo;
+        public string _vehicleTipo;
         [ObservableProperty]
         public int _power;
         [ObservableProperty]
@@ -49,7 +50,11 @@ namespace Fleet.MauiPrincipal.ViewModel
         [ObservableProperty]
         public string _model;
         [ObservableProperty]
-        public int _dataFabrico;
+        public int _dataFabrico; 
+        [ObservableProperty]
+        public string _assignedState;
+        [ObservableProperty]
+        public string _marca;
         public Vehicle vehicleUpdate { get; set; } 
         public VehicleAddPageViewModel(Vehicle vehicle)
         {
@@ -73,7 +78,7 @@ namespace Fleet.MauiPrincipal.ViewModel
             get
             {
                 //return Enum.GetNames(typeof(VehicleType)).Select(b => b).ToList();
-                return new List<String> { "Nenhum", "Carro", "Motorizada", "Camião", "Autocarro" };
+                return new List<String> {  "Carro", "Motorizada", "Camião", "Autocarro" };
             }
         }
 
@@ -87,24 +92,14 @@ namespace Fleet.MauiPrincipal.ViewModel
                 {
                     _selectedVehicleType = value;
                     OnPropertyChanged(nameof(SelectedVehicleTypes));
-                    if (_selectedVehicleType.Equals("Carro"))
-                    {
-                        VehicleTipo = 1;
-                    }
-                    else if (_selectedVehicleType.Equals("Motorizada"))
-                    {
-                        VehicleTipo = 2;
-                    }
-                    else if (_selectedVehicleType.Equals("Camião"))
-                    {
-                        VehicleTipo = 3;
-                    }
-                    else if (_selectedVehicleType.Equals("Autocarro"))
-                    {
-                        VehicleTipo = 4;
-                    }
-                    else { VehicleTipo = 0; }
+                    
                 }
+                //else
+                //{
+                //    _selectedVehicleType = "Carro";
+                //    OnPropertyChanged(nameof(SelectedVehicleTypes));
+                //}
+
             }      
     }
         // Metodo Carregar Vehicle Type
@@ -112,9 +107,8 @@ namespace Fleet.MauiPrincipal.ViewModel
       public List<string> VehicleTransmission
         {
             get
-            {
-                //return  Enum.GetNames(typeof(TransmissionType)).Select(b => b).ToList(); 
-                return new List<string> { "Nenhum", "Manual", "Automatico", "CVT", "AMT" };
+            {             //return  Enum.GetNames(typeof(TransmissionType)).Select(b => b).ToList(); 
+                return new List<string> {  "Manual", "Automatico", "CVT", "AMT" };
                 
             }
         }
@@ -128,24 +122,45 @@ namespace Fleet.MauiPrincipal.ViewModel
                 {
                     _selectedTransmission = value;
                     OnPropertyChanged(nameof(SelectedTransmissions));
-                    if (_selectedTransmission.Equals("Manual"))
-                    {
-                        TransmitionType = 1;
-                    }
-                    else if (_selectedTransmission.Equals("Automatico"))
-                    {
-                        TransmitionType = 2;
-                    }
-                    else if (_selectedTransmission.Equals("CVT"))
-                    {
-                        TransmitionType = 3;
-                    }
-                    else if (_selectedTransmission.Equals("AMT"))
-                    {
-                        TransmitionType = 4;
-                    }
-                    else { TransmitionType = 0; }
+           
                 }
+               //else
+               // {
+               //     _selectedColor = "Manual";
+               //     OnPropertyChanged(nameof(SelectedTransmissions));
+               // }
+            }
+
+        }
+
+        // Metodo Carregar cores
+        private string _colors;
+        public List<string> Colors
+        {
+            get
+            {             //return  Enum.GetNames(typeof(TransmissionType)).Select(b => b).ToList(); 
+                return new List<string> {  "Branco", "Preto", "Prata", "Azul","Vermelho","Verde","Amarelo", "Cinza", "Marrom", "Laranja" };
+
+            }
+        }
+        private string _selectedColor;
+
+        public string SelectedColors
+        {
+            get { return _selectedColor; }
+            set
+            {
+                if (SelectedColors != value)
+                {
+                    _selectedColor = value;
+                    OnPropertyChanged(nameof(SelectedColors));
+
+                }
+               //else
+               // {
+               //     _selectedColor = "Branco";
+               //     OnPropertyChanged(nameof(SelectedColors));
+               // }
             }
 
         }
@@ -160,7 +175,7 @@ namespace Fleet.MauiPrincipal.ViewModel
                 OnPropertyChanged(nameof(VehicleMarcas));
             }
         }
-        private VehicleBrand _selectedMarca;
+        private VehicleBrand _selectedMarca ;
         public VehicleBrand SelectedMarcas
         {
             get { return _selectedMarca; }
@@ -171,6 +186,11 @@ namespace Fleet.MauiPrincipal.ViewModel
                     _selectedMarca = value;
                     OnPropertyChanged(nameof(SelectedMarcas));
                 }
+                //else
+                //{
+                //    _selectedMarca.Name = "Toyota";
+                //    OnPropertyChanged(nameof(SelectedMarcas));
+                //}
             }
         }
         private async Task CarregarVehicleMarcaAsync()
@@ -195,17 +215,19 @@ namespace Fleet.MauiPrincipal.ViewModel
         {
             foreach (var item in Vehicles)
             {
-                if (!item.Vin.Equals(Vin) && !item.Registration.Equals(Registration))
-                {
-                    isNewItem = true;
-                    path = "/FleetTransport/Vehicle";
-                }
-                else
-                {
-                    isNewItem = false;
-                    path = $"/FleetTransport/Vehicle/{item.Id}";
-                    paramId = item.Id;
-                }
+              
+                        if (!item.Vin.Equals(Vin) && !item.Registration.Equals(Registration))
+                        {
+                            isNewItem = true;
+                            path = "/FleetTransport/Vehicle";
+                        }
+                        else
+                        {
+                            isNewItem = false;
+                            path = $"/FleetTransport/Vehicle/{item.Id}";
+                            paramId = item.Id;
+                        }
+                    
             }
         }
         public ICommand CadastraVehicleCommand => new Command(async () =>
@@ -215,29 +237,33 @@ namespace Fleet.MauiPrincipal.ViewModel
         {
             VerifyNewVehicles();
             var url = $"{baseUrl + path}";
-            if (!string.IsNullOrEmpty(Vin))
+            if ((!(string.IsNullOrEmpty(Vin)) && !(string.IsNullOrEmpty(Registration)) && !(string.IsNullOrEmpty(Variante)) &&
+                 !(string.IsNullOrEmpty(Model))))
             {
-                var vehicle = new Vehicle
-                {
-                    Vin = Vin,
-                    Cor = Cor,
-                    Variant = Variante,
-                    Brand = _selectedMarca.Name,
-                    Model = Model,
-                    Power = Power,
-                    Registration = Registration,
-                    Transmission = TransmitionType,
-                    FuelConsumption = FuelConsumption,
-                    Type = VehicleTipo,
-                    YearOfManufacture = DataFabrico,
-                    RegistrationDate = DateTime.Today,
-                    //Assigned = false;
-                };
-                string json = JsonSerializer.Serialize<Vehicle>(vehicle, _SerializerOptions);
-                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                Debug.WriteLine("o valor do json é " + json);
-                HttpResponseMessage response = null;
-                if (isNewItem.Equals(false)){ 
+               
+                    var vehicle = new Vehicle
+                    {
+                        Vin = Vin,
+                        Cor = _selectedColor,
+                        Variant = Variante,
+                        Brand = _selectedMarca.Name,
+                        Model = Model,
+                        Power = Power,
+                        Registration = Registration,
+                        Transmission = _selectedTransmission,
+                        FuelConsumption = FuelConsumption,
+                        Type = _selectedVehicleType,
+                        YearOfManufacture = DataFabrico,
+                        RegistrationDate = DateTime.Today,
+                        //Assigned = false
+            };
+               
+                    string json = JsonSerializer.Serialize<Vehicle>(vehicle, _SerializerOptions);
+                    StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+               
+                    HttpResponseMessage response = null;
+                    if (isNewItem.Equals(false))
+                    {
                         response = await Client.PutAsync(url, content);
                         await Application.Current.MainPage.DisplayAlert("Informação ", "Veiculo Atualizado com sucesso!", "Ok");
                         CleanFields();
@@ -246,14 +272,22 @@ namespace Fleet.MauiPrincipal.ViewModel
                     else
                     {
                         response = await Client.PostAsync(url, content);
-                        await Application.Current.MainPage.DisplayAlert("Informação", "Veiculo Cadastrado com sucesso!", "Ok");
-                        CleanFields();
-                        await Application.Current.MainPage.Navigation.PopAsync();
+                        if (response.IsSuccessStatusCode)
+                        {
+                            await Application.Current.MainPage.DisplayAlert("Informação", "Veiculo Cadastrado com sucesso!", "Ok");
+                            CleanFields();
+                            await Application.Current.MainPage.Navigation.PopAsync();
+                        }
+                        else {
+                        await Application.Current.MainPage.DisplayAlert("Informação", "Veiculo nao Cadastrado sucesso!", "Ok");
+                    }
+                       
+                    }
                 }
-            }
+     
             else
             {
-                await Application.Current.MainPage.DisplayAlert("Falhou ", "Veiculo nao foi cadastrado nem atualizado!", "Ok");
+                await Application.Current.MainPage.DisplayAlert("Atenção ", "Campos obrigatório vazio", "Ok");
             }
         }
         public ICommand CarregarVehiclesCommand => new Command(async () =>
@@ -269,10 +303,10 @@ namespace Fleet.MauiPrincipal.ViewModel
                 {
                     var data = await JsonSerializer.DeserializeAsync<List<Vehicle>>
                         (responseStream, _SerializerOptions);
-                    Vehicles = data;
-                    
+                       Vehicles = data;
                 }
         }
+   
         public void CleanFields()
         {
             Vin = "";
@@ -282,9 +316,9 @@ namespace Fleet.MauiPrincipal.ViewModel
             Model = "";
             Power = 0;
             Registration = "";
-            TransmitionType = 0;
+            TransmitionType = "";
             FuelConsumption = 0;
-            VehicleTipo = 0;
+            VehicleTipo = "";
             DataFabrico = 0;
         }   
         public void FillTheFields()

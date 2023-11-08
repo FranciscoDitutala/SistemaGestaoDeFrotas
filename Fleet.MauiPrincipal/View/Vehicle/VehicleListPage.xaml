@@ -17,11 +17,25 @@
         <Label Text="Gerir Veículos" TextColor="White" FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"
            HorizontalOptions="Start" VerticalOptions="Start" Margin="20,40,0,0" />
         
-            <Grid  Grid.Row="2" Grid.ColumnSpan="2"  Margin="-20,-50,0,0" HorizontalOptions="Start"  >
-                <ScrollView HorizontalOptions="Start"  >
+            <Grid  Grid.Row="2" Grid.ColumnSpan="2"  Margin="-20,-50,0,0" HorizontalOptions="Start" 
+                   RowDefinitions="*,6*" ColumnDefinitions="8*,2*">
+            <Grid Grid.Row="0" FlowDirection="LeftToRight" Margin="20,0,0,0" Grid.ColumnSpan="2" VerticalOptions="Start"
+              RowDefinitions="*" ColumnDefinitions="*,*" HeightRequest="60">
+                <material:TextField  Padding="20,0,0,0" FontFamily="Gilroy" 
+                      Title="Procurar" Text="{Binding Filter}" Grid.Row="0" Grid.Column="0"
+                       Icon="{FontImageSource FontFamily=MaterialRegular,
+                      Glyph={x:Static m:MaterialRegular.Search}}"/>
+                <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Procurar " HorizontalOptions="Start"
+                          Margin="20,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="search_64px.png" VerticalOptions="Start"
+                          Grid.Column="1" Grid.Row="0" Command="{Binding CarregarVehiclesFilterCommand}">       
+                </Button>
+
+            </Grid>
+            <ScrollView HorizontalOptions="Start" Margin="20,0,0,0"   Grid.Row="1" VerticalOptions="Start"
+                        >
 
                 <material:DataGrid ItemsSource="{Binding Vehicles}"  Margin="20,0,20,20"  BackgroundColor="WhiteSmoke" CornerRadius="0" x:Name="GridList" HorizontalOptions="Start"
-                        LineSeparatorColor="#004D97" SelectedItems="{Binding SelectedItems}" BorderColor="#004D97" FlowDirection="LeftToRight" WidthRequest="600"   >
+                        LineSeparatorColor="#004D97" SelectedItems="{Binding SelectedItems}" BorderColor="#004D97" FlowDirection="LeftToRight"   >
                     <material:DataGrid.EmptyView>
                         <VerticalStackLayout Margin="80,20">
                             <Image
@@ -42,9 +56,11 @@
                             <material:DataGridColumn Binding="{Binding Brand}" Title="Marca" />
                             <material:DataGridColumn Binding="{Binding Model}" Title="Modelo"/>
                             <material:DataGridColumn Binding="{Binding Type}" Title="Tipo"/>
-                            <material:DataGridColumn Binding="{Binding Assigned}" Title="Tipo"/>
-   
+                        <material:DataGridColumn Binding="{Binding Assigned}" Title="Atribuição"/>
+                       
                     </material:DataGrid.Columns>
+                    
+                    
                     </material:DataGrid>
                 </ScrollView>
 

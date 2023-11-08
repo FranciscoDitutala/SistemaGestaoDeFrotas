@@ -10,7 +10,7 @@ namespace Fleet.MauiPrincipal.Service
     public class Assignment
     {
         public int Id { get; set; }
-        public int Type { get; set; }
+        public string Type { get; set; }
         public int VehicleId { get; set; }
         public int OrgaoId { get; set; }
         public int EmployeeId { get; set; }

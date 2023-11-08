@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fleet.MauiPrincipal.View.Part.StockDetailsPage"
+              xmlns:viewModel="clr-namespace:Fleet.MauiPrincipal.ViewModel.Parts"
+             x:DataType="viewModel:StockDetailsViewModel"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome"
+             xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
+             xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+             xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui" 
+             NavigationPage.HasNavigationBar="False"
+             Title="StockDetailsPage">
+    <Grid RowDefinitions="3*,6*,*" ColumnDefinitions="*,*,*"  >
+        <Image  Grid.Row="0" Grid.ColumnSpan="3"  Margin="0,-30,0,0" Source="sobressalentes.png" Aspect="AspectFill" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
+        <Grid Grid.Row="0" Grid.ColumnSpan="3" Margin="40,-20,10,10" RowDefinitions="*,*"  ZIndex="1" VerticalOptions="EndAndExpand" >
+            <Label  Text="Informações do Stock" FontFamily="Gilroy" FontAttributes="Bold" FontSize="Large" 
+               TextColor="White" ZIndex="1" />
+        </Grid>
+        <Grid Grid.ColumnSpan="3" Grid.Row="1" HorizontalOptions="Start"  Margin="30,20,10,10" ColumnDefinitions="*,*" RowSpacing="0" RowDefinitions="*,2*" >
+            <Border Grid.Column="0" Grid.Row="0" Padding="10,10,0,10"  VerticalOptions="Start"
+             Margin="10,0,0,0" Opacity="1" HeightRequest="100" WidthRequest="500" BackgroundColor="#512BD4" >
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="4"/>
+                </Border.StrokeShape>
+                <VerticalStackLayout  Spacing="2"  HorizontalOptions="Start" Margin="15,10,0,0" VerticalOptions="Start" Grid.Row="0">
+                    <HorizontalStackLayout Spacing="15">
+                        <Label Text="Provedor:" FontFamily="Gilroy" FontSize="Subtitle" TextColor="White" HorizontalOptions="Start" />
+                        <Label Text="{Binding Stock.ProvidersInfo}" FontFamily="Gilroy" FontSize="Subtitle" TextColor="White" FontAttributes="Bold" HorizontalOptions="Start" />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="15">
+                        <Label Text="valor da Compra (Kz) :" FontFamily="Gilroy" FontSize="Subtitle" TextColor="White"  HorizontalOptions="Start" />
+                        <Label Text="{Binding Stock.TotalValue}" FontSize="Subtitle" FontFamily="Gilroy" TextColor="White"  FontAttributes="Bold" HorizontalOptions="Start" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+            <Border Grid.Column="0" Grid.Row="1" Padding="10,10,0,10"  VerticalOptions="Start"
+           Margin="10,0,0,0" Opacity="1" HeightRequest="200" WidthRequest="500">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="4"/>
+                </Border.StrokeShape>
+                <VerticalStackLayout Margin="20,0,0,0" Spacing="8">
+                    <HorizontalStackLayout Spacing="15">
+                        <Label Text="Descrição:" FontFamily="Gilroy" FontSize="Subtitle"  HorizontalOptions="Start" />
+                        <Label Text="{Binding Stock.Notes}" FontFamily="Gilroy" FontSize="Subtitle"  FontAttributes="Bold" HorizontalOptions="Start" />
+                    </HorizontalStackLayout>
+                    <!--<HorizontalStackLayout Spacing="15">
+                        <Label Text="Peças:" FontFamily="Gilroy" FontSize="Subtitle"  HorizontalOptions="Start" />
+                        <Label Text="{Binding Stock.Lines}" FontFamily="Gilroy" FontSize="Subtitle"  FontAttributes="Bold" HorizontalOptions="Start" />
+                    </HorizontalStackLayout>-->
+                   
+                </VerticalStackLayout>
+            </Border>
+            <Grid Grid.Column="1" WidthRequest="300" Grid.RowSpan="3"  Margin="20,0,0,0" RowDefinitions="*,8*" RowSpacing="0">
+                <Label Text="Peças Cadastradas no Stock"  Margin="8" Grid.Row="0" FontFamily="Gilroy" FontSize="Subtitle"  FontAttributes="Bold"/>
+                <ScrollView Margin="0,0,0,0" Grid.Row="1" >
+                    <material:DataGrid ItemsSource="{Binding Stock.Lines}"  Margin="0,0,20,20"  BackgroundColor="WhiteSmoke" CornerRadius="0" 
+                    LineSeparatorColor="#004D97" SelectedItems="{Binding SelectedItems}" BorderColor="#004D97"  >
+                        <material:DataGrid.Columns >
+                            <material:DataGridColumn Binding="{Binding PartUpc}" Title="Codigo"  />
+                            <material:DataGridColumn Binding="{Binding Quantity}" Title="Quantidade"/>
+                        </material:DataGrid.Columns>
+                    </material:DataGrid>
+                </ScrollView>
+
+            </Grid>
+            
+
+        </Grid>
+        <Grid Grid.Row="3" Grid.ColumnSpan="2" Margin="20,0,0,0" RowDefinitions="*,*" ColumnDefinitions="*,*,*,*"  
+          HorizontalOptions="Start" ColumnSpacing="10" >
+        
+
+            <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Refresh " 
+                  Margin="10,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png" Command="{Binding CarregarStockEntryCommand}"
+               Grid.Column="1" >
+            </Button>
+
+            <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Atualizar " 
+                  Margin="10,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="update_64px.png" 
+               Grid.Column="2" Command="{Binding GoToAddStockCommad}" >
+            </Button>
+        </Grid>
+    </Grid>
+</ContentPage>

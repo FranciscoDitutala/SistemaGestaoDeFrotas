@@ -43,13 +43,13 @@
                         <material:DataGridColumn Binding="{Binding Name}" Title="Nome "/>
                         <material:DataGridColumn Binding="{Binding SubCategory}" Title="Sub Categorias" />
                         <material:DataGridColumn  >
-                            <material:DataGridColumn.CellItemTemplate    >
+                            <!--<material:DataGridColumn.CellItemTemplate    >
                                 <DataTemplate>
 
                                     <Button  ImageSource="update_64px.png" Margin="0,0,10,0" Text="Atualizar" BackgroundColor="White"
                                           BorderColor="#512BD4" TextColor="#512BD4" FontSize="Micro"   FontFamily="Gilroy"  />
                                 </DataTemplate>
-                            </material:DataGridColumn.CellItemTemplate>
+                            </material:DataGridColumn.CellItemTemplate>-->
 
                         </material:DataGridColumn>
                     </material:DataGrid.Columns>

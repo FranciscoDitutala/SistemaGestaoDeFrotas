@@ -20,10 +20,10 @@ namespace Fleet.MauiPrincipal.Service
         public int YearOfManufacture { get; set; }
 
         [Required]
-        public int Type { get; set; }
+        public string Type { get; set; }
 
         [Required]
-        public int Transmission { get; set; }
+        public string Transmission { get; set; }
 
         [Required]
         [Range(1, int.MaxValue)]

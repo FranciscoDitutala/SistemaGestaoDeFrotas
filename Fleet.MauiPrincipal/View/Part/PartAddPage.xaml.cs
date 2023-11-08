@@ -14,9 +14,5 @@ public partial class PartAddPage : ContentPage
         InitializeComponent();
         this.BindingContext = new PartAddPageViewModel(upc, categoria, Quant);
     }
-    private async void ReturnToAddStock(object sender, EventArgs e)
-    {
- 
-        await Navigation.PushAsync(new StockyEntryPage());
-    }
+   
 }

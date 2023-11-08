@@ -19,8 +19,6 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
         private HttpClient Client;
         JsonSerializerOptions _SerializerOptions;
         string baseUrl = "https://localhost:7111";
-        [ObservableProperty]
-        public ObservableCollection<StockEntry> _stocks;
        
         [ObservableProperty]
         public string _providers;
@@ -33,23 +31,18 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
         public int _quantStock;
         [ObservableProperty]
         public string _upcStock;
+        public StockEntry stockUpdateId;
 
-        public StockyEntryPageViewModel() {
+        public StockyEntryPageViewModel(StockEntry stockParam) {
+          
             Client = new HttpClient();
-            Stocks = new ObservableCollection<StockEntry>();
-            //Parts = new ObservableCollection<Part>();
             _SerializerOptions = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             };
-            //allItems = new List<Part> { 
-            //    new Part { Upc = "Teste", Sku = "Gets", Brand = "Teste", PartTypeName = "Teste", Model = "Teste", StockQty = 4 },
-            //    new Part { Upc = "Testador", Sku = "Testador", Brand = "Teste", PartTypeName = "Teste", Model = "Teste", StockQty = 4 },
-            //    };
-           
-            //Items = new ObservableCollection<Part>(allItems);
-            //CarregarPartCategoriesAsync();
-            CarregarPartAsync();
+            stockUpdateId = stockParam;
+            FillTheFields();
+            CarregarStocksAsync();
             CarregarSoctkEntryLines();
         }
 
@@ -106,64 +99,7 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
                 Items = new ObservableCollection<Part>(filteredItems);
             }
         }
-        public ICommand CarregarPartCommand => new Command(async () =>
-             await CarregarPartAsync());
-        private async Task CarregarPartAsync()
-        {
-           
-        }
-        public Categories categoria;
-        private List<Categories> _categoriesItems;
-        public List<Categories> CategoriesItems
-        {
-            get { return _categoriesItems; }
-            set
-            {
-                _categoriesItems = value;
-                OnPropertyChanged(nameof(CategoriesItems));
-            }
-        }
-        //public ObservableCollection<Categories> Items { get; set; }  
-        //public Categories SelectedItems { get; set; } = new Categories();
-        //public ICommand CarregarPartCategoriesCommand => new Command(async () =>
-        //     await CarregarPartCategoriesAsync());
-        //private async Task CarregarPartCategoriesAsync()
-        //{
-        //    Debug.WriteLine("Entrou no metodo carregar categorias");
-        //    CategoriesItems = new List<Categories>();
-        //    var url = $"{baseUrl}/FleetParts/Part/GetCategories";
-        //    var response = await Client.GetAsync(url);
-        //    if (response.IsSuccessStatusCode)
-        //        using (var responseStream = await response.Content.ReadAsStreamAsync())
-        //        {
-        //            var data = await JsonSerializer.DeserializeAsync<List<Categories>>
-        //                (responseStream, _SerializerOptions);
-        //            CategoriesItems = data;
-        //            Debug.WriteLine("carregaregou categoria com sucesso " + CategoriesItems);
-        //        }
-        //}
-        private Categories _selectedCategorias;
-        public Categories SelectedCategorias
-        {
-            get { return _selectedCategorias; }
-            set
-            {
-                if (SelectedCategorias != value)
-                {
-                    _selectedCategorias = value;
-                    OnPropertyChanged(nameof(SelectedCategorias));
-                }
-              
-
-            }
-        }
-        public ICommand SalvarStockCommand => new Command(async () =>
-                 await SalvarStockCommandAsync());
-        public async Task SalvarStockCommandAsync()
-        {
-            
-        }
-        //public StockEntryLines StockyLines;
+      
         private ObservableCollection<StockEntryLines> _lines = new ();
         public ObservableCollection<StockEntryLines> StLines
         {
@@ -200,10 +136,6 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
                 _lines.Add(StockyLines);
                 UpcStock = "";
                 QuantStock=0;
-                //foreach (var item in StLines)
-                //{
-                //    Debug.WriteLine("O stockyEntryLines a quantidade " + item.Quantity + " o codigo" + item.PartUpc);
-                //}
             }
             else
             {
@@ -224,7 +156,6 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
           await GoTOAddPartAsync());
         public async Task GoTOAddPartAsync()
         {
-            //await Application.Current.MainPage.Navigation.PushAsync(new PartAddPage(UpcPart, _selectedCategorias, Quant));     
             await Application.Current.MainPage.Navigation.PushAsync(new PartAddFirstParge(UpcStock, QuantStock));
         }
         public ICommand CarregarSoctkEntryLinesCommand => new Command(async () =>
@@ -233,13 +164,69 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
         {
             StLines = _lines;
         }
+        private ObservableCollection< StockEntry> _stock;
+        public ObservableCollection<StockEntry> Stock
+        {
+            get { return _stock; }
+            set
+            {
+                _stock = value;
+                OnPropertyChanged(nameof(Stock));
+            }
+        }
+        private string path;
+        int paramId;
+        public bool isNewItem;
+        public ICommand CarregarStocksCommand => new Command(async () =>
+            await CarregarStocksAsync());
+        private async Task CarregarStocksAsync()
+        {
+            Stock = new ObservableCollection<StockEntry>();
+            var url = $"{baseUrl}/FleetParts/StockEntry/GetStockyEntry/{stockUpdateId}";
+            var response = await Client.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+                using (var responseStream = await response.Content.ReadAsStreamAsync())
+                {
+                    var data = await JsonSerializer.DeserializeAsync<ObservableCollection<StockEntry>>
+                        (responseStream, _SerializerOptions);
+                    Stock = data;
+                    //isNewItem = false;
+                    //path = $"/FleetParts/StockEntry/UpdateStockEntry/{Stock.Id}";
+                    Debug.WriteLine("Carregou com stock de entrada  sucesso");
+                }
+            else {
+                //isNewItem = true;
+                //path = "/FleetParts/StockEntry/AddStockEntry";
+            }
+            Debug.WriteLine("Dentro do stock");
+        }
+        public void VerifyNewStockEntry()
+        {
+            foreach (var item in Stock)
+            {
+                if (!item.Id.Equals(stockUpdateId.Id))
+                {
+                    isNewItem = true;
 
-       public ICommand CadastrarSoctkCommand => new Command(async () =>
-             await CadastrarSoctkAsync()  );
+                    path = "/FleetTransport/Vehicle";
+                    Debug.WriteLine("Chegou aqui ", path);
+                }
+                else
+                {
+                    isNewItem = false;
+                    path = $"/FleetTransport/Vehicle/{item.Id}";
+                }
+            }   
+        }
+       
+        public ICommand CadastrarSoctkCommand => new Command(async () =>
+             await CadastrarSoctkAsync() );
         public async Task CadastrarSoctkAsync()
         {
-            Debug.WriteLine("Entro no metodo cadastrar Stock");
-            var url = $"{baseUrl}/FleetParts/StockEntry/AddStockEntry";
+            VerifyNewStockEntry();
+            Debug.WriteLine("Entro no metodo cadastrar Stock o path é ", path);
+            var url = $"{baseUrl + path}";
+            Debug.WriteLine("Entro no metodo cadastrar Stock a url é " + url);
             if (BuyValue > 0)
             {
                 var StockEntries = new StockEntry
@@ -251,22 +238,45 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
                 };
                 string json = JsonSerializer.Serialize<StockEntry>(StockEntries, _SerializerOptions);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                var response = await Client.PostAsync(url, content);
-                if (response.IsSuccessStatusCode)
+                if (isNewItem)
                 {
-                    await Application.Current.MainPage.DisplayAlert("Atenção", "Stock cadastrado  com sucesso ", "OK");
-                    StLines = null;
-                    await Application.Current.MainPage.Navigation.PopAsync();
+                    var response = await Client.PostAsync(url, content);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Atenção", "Entrada cadastrado  com sucesso ", "OK");
+                        _lines = null;
+                        await Application.Current.MainPage.Navigation.PopAsync();
+                        await Application.Current.MainPage.Navigation.PopAsync();
+                    }
+                    else { await Application.Current.MainPage.DisplayAlert("Falhou", "Entrada não cadastrado ", "OK"); }
+                }else
+                {
+                    var response = await Client.PutAsync(url, content);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Atenção", "Entrada Atualizado com sucesso ", "OK");
+                        _lines = null;
+                        ClearTheFields();
+                        await Application.Current.MainPage.Navigation.PopAsync();
+                        await Application.Current.MainPage.Navigation.PopAsync();
+                    }
+                    else { await Application.Current.MainPage.DisplayAlert("Falhou", "Entrada não atualizada  ", "OK"); }
                 }
-                else { await Application.Current.MainPage.DisplayAlert("Falhou", "Stock não cadastrado ", "OK"); }
-
             }
             else { await Application.Current.MainPage.DisplayAlert("Atenção", "Campos obrigatorio Vazio ", "OK"); }
-
         }
-
+        public void FillTheFields() {
+            //Providers = stockUpdateId.ProvidersInfo;
+            //Notes = stockUpdateId.Notes;
+            //BuyValue = stockUpdateId.TotalValue;
+            //StLines = stockUpdateId.Lines;
+        }
+        public void ClearTheFields()
+        {
+            Providers = "";
+            Notes = "";
+            BuyValue =0;
+            _lines = null;
+        }
     }
-
-
-
 }

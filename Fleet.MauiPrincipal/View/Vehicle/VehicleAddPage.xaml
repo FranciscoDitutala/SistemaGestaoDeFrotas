@@ -25,29 +25,31 @@
                         Icon="{FontImageSource FontFamily=MaterialRegular,
                     Glyph={x:Static m:MaterialRegular.Numbers}} "/>
 
-                            <material:TextField  Padding="10,0,0,0"
-                    Title="Cor do Veículo" Text="{Binding Cor}" FontFamily="Gilroy"
-                     Icon="{FontImageSource FontFamily=MaterialRegular,
-                    Glyph={x:Static m:MaterialRegular.Color_lens}}"/>
+                <material:PickerField Padding="10,0,0,0" FontFamily="Gilroy" 
+                        Title="Cor" ItemsSource="{Binding Colors}"    
+                                              SelectedItem="{Binding SelectedColors}"
+                             Icon="{FontImageSource FontFamily=MaterialRegular,
+                        Glyph={x:Static m:MaterialRegular.Color_lens}}"/>
 
                 <material:PickerField Padding="10,0,0,0" FontFamily="Gilroy" 
                     Title="Tipo do Veiculo" ItemsSource="{Binding VehicleTypes}"    
                                           SelectedItem="{Binding SelectedVehicleTypes}"
                          Icon="{FontImageSource FontFamily=MaterialRegular,
                     Glyph={x:Static m:MaterialRegular.Car_rental}}"/>
+                <material:PickerField Padding="10,0,0,0"
+                Title="Transmissão " ItemsSource="{Binding VehicleTransmission}" SelectedItem="{Binding SelectedTransmissions}"  FontFamily="Gilroy" 
+                     Icon="{FontImageSource FontFamily=MaterialRegular,
+                Glyph={x:Static m:MaterialRegular.Branding_watermark}}"/>
+
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.RowSpan="1" Grid.Column="1" Spacing="15" Padding="0,0,0,0" VerticalOptions="Start" >
 
                 <material:TextField Padding="10,0,0,0"  FontFamily="Gilroy"
-                      Title="Matricula" Text="{Binding Registration}"
-                           Icon="{FontImageSource FontFamily=MaterialRegular,
-                      Glyph={x:Static m:MaterialRegular.Code}}"/>
-                        </VerticalStackLayout>  
-           
-                <VerticalStackLayout Grid.RowSpan="1" Grid.Column="1" Spacing="15" Padding="0,0,0,0" >
-
-                <material:TextField Padding="10,0,0,0" FontFamily="Gilroy" 
-                 Title="Modelo do Veiculo" Text="{Binding Model}" 
-                 Icon="{FontImageSource FontFamily=MaterialRegular,
-               Glyph={x:Static m:MaterialRegular.Car_rental}} "/>
+      Title="Matricula" Text="{Binding Registration}"
+           Icon="{FontImageSource FontFamily=MaterialRegular,
+      Glyph={x:Static m:MaterialRegular.Code}}"/>
+             
                 <material:PickerField  Padding="10,0,0,0"
                      Title="Marca do Veiculo" ItemsSource="{Binding VehicleMarcas}" SelectedItem="{Binding SelectedMarcas}" 
                                                    ItemDisplayBinding="{Binding Name}"
@@ -59,28 +61,27 @@
                           Icon="{FontImageSource FontFamily=MaterialRegular,
                      Glyph={x:Static m:MaterialRegular.Car_rental}}"/>
 
-                <material:TextField Padding="10,0,0,0" FontFamily="Gilroy"
-                       Title="Potencia do Veiculo" Text="{Binding Power}"
-                            Icon="{FontImageSource FontFamily=MaterialRegular, 
-                       Glyph={x:Static m:MaterialRegular.Settings_power}}"/>
-
-                        </VerticalStackLayout>
-                        <VerticalStackLayout Grid.RowSpan="2" Grid.Column="2" Spacing="15" Padding="0,0,0,0"  >
-                <material:TextField  Padding="10,0,0,0" FontFamily="Gilroy"
-                Title="Ano de Fabrico" Text="{Binding DataFabrico}"
-                     Icon="{FontImageSource FontFamily=MaterialRegular,
-                Glyph={x:Static m:MaterialRegular.Date_range}}"/>
-
-                            <material:PickerField Padding="10,0,0,0"
-             Title="Transmissão " ItemsSource="{Binding VehicleTransmission}" SelectedItem="{Binding SelectedTransmissions}"  FontFamily="Gilroy" 
-                  Icon="{FontImageSource FontFamily=MaterialRegular,
-             Glyph={x:Static m:MaterialRegular.Branding_watermark}}"/>
-
                 <material:TextField  Padding="10,0,0,0" FontFamily="Gilroy"
                 Title="Consumo de Combustivel" Text="{Binding FuelConsumption}"
                      Icon="{FontImageSource FontFamily=MaterialRegular,
                 Glyph={x:Static m:MaterialRegular.Local_gas_station}}"/>
-                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+            
+            <VerticalStackLayout Grid.RowSpan="2" Grid.Column="2" Spacing="15" Padding="0,0,0,0"  >
+                <material:TextField  Padding="10,0,0,0" FontFamily="Gilroy"
+                Title="Ano de Fabrico" Text="{Binding DataFabrico}"
+                     Icon="{FontImageSource FontFamily=MaterialRegular,
+                Glyph={x:Static m:MaterialRegular.Date_range}}"/>
+                <material:TextField Padding="10,0,0,0" FontFamily="Gilroy" 
+    Title="Modelo do Veiculo" Text="{Binding Model}" 
+    Icon="{FontImageSource FontFamily=MaterialRegular,
+  Glyph={x:Static m:MaterialRegular.Car_rental}} "/>
+                <material:TextField Padding="10,0,0,0" FontFamily="Gilroy"
+Title="Potencia do Veiculo" Text="{Binding Power}"
+     Icon="{FontImageSource FontFamily=MaterialRegular, 
+Glyph={x:Static m:MaterialRegular.Settings_power}}"/>
+            </VerticalStackLayout>
 
         </Grid>
 
