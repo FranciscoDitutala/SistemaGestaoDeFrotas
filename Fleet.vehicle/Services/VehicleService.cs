@@ -94,7 +94,7 @@ namespace Fleet.Transport.Services
         public override  async  Task FindVehicles(FindVehiclesRequest request, IServerStreamWriter<VehiclePayload> responseStream, ServerCallContext context)
         {
             await foreach (var vehicle in _vehicleRepository.Entities.FilterAsync(x => x.Registration== request.Filter || 
-            x.Brand==request.Filter || x.Cor==request.Filter  || x.Type == request.Filter || x.Vin == x.Vin))
+            x.Brand==request.Filter || x.Cor==request.Filter  || x.Type == request.Filter || x.Vin == request.Filter))
             {
                 await responseStream.WriteAsync(_mapper.Map<VehiclePayload>(vehicle));
             }
