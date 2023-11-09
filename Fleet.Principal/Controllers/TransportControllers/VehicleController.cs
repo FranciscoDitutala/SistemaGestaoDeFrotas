@@ -4,10 +4,12 @@ using Fleet.Principal.Dtos.TransPortDtos.VehicleDtos;
 using Fleet.Principal.Services.TransportServices;
 using Fleet.Principal.Services.TransportServices.Interfaces;
 using Fleet.Transport;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Fleet.Principal.Controllers.TransportControllers
 {
+    [Authorize]
     [ApiController]
     [Route("FleetTransport/[controller]")]
     public class VehicleController : ControllerBase
@@ -78,13 +80,19 @@ namespace Fleet.Principal.Controllers.TransportControllers
         [HttpPost]
         public async Task<IActionResult> Post(AddVehicleDto addVehicleDto)
         {
-            if( addVehicleDto == null)
+
+            try { 
+                    var ver = await _vehicleService.VerificarVinReg(addVehicleDto);
+                    if (ver == false) return BadRequest("A matricula ou Vin do veículo já existe");
+
+                        var ans = await _vehicleService.AddVehicleAsync(addVehicleDto);
+                        return Ok(ans);
+            }
+            catch(ArgumentException ex)
             {
-                return BadRequest(" O veículo não pode ser nullo, Prencher os campos obrigatorio");
+                return BadRequest(ex.Message);
             }
 
-            var ans = await _vehicleService.AddVehicleAsync(addVehicleDto);
-            return Ok(ans);
         }
 
 

@@ -78,6 +78,8 @@ namespace Fleet.Principal.Services.TransportServices
 
         }
 
+
+
      /*
         public async Task<IEnumerable<VehicleDto>> FindAllVehiclesByTypeAsync(string type)
         {
@@ -129,6 +131,20 @@ namespace Fleet.Principal.Services.TransportServices
             }
 
             return Vehicles;
+        }
+
+        public async Task<bool> VerificarVinReg(AddVehicleDto vehicle)
+        {
+            using var list = _vehicleManagerClient.FindAllVehicles(new FindAllVehiclesRequest());
+
+            while (await list.ResponseStream.MoveNext())
+            {
+                var ve = _mapper.Map<VehicleDto>(list.ResponseStream.Current);
+                if (ve.Vin == vehicle.Vin || ve.Registration == vehicle.Registration)
+                    return false;
+            }
+
+            return true;
         }
     }
 }

@@ -13,5 +13,7 @@ namespace Fleet.Principal.Services.TransportServices.Interfaces
         //public Task<IEnumerable<VehicleDto>> FindAllVehiclesByTypeAsync(string type);
         public Task<IEnumerable<VehicleDto>> FindAllVehiclesActiveAsync(bool active);
         public Task<IEnumerable<VehicleDto>> FindVehiclesAsync(string filter);
+
+        public Task<bool> VerificarVinReg(AddVehicleDto vehicle);
     }
 }

@@ -38,7 +38,7 @@ namespace Fleet.Principal.Controllers.PartsControllers
 
         }
 
-        [HttpGet("GetStockEntries/fromDate/toDate")]
+        [HttpGet("GetStockEntries/{fromDate}/{toDate}")]
         public async Task<IActionResult> GetStockByDate(DateTime fromDate, DateTime toDate)
         {
 

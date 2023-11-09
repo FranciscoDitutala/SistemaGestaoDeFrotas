@@ -58,6 +58,29 @@ namespace CustomerApi.Controllers
             return Unauthorized();
         }
 
+        [HttpGet]
+        [Route("get-all-users")]
+        public IActionResult GetAllUsers()
+        {
+            var users = _userManager.Users.Select(u => new { u.UserName, u.Email }).ToList();
+            return Ok(users);
+        }
+        [HttpGet]
+        [Route("get-user/{username}")]
+        public async Task<IActionResult> GetUser(string username)
+        {
+            var user = await _userManager.FindByNameAsync(username);
+
+            if (user != null)
+            {
+                var userDetails = new { user.UserName, user.Email };
+                return Ok(userDetails);
+            }
+
+            return NotFound();
+        }
+
+
         [HttpPost]
         [Route("register")]
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
