@@ -12,12 +12,12 @@
              NavigationPage.HasNavigationBar="False"
              Title="Lista de Viaturas ">
 
-    <Grid  RowDefinitions ="3*,*,7*,1*" ColumnDefinitions="*"  >
+    <Grid  RowDefinitions ="3*,7*,1*" ColumnDefinitions="*"  >
         <Image  Grid.Row="0" Aspect="AspectFill" Source="controlo.png" Margin="0,-30,0,0"  />
         <Label Text="Gerir Veículos" TextColor="White" FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"
            HorizontalOptions="Start" VerticalOptions="Start" Margin="20,40,0,0" />
         
-            <Grid  Grid.Row="2" Grid.ColumnSpan="2"  Margin="-20,-50,0,0" HorizontalOptions="Start" 
+            <Grid  Grid.Row="1" Grid.ColumnSpan="2"  Margin="-20,10,0,0" HorizontalOptions="Start" 
                    RowDefinitions="*,6*" ColumnDefinitions="8*,2*">
             <Grid Grid.Row="0" FlowDirection="LeftToRight" Margin="20,0,0,0" Grid.ColumnSpan="2" VerticalOptions="Start"
               RowDefinitions="*" ColumnDefinitions="*,*" HeightRequest="60">
@@ -31,7 +31,7 @@
                 </Button>
 
             </Grid>
-            <ScrollView HorizontalOptions="Start" Margin="20,0,0,0"   Grid.Row="1" VerticalOptions="Start"
+            <ScrollView HorizontalOptions="Start" Margin="20,0,0,0"   Grid.Row="2" VerticalOptions="Start" Grid.ColumnSpan="2"
                         >
 
                 <material:DataGrid ItemsSource="{Binding Vehicles}"  Margin="20,0,20,20"  BackgroundColor="WhiteSmoke" CornerRadius="0" x:Name="GridList" HorizontalOptions="Start"
@@ -66,7 +66,7 @@
 
             </Grid>
 
-            <Grid Grid.Row="3" Margin="0,0,0,0" RowDefinitions="*,*" ColumnDefinitions="*,*,*" BackgroundColor="WhiteSmoke" HorizontalOptions="Start" ColumnSpacing="10" >
+            <Grid Grid.Row="3" Margin="20,0,0,0" RowDefinitions="*,*" ColumnDefinitions="*,*,*" BackgroundColor="WhiteSmoke" HorizontalOptions="Start" ColumnSpacing="10" >
                 <Button  CornerRadius="8" WidthRequest="200" TextColor="#512BD4" BorderColor="#512BD4"  FontSize="Medium" Text="Adicionar " HorizontalOptions="Start"
                  Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="add_64px.png" Command="{Binding GoToAddVehicleCommand}"  >
                 </Button>

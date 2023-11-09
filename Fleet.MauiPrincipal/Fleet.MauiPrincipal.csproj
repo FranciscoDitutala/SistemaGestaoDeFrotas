@@ -90,7 +90,6 @@
 		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
 		<PackageReference Include="SQLitePCLRaw.core" Version="2.1.6" />
 		<PackageReference Include="SQLitePCLRaw.lib.e_sqlite3" Version="2.1.6" />
-		<PackageReference Include="Syncfusion.Maui.Inputs" Version="23.1.43" />
 		<PackageReference Include="UraniumUI" Version="2.5.6" />
 		<PackageReference Include="UraniumUI.Icons.FontAwesome" Version="2.5.6" />
 		<PackageReference Include="UraniumUI.Icons.MaterialIcons" Version="2.5.6" />
@@ -128,6 +127,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="MenuPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="NewPage1.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="NewPage2.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="View\NavBarPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

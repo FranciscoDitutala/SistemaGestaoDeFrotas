@@ -18,8 +18,9 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
         private HttpClient Client;
         JsonSerializerOptions _SerializerOptions;
         string baseUrl = "https://localhost:7111";
-       
-      
+
+        private DateTime _beginDate = new();
+        public DateTime LastDate { get; set; }
         public StockyEntriesPageViewModel()
         {
             //SelectedBeginDate = DateTime;
@@ -30,6 +31,17 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
             };
             CarregarStocksAsync();
         }
+     
+        public DateTime BeginDate
+        {
+            get { return _beginDate; }
+            set
+            {
+                _beginDate = value;
+                OnPropertyChanged(nameof(BeginDate));
+            }
+        }
+        
         private List<StockEntry> _stock;
         public List<StockEntry> Stock
         {
@@ -76,7 +88,7 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
         private async Task CarregarStocksByDateAsync()
         {
             Entrada = new StockEntry();
-            var url = $"{baseUrl}/FleetParts/StockEntry/GetStockEntriesByDate";
+            var url = $"{baseUrl}/FleetParts/StockEntry/GetStockEntries/{BeginDate}/{LastDate}";
             var response = await Client.GetAsync(url);
             if (response.IsSuccessStatusCode)
                 using (var responseStream = await response.Content.ReadAsStreamAsync())
@@ -84,7 +96,7 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
                     var data = await JsonSerializer.DeserializeAsync<StockEntry>
                         (responseStream, _SerializerOptions);
                     Entrada = data;
-                    Debug.WriteLine("Carregou com stock  sucesso");
+                    Debug.WriteLine("Carregou com stock filter sucesso");
                 }
             Debug.WriteLine("Dentro do stock");
         }

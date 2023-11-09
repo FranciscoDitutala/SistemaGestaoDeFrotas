@@ -14,28 +14,30 @@
                  Title="StockyOutsPage">
 
     <Grid RowDefinitions="4*,7*,*,*" ColumnDefinitions="2*,*" ColumnSpacing="10" >
-        <Label Grid.Row="0" Text="Lista de Entradas" Padding="25,0,0,10"  FontAttributes="Bold"  TextColor="White"
+        <Label Grid.Row="0" Text="Lista de Saida" Padding="25,0,0,10"  FontAttributes="Bold"  TextColor="White"
           FontSize="Header"   VerticalOptions="EndAndExpand" HorizontalOptions="Start" FontFamily="Gilroy" ZIndex="1" />
         <Image  Grid.Row="0" Grid.ColumnSpan="3"  Margin="0,-30,0,0" Source="monitorar.png" Aspect="AspectFill" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
-        <Grid  Grid.Row="1" Grid.ColumnSpan="2"  Margin="0,20,0,0" HorizontalOptions="Start" RowDefinitions="*,4*"  >
-            <Grid Margin="0,-20,0,10" Padding="15" Grid.Row="0" ColumnDefinitions="*,*,*" ColumnSpacing="0"  >
-                <!--<material:DatePickerField Title="Data Inicio" HorizontalOptions="Start"  VerticalOptions="Start" Grid.Column="0"
-                                      WidthRequest="300" FontFamily="Gilroy"  BorderColor="#512BD4" Date="{Binding Entrada.BeginDate }"
-                                          Icon="{FontImageSource FontFamily=MaterialRegular,
-                                    Glyph={x:Static m:MaterialRegular.Date_range}}" Padding="10,0,0,0"
-                                      />
-                <material:DatePickerField Grid.Row="0" Title="Data Final" HorizontalOptions="Start" VerticalOptions="Start" Grid.Column="1"
-                        WidthRequest="300" FontFamily="Gilroy"  BorderColor="#512BD4"  Icon="{FontImageSource FontFamily=MaterialRegular,
-                        Glyph={x:Static m:MaterialRegular.Date_range}}" Padding="10,0,0,0" Date="{Binding Entrada.LastDate }"
+        <Grid  Grid.Row="1" Grid.ColumnSpan="2"  Margin="0,20,0,0" HorizontalOptions="Start" RowDefinitions="*,4*"  ColumnDefinitions="2.5*,*" >
+            <Grid Margin="0,-20,0,10" Padding="15" Grid.Row="0" ColumnDefinitions="4*,*" ColumnSpacing="0"  Grid.Column="0" >
+                <HorizontalStackLayout Grid.Column="0">
+                    <material:DatePickerField Title="Data Inicio" 
+                    FontFamily="Gilroy"  BorderColor="#512BD4"
+                            Icon="{FontImageSource FontFamily=MaterialRegular,
+                      Glyph={x:Static m:MaterialRegular.Date_range}}" Padding="10,0,0,0"
                         />
+                    <material:DatePickerField Grid.Row="0" Title="Data Final" 
+              FontFamily="Gilroy"  BorderColor="#512BD4"  Icon="{FontImageSource FontFamily=MaterialRegular,
+              Glyph={x:Static m:MaterialRegular.Date_range}}" Padding="10,0,0,0" 
+              />
+                </HorizontalStackLayout>
                 <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Procurar"  VerticalOptions="Start"
          HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="search_64px.png" HorizontalOptions="Start" Grid.Column="2" Margin="0,0,0,0"
-     Command="{Binding CarregarStocksByDateCommand}" />-->
+     Command="{Binding CarregarStocksByDateCommand}" />
 
 
             </Grid>
-            <ScrollView HorizontalOptions="Start"  Grid.Row="1"  >
-                <material:DataGrid ItemsSource="{Binding Stock}"  Margin="10,0,20,20"  BackgroundColor="WhiteSmoke" CornerRadius="0"  
+            <ScrollView HorizontalOptions="Start"  Grid.Row="1" Grid.Column="0"  >
+                <material:DataGrid ItemsSource="{Binding Stock}"  Margin="10,0,20,20"  BackgroundColor="WhiteSmoke" CornerRadius="0"   
               LineSeparatorColor="#004D97" SelectedItems="{Binding SelectedItems}" BorderColor="#004D97"     >
                     <material:DataGrid.EmptyView>
                         <VerticalStackLayout Margin="80,20">
@@ -51,9 +53,9 @@
                     </material:DataGrid.EmptyView>
                     <material:DataGrid.Columns >
                         <material:DataGridSelectionColumn Title="#"/>
-                        <material:DataGridColumn  Title="Solicitante"  />
-                        <material:DataGridColumn  Title="Descrição"/>
-                        <material:DataGridColumn  Title="Valor da Compra" />
+                        <material:DataGridColumn Binding="{Binding RequestedBy}" Title="Solicitante"  />
+                        <material:DataGridColumn  Binding="{Binding RequestedBy}"  Title="Descrição"/>
+                        <!--<material:DataGridColumn  Title="Valor da Compra" />-->
                        
                     </material:DataGrid.Columns>
 
@@ -63,7 +65,7 @@
         </Grid>
 
         <Grid Grid.Row="3" Grid.ColumnSpan="2" Margin="20,0,0,0" RowDefinitions="*,*" ColumnDefinitions="*,*,*"  HorizontalOptions="Start" ColumnSpacing="10" >
-            <Button  CornerRadius="8" WidthRequest="200" TextColor="#512BD4" BorderColor="#512BD4"  FontSize="Medium" Text="Entrada " HorizontalOptions="Start"
+            <Button  CornerRadius="8" WidthRequest="200" TextColor="#512BD4" BorderColor="#512BD4"  FontSize="Medium" Text="Saida " HorizontalOptions="Start"
        HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="add_64px.png" Command="{Binding GoToAddStockCommand}"  >
             </Button>
 

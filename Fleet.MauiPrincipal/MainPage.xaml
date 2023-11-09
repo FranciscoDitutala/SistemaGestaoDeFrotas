@@ -11,6 +11,8 @@
              xmlns:viewModel="clr-namespace:Fleet.MauiPrincipal.ViewModel"
              x:DataType="viewModel:MainPageViewModel"
               NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasBackButton="False"
+            
             
              Title="DashBoard" >
 

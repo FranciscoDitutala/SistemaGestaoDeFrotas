@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Shell
+<FlyoutPage 
         x:Class="Fleet.MauiPrincipal.AppShell"
         xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -8,46 +8,34 @@
         xmlns:vehicle="clr-namespace:Fleet.MauiPrincipal.View.Vehicle"
         xmlns:views="clr-namespace:Fleet.MauiPrincipal.View"
         xmlns:main="clr-namespace:Fleet.MauiPrincipal"
-     xmlns:user="clr-namespace:Fleet.MauiPrincipal.View.session"
-     xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
-     xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome"
-     xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
-     xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
-     xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui" 
-     Shell.FlyoutBehavior="Locked"
+         xmlns:user="clr-namespace:Fleet.MauiPrincipal.View.session"
+         xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+         xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome"
+         xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
+         xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+         xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui" 
+         FlyoutLayoutBehavior="SplitOnLandscape"
+                 >
     
-   Shell.BackgroundColor="Aqua"
-    FlyoutIcon="Home"
-    FlyoutBackground="WhiteSmoke" 
-    Shell.TitleColor="#0B4CA1" >
-    <Shell.FlyoutHeader>
+    <!--<Shell.FlyoutHeader>
         <StackLayout BackgroundColor="White" HeightRequest="195"  VerticalOptions="Center" Padding="5" >
             <Label Text="SISTEMA DE GESTÃO " FontSize="Header" TextColor="#512BD4" HorizontalOptions="Center" Margin="0,10,0,0" VerticalOptions="Center"
             FontFamily="Gilroy" FontAttributes="Bold" />
             <Label Text="De Frotas e Peças Sobressalentes " FontSize="Medium" TextColor="#512BD4" HorizontalOptions="Start" Margin="30,0,0,0"
 FontFamily="Gilroy" />
         </StackLayout>
-    </Shell.FlyoutHeader>
+    </Shell.FlyoutHeader>-->
 
-    <ShellContent 
-            Title="Dashboard" Icon="Dashboard_64px.png"
-            ContentTemplate="{DataTemplate main:MainPage}"
-            Route="MainPage"  />
-    <ShellContent 
-            Title="Gerir Peças" Icon="scan_stock_64px.png"
-            ContentTemplate="{DataTemplate part:PartPage}"
-            Route="PartPage" />
-
-    <ShellContent 
-            Title="Gerir Veículos" Icon="car_64px.png"
-            ContentTemplate="{DataTemplate vehicle:VehicleListPage}"
-            Route="VehicleListPage" >
-    </ShellContent>
-
-    <ShellContent 
-            Title="Gerir Usuario" Icon="user_64px.png"
-            ContentTemplate="{DataTemplate user:CreateUser}"
-            Route="CreateUser" >
-    </ShellContent>
    
-</Shell>
+    <FlyoutPage.Flyout>
+        <local:MenuPage x:Name="flyoutPage" />
+    </FlyoutPage.Flyout>
+    <FlyoutPage.Detail>
+        <NavigationPage>
+            <x:Arguments>
+                <local:MainPage />
+            </x:Arguments>
+        </NavigationPage>
+    </FlyoutPage.Detail>
+    
+</FlyoutPage>

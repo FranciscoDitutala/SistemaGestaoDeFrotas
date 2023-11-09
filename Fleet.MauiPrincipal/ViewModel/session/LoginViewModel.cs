@@ -1,10 +1,14 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿
+using CommunityToolkit.Mvvm.ComponentModel;
+using Fleet.MauiPrincipal.Service;
 using Microsoft.Maui.Controls;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -13,6 +17,10 @@ namespace Fleet.MauiPrincipal.ViewModel.session
     public partial class LoginViewModel:ObservableObject
 
     {
+        private HttpClient Client;
+        JsonSerializerOptions _SerializerOptions;
+        string baseUrl = "https://localhost:7111";
+
         [ObservableProperty]
         public string _NameUser;
         [ObservableProperty]
@@ -20,36 +28,80 @@ namespace Fleet.MauiPrincipal.ViewModel.session
         public LoginViewModel()
         {
 
+            Client = new HttpClient();
+            _SerializerOptions = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+           
+        }
+        public string token;
+        private Login _login;
+        public Login Login
+        {
+            get { return _login; }
+            set
+            {
+                _login = value;
+                OnPropertyChanged(nameof(Login));
+            }
         }
 
-        
         public ICommand EntrarSistemaCommand => new Command(async () =>
          await EntrarSistemaAsync());
 
         private async Task EntrarSistemaAsync()
         {
-            //var user = Convert.ToString(UserName.Text);
-            //var pass = Convert.ToString(PassUser.Text);
-            if (((!string.IsNullOrEmpty(NameUser)) && (!string.IsNullOrEmpty(PassUser))))
+            //Debug.WriteLine("Entrou no metodo Login ");
+            Login = new Login
             {
-                if (NameUser.Equals("admin") && PassUser.Equals("1234"))
-                {
-                    await Application.Current.MainPage.DisplayAlert("Informação", "Login com sucesso", "Ok");
-                    NameUser = "";
-                    PassUser = "";
-                    //await AppShell.Current.GoToAsync(nameof(AppShell));
-                    Application.Current.MainPage.Navigation.PushAsync(new AppShell());
-                }
-                else
-                {
-                    Application.Current.MainPage.DisplayAlert("Atenção", "Usuario não encontrado", "Ok");
-                }
-            }
-            else
+                Password = PassUser,
+                Username = NameUser
+            };
+            var url = $"{baseUrl}/api/Authenticate/login";
+            string json = JsonSerializer.Serialize<Login>(Login, _SerializerOptions);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await Client.PostAsync(url, content);
+            if (response.IsSuccessStatusCode)
             {
-                await Application.Current.MainPage.DisplayAlert("Atenção", "Campos Obrigatórios em brancos", "Ok");
+                var conteudo = await response.Content.ReadAsStringAsync();
+                var tokenResponse = JsonSerializer.Deserialize<JsonDocument>(conteudo);
+                token = tokenResponse.RootElement.GetProperty("access_token").GetString();
+
+                await Application.Current.MainPage.DisplayAlert("Informação ", "Veiculo Atualizado com sucesso!", "Ok");
+                await Application.Current.MainPage.Navigation.PushAsync(new AppShell());
+            }else
+            {
+                {
+                    // Lidere com erros de autenticação
+                    await Application.Current.MainPage.DisplayAlert("Atenção", "Usuario não encontrado", "Ok");
+
+                }
 
             }
+
+
+            ////var user = Convert.ToString(UserName.Text);
+            ////var pass = Convert.ToString(PassUser.Text);
+            //if (((!string.IsNullOrEmpty(NameUser)) && (!string.IsNullOrEmpty(PassUser))))
+            //{
+            //    if (NameUser.Equals("admin") && PassUser.Equals("1234"))
+            //    {
+            //        await Application.Current.MainPage.DisplayAlert("Informação", "Login com sucesso", "Ok");
+            //        NameUser = "";
+            //        PassUser = "";
+            //        await Application.Current.MainPage.Navigation.PushAsync(new AppShell());
+            //    }
+            //    else
+            //    {
+            //      await    Application.Current.MainPage.DisplayAlert("Atenção", "Usuario não encontrado", "Ok");
+            //    }
+            //}
+            //else
+            //{
+            //    await Application.Current.MainPage.DisplayAlert("Atenção", "Campos Obrigatórios em brancos", "Ok");
+
+            //}
         }
     }
 }

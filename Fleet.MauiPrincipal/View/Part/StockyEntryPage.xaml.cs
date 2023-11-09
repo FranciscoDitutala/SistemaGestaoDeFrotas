@@ -14,11 +14,5 @@ public partial class StockyEntryPage : ContentPage
 		InitializeComponent();
 		BindingContext = new StockyEntryPageViewModel(stock);
 	}
- 
-   //private async void ReturnToListStockyEntry(object sender, EventArgs e)
-   // {
-   //         await Navigation.PushAsync(new StockyEntriesPage());
-    
-       
-   // }
+
 }

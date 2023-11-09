@@ -25,35 +25,25 @@
                 </Border.StrokeShape>
                 <Grid Grid.ColumnSpan="2" RowDefinitions="*,*"  ColumnDefinitions="*,*" HorizontalOptions="Start" >
                     <material:TextField Padding="10,10,0,0" Grid.Column="0" Grid.Row="0"
-                        Title="Provedor"  WidthRequest="300"  FontFamily="Gilroy"
+                        Title="Solicitante"  WidthRequest="300"  FontFamily="Gilroy"
                         Icon="{FontImageSource FontFamily=MaterialRegular,
                         Glyph={x:Static m:MaterialRegular.Perm_identity}} "/>
 
-                    <material:TextField  Padding="10,10,0,0"  FontFamily="Gilroy" Grid.Column="0" Grid.Row="1"
-                        Title="Valor da Compra"  WidthRequest="300"  HorizontalOptions="Start"
-                        Icon="{FontImageSource FontFamily=MaterialRegular,
-                        Glyph={x:Static m:MaterialRegular.Shopping_cart_checkout}}"/>
-
-                    <material:EditorField  Padding="10,10,0,0"  Grid.Column="1" Grid.RowSpan="1"  HorizontalOptions="Start"
-                        Title="Descrição"  WidthRequest="560" HeightRequest="60" FontFamily="Gilroy"
+                    <material:EditorField  Padding="10,10,0,0"  Grid.Column="1" Grid.RowSpan="2"  HorizontalOptions="Start"
+                        Title="Notas"  WidthRequest="560" HeightRequest="60" FontFamily="Gilroy"
                          Icon="{FontImageSource FontFamily=MaterialRegular,
                          Glyph={x:Static m:MaterialRegular.Description}}"/>
                 </Grid>
             </Border>
-            <Border Grid.ColumnSpan="2" Grid.Row="1" Padding="10,0,0,0"  HeightRequest="100" WidthRequest="720"
+            <Border Grid.ColumnSpan="2" Grid.Row="1" Padding="10,0,0,0"  HeightRequest="100"
            Margin="10,0,0,10" Opacity="1" HorizontalOptions="Start" >
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="4"/>
                 </Border.StrokeShape>
-                <VerticalStackLayout >
+                <Grid >
                     <Label Text="Adicionar Artigo no Stock:" Margin="15,0,0,0" FontFamily="Gilroy"/>
                     <HorizontalStackLayout  HorizontalOptions="Start" VerticalOptions="Center">
-                        <!--<material:AutoCompleteTextField Padding="10,0,0,0" WidthRequest="300" Margin="0,10,0,0"
-                            Title="Código" ItemsSource="{Binding Items}" Text="{Binding SearchText} "  SelectedText="{Binding UpcStock}"
-                            Icon="{FontImageSource FontFamily=MaterialRegular,  Glyph={x:Static m:MaterialRegular.Engineering}} "/>-->
-                        <!--<editors:SfAutocomplete x:Name="autocomplete" HeightRequest="50"
-                                    WidthRequest="300" Text="{Binding SearchText}" SelectedItem="{Binding UpcStock }"
-                                    ItemsSource="{Binding Items}"  />-->
+                      
                         <material:TextField  Padding="10,0,0,0" WidthRequest="300" Margin="0,10,0,0"
                               Title="Codigo Upc"  FontFamily="Gilroy"
                               Icon="{FontImageSource FontFamily=MaterialRegular,
@@ -62,10 +52,10 @@
                              Title="Quantidade"  FontFamily="Gilroy"
                              Icon="{FontImageSource FontFamily=MaterialRegular,
                              Glyph={x:Static m:MaterialRegular.Production_quantity_limits}}"/>
-                        <Button ImageSource="add_64px.png" BackgroundColor="white"  HeightRequest="45" Margin="10"  HorizontalOptions="Center" BorderColor="#512BD4"   />
-                        <!--<Button ImageSource="update_64px.png" BackgroundColor="White" Margin="5,10,0,0" HeightRequest="46" Command="{Binding CarregarSoctkEntryLinesCommand}"  />-->
+                        <Button ImageSource="add_64px.png" BackgroundColor="white"  HeightRequest="45" Margin="10"  HorizontalOptions="Center" BorderColor="#512BD4"  Command="{Binding CadastrarSoctkEntryLinesCommand}"  />
+                     
                     </HorizontalStackLayout>
-                </VerticalStackLayout>
+                </Grid>
             </Border>
             <Label Grid.Row="2" Text="Lista de Entradas do Stock" Padding="25,0,0,10"  FontAttributes="Bold"  TextColor="#512BD4"
               FontSize="Title"   VerticalOptions="Start" HorizontalOptions="Start" FontFamily="Gilroy" />
@@ -94,8 +84,6 @@
                 </material:DataGrid.Columns>
             </material:DataGrid>
         </ScrollView >
-
-
         <Grid Grid.Row="4" Grid.ColumnSpan="2" Margin="20,20,0,0" RowDefinitions="*,*" ColumnDefinitions="*,*,*"  HorizontalOptions="Start" ColumnSpacing="10" >
             <Button  CornerRadius="8" WidthRequest="200" TextColor="#512BD4" BorderColor="#512BD4"  FontSize="Medium" Text="Refresh " HorizontalOptions="Start"
                HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png"    >

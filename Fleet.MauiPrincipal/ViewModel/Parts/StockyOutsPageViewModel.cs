@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Fleet.MauiPrincipal.Service.Part;
+using Fleet.MauiPrincipal.View.Part;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -110,9 +111,9 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
       await GoToAddStockAsync());
     public async Task GoToAddStockAsync()
     {
-        StockEntry v = new StockEntry();
-        //await Application.Current.MainPage.Navigation.PushAsync(new StockyEntryPage(v));
-    }
+            StockyOut v = new StockyOut();
+            await Application.Current.MainPage.Navigation.PushAsync(new StockyOutPage(v));
+        }
 
 
 

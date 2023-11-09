@@ -11,26 +11,22 @@ namespace Fleet.MauiPrincipal
         {
             InitializeComponent();
 
-            //MainPage = new Login();
-            MainPage = new NavigationPage( new Login());
+             //MainPage = new Login();
+            MainPage = new NavigationPage(new Login());
+            //MainPage = new AppShell();
         }
         protected override Window CreateWindow(IActivationState activationState)
         {
             var window = base.CreateWindow(activationState);
-            const int newWidth = 1400;
-            const int newHeigth = 800;
-            window.X = 200;
-            window.Y = 200;
-            window.Width = newWidth;
-            window.Height = newHeigth;
-            window.MaximumWidth = newWidth;
-            window.MaximumHeight = newHeigth;
+            //const int newWidth = 1400;
+            //const int newHeigth = 800;
+            //window.X = 200;
+            //window.Y = 200;
+            //window.Width = newWidth;
+            //window.Height = newHeigth;
+            //window.MaximumWidth = newWidth;
+            //window.MaximumHeight = newHeigth;
            
-
-
-            // Get display size
-            //var displayInfo = DeviceDisplay.Current.MainDisplayInfo;
-
             //// Center the window
             //window.X = (displayInfo.Width / displayInfo.Density - window.Width) / 2;
             //window.Y = (displayInfo.Height / displayInfo.Density - window.Height) / 2;
@@ -39,6 +35,7 @@ namespace Fleet.MauiPrincipal
             return window;
 
         }
+     
 
-     }
+    }
 }

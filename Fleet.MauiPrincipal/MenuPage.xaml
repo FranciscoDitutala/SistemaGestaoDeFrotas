@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Fleet.MauiPrincipal.MenuPage"
+             xmlns:local="clr-namespace:Fleet.MauiPrincipal"
+            xmlns:part="clr-namespace:Fleet.MauiPrincipal.View.Part"
+            xmlns:vehicle="clr-namespace:Fleet.MauiPrincipal.View.Vehicle"
+            xmlns:views="clr-namespace:Fleet.MauiPrincipal.View"
+            xmlns:main="clr-namespace:Fleet.MauiPrincipal"
+             xmlns:user="clr-namespace:Fleet.MauiPrincipal.View.session"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome"
+             xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
+             xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+             xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui" 
+             Title="MenuPage" >
+    <VerticalStackLayout>
+
+        <!--<ShellContent 
+         Title="Dashboard" Icon="Dashboard_64px.png"
+         ContentTemplate="{DataTemplate main:MainPage}"
+         Route="MainPage"  />
+ <ShellContent 
+         Title="Gerir Peças" Icon="scan_stock_64px.png"
+         ContentTemplate="{DataTemplate part:PartPage}"
+         Route="PartPage" />
+
+ <ShellContent 
+         Title="Gerir Veículos" Icon="car_64px.png"
+         ContentTemplate="{DataTemplate vehicle:VehicleListPage}"
+         Route="VehicleListPage" >
+ </ShellContent>
+     .
+ <ShellContent 
+         Title="Gerir Usuario" Icon="user_64px.png"
+         ContentTemplate="{DataTemplate user:CreateUser}"
+         Route="CreateUser" >
+ </ShellContent>-->
+        <Label 
+            Text="Welcome to .NET MAUI!"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Button
+            x:Name="btn"
+            x:FieldModifier="public"
+            Text="Open Second Page"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"/>
+            <Button
+             x:Name="btn2"
+             x:FieldModifier="public"
+             Text="Open Second Page"
+             VerticalOptions="Center"
+             HorizontalOptions="Center"/>
+     </VerticalStackLayout>
+
+</ContentPage>

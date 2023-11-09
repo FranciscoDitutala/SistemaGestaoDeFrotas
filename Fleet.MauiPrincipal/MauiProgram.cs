@@ -10,7 +10,6 @@ using Microsoft.Extensions.Logging;
 using UraniumUI;
 using Microsoft.Maui.Controls.Compatibility.Hosting;
 using Microsoft.Maui.Controls.Handlers.Compatibility;
-using Syncfusion.Maui.Core.Hosting;
 using CommunityToolkit.Maui;
 
 namespace Fleet.MauiPrincipal
@@ -20,7 +19,7 @@ namespace Fleet.MauiPrincipal
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
-            builder.UseUraniumUI().UseUraniumUIMaterial().ConfigureSyncfusionCore().UseMauiApp<App>().ConfigureFonts(fonts =>
+            builder.UseUraniumUI().UseUraniumUIMaterial().UseMauiApp<App>().ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");

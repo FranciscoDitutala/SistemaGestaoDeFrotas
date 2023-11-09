@@ -13,94 +13,105 @@
               NavigationPage.HasNavigationBar="False"
               Title="Cadastrar Veículos"  >
 
-    <Grid RowDefinitions="3*,*,5*,*" ColumnDefinitions="5*,5*,5*"  ColumnSpacing="5" RowSpacing="10"  >
+    <Grid RowDefinitions="*,6*" ColumnDefinitions="5*,5*,5*"  ColumnSpacing="5" RowSpacing="10"  >
         <Image  Grid.Row="0" Grid.ColumnSpan="3"  Margin="0,-30,0,0" Source="monitorar.png" Aspect="AspectFill" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
         
             <Grid Grid.ColumnSpan="3" Grid.Row="1" RowDefinitions="*,*,*" ColumnDefinitions="*,*,*" Margin="0,0,15,0" >
-                
-             <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="15" Padding="10,0,0,0" VerticalOptions="Start">
+            <input:FormView Grid.ColumnSpan="3" Spacing="15"  Grid.RowSpan="3" SubmitCommand="{Binding CadastraVehicleCommand}">
+                <!--<VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="15" Padding="10,0,0,0" VerticalOptions="Start">-->
 
-                            <material:TextField Padding="10,0,0,0"
-                    Title="Nº do Chassis " Text="{Binding Vin}" FontFamily="Gilroy"
+                <material:TextField Padding="10,0,0,0" 
+                    Title="Nº do Chassis " Text="{Binding Vin}" FontFamily="Gilroy" 
                         Icon="{FontImageSource FontFamily=MaterialRegular,
-                    Glyph={x:Static m:MaterialRegular.Numbers}} "/>
+                    Glyph={x:Static m:MaterialRegular.Numbers}} ">
+                    <validation:RequiredValidation  />
+                </material:TextField>
 
                 <material:PickerField Padding="10,0,0,0" FontFamily="Gilroy" 
                         Title="Cor" ItemsSource="{Binding Colors}"    
                                               SelectedItem="{Binding SelectedColors}"
                              Icon="{FontImageSource FontFamily=MaterialRegular,
-                        Glyph={x:Static m:MaterialRegular.Color_lens}}"/>
+                        Glyph={x:Static m:MaterialRegular.Color_lens}}">
+                    <validation:RequiredValidation  />
+                </material:PickerField>
 
                 <material:PickerField Padding="10,0,0,0" FontFamily="Gilroy" 
                     Title="Tipo do Veiculo" ItemsSource="{Binding VehicleTypes}"    
                                           SelectedItem="{Binding SelectedVehicleTypes}"
                          Icon="{FontImageSource FontFamily=MaterialRegular,
-                    Glyph={x:Static m:MaterialRegular.Car_rental}}"/>
+                    Glyph={x:Static m:MaterialRegular.Car_rental}}">
+                    <validation:RequiredValidation  />
+                </material:PickerField>
                 <material:PickerField Padding="10,0,0,0"
                 Title="Transmissão " ItemsSource="{Binding VehicleTransmission}" SelectedItem="{Binding SelectedTransmissions}"  FontFamily="Gilroy" 
                      Icon="{FontImageSource FontFamily=MaterialRegular,
-                Glyph={x:Static m:MaterialRegular.Branding_watermark}}"/>
+                Glyph={x:Static m:MaterialRegular.Branding_watermark}}">
+                    <validation:RequiredValidation  />
+                </material:PickerField>
 
-            </VerticalStackLayout>
-
-            <VerticalStackLayout Grid.RowSpan="1" Grid.Column="1" Spacing="15" Padding="0,0,0,0" VerticalOptions="Start" >
 
                 <material:TextField Padding="10,0,0,0"  FontFamily="Gilroy"
       Title="Matricula" Text="{Binding Registration}"
            Icon="{FontImageSource FontFamily=MaterialRegular,
-      Glyph={x:Static m:MaterialRegular.Code}}"/>
-             
+      Glyph={x:Static m:MaterialRegular.Code}}">
+                    <validation:RequiredValidation  />
+                    <validation:RegexValidation Message="XX-NN-NN-XX" />
+                </material:TextField>
+
                 <material:PickerField  Padding="10,0,0,0"
                      Title="Marca do Veiculo" ItemsSource="{Binding VehicleMarcas}" SelectedItem="{Binding SelectedMarcas}" 
                                                    ItemDisplayBinding="{Binding Name}"
                       Icon="{FontImageSource FontFamily=MaterialRegular,   
-                     Glyph={x:Static m:MaterialRegular.Model_training}}"/>
+                     Glyph={x:Static m:MaterialRegular.Model_training}}">
+                    <validation:RequiredValidation  />
+                </material:PickerField>
 
                 <material:TextField Padding="10,0,0,0" FontFamily="Gilroy"
                      Title="Variante do Veiculo" Text="{Binding Variante}"  
                           Icon="{FontImageSource FontFamily=MaterialRegular,
-                     Glyph={x:Static m:MaterialRegular.Car_rental}}"/>
-
+                     Glyph={x:Static m:MaterialRegular.Car_rental}}">
+                    <validation:RequiredValidation  />
+                </material:TextField>
                 <material:TextField  Padding="10,0,0,0" FontFamily="Gilroy"
                 Title="Consumo de Combustivel" Text="{Binding FuelConsumption}"
                      Icon="{FontImageSource FontFamily=MaterialRegular,
-                Glyph={x:Static m:MaterialRegular.Local_gas_station}}"/>
+                Glyph={x:Static m:MaterialRegular.Local_gas_station}}" Keyboard="Numeric"  >
+                    <validation:MinLengthValidation MinLength="1" Message="Consumo Inavalido no minimo 1 litro  "   />
+                    <validation:NumericValidation   />
+                    <validation:RequiredValidation  />
 
-            </VerticalStackLayout>
-            
-            <VerticalStackLayout Grid.RowSpan="2" Grid.Column="2" Spacing="15" Padding="0,0,0,0"  >
+                </material:TextField>
                 <material:TextField  Padding="10,0,0,0" FontFamily="Gilroy"
                 Title="Ano de Fabrico" Text="{Binding DataFabrico}"
                      Icon="{FontImageSource FontFamily=MaterialRegular,
-                Glyph={x:Static m:MaterialRegular.Date_range}}"/>
+                Glyph={x:Static m:MaterialRegular.Date_range}}">
+                    <validation:RequiredValidation  />
+                    <validation:NumericValidation   />
+              
+                </material:TextField>
                 <material:TextField Padding="10,0,0,0" FontFamily="Gilroy" 
-    Title="Modelo do Veiculo" Text="{Binding Model}" 
-    Icon="{FontImageSource FontFamily=MaterialRegular,
-  Glyph={x:Static m:MaterialRegular.Car_rental}} "/>
+                        Title="Modelo do Veiculo" Text="{Binding Model}" 
+                        Icon="{FontImageSource FontFamily=MaterialRegular,
+                      Glyph={x:Static m:MaterialRegular.Car_rental}} ">
+                    <validation:RequiredValidation  />
+                </material:TextField>
                 <material:TextField Padding="10,0,0,0" FontFamily="Gilroy"
-Title="Potencia do Veiculo" Text="{Binding Power}"
-     Icon="{FontImageSource FontFamily=MaterialRegular, 
-Glyph={x:Static m:MaterialRegular.Settings_power}}"/>
-            </VerticalStackLayout>
+                    Title="Potencia do Veiculo" Text="{Binding Power}"
+                         Icon="{FontImageSource FontFamily=MaterialRegular, 
+                    Glyph={x:Static m:MaterialRegular.Settings_power}}">
+                    <validation:RequiredValidation  />
+                </material:TextField>
+            <!--</VerticalStackLayout>-->
+                <Button  CornerRadius="8" WidthRequest="200" TextColor="#512BD4" BorderColor="#512BD4"  FontSize="Medium" Text="Salvar " HorizontalOptions="EndAndExpand" VerticalOptions="End"
+                        Margin="10,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="save_64px.png" Command="{Binding CadastraVehicleCommand}"
+                            input:FormView.IsSubmitButton="True" >
+                    
+                </Button>
+
+            </input:FormView>
 
         </Grid>
-
-        <!--<Label Text="{Binding SelectedTransmissions}"/>-->
-
-        <Grid Grid.Row="3" Grid.ColumnSpan="2" Padding="20,30,0,0" BackgroundColor="LightGray" RowDefinitions="*,*" ColumnDefinitions="*,*,*" 
-              HorizontalOptions="Start" ColumnSpacing="10" WidthRequest="2000" >
-            <Button  CornerRadius="8" WidthRequest="200" TextColor="#512BD4" BorderColor="#512BD4"  FontSize="Medium" Text="Salvar " HorizontalOptions="Start"
-        HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="save_64px.png" Command="{Binding CadastraVehicleCommand}" >
-            </Button>
-
-        
-
-            <!--<Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Refresh " 
-            Margin="10,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="update_64px.png"
-         Grid.Column="2" Command="{Binding CarregarVehiclesCommand}" >
-      </Button>-->
-
-        </Grid>
+       
 
     </Grid>
   

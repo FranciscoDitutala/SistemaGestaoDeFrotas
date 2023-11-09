@@ -5,7 +5,7 @@ using Fleet.MauiPrincipal.View.Vehicle;
 
 namespace Fleet.MauiPrincipal
 {
-    public partial class AppShell : Shell
+    public partial class AppShell : FlyoutPage
     {
         public AppShell()
         {
@@ -17,9 +17,7 @@ namespace Fleet.MauiPrincipal
             Routing.RegisterRoute(nameof(VehicleAddPage), typeof(VehicleAddPage));
             Routing.RegisterRoute(nameof(NavBarPage), typeof(NavBarPage));
             Routing.RegisterRoute(nameof(VehicleAssignPage), typeof(VehicleAssignPage));
-
             Routing.RegisterRoute(nameof(VehicleAddPage), typeof(VehicleAddPage));
-
             //Routing.RegisterRoute(nameof(PartTypePage), typeof(PartTypePage));
             Routing.RegisterRoute(nameof(PartPage), typeof(PartPage));
             Routing.RegisterRoute(nameof(StockyEntryPage), typeof(StockyEntryPage));
@@ -33,6 +31,29 @@ namespace Fleet.MauiPrincipal
             Routing.RegisterRoute(nameof(StockyOutsPage), typeof(StockyOutsPage));
             Routing.RegisterRoute(nameof(VehicleDetailPage), typeof(VehicleDetailPage));
 
+            flyoutPage.btn.Clicked += OpenSecondPageClicked;
+            flyoutPage.btn2.Clicked += OpenSecondPageClicked2;
+            flyoutPage.btn2.Clicked += OpenSecondPageClicked2;
+
+        }
+
+        private void OpenSecondPageClicked(object sender, EventArgs e)
+        {
+            if (!((IFlyoutPageController)this).ShouldShowSplitMode)
+                IsPresented = false;
+                Detail = new NavigationPage(new PartPage());
+        } 
+        private void OpenSecondPageClicked2(object sender, EventArgs e)
+        {
+            if (!((IFlyoutPageController)this).ShouldShowSplitMode)
+                IsPresented = false;
+                Detail = new NavigationPage(new VehicleListPage());
+        }
+        private void OpenSecondPage(object sender, EventArgs e)
+        {
+            if (!((IFlyoutPageController)this).ShouldShowSplitMode)
+                IsPresented = false;
+                Detail = new NavigationPage(new CreateUser());
         }
 
 

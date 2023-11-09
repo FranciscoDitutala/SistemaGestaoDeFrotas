@@ -208,14 +208,15 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
                 {
                     isNewItem = true;
 
-                    path = "/FleetTransport/Vehicle";
-                    Debug.WriteLine("Chegou aqui ", path);
+                    path ="/FleetTransport/Vehicle";
+                   
                 }
                 else
                 {
                     isNewItem = false;
                     path = $"/FleetTransport/Vehicle/{item.Id}";
                 }
+                Debug.WriteLine("Dentro do Verify stock de Entrada o path é  " +path);
             }   
         }
        
@@ -223,7 +224,7 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
              await CadastrarSoctkAsync() );
         public async Task CadastrarSoctkAsync()
         {
-            VerifyNewStockEntry();
+           
             Debug.WriteLine("Entro no metodo cadastrar Stock o path é ", path);
             var url = $"{baseUrl + path}";
             Debug.WriteLine("Entro no metodo cadastrar Stock a url é " + url);
