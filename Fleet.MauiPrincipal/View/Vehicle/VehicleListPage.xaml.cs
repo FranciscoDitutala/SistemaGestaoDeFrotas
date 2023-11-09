@@ -12,10 +12,10 @@ public partial class VehicleListPage : ContentPage
     //    InitializeComponent();
 
     //}
-    public VehicleListPage()
+    public VehicleListPage(string Token)
     {
         InitializeComponent();
-        BindingContext = new VehicleListPageViewModel();
+        BindingContext = new VehicleListPageViewModel(Token);
      
     }
     protected override void OnAppearing()

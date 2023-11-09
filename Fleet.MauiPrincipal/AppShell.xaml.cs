@@ -2,14 +2,18 @@
 using Fleet.MauiPrincipal.View.Part;
 using Fleet.MauiPrincipal.View.session;
 using Fleet.MauiPrincipal.View.Vehicle;
+using System.Diagnostics;
 
 namespace Fleet.MauiPrincipal
 {
     public partial class AppShell : FlyoutPage
     {
-        public AppShell()
+
+        public string Token; 
+        public AppShell(string token)
         {
-            InitializeComponent();
+            Token = token;
+            InitializeComponent(); 
             Routing.RegisterRoute(nameof(VehicleBrandPage), typeof(VehicleBrandPage));
             Routing.RegisterRoute(nameof(VehicleModelPage), typeof(VehicleModelPage));
             Routing.RegisterRoute(nameof(VehicleVaraintPage), typeof(VehicleVaraintPage));
@@ -30,11 +34,11 @@ namespace Fleet.MauiPrincipal
             Routing.RegisterRoute(nameof(StockyEntriesPage), typeof(StockyEntriesPage));
             Routing.RegisterRoute(nameof(StockyOutsPage), typeof(StockyOutsPage));
             Routing.RegisterRoute(nameof(VehicleDetailPage), typeof(VehicleDetailPage));
-
+           
             flyoutPage.btn.Clicked += OpenSecondPageClicked;
             flyoutPage.btn2.Clicked += OpenSecondPageClicked2;
-            flyoutPage.btn2.Clicked += OpenSecondPageClicked2;
-
+            //flyoutPage.btn3.Clicked += OpenSecondPageClicked2;
+            
         }
 
         private void OpenSecondPageClicked(object sender, EventArgs e)
@@ -47,7 +51,7 @@ namespace Fleet.MauiPrincipal
         {
             if (!((IFlyoutPageController)this).ShouldShowSplitMode)
                 IsPresented = false;
-                Detail = new NavigationPage(new VehicleListPage());
+                Detail = new NavigationPage(new VehicleListPage(Token));
         }
         private void OpenSecondPage(object sender, EventArgs e)
         {

@@ -50,18 +50,16 @@ namespace Fleet.MauiPrincipal.ViewModel
             }
         }
 
-        public VehicleListPageViewModel()
+        public VehicleListPageViewModel(string token)
         {
             Client = new HttpClient();
             _SerializerOptions = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             };
-
+              
+            Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             CarregarVehiclesAsync();
-            //CarregarVehiclesFilterAsync();
-
-
         }
         public ICommand CarregarVehiclesFilterCommand => new Command(async () =>
              await CarregarVehiclesFilterAsync());

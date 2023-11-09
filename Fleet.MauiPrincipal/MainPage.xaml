@@ -12,8 +12,7 @@
              x:DataType="viewModel:MainPageViewModel"
               NavigationPage.HasNavigationBar="False"
              NavigationPage.HasBackButton="False"
-            
-            
+
              Title="DashBoard" >
 
                 <Grid RowDefinitions="3*,5*,2*,2*" ColumnDefinitions="*,*" RowSpacing="20" VerticalOptions="Start"  >

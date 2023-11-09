@@ -49,6 +49,8 @@ builder.Services.AddAuthentication(options =>
     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
 })
 
+
+
 // Adding Jwt Bearer
 .AddJwtBearer(options =>
 {
@@ -63,6 +65,7 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Secret"]))
     };
 });
+builder.Services.AddAuthorization();
 
 // Add services to the container.
 

@@ -8,15 +8,15 @@ namespace Fleet.MauiPrincipal
 {
     public  class AppConfiguration
     {
-        public Page CreateMainPage()
-        {
-            var flyoutPage = new FlyoutPage
-            {
-                Flyout = new AppShell(),
-                Detail = new MainPage()
-            };
+        //public Page CreateMainPage()
+        //{
+        //    var flyoutPage = new FlyoutPage
+        //    {
+        //        Flyout = new AppShell(string token),
+        //        Detail = new MainPage()
+        //    };
 
-            return new NavigationPage(flyoutPage);
-        }
+        //    return new NavigationPage(flyoutPage);
+        //}
     }
 }

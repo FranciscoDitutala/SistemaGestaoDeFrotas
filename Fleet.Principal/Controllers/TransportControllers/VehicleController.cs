@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Fleet.Principal.Controllers.TransportControllers
 {
-    [Authorize]
+
     [ApiController]
     [Route("FleetTransport/[controller]")]
     public class VehicleController : ControllerBase
@@ -33,6 +33,7 @@ namespace Fleet.Principal.Controllers.TransportControllers
             if (ans.Id <= 0) return NotFound("O veiculo não foi encontrado");
             return Ok(ans);
         }
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAllVehicles()
         {

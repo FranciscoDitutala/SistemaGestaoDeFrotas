@@ -15,7 +15,6 @@ using System.Windows.Input;
 namespace Fleet.MauiPrincipal.ViewModel.session
 {
     public partial class LoginViewModel:ObservableObject
-
     {
         private HttpClient Client;
         JsonSerializerOptions _SerializerOptions;
@@ -69,7 +68,7 @@ namespace Fleet.MauiPrincipal.ViewModel.session
                 token = tokenResponse.RootElement.GetProperty("token").GetString();
 
                 await Application.Current.MainPage.DisplayAlert("Informação ", "Veiculo Atualizado com sucesso!", "Ok");
-                await Application.Current.MainPage.Navigation.PushAsync(new AppShell());
+                await Application.Current.MainPage.Navigation.PushAsync(new AppShell(token));
             }else
             {
                 {
