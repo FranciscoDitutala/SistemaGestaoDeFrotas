@@ -52,7 +52,7 @@ namespace CustomerApi.Controllers
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
                     expiration = token.ValidTo,
-                    userdetail= user.UserName
+          
                 });
             }
             return Unauthorized();

@@ -36,16 +36,16 @@ namespace Fleet.MauiPrincipal.ViewModel.session
            
         }
         public string token;
-        private Login _login;
-        public Login Login
-        {
-            get { return _login; }
-            set
-            {
-                _login = value;
-                OnPropertyChanged(nameof(Login));
-            }
-        }
+        //private Login _login;
+        //public Login Login
+        //{
+        //    get { return _login; }
+        //    set
+        //    {
+        //        _login = value;
+        //        OnPropertyChanged(nameof(Login));
+        //    }
+        //}
 
         public ICommand EntrarSistemaCommand => new Command(async () =>
          await EntrarSistemaAsync());
@@ -53,7 +53,7 @@ namespace Fleet.MauiPrincipal.ViewModel.session
         private async Task EntrarSistemaAsync()
         {
             //Debug.WriteLine("Entrou no metodo Login ");
-            Login = new Login
+            var Login = new Login
             {
                 Password = PassUser,
                 Username = NameUser
@@ -66,7 +66,7 @@ namespace Fleet.MauiPrincipal.ViewModel.session
             {
                 var conteudo = await response.Content.ReadAsStringAsync();
                 var tokenResponse = JsonSerializer.Deserialize<JsonDocument>(conteudo);
-                token = tokenResponse.RootElement.GetProperty("access_token").GetString();
+                token = tokenResponse.RootElement.GetProperty("token").GetString();
 
                 await Application.Current.MainPage.DisplayAlert("Informação ", "Veiculo Atualizado com sucesso!", "Ok");
                 await Application.Current.MainPage.Navigation.PushAsync(new AppShell());
