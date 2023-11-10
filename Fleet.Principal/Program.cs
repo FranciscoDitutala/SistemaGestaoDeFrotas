@@ -127,6 +127,9 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+// adicionado
+app.UseAuthentication();
+
 app.MapControllers();
 
 app.Run();

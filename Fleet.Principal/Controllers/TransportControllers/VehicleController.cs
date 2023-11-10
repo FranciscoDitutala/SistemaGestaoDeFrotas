@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using Fleet.Principal.Dtos.TransPortDtos.DocumentDtos;
 using Fleet.Principal.Dtos.TransPortDtos.VehicleDtos;
+using Fleet.Principal.Model;
 using Fleet.Principal.Services.TransportServices;
 using Fleet.Principal.Services.TransportServices.Interfaces;
 using Fleet.Transport;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Fleet.Principal.Controllers.TransportControllers
@@ -33,8 +35,10 @@ namespace Fleet.Principal.Controllers.TransportControllers
             if (ans.Id <= 0) return NotFound("O veiculo não foi encontrado");
             return Ok(ans);
         }
-        [Authorize]
+
+        //[Authorize(Roles =UserRoles.User)]
         [HttpGet]
+    
         public async Task<IActionResult> GetAllVehicles()
         {
 

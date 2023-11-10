@@ -58,10 +58,12 @@ namespace CustomerApi.Controllers
             return Unauthorized();
         }
 
+
         [HttpGet]
         [Route("get-all-users")]
         public IActionResult GetAllUsers()
         {
+
             var users = _userManager.Users.Select(u => new { u.UserName, u.Email }).ToList();
             return Ok(users);
         }
@@ -169,7 +171,7 @@ namespace CustomerApi.Controllers
             }
             return NotFound();
         }
-
+        
 
 
         private JwtSecurityToken GetToken(List<Claim> authClaims)

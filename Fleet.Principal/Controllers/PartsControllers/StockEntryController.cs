@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using Fleet.Principal.Dtos.PartsDtos.StockyEntryDtos;
+using Fleet.Principal.Model;
 using Fleet.Principal.Services.PartsServices.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Collections.ObjectModel;
 
 namespace Fleet.Principal.Controllers.PartsControllers
 {
@@ -19,6 +22,7 @@ namespace Fleet.Principal.Controllers.PartsControllers
        
         }
 
+        private ObservableCollection<StockEntryDto> list = new ();
         [HttpGet("GetStockyEntry/{id}")]
         public async Task<IActionResult> Get(int id)
         {
@@ -33,19 +37,29 @@ namespace Fleet.Principal.Controllers.PartsControllers
         public async Task<IActionResult> GetAll()
         {
 
+
+            if (list.Any()) return Ok(list);
             var ans = await _stockEntryService.FindAllAsync(false,DateTime.Now,DateTime.Now);
             return ans != null ? Ok(ans) : BadRequest("stockyEntry não encontrado");
 
         }
 
-        [HttpGet("GetStockEntries/{fromDate}/{toDate}")]
-        public async Task<IActionResult> GetStockByDate(DateTime fromDate, DateTime toDate)
+        [HttpGet("GetStockEntries")]
+        public async Task<IActionResult> GetStockByDate(DateModel dateModel)
         {
 
-            var ans = await _stockEntryService.FindAllAsync(true, fromDate, toDate);
-            return ans != null ? Ok(ans) : BadRequest("stockyEntry não encontrado");
+            if(list.Any())
+               list.Clear();
+            var ans = await _stockEntryService.FindAllAsync(true, dateModel.FromDate,dateModel.ToDate);
+
+            foreach ( var x in ans)
+            {
+                list.Add(x);
+            }
+            return Redirect("GetStockEntries");
 
         }
+
 
         [HttpPost("AddStockEntry")]
         public async Task<IActionResult> Post(CreateStockEntryDto createStockEntryDto)

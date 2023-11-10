@@ -53,12 +53,13 @@ namespace Fleet.MauiPrincipal.ViewModel
         public VehicleListPageViewModel(string token)
         {
             Client = new HttpClient();
+            Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             _SerializerOptions = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             };
               
-            Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+          
             CarregarVehiclesAsync();
         }
         public ICommand CarregarVehiclesFilterCommand => new Command(async () =>
