@@ -23,6 +23,7 @@ namespace Fleet.Principal.Controllers.PartsControllers
         }
 
         private ObservableCollection<StockEntryDto> list = new ();
+        private ObservableCollection<StockEntryDto> list2 = new();
         [HttpGet("GetStockyEntry/{id}")]
         public async Task<IActionResult> Get(int id)
         {
@@ -36,15 +37,26 @@ namespace Fleet.Principal.Controllers.PartsControllers
         [HttpGet("GetStockEntries")]
         public async Task<IActionResult> GetAll()
         {
+          
 
+            if (list.Any())
+            {
+                list2.Clear();
+                foreach(var x in list)
+                {
+                    list2.Add(x);
+                }
+                list.Clear();
 
-            if (list.Any()) return Ok(list);
+                return Ok(list2);
+            }
+                
             var ans = await _stockEntryService.FindAllAsync(false,DateTime.Now,DateTime.Now);
             return ans != null ? Ok(ans) : BadRequest("stockyEntry não encontrado");
 
         }
 
-        [HttpGet("GetStockEntries")]
+        [HttpPost("GetStockEntries")]
         public async Task<IActionResult> GetStockByDate(DateModel dateModel)
         {
 
@@ -59,7 +71,7 @@ namespace Fleet.Principal.Controllers.PartsControllers
             return Redirect("GetStockEntries");
 
         }
-
+ 
 
         [HttpPost("AddStockEntry")]
         public async Task<IActionResult> Post(CreateStockEntryDto createStockEntryDto)
