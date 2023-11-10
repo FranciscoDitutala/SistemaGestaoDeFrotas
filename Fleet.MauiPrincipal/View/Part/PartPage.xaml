@@ -6,6 +6,7 @@
              xmlns:viewmodel="clr-namespace:Fleet.MauiPrincipal.ViewModel.Parts"
              x:DataType="viewmodel:PartPageViewModel"
              NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasBackButton="False"
              Title="Part Page">
     <Grid RowDefinitions="3*,5*,2*,2*" ColumnDefinitions="*,*" RowSpacing="20" VerticalOptions="Start">
         <Image Grid.ColumnSpan="2" Grid.Row="0" Aspect="AspectFill" Source="sobressalentes.png" Margin="0,-30,0,0"  />

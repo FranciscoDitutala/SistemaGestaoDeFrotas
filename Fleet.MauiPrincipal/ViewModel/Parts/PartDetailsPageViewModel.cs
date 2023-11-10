@@ -65,5 +65,12 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
                     Parts = data;
                 }
         }
+        public ICommand VoltarCommand => new Command(async () =>
+  await Voltar());
+        private async Task Voltar()
+        {
+            await Application.Current.MainPage.Navigation.PopAsync();
+        }
+
     }
 }

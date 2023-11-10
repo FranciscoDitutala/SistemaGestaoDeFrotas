@@ -12,6 +12,8 @@
              NavigationPage.HasNavigationBar="False"
              Title="StockDetailsPage">
     <Grid RowDefinitions="3*,6*,*" ColumnDefinitions="*,*,*"  >
+        <ImageButton Source="return_64px.png" Command="{Binding VoltarCommand}" ZIndex="1" Grid.Row="0" Aspect="AspectFit" WidthRequest="20" HeightRequest="20" 
+      Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" BackgroundColor="Transparent"/>
         <Image  Grid.Row="0" Grid.ColumnSpan="3"  Margin="0,-30,0,0" Source="sobressalentes.png" Aspect="AspectFill" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
         <Grid Grid.Row="0" Grid.ColumnSpan="3" Margin="40,-20,10,10" RowDefinitions="*,*"  ZIndex="1" VerticalOptions="EndAndExpand" >
             <Label  Text="Informações do Stock" FontFamily="Gilroy" FontAttributes="Bold" FontSize="Large" 

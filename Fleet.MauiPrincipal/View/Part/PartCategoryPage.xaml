@@ -14,8 +14,8 @@
              Title="Part Categoria" >
     <Grid  RowDefinitions ="3*,*,7*,1*" ColumnDefinitions="*"  >
 
-        <ImageButton  Source="return_64px.png" Aspect="AspectFill" WidthRequest="20" HeightRequest="20"
-                    Grid.Row="0" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" Margin="10,-20,0,0" ZIndex="1"/>
+        <ImageButton Source="return_64px.png" Command="{Binding VoltarCommand}" ZIndex="1" Grid.Row="0" Aspect="AspectFit" WidthRequest="20" HeightRequest="20" 
+              Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" BackgroundColor="Transparent"/>
         <Image  Grid.Row="0" Aspect="AspectFill" Source="sobressalentes.png" Margin="0,-30,0,0"  />
         <Label Text="Listar SubCategorias" TextColor="White" FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"
         HorizontalOptions="Start" VerticalOptions="Start" Margin="20,40,0,0" />
@@ -60,7 +60,7 @@
 
         <Grid Grid.Row="3" Margin="0,0,0,0" RowDefinitions="*,*" ColumnDefinitions="*,*,*" BackgroundColor="WhiteSmoke" HorizontalOptions="Start" ColumnSpacing="10" >
             
-            <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Refresh " HorizontalOptions="Start"
+            <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Atualizar " HorizontalOptions="Start"
               Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png" Command="{Binding CarregarPartTypeCategoriesCommand}"
                       Grid.Column="1" >
             </Button>

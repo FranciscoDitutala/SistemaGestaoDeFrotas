@@ -87,18 +87,19 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
              await CarregarStocksByDateAsync());
         private async Task CarregarStocksByDateAsync()
         {
-            Entrada = new StockEntry();
-            var url = $"{baseUrl}/FleetParts/StockEntry/GetStockEntries/{BeginDate}/{LastDate}";
-            var response = await Client.GetAsync(url);
-            if (response.IsSuccessStatusCode)
-                using (var responseStream = await response.Content.ReadAsStreamAsync())
-                {
-                    var data = await JsonSerializer.DeserializeAsync<StockEntry>
-                        (responseStream, _SerializerOptions);
-                    Entrada = data;
-                    Debug.WriteLine("Carregou com stock filter sucesso");
-                }
-            Debug.WriteLine("Dentro do stock");
+            Stock = new  List<StockEntry>();
+            //var url = $"{baseUrl}/FleetParts/StockEntry/GetStockEntries/{BeginDate}/{LastDate}";
+            //var response = await Client.PostAsync(url);
+            //if (response.IsSuccessStatusCode)
+            //    using (var responseStream = await response.Content.ReadAsStreamAsync())
+            //    {
+            //        var data = await JsonSerializer.DeserializeAsync<List<StockEntry>>
+            //            (responseStream, _SerializerOptions);
+            //        Stock = data;
+            //        Debug.WriteLine("Carregou com stock filter sucesso");
+            //        //Stock = Entrada;
+            //    }  else { await Application.Current.MainPage.DisplayAlert("Atenção","O item nao foi encontrado","Ok"); }
+            
         }
         public ObservableCollection<StockEntry> Items { get; set; }
         public ObservableCollection<StockEntry> SelectedItems { get; set; } = new ObservableCollection<StockEntry>();
@@ -118,6 +119,13 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
 
             }
         }
+        public ICommand VoltarCommand => new Command(async () =>
+ await Voltar());
+        private async Task Voltar()
+        {
+            await Application.Current.MainPage.Navigation.PopAsync();
+        }
+
         public ICommand GoToAddStockCommand => new Command(async () =>
           await GoToAddStockAsync());
         public async Task GoToAddStockAsync()

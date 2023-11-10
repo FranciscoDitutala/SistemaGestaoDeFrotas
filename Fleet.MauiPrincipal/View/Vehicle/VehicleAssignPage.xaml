@@ -40,7 +40,7 @@
                 <material:PickerField 
                         Title="Veículo Atribuir" 
                         ItemsSource="{Binding Vehicles}"
-                        ItemDisplayBinding="{Binding Vin}"
+                        ItemDisplayBinding="{Binding Registration}"
                         SelectedItem="{Binding SelectedVehicle}"
                         Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Car_rental}}"
                     />

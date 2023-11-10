@@ -10,9 +10,12 @@
              xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui" 
              NavigationPage.HasNavigationBar="False"
+              NavigationPage.HasBackButton="False"
              Title="PartDetailsPage">
     
     <Grid RowDefinitions="3*,6*,*" ColumnDefinitions="*,*,*"  >
+        <ImageButton Source="return_64px.png" Command="{Binding VoltarCommand}" ZIndex="1" Grid.Row="0" Aspect="AspectFit" WidthRequest="20" HeightRequest="20" 
+    Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" BackgroundColor="Transparent"/>
         <Image  Grid.Row="0" Grid.ColumnSpan="3"  Margin="0,-30,0,0" Source="sobressalentes.png" Aspect="AspectFill" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
         <Grid Grid.Row="0" Grid.ColumnSpan="3" Margin="40,130,10,10" RowDefinitions="*,*"  ZIndex="1" >
             <Label  Text="Informações da Peça" FontFamily="Gilroy" FontAttributes="Bold" FontSize="Large"
@@ -63,19 +66,19 @@
         </Grid>
         <Grid Grid.Row="3" Grid.ColumnSpan="2" Margin="20,0,0,0" RowDefinitions="*,*" ColumnDefinitions="*,*,*,*"  
               HorizontalOptions="Start" ColumnSpacing="10" >
-            <Button  CornerRadius="8" WidthRequest="200" TextColor="white" BackgroundColor="Red"  FontSize="Medium" Text="Deletar " HorizontalOptions="Start"
+            <!--<Button  CornerRadius="8" WidthRequest="200" TextColor="white" BackgroundColor="Red"  FontSize="Medium" Text="Deletar " HorizontalOptions="Start"
         HeightRequest="50"  FontFamily="Gilroy" ImageSource="delete_64px.png"    Grid.Column="0"  >
-            </Button>
+            </Button>-->
 
             <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Refresh " 
                       Margin="10,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png" Command="{Binding CarregarPartsCommand}"
                    Grid.Column="1" >
             </Button>
 
-            <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Atualizar " 
+            <!--<Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Atualizar " 
                       Margin="10,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="update_64px.png" 
                    Grid.Column="2" >
-            </Button>
+            </Button>-->
         </Grid>
 
     </Grid>

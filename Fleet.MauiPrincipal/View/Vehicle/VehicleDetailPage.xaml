@@ -9,11 +9,14 @@
               xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"    
               xmlns:viewmodel="clr-namespace:Fleet.MauiPrincipal.ViewModel"
               x:DataType="viewmodel:Vehicle_DetailsViewModel"
+             
               NavigationPage.HasNavigationBar="False"
               Title="VehicleListPage" >
     <Grid RowDefinitions="3*,7*,*" ColumnDefinitions="*,*,*"  >
         <Image  Grid.Row="0" Grid.ColumnSpan="3"  Margin="0,-30,0,0" Source="monitorar.png" Aspect="AspectFill" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
-        <Grid Grid.Row="0" Grid.ColumnSpan="3" Margin="40,130,10,10" RowDefinitions="*,*"  ZIndex="1" >
+        <ImageButton Source="return_64px.png" Command="{Binding VoltarCommand}" ZIndex="1" Grid.Row="0" Aspect="AspectFit" WidthRequest="20" HeightRequest="20" 
+                     Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" BackgroundColor="Transparent"/>
+        <Grid Grid.Row="0" Grid.ColumnSpan="3" Margin="40,130,10,10" RowDefinitions="*,*"  ZIndex="1"  >
             <Label  Text="Informações do Veículo" FontFamily="Gilroy" FontAttributes="Bold" FontSize="Large"
                    TextColor="White" ZIndex="1" />
         </Grid>

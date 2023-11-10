@@ -200,25 +200,25 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
             }
             Debug.WriteLine("Dentro do stock");
         }
-        public void VerifyNewStockEntry()
-        {
-            foreach (var item in Stock)
-            {
-                if (!item.Id.Equals(stockUpdateId.Id))
-                {
-                    isNewItem = true;
+        //public void VerifyNewStockEntry()
+        //{
+        //    foreach (var item in Stock)
+        //    {
+        //        if (!item.Id.Equals(stockUpdateId.Id))
+        //        {
+        //            isNewItem = true;
 
-                    path ="/FleetTransport/Vehicle";
+        //            path ="/FleetTransport/Vehicle";
                    
-                }
-                else
-                {
-                    isNewItem = false;
-                    path = $"/FleetTransport/Vehicle/{item.Id}";
-                }
-                Debug.WriteLine("Dentro do Verify stock de Entrada o path é  " +path);
-            }   
-        }
+        //        }
+        //        else
+        //        {
+        //            isNewItem = false;
+        //            path = $"/FleetTransport/Vehicle/{item.Id}";
+        //        }
+        //        Debug.WriteLine("Dentro do Verify stock de Entrada o path é  " +path);
+        //    }   
+        //}
        
         public ICommand CadastrarSoctkCommand => new Command(async () =>
              await CadastrarSoctkAsync() );
@@ -226,7 +226,8 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
         {
            
             Debug.WriteLine("Entro no metodo cadastrar Stock o path é ", path);
-            var url = $"{baseUrl + path}";
+            //$"{baseUrl}/FleetCommon/VehicleBrand"
+            var url = $"{baseUrl}/FleetParts/StockEntry/AddStockEntry";
             Debug.WriteLine("Entro no metodo cadastrar Stock a url é " + url);
             if (BuyValue > 0)
             {
@@ -239,8 +240,7 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
                 };
                 string json = JsonSerializer.Serialize<StockEntry>(StockEntries, _SerializerOptions);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                if (isNewItem)
-                {
+               
                     var response = await Client.PostAsync(url, content);
                     if (response.IsSuccessStatusCode)
                     {
@@ -250,19 +250,7 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
                         await Application.Current.MainPage.Navigation.PopAsync();
                     }
                     else { await Application.Current.MainPage.DisplayAlert("Falhou", "Entrada não cadastrado ", "OK"); }
-                }else
-                {
-                    var response = await Client.PutAsync(url, content);
-                    if (response.IsSuccessStatusCode)
-                    {
-                        await Application.Current.MainPage.DisplayAlert("Atenção", "Entrada Atualizado com sucesso ", "OK");
-                        _lines = null;
-                        ClearTheFields();
-                        await Application.Current.MainPage.Navigation.PopAsync();
-                        await Application.Current.MainPage.Navigation.PopAsync();
-                    }
-                    else { await Application.Current.MainPage.DisplayAlert("Falhou", "Entrada não atualizada  ", "OK"); }
-                }
+               
             }
             else { await Application.Current.MainPage.DisplayAlert("Atenção", "Campos obrigatorio Vazio ", "OK"); }
         }
@@ -272,6 +260,13 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
             //BuyValue = stockUpdateId.TotalValue;
             //StLines = stockUpdateId.Lines;
         }
+        public ICommand VoltarCommand => new Command(async () =>
+ await Voltar());
+        private async Task Voltar()
+        {
+            await Application.Current.MainPage.Navigation.PopAsync();
+        }
+
         public void ClearTheFields()
         {
             Providers = "";

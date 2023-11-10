@@ -162,6 +162,11 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
                 }
             } else { await Application.Current.MainPage.DisplayAlert("Atenção","Campos Obrigatorios em branco","Ok"); }    
         }
-
+        public ICommand VoltarCommand => new Command(async () =>
+await Voltar());
+        private async Task Voltar()
+        {
+            await Application.Current.MainPage.Navigation.PopAsync();
+        }
     }
 }

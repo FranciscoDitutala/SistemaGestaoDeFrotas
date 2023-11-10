@@ -10,12 +10,14 @@
              xmlns:viewmodel="clr-namespace:Fleet.MauiPrincipal.ViewModel"
              x:DataType="viewmodel:VehicleListPageViewModel"
              NavigationPage.HasNavigationBar="False"
+             
              Title="Lista de Viaturas ">
 
     <Grid  RowDefinitions ="3*,7*,1*" ColumnDefinitions="*"  >
         <Image  Grid.Row="0" Aspect="AspectFill" Source="controlo.png" Margin="0,-30,0,0"  />
-        <Label Text="Gerir Veículos" TextColor="White" FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"
-           HorizontalOptions="Start" VerticalOptions="Start" Margin="20,40,0,0" />
+        <!--<ImageButton Source="return_64px.png" Command="{Binding VoltarCommand}" ZIndex="1" Grid.Row="0"  />-->
+        <Label Text="Gerir Veículos" TextColor="White" FontSize="Medium" FontFamily="Gilroy" FontAttributes="Bold"
+           HorizontalOptions="Start" VerticalOptions="StartAndExpand" Margin="20,40,0,0" />
         
             <Grid  Grid.Row="1" Grid.ColumnSpan="2"  Margin="-20,10,0,0" HorizontalOptions="Start" 
                    RowDefinitions="*,6*" ColumnDefinitions="8*,2*">
@@ -56,7 +58,7 @@
                             <material:DataGridColumn Binding="{Binding Brand}" Title="Marca" />
                             <material:DataGridColumn Binding="{Binding Model}" Title="Modelo"/>
                             <material:DataGridColumn Binding="{Binding Type}" Title="Tipo"/>
-                        <material:DataGridColumn Binding="{Binding Assigned}" Title="Atribuição"/>
+                        <!--<material:DataGridColumn Binding="{Binding Assigned}" Title="Atribuição"/>-->
                        
                     </material:DataGrid.Columns>
                     

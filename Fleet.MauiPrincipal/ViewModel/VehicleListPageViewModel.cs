@@ -49,7 +49,16 @@ namespace Fleet.MauiPrincipal.ViewModel
                 OnPropertyChanged(nameof(VehiclesFilter));
             }
         }
+        public VehicleListPageViewModel()
+        {
+            Client = new HttpClient();
+            _SerializerOptions = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
 
+            CarregarVehiclesAsync();
+        }
         public VehicleListPageViewModel(string token)
         {
             Client = new HttpClient();
@@ -79,6 +88,12 @@ namespace Fleet.MauiPrincipal.ViewModel
                     Debug.WriteLine("Carregou filter");
 
                 }
+        }
+        public ICommand VoltarCommand => new Command(async () =>
+             await Voltar());
+        private async Task Voltar()
+        {
+            await Application.Current.MainPage.Navigation.PopAsync();
         }
         public ICommand CarregarVehiclesCommand => new Command(async () =>
              await CarregarVehiclesAsync());

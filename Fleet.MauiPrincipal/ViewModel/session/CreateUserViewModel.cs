@@ -1,13 +1,130 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Fleet.MauiPrincipal.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Fleet.MauiPrincipal.ViewModel.session
 {
-    public partial class CreateUserViewModel
+    public partial class CreateUserViewModel:ObservableObject
     {
+        private HttpClient Client;
+        JsonSerializerOptions _SerializerOptions;
+        string baseUrl = "https://localhost:7111";
+        [ObservableProperty]
+        public string _userName;
+        [ObservableProperty]
+        public string _password;
+        [ObservableProperty]
+        public string _emailEntry;
+        
+        public User userUpdate;
+        public CreateUserViewModel()
+        {
+            //userUpdate = user;
+            Client = new HttpClient();
+            //Vehicles = new ObservableCollection<Vehicle>();
+            _SerializerOptions = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+            //FillTheFields();
+            CarregarUserAsync();
 
+        }
+        public List<User> Users;
+        public ICommand CarregarUserCommand => new Command(async () =>
+           await CarregarUserAsync());
+        private async Task CarregarUserAsync()
+        {
+            Users = new List<User>();
+            var url = $"{baseUrl}/api/Authenticate/get-all-users";
+
+            var response = await Client.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+                using (var responseStream = await response.Content.ReadAsStreamAsync())
+                {
+                    var data = await JsonSerializer.DeserializeAsync<List<User>>
+                        (responseStream, _SerializerOptions);
+                    Users = data;
+                }
+        }
+
+        public bool isNewItem;
+        string path;
+        int paramId;
+        public void VerifyNewUser()
+        {
+            foreach (var item in Users)
+            {
+
+                if (!item.Email.Equals(EmailEntry) && !item.UserName.Equals(UserName))
+                {
+                    isNewItem = true;
+                    path = "/api/Authenticate/register";
+                }
+                else
+                {
+                    isNewItem = false;
+                    path = $"/api/Authenticate/edit-password{item.Id}";
+                    paramId = item.Id;
+                }
+
+            }
+        }
+        public ICommand CadastraUsuarioCommand => new Command(async () =>
+          await CadastraUsuarioAsync());
+        private async Task CadastraUsuarioAsync()
+        {
+            VerifyNewUser();
+            var url = $"{baseUrl + path}";
+            if ((!(string.IsNullOrEmpty(UserName)) && !(string.IsNullOrEmpty(EmailEntry)) && !(string.IsNullOrEmpty(Password))))
+            {
+
+                var user = new User
+                {
+                    UserName = UserName,
+                    Password = Password,
+                    Email = EmailEntry
+                   
+                };
+
+                string json = JsonSerializer.Serialize<User>(user, _SerializerOptions);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = null;
+                if (isNewItem.Equals(false))
+                {
+                    //response = await Client.PutAsync(url, content);
+                    await Application.Current.MainPage.DisplayAlert("Informação ", "Usuario Atualizado com sucesso!", "Ok");
+                    //CleanFields();
+                    //await Application.Current.MainPage.Navigation.PushAsync(new (paramId));
+                }
+                else
+                {
+                    response = await Client.PostAsync(url, content);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Informação", "Usuario Cadastrado com sucesso!", "Ok");
+                        //CleanFields();
+                        await Application.Current.MainPage.Navigation.PopAsync();
+                    }
+                    else
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Informação", "Usuario nao Cadastrado sucesso!", "Ok");
+                    }
+
+                }
+            }
+
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Atenção ", "Campos obrigatório vazio", "Ok");
+            }
+        }
     }
 }

@@ -45,6 +45,13 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
                 OnPropertyChanged(nameof(Stock));
             }
         }
+        public ICommand VoltarCommand => new Command(async () =>
+          await Voltar());
+        private async Task Voltar()
+        {
+            await Application.Current.MainPage.Navigation.PopAsync();
+        }
+
         public ICommand GoToAddStockCommad => new Command(async () =>
          await GoToAddStockAsync());
         private async Task GoToAddStockAsync()

@@ -11,9 +11,12 @@
              xmlns:viewModel="clr-namespace:Fleet.MauiPrincipal.ViewModel.Parts"
              x:DataType="viewModel:PartListPageViewModelcs"
              NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasBackButton="False"
              
              Title="PartListPage">
     <Grid  RowDefinitions ="3*,*,7*,1*" ColumnDefinitions="*"  >
+        <ImageButton Source="return_64px.png" Command="{Binding VoltarCommand}" ZIndex="1" Grid.Row="0" Aspect="AspectFit" WidthRequest="20" HeightRequest="20" 
+      Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" BackgroundColor="Transparent"/>
         <Image  Grid.Row="0" Aspect="AspectFill" Source="controlo.png" Margin="0,-30,0,0"  />
         <Label Text="Gerir Peças" TextColor="White" FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"
         HorizontalOptions="Start" VerticalOptions="Start" Margin="20,40,0,0" />
@@ -44,14 +47,14 @@
                         <material:DataGridColumn Binding="{Binding Sku}" Title="Codigo Nacional"/>
                         <material:DataGridColumn Binding="{Binding PartTypeName}" Title="SubCategoria" />
                         <material:DataGridColumn Binding="{Binding Brand}" Title="Marca"/>
-                        <material:DataGridColumn Title="Ações"  >
+                        <!--<material:DataGridColumn Title="Ações"  >
                             <material:DataGridColumn.CellItemTemplate    >
                                 <DataTemplate>
                                     <Button  ImageSource="show_property_64px.png" Margin="10,0,0,0" Text="Detalhes" BackgroundColor="White" BorderColor="#512BD4" TextColor="#512BD4"
                                           FontSize="Micro"    FontFamily="Gilroy" Command="{Binding CarregarPartsCommand}" />
                                 </DataTemplate>
                             </material:DataGridColumn.CellItemTemplate>
-                        </material:DataGridColumn>
+                        </material:DataGridColumn>-->
                       </material:DataGrid.Columns>
                 </material:DataGrid>
             </ScrollView>

@@ -2,12 +2,82 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Fleet.MauiPrincipal.View.session.ListarUser"
-               NavigationPage.HasNavigationBar="False"
-             Title="ListarUser">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+            xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome"
+            xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
+            xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+            xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"    
+            xmlns:viewmodel="clr-namespace:Fleet.MauiPrincipal.ViewModel.session"
+            x:DataType="viewmodel:LoginListViewModel"
+            NavigationPage.HasNavigationBar="False"
+            NavigationPage.HasBackButton="False"
+            Title="ListarUser">
+
+
+    <Grid  RowDefinitions ="3*,7*,1*" ColumnDefinitions="*"  >
+        <Image  Grid.Row="0" Aspect="AspectFill" Source="controlo.png" Margin="0,-30,0,0"  />
+        <Label Text="Gerir Usuários" TextColor="White" FontSize="Large" FontFamily="Gilroy" FontAttributes="Bold"
+         HorizontalOptions="Start" VerticalOptions="EndAndExpand" Margin="20,40,0,0" />
+
+        <Grid  Grid.Row="1" Grid.ColumnSpan="2"  Margin="-20,10,0,0" HorizontalOptions="Start" 
+                 RowDefinitions="*,6*" ColumnDefinitions="8*,2*">
+            <!--<Grid Grid.Row="0" FlowDirection="LeftToRight" Margin="20,0,0,0" Grid.ColumnSpan="2" VerticalOptions="Start"
+            RowDefinitions="*" ColumnDefinitions="*,*" HeightRequest="60">
+                <material:TextField  Padding="20,0,0,0" FontFamily="Gilroy" 
+                    Title="Procurar" Text="{Binding Filter}" Grid.Row="0" Grid.Column="0"
+                     Icon="{FontImageSource FontFamily=MaterialRegular,
+                    Glyph={x:Static m:MaterialRegular.Search}}"/>
+                <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Procurar " HorizontalOptions="Start"
+                        Margin="20,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="search_64px.png" VerticalOptions="Start"
+                        Grid.Column="1" Grid.Row="0" Command="{Binding CarregarVehiclesFilterCommand}">
+                </Button>
+
+            </Grid>-->
+            <ScrollView HorizontalOptions="Start" Margin="20,0,0,0"   Grid.Row="2" VerticalOptions="Start" Grid.ColumnSpan="2"
+                      >
+
+                <material:DataGrid ItemsSource="{Binding Users}"  Margin="20,0,20,20"  BackgroundColor="WhiteSmoke" CornerRadius="0" x:Name="GridList" HorizontalOptions="Start"
+                      LineSeparatorColor="#004D97" SelectedItems="{Binding SelectedItems}" BorderColor="#004D97" FlowDirection="LeftToRight"   >
+                    <material:DataGrid.EmptyView>
+                        <VerticalStackLayout Margin="80,20">
+                            <Image
+                WidthRequest="40"
+                HeightRequest="40"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Source="{FontImageSource FontFamily=MaterialOutlined, Glyph={x:Static m:MaterialOutlined.Backup_table}, Color={AppThemeBinding
+                      Light={StaticResource OnSurface}, Dark={StaticResource OnSurfaceDark}}}"/>
+                            <Label Text="Sem dados armazenados..." HorizontalOptions="Center"/>
+                        </VerticalStackLayout>
+                    </material:DataGrid.EmptyView>
+
+                    <material:DataGrid.Columns >
+                        <material:DataGridSelectionColumn Title="#"/>
+                        <material:DataGridColumn Binding="{Binding UserName}" Title="Nome de Usuario"  />
+                        <material:DataGridColumn Binding="{Binding Email}" Title="Email"/>
+    
+                    </material:DataGrid.Columns>
+
+
+                </material:DataGrid>
+            </ScrollView>
+
+        </Grid>
+
+        <Grid Grid.Row="3" Margin="20,0,20,20" RowDefinitions="*,*" ColumnDefinitions="*,*,*" BackgroundColor="WhiteSmoke" HorizontalOptions="Start" ColumnSpacing="10" VerticalOptions="EndAndExpand" >
+            <Button  CornerRadius="8" WidthRequest="200" TextColor="#512BD4" BorderColor="#512BD4"  FontSize="Medium" Text="Adicionar " HorizontalOptions="Start"
+               Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="add_64px.png" Command="{Binding GoToCreateUserCommand}"  >
+            </Button>
+            <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Listar " HorizontalOptions="Start"
+               Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png"
+                       Grid.Column="1" Command="{Binding CarregarUsersCommand}" >
+            </Button>
+            <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Detalhes " HorizontalOptions="Start"
+            Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png"
+                    Grid.Column="2" Command="{Binding GoToUserDetailsCommand}">
+            </Button>
+
+        </Grid>
+
+    </Grid>
 </ContentPage>

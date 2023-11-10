@@ -13,10 +13,10 @@
              Title="PartCategoriesPage">
 
     <Grid  RowDefinitions ="3*,*,7*,1*" ColumnDefinitions="*"  >
-
-        <ImageButton  Source="return_64px.png" Aspect="AspectFill" Clicked="ReturnToListVehicle" WidthRequest="20" HeightRequest="20"
-                       Grid.Row="0" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" Margin="10,-20,0,0" ZIndex="1"/>
-        <Image  Grid.Row="0" Aspect="AspectFill" Source="sobressalentes.png" Margin="0,-30,0,0"  />
+        <ImageButton Source="return_64px.png" Command="{Binding VoltarCommand}" ZIndex="1" Grid.Row="0" Aspect="AspectFit" WidthRequest="20" HeightRequest="20" 
+      Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" BackgroundColor="Transparent"/>
+        
+<Image  Grid.Row="0" Aspect="AspectFill" Source="sobressalentes.png" Margin="0,-30,0,0"  />
         <Label Text="Listar Categorias" TextColor="White" FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"
            HorizontalOptions="Start" VerticalOptions="Start" Margin="20,40,0,0" />
 

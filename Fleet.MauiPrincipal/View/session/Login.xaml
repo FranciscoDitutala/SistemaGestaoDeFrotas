@@ -19,13 +19,13 @@
             RowDefinitions="*,*,*" ColumnDefinitions="*,*" HorizontalOptions="End"  Margin="0,-20,40,0" >
 
         <Grid Grid.Row="2" Grid.Column="1" BackgroundColor="WhiteSmoke" WidthRequest="400" HeightRequest="480" Padding="0,50,0,0" 
-              VerticalOptions="Center" HorizontalOptions="EndAndExpand" RowDefinitions="*,2*" >
+              VerticalOptions="Center" HorizontalOptions="EndAndExpand" RowDefinitions="*,3*" >
            
                 <VerticalStackLayout VerticalOptions="Center" Grid.Row="0" HorizontalOptions="Center" Margin="0,0,0,30" >
 
-                    <Label  Text="Sistema de Gestão  " FontSize="27" TextColor="#512BD4" FontAttributes="Bold"
+                    <Label  Text="Sistema de Gestão  " FontSize="Large" TextColor="#512BD4" FontAttributes="Bold"
                   VerticalOptions="Center" HorizontalOptions="Center" FontFamily="Gilroy"  /> 
-                    <Label  Text="Frotas e Peças  " FontSize="17" FontAttributes="None"
+                    <Label  Text="Frotas e Peças com Geolocalização  " FontSize="17" FontAttributes="None"
                   VerticalOptions="Center" HorizontalOptions="Center" FontFamily="Gilroy" />
                     <Label  Text="Faça o seu Login  " FontSize="Small"  Margin="0,20,0,0" FontFamily="Gilroy"
                   VerticalOptions="Center" HorizontalOptions="Center" TextColor="Black"  FontAttributes="Bold" />
@@ -33,7 +33,7 @@
                 </VerticalStackLayout>
             
             <input:FormView Spacing="30" FlowDirection="LeftToRight"  SubmitCommand="{Binding EntrarSistemaCommand}" 
-                            Grid.Row="1">
+                            Grid.Row="1" Margin="0,30,0,0" >
           
                  <material:TextField WidthRequest="350" x:Name="UserName" 
                   Title="Nome de Usuario" HeightRequest="50" FontFamily="Gilroy" Text="{Binding NameUser}"

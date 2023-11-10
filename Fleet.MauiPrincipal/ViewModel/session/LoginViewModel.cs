@@ -35,16 +35,6 @@ namespace Fleet.MauiPrincipal.ViewModel.session
            
         }
         public string token;
-        //private Login _login;
-        //public Login Login
-        //{
-        //    get { return _login; }
-        //    set
-        //    {
-        //        _login = value;
-        //        OnPropertyChanged(nameof(Login));
-        //    }
-        //}
 
         public ICommand EntrarSistemaCommand => new Command(async () =>
          await EntrarSistemaAsync());
@@ -52,13 +42,13 @@ namespace Fleet.MauiPrincipal.ViewModel.session
         private async Task EntrarSistemaAsync()
         {
             //Debug.WriteLine("Entrou no metodo Login ");
-            var Login = new Login
+            var Login = new User
             {
                 Password = PassUser,
-                Username = NameUser
+                UserName = NameUser
             };
             var url = $"{baseUrl}/api/Authenticate/login";
-            string json = JsonSerializer.Serialize<Login>(Login, _SerializerOptions);
+            string json = JsonSerializer.Serialize<User>(Login, _SerializerOptions);
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await Client.PostAsync(url, content);
             if (response.IsSuccessStatusCode)
@@ -66,10 +56,15 @@ namespace Fleet.MauiPrincipal.ViewModel.session
                 var conteudo = await response.Content.ReadAsStringAsync();
                 var tokenResponse = JsonSerializer.Deserialize<JsonDocument>(conteudo);
                 token = tokenResponse.RootElement.GetProperty("token").GetString();
-
-                await Application.Current.MainPage.DisplayAlert("Informação ", "Veiculo Atualizado com sucesso!", "Ok");
+                
+                await Application.Current.MainPage.DisplayAlert("Informação ", "Login com sucesso!", "Ok");
+            
                 await Application.Current.MainPage.Navigation.PushAsync(new AppShell(token));
-            }else
+                //await Application.Current.MainPage.Navigation.PushAsync(new AppShell());
+                NameUser = "";
+                PassUser = "";
+            }
+            else
             {
                 {
                     // Lidere com erros de autenticação

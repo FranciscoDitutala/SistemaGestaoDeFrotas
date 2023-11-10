@@ -55,7 +55,7 @@
            Icon="{FontImageSource FontFamily=MaterialRegular,
       Glyph={x:Static m:MaterialRegular.Code}}">
                     <validation:RequiredValidation  />
-                    <validation:RegexValidation Message="XX-NN-NN-XX" />
+                    <validation:RegexValidation Pattern="^[A-Za-z]{2}-\d{2}-\d{2}-[A-Za-z]{2}$" Message=" The pattern EX. LD-12-12-AZ" />
                 </material:TextField>
 
                 <material:PickerField  Padding="10,0,0,0"
@@ -71,6 +71,7 @@
                           Icon="{FontImageSource FontFamily=MaterialRegular,
                      Glyph={x:Static m:MaterialRegular.Car_rental}}">
                     <validation:RequiredValidation  />
+                    <validation:MinLengthValidation MinLength="3" Message="Minimum char 3"   />
                 </material:TextField>
                 <material:TextField  Padding="10,0,0,0" FontFamily="Gilroy"
                 Title="Consumo de Combustivel" Text="{Binding FuelConsumption}"
@@ -86,6 +87,8 @@
                      Icon="{FontImageSource FontFamily=MaterialRegular,
                 Glyph={x:Static m:MaterialRegular.Date_range}}">
                     <validation:RequiredValidation  />
+                    <validation:MinValueValidation MinValue="1900"   />
+                    <validation:MaxValueValidation MaxValue="2099"   />
                     <validation:NumericValidation   />
               
                 </material:TextField>
@@ -100,6 +103,8 @@
                          Icon="{FontImageSource FontFamily=MaterialRegular, 
                     Glyph={x:Static m:MaterialRegular.Settings_power}}">
                     <validation:RequiredValidation  />
+                    <validation:DigitsOnlyValidation  />
+                    
                 </material:TextField>
             <!--</VerticalStackLayout>-->
                 <Button  CornerRadius="8" WidthRequest="200" TextColor="#512BD4" BorderColor="#512BD4"  FontSize="Medium" Text="Salvar " HorizontalOptions="EndAndExpand" VerticalOptions="End"

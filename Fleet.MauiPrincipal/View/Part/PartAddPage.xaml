@@ -15,7 +15,8 @@
 
     <Grid RowDefinitions="3*,3*,2*,*" ColumnDefinitions="5*,5*"  ColumnSpacing="5"  RowSpacing="10" >
         <Image  Grid.Row="0" Grid.ColumnSpan="3"  Margin="0,-30,0,0" Source="monitorar.png" Aspect="AspectFill" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
-
+        <ImageButton Source="return_64px.png" Command="{Binding VoltarCommand}" ZIndex="1" Grid.Row="0" Aspect="AspectFit" WidthRequest="20" HeightRequest="20" 
+      Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" BackgroundColor="Transparent"/>
         <!--<HorizontalStackLayout Margin="10,-10,0,0"  Grid.ColumnSpan="3" HeightRequest="60" Grid.Row="0" >
             <ImageButton   Source="return_64px.png" Aspect="AspectFill" Clicked="ReturnToAddStock" WidthRequest="20" HeightRequest="20" 
            Grid.Row="0" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" Margin="10,0,0,20" />
@@ -23,15 +24,15 @@
         </HorizontalStackLayout>-->
         <VerticalStackLayout Grid.Row="1" Grid.Column="0" Spacing="15" Padding="10" Margin="2" >
 
-                <material:TextField Padding="10,0,0,0"
+                <material:TextField Padding="10,0,0,0" IsReadOnly="True"
             Title="Codigo Univesral (UPC)" Text="{Binding Upc , Mode=OneWay}" FontFamily="Gilroy"
                 Icon="{FontImageSource FontFamily=MaterialRegular,
             Glyph={x:Static m:MaterialRegular.Numbers}} "/>
 
                 <material:TextField  Padding="10,0,0,0"
-            Title="Codigo Local (SKU)" Text="{Binding Sku}" FontFamily="Gilroy"
+            Title="Codigo Local (SKU)" Text="{Binding Sku}" FontFamily="Gilroy" 
              Icon="{FontImageSource FontFamily=MaterialRegular,
-            Glyph={x:Static m:MaterialRegular.Production_quantity_limits}}"/>
+            Glyph={x:Static m:MaterialRegular.Production_quantity_limits}}" />
 
                 <material:PickerField Padding="10,0,0,0"
                                 Title="Tipo de Peça" ItemsSource="{Binding CategoriesItems}"
@@ -50,7 +51,7 @@
             Title="Marca da Peça" Text="{Binding Brand}"  FontFamily="Gilroy"
                  Icon="{FontImageSource FontFamily=MaterialRegular,
             Glyph={x:Static m:MaterialRegular.Car_rental}}"/>
-            <material:TextField  Padding="10,0,0,0"
+            <material:TextField  Padding="10,0,0,0" IsReadOnly="True"
                  Title="Quantidade" Text="{Binding Quant , Mode=TwoWay}" FontFamily="Gilroy"
                   Icon="{FontImageSource FontFamily=MaterialRegular,
                  Glyph={x:Static m:MaterialRegular.Description}}"/>
