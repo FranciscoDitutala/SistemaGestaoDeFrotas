@@ -87,6 +87,13 @@ namespace Fleet.MauiPrincipal.ViewModel
         }
 
 
+        public ICommand VoltarCommand => new Command(async () =>
+await Voltar());
+        private async Task Voltar()
+        {
+            await Application.Current.MainPage.Navigation.PopAsync();
+        }
+
         //Metodo para carregar a Vehicle e anexar no Picker
         private async Task CarregarVehiclesAsync()
         {

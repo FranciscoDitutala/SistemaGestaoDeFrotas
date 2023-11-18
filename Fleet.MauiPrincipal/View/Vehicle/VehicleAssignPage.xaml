@@ -14,6 +14,8 @@
                Title="VehicleAssignPage">
    
         <Grid RowDefinitions="3*,5*,2*,*"     >
+        <ImageButton Source="return_64px.png" Command="{Binding VoltarCommand}" ZIndex="1" Grid.Row="0" Aspect="AspectFit" WidthRequest="20" HeightRequest="20" 
+Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" BackgroundColor="Transparent"/>
         <Image  Grid.Row="0" Grid.ColumnSpan="3"  Margin="0,-30,0,0" Source="monitorar.png" Aspect="AspectFill" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
 
         <Grid Grid.Row="1" Grid.ColumnSpan="3"  Margin="10,10,20,0"  VerticalOptions="Start"

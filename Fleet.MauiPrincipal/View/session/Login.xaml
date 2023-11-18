@@ -8,8 +8,8 @@
              xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
               xmlns:controls="https://trungnt2910.github.io/schemas/maui/2022/colorpicker"
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
-                xmlns:viewModel="clr-namespace:Fleet.MauiPrincipal.ViewModel.session"
-               x:DataType="viewModel:LoginViewModel"
+            xmlns:viewModel="clr-namespace:Fleet.MauiPrincipal.ViewModel.session"
+             x:DataType="viewModel:LoginViewModel"
          
              NavigationPage.HasNavigationBar="False"
              BackgroundImageSource="loginbg.png" 
@@ -54,8 +54,6 @@
                 </material:TextField>
                 <Button  CornerRadius="8" WidthRequest="350" FontSize="Medium" Text="Entrar" Command="{Binding EntrarSistemaCommand}"
                                  Margin="0,0,0,0" HeightRequest="50" BackgroundColor="#512BD4" input:FormView.IsSubmitButton="True" />
-
-                      
 
             </input:FormView>
         </Grid>

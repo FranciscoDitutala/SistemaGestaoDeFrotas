@@ -12,11 +12,13 @@
               x:DataType="viewModel:VehicleAddPageViewModel"
               NavigationPage.HasNavigationBar="False"
               Title="Cadastrar Veículos"  >
-
-    <Grid RowDefinitions="*,6*" ColumnDefinitions="5*,5*,5*"  ColumnSpacing="5" RowSpacing="10"  >
+    
+        <Grid RowDefinitions="*,6*,2*" ColumnDefinitions="5*,5*,5*"  ColumnSpacing="5" RowSpacing="10"  >
         <Image  Grid.Row="0" Grid.ColumnSpan="3"  Margin="0,-30,0,0" Source="monitorar.png" Aspect="AspectFill" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
+        <ImageButton Source="return_64px.png" Command="{Binding VoltarCommand}" ZIndex="1" Grid.Row="0" Aspect="AspectFit" WidthRequest="20" HeightRequest="20" 
+Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" BackgroundColor="Transparent"/>
         
-            <Grid Grid.ColumnSpan="3" Grid.Row="1" RowDefinitions="*,*,*" ColumnDefinitions="*,*,*" Margin="0,0,15,0" >
+        <Grid Grid.ColumnSpan="3" Grid.Row="1" RowDefinitions="*,*,*" ColumnDefinitions="*,*,*" Margin="0,0,15,0"   >
             <input:FormView Grid.ColumnSpan="3" Spacing="15"  Grid.RowSpan="3" SubmitCommand="{Binding CadastraVehicleCommand}">
                 <!--<VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="15" Padding="10,0,0,0" VerticalOptions="Start">-->
 
@@ -116,9 +118,8 @@
             </input:FormView>
 
         </Grid>
-       
 
+      
     </Grid>
-  
 
 </ContentPage>

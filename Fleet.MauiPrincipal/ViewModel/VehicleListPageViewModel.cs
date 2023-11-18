@@ -18,40 +18,37 @@ using System.Diagnostics;
 
 namespace Fleet.MauiPrincipal.ViewModel
 {
-    public partial class VehicleListPageViewModel : ObservableObject 
+    public partial class VehicleListPageViewModel : ObservableObject
     {
-       
         private HttpClient Client;
         JsonSerializerOptions _SerializerOptions;
         string baseUrl = "https://localhost:7111";
         public ObservableCollection<Vehicle> VehicleItems { get; } = new();
         [ObservableProperty]
-        public string _filter;  
+        public string _filter;
         [ObservableProperty]
         public string _assignedState;
 
+        public ObservableCollection<Vehicle> SelectedItems { get; set; } = new ObservableCollection<Vehicle>();
+        public Vehicle SelectedVehicle { get; set; } = new Vehicle();
+        [ObservableProperty]
+        public ObservableCollection<Vehicle> _vehicleList;
         private List<Vehicle> _vehicles;
         public List<Vehicle> Vehicles
         {
             get { return _vehicles; }
             set
             {
-                _vehicles = value; 
+                _vehicles = value;
                 OnPropertyChanged(nameof(Vehicles));
             }
-        } private List<Vehicle> _vehiclesFilter;
-        public List<Vehicle> VehiclesFilter
-        {
-            get { return _vehiclesFilter; ; }
-            set
-            {
-                _vehiclesFilter = value; 
-                OnPropertyChanged(nameof(VehiclesFilter));
-            }
         }
+
         public VehicleListPageViewModel()
         {
             Client = new HttpClient();
+
+            Vehicles = new List<Vehicle>();
             _SerializerOptions = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
@@ -62,11 +59,13 @@ namespace Fleet.MauiPrincipal.ViewModel
         public VehicleListPageViewModel(string token)
         {
             Client = new HttpClient();
+
+            Vehicles = new List<Vehicle>();
             _SerializerOptions = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             };
-              
+
             Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             CarregarVehiclesAsync();
         }
@@ -74,17 +73,17 @@ namespace Fleet.MauiPrincipal.ViewModel
              await CarregarVehiclesFilterAsync());
         private async Task CarregarVehiclesFilterAsync()
         {
-            Vehicles = new List<Vehicle>();
+            VehicleList = new ObservableCollection<Vehicle>();
             var url = $"{baseUrl}/FleetTransport/Vehicle/GetVehicles/{Filter}";
 
             var response = await Client.GetAsync(url);
             if (response.IsSuccessStatusCode)
                 using (var responseStream = await response.Content.ReadAsStreamAsync())
                 {
-                    var data = await JsonSerializer.DeserializeAsync<List<Vehicle>>
+                    var data = await JsonSerializer.DeserializeAsync<ObservableCollection<Vehicle>>
                         (responseStream, _SerializerOptions);
 
-                    Vehicles = data;
+                    VehicleList = data;
                     Debug.WriteLine("Carregou filter");
 
                 }
@@ -99,47 +98,23 @@ namespace Fleet.MauiPrincipal.ViewModel
              await CarregarVehiclesAsync());
         private async Task CarregarVehiclesAsync()
         {
-            Vehicles = new List<Vehicle>();
+            VehicleList = new ObservableCollection<Vehicle>();
             var url = $"{baseUrl}/FleetTransport/Vehicle";
 
             var response = await Client.GetAsync(url);
             if (response.IsSuccessStatusCode)
                 using (var responseStream = await response.Content.ReadAsStreamAsync())
                 {
-                    var data = await JsonSerializer.DeserializeAsync<List<Vehicle>>
+                    var data = await JsonSerializer.DeserializeAsync<ObservableCollection<Vehicle>>
                         (responseStream, _SerializerOptions);
 
-                    Vehicles = data;
-                    VerifyAssigned();
+                    VehicleList = data;
+    
                 }
         }
-        public void VerifyAssigned()
-        {
-            //foreach (var item in Vehicles)
-            //{
-            //    if (item.Assigned.Equals(false))
-            //    {
-            //        item.Assigned = (string)"Não Atribuido";
-            //    }
-            //    else { AssignedState = "Atribuido"; }
-            //}
-        }
+ 
         public ObservableCollection<Vehicle> Items { get; set; }
-        public ObservableCollection<Vehicle> SelectedItems { get; set; } = new ObservableCollection<Vehicle>();
 
-        public ICommand GoToVehicleDetalhesCommand => new Command(async () =>
-             await GoToVehicleDetalhesAsync());
-        public async Task GoToVehicleDetalhesAsync()
-        {
-            Items = new ObservableCollection<Vehicle>(_vehicles);
-            foreach (var item in SelectedItems)
-            {
-                if (Items.Contains(item))
-                {
-                    await Application.Current.MainPage.Navigation.PushAsync(new VehicleDetailPage(item.Id));
-                }
-            } 
-        }
         public ICommand GoToAddVehicleCommand => new Command(async () =>
              await GoToAddVehicleAsync());
         private async Task GoToAddVehicleAsync()
@@ -147,5 +122,25 @@ namespace Fleet.MauiPrincipal.ViewModel
             Vehicle v = new Vehicle();
             await Application.Current.MainPage.Navigation.PushAsync(new VehicleAddPage(v));
         }
+
+        [RelayCommand]
+        public async void DisplayAlert(Vehicle vehicle)
+        {
+            Vehicle VehicleSeleted = new Vehicle() ;
+            if (VehicleList != null && VehicleList.Contains(vehicle))
+            {   VehicleSeleted = vehicle;
+                var option = await Application.Current.MainPage.DisplayActionSheet("Selecionar a Opção", "Ok", null, "Atualizar", "Detalhes");
+                if (option == "Atualizar")
+                {
+                    await Application.Current.MainPage.Navigation.PushAsync(new VehicleAddPage(VehicleSeleted));
+                }
+                else if (option == "Detalhes")
+                {
+                    await Application.Current.MainPage.Navigation.PushAsync(new VehicleDetailPage(VehicleSeleted.Id));
+                }
+            }
+
+        }
+    
     }
 }

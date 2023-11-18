@@ -207,7 +207,12 @@ namespace Fleet.MauiPrincipal.ViewModel
                     VehicleMarcas = data;
                 }
         }
-
+        public ICommand VoltarCommand => new Command(async () =>
+await Voltar());
+        private async Task Voltar()
+        {
+            await Application.Current.MainPage.Navigation.PopAsync();
+        }
         public bool isNewItem ;
         string path;
         int paramId;
