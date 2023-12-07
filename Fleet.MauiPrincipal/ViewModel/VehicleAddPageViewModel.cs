@@ -60,7 +60,6 @@ namespace Fleet.MauiPrincipal.ViewModel
         {
             vehicleUpdate = vehicle;
             Client = new HttpClient();
-            //Vehicles = new ObservableCollection<Vehicle>();
             _SerializerOptions = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
@@ -72,7 +71,6 @@ namespace Fleet.MauiPrincipal.ViewModel
         }   
         // Metodo Carregar Vehicle Type
         private string _vehicleType;
-
         public List<string> VehicleTypes
         {
             get
@@ -94,12 +92,6 @@ namespace Fleet.MauiPrincipal.ViewModel
                     OnPropertyChanged(nameof(SelectedVehicleTypes));
                     
                 }
-                //else
-                //{
-                //    _selectedVehicleType = "Carro";
-                //    OnPropertyChanged(nameof(SelectedVehicleTypes));
-                //}
-
             }      
     }
         // Metodo Carregar Vehicle Type
@@ -124,11 +116,7 @@ namespace Fleet.MauiPrincipal.ViewModel
                     OnPropertyChanged(nameof(SelectedTransmissions));
            
                 }
-               //else
-               // {
-               //     _selectedColor = "Manual";
-               //     OnPropertyChanged(nameof(SelectedTransmissions));
-               // }
+             
             }
 
         }
@@ -156,11 +144,7 @@ namespace Fleet.MauiPrincipal.ViewModel
                     OnPropertyChanged(nameof(SelectedColors));
 
                 }
-               //else
-               // {
-               //     _selectedColor = "Branco";
-               //     OnPropertyChanged(nameof(SelectedColors));
-               // }
+             
             }
 
         }
@@ -186,11 +170,7 @@ namespace Fleet.MauiPrincipal.ViewModel
                     _selectedMarca = value;
                     OnPropertyChanged(nameof(SelectedMarcas));
                 }
-                //else
-                //{
-                //    _selectedMarca.Name = "Toyota";
-                //    OnPropertyChanged(nameof(SelectedMarcas));
-                //}
+   
             }
         }
         private async Task CarregarVehicleMarcaAsync()
@@ -216,6 +196,7 @@ await Voltar());
         public bool isNewItem ;
         string path;
         int paramId;
+        Vehicle teste =  new Vehicle() ;
         public void VerifyNewVehicles()
         {
             foreach (var item in Vehicles)
@@ -225,6 +206,7 @@ await Voltar());
                         {
                             isNewItem = true;
                             path = "/FleetTransport/Vehicle";
+                            teste =item;
                         }
                         else
                         {
@@ -235,66 +217,7 @@ await Voltar());
                     
             }
         }
-        public ICommand CadastraVehicleCommand => new Command(async () =>
-      await CadastraVehicleAsync());
-
-        private async Task CadastraVehicleAsync()
-        {
-            VerifyNewVehicles();
-            var url = $"{baseUrl + path}";
-            if ((!(string.IsNullOrEmpty(Vin)) && !(string.IsNullOrEmpty(Registration)) && !(string.IsNullOrEmpty(Variante)) &&
-                 !(string.IsNullOrEmpty(Model))))
-            {
-               
-                    var vehicle = new Vehicle
-                    {
-                        Vin = Vin,
-                        Cor = _selectedColor,
-                        Variant = Variante,
-                        Brand = _selectedMarca.Name,
-                        Model = Model,
-                        Power = Power,
-                        Registration = Registration,
-                        Transmission = _selectedTransmission,
-                        FuelConsumption = FuelConsumption,
-                        Type = _selectedVehicleType,
-                        YearOfManufacture = DataFabrico,
-                        RegistrationDate = DateTime.Today,
-                        //Assigned = false
-            };
-               
-                    string json = JsonSerializer.Serialize<Vehicle>(vehicle, _SerializerOptions);
-                    StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-               
-                    HttpResponseMessage response = null;
-                    if (isNewItem.Equals(false))
-                    {
-                        response = await Client.PutAsync(url, content);
-                        await Application.Current.MainPage.DisplayAlert("Informação ", "Veiculo Atualizado com sucesso!", "Ok");
-                        CleanFields();
-                        await Application.Current.MainPage.Navigation.PushAsync(new VehicleDetailPage(paramId));
-                    }
-                    else
-                    {
-                        response = await Client.PostAsync(url, content);
-                        if (response.IsSuccessStatusCode)
-                        {
-                            await Application.Current.MainPage.DisplayAlert("Informação", "Veiculo Cadastrado com sucesso!", "Ok");
-                            CleanFields();
-                            await Application.Current.MainPage.Navigation.PopAsync();
-                        }
-                        else {
-                        await Application.Current.MainPage.DisplayAlert("Informação", "Veiculo nao Cadastrado sucesso!", "Ok");
-                    }
-                       
-                    }
-                }
      
-            else
-            {
-                await Application.Current.MainPage.DisplayAlert("Atenção ", "Campos obrigatório vazio", "Ok");
-            }
-        }
         public ICommand CarregarVehiclesCommand => new Command(async () =>
             await CarregarVehiclesAsync());
         private async Task CarregarVehiclesAsync()
@@ -312,6 +235,14 @@ await Voltar());
                 }
         }
    
+    public ICommand GoToVehicleAddSecondCommand => new Command(async () =>
+            await GoToVehicleAddSecondAsync());
+        private async Task GoToVehicleAddSecondAsync()
+        {
+              await Application.Current.MainPage.Navigation.PushAsync(new NewPage2
+              (Vin, _selectedColor,_selectedTransmission,_selectedVehicleType, _selectedMarca.Name, Registration));
+        }
+
         public void CleanFields()
         {
             Vin = "";
@@ -328,14 +259,17 @@ await Voltar());
         }   
         public void FillTheFields()
         {
-            Model = vehicleUpdate.Model;
-            Variante = vehicleUpdate.Variant;
-            DataFabrico = vehicleUpdate.YearOfManufacture;
-            Power = vehicleUpdate.Power;
+            //Model = vehicleUpdate.Model;
+            //Variante = vehicleUpdate.Variant;
+           // DataFabrico = vehicleUpdate.YearOfManufacture;
+           // Power = vehicleUpdate.Power;
             Vin = vehicleUpdate.Vin;
             Registration = vehicleUpdate.Registration;
             Cor = vehicleUpdate.Cor;
-            FuelConsumption = vehicleUpdate.FuelConsumption;
+            Brand = vehicleUpdate.Brand;
+            VehicleTipo = vehicleUpdate.Type;
+            TransmitionType = vehicleUpdate.Transmission;
+            //FuelConsumption = vehicleUpdate.FuelConsumption;
         }
        
     }

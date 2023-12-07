@@ -25,6 +25,7 @@
             <Label Text="De Frotas e Peças Sobressalentes " FontSize="Micro" TextColor="#512BD4" HorizontalOptions="Start" Margin="20,0,0,0"
       FontFamily="Gilroy" />
         </StackLayout>
+       
     </Shell.FlyoutHeader>
     <ShellContent 
         Title="Dashboard" Icon="Dashboard_64px.png"
@@ -46,21 +47,11 @@
         ContentTemplate="{DataTemplate user:ListarUser}"
         Route="ListarUser" >
 </ShellContent>
-
-    <!--<FlyoutPage.Flyout>
-        <local:MenuPage x:Name="flyoutPage" />
-    </FlyoutPage.Flyout>
-    <FlyoutPage.Detail>
-        <NavigationPage>
-            <x:Arguments>
-                <local:MainPage />
-            </x:Arguments>
-        </NavigationPage>
-    </FlyoutPage.Detail>-->
     <Shell.FlyoutFooter>
-        <StackLayout  BackgroundColor="Aqua" Margin="0,0,0,10"  >
-            <Button Text="Logout" BorderColor="#512BD4" x:Name="btnLogout" HeightRequest="45" BackgroundColor="White" BorderWidth="1" CornerRadius="0"
-                    TextColor="#512BD4" FontAttributes="Bold" FontSize="Small" FontFamily="Gilroy"/>
-        </StackLayout>
+        <HorizontalStackLayout  Margin="20,0,0,10" Spacing="10"  >
+            <Button x:Name="btnLogout" Text="Seja Bemvindo:  " HeightRequest="45"  CornerRadius="0"
+                    TextColor="#512BD4"  FontSize="Small" FontFamily="Gilroy"  ImageSource="user_64px.png" BackgroundColor="white" />
+                     
+        </HorizontalStackLayout>
     </Shell.FlyoutFooter>
 </Shell>

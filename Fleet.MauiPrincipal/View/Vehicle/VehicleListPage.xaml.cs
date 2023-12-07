@@ -51,4 +51,5 @@ public partial class VehicleListPage : ContentPage
         await Navigation.PushAsync(new VehicleAssignPage());
     }
 
+
 }

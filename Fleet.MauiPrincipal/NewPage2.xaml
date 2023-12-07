@@ -2,11 +2,138 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Fleet.MauiPrincipal.NewPage2"
+              xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome"
+             xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
+             xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+             xmlns:controls="https://trungnt2910.github.io/schemas/maui/2022/colorpicker"
+             xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
+             xmlns:viewModel="clr-namespace:Fleet.MauiPrincipal.ViewModel"
+             x:DataType="viewModel:VehicleAddSecondViewModel"
+             NavigationPage.HasNavigationBar="False"
              Title="NewPage2">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+        <Grid RowDefinitions="3*,5*,2*"
+          ColumnDefinitions="5*,5*,5*"
+          ColumnSpacing="5"
+          RowSpacing="10">
+        <Image Grid.Row="0"
+               Grid.ColumnSpan="3"
+               Margin="0,-30,0,0"
+               Source="monitorar.png"
+               Aspect="AspectFill"
+               HorizontalOptions="StartAndExpand"
+               VerticalOptions="StartAndExpand" />
+        <ImageButton Source="return_64px.png"
+                     Command="{Binding VoltarCommand}"
+                     ZIndex="1"
+                     Grid.Row="0"
+                     Aspect="AspectFit"
+                     WidthRequest="20"
+                     HeightRequest="20"
+                     Grid.Column="0"
+                     HorizontalOptions="Start"
+                     VerticalOptions="Start"
+                     BackgroundColor="Transparent" />
+        <Grid Grid.ColumnSpan="3"
+              Grid.Row="1"
+              RowDefinitions="*,*,*"
+              ColumnDefinitions="*,*,*"
+              Margin="0,0,15,0">
+            <input:FormView Grid.ColumnSpan="3"
+                            Spacing="15"
+                            Grid.RowSpan="3"
+                            SubmitCommand="{Binding CadastraVehicleCommand}">
+                <material:TextField Padding="10,0,0,0"
+                                    FontFamily="Gilroy"
+                                    Title="Variante do Veiculo"
+                                    Text="{Binding Variante}"
+                                    Icon="{FontImageSource FontFamily=MaterialRegular,
+&#xA;                     Glyph={x:Static m:MaterialRegular.Car_rental}}">
+                    <validation:RequiredValidation />
+                    <validation:MinLengthValidation MinLength="3"  Message="Minimum char 3" />
+                
+                </material:TextField>
+                <material:TextField Padding="10,0,0,0"
+                                    FontFamily="Gilroy"
+                                    Title="Consumo de Combustivel"
+                                    Text="{Binding FuelConsumption}"
+                                    Icon="{FontImageSource FontFamily=MaterialRegular,
+&#xA;                Glyph={x:Static m:MaterialRegular.Local_gas_station}}"
+                                    Keyboard="Numeric">
+                    <validation:MinLengthValidation MinLength="1"
+                                                    Message="Consumo Inavalido no minimo 1 litro  " />
+                    <validation:NumericValidation />
+                    <validation:RequiredValidation />
+                         <validation:DigitsOnlyValidation />
+                    <validation:MinValueValidation MinValue="1"  />
+                     <validation:MaxValueValidation MaxValue="200"/>
+                </material:TextField>
+                <material:TextField Padding="10,0,0,0"
+                                    FontFamily="Gilroy"
+                                    Title="Ano de Fabrico"
+                                    Text="{Binding DataFabrico}"
+                                    Icon="{FontImageSource FontFamily=MaterialRegular,
+&#xA;                Glyph={x:Static m:MaterialRegular.Date_range}}">
+                    <validation:RequiredValidation />
+                    <validation:MinValueValidation MinValue="1900" />
+                    <validation:MaxValueValidation MaxValue="2099" />
+                    <validation:NumericValidation />
+                </material:TextField>
+                <material:TextField Padding="10,0,0,0"
+                                    FontFamily="Gilroy"
+                                    Title="Modelo do Veiculo"
+                                    Text="{Binding Model}"
+                                    Icon="{FontImageSource FontFamily=MaterialRegular,
+&#xA;                      Glyph={x:Static m:MaterialRegular.Car_rental}} ">
+                    <validation:RequiredValidation />
+                    <validation:MinLengthValidation MinLength="3" />
+                </material:TextField>
+                <material:TextField Padding="10,0,0,0"
+                                    FontFamily="Gilroy"
+                                    Title="Potencia do Veiculo"
+                                    Text="{Binding Power}"
+                                    Icon="{FontImageSource FontFamily=MaterialRegular, 
+&#xA;                    Glyph={x:Static m:MaterialRegular.Settings_power}}">
+                    <validation:RequiredValidation />
+                    <validation:DigitsOnlyValidation />
+                    <validation:MinValueValidation MinValue="1"  />
+                     <validation:MaxValueValidation MaxValue="480"/>
+                      <validation:NumericValidation />
+                </material:TextField>
+                <!-- </VerticalStackLayout> -->
+                <HorizontalStackLayout HorizontalOptions="EndAndExpand">
+                <Button CornerRadius="8"
+                        WidthRequest="200"
+                        TextColor="#512BD4"
+                        BorderColor="#512BD4"
+                        FontSize="Medium"
+                        Text="Anterior "
+                        HorizontalOptions="EndAndExpand"
+                        VerticalOptions="End"
+                        Margin="10,0,0,0"
+                        HeightRequest="50"
+                        BackgroundColor="White"
+                        FontFamily="Gilroy"
+                        ImageSource="save_64px.png"
+                        Command="{Binding GoTOVehicleAddPageCommand}"
+                     />
+                <Button CornerRadius="8"
+                        WidthRequest="200"
+                        TextColor="#512BD4"
+                        BorderColor="#512BD4"
+                        FontSize="Medium"
+                        Text="Salvar "
+                        HorizontalOptions="EndAndExpand"
+                        VerticalOptions="End"
+                        Margin="10,0,0,0"
+                        HeightRequest="50"
+                        BackgroundColor="White"
+                        FontFamily="Gilroy"
+                        ImageSource="save_64px.png"
+                        Command="{Binding CadastraVehicleCommand}"
+                        input:FormView.IsSubmitButton="True" />
+                </HorizontalStackLayout>
+            </input:FormView>
+        </Grid>
+    </Grid>
 </ContentPage>

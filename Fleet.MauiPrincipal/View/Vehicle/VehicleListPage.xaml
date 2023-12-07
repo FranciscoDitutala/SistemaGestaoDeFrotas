@@ -18,49 +18,28 @@
                Aspect="AspectFill"
                Source="controlo.png"
                Margin="0,-30,0,0" />
-        <Label Text="Gerir Veículos"
+        <Label Text="Veículos"
                TextColor="White"
                FontSize="Large"
                FontFamily="Gilroy"
                FontAttributes="Bold"
                HorizontalOptions="Start"
                VerticalOptions="End"
-               Margin="20,40,30,30" />
+               Margin="20,40,10,0" />
         <Grid Grid.Row="1"
-              Margin="20,10,10,10"
+              Margin="10,10,10,10"
               Grid.ColumnSpan="2"
               VerticalOptions="Start"
               RowDefinitions="*,*"
               HeightRequest="60">
-            <!-- <material:TextField Margin="20,0,0,0"
-                                    FontFamily="Gilroy"
-                                    Title="Procurar"
-                                    Text="{Binding Filter}"
-                                    Grid.Row="0"
-                                     HeightRequest="40"
-                                    Grid.Column="0"
-                                    Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Search}}" /> 
-                                    <Button CornerRadius="8"
-                        BorderColor="#512BD4"
-                        TextColor="#512BD4"
-                        Text="Procurar "
-                        HorizontalOptions="End"
-                        Margin="20,0,0,0"
-                        HeightRequest="40"
-                        BackgroundColor="White"
-                        FontFamily="Gilroy"
-                        ImageSource="search_64px.png"
-                        VerticalOptions="Start"
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        Command="{Binding CarregarVehiclesFilterCommand}" /> -->
-            <SearchBar x:Name="searchBar"
-                       SearchCommand="{Binding PerformSearch}"
-                       SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
-                       Placeholder="Procurar Veículos" />
+            <SearchBar  x:Name="searchBar"
+                        Text="{Binding TermoPesquisar}"
+                        SearchCommand="{Binding PerformSearch}"
+                        SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
+                        Placeholder="Pesquisar " />
         </Grid>
         <ScrollView HorizontalOptions="Start"
-                    Margin="10,0,0,10"
+                    Margin="10,0,10,10"
                     Grid.Row="2"
                     VerticalOptions="Start"
                     Grid.ColumnSpan="2">
@@ -136,7 +115,7 @@
             </CollectionView>
         </ScrollView>
         <Grid Grid.Row="3"
-              Margin="10,-10,10,20"
+              Margin="10,10,10,10"
               Padding="0"
               RowDefinitions="*,*"
               ColumnDefinitions="*,*,*"
@@ -145,7 +124,7 @@
               VerticalOptions="End"
               ColumnSpacing="10">
             <Button CornerRadius="8"
-                    WidthRequest="200"
+                    WidthRequest="150"
                     TextColor="#512BD4"
                     BorderColor="#512BD4"
                     Text="Adicionar "
@@ -156,7 +135,7 @@
                     ImageSource="add_64px.png"
                     Command="{Binding GoToAddVehicleCommand}" />
             <Button CornerRadius="8"
-                    WidthRequest="200"
+                    WidthRequest="100"
                     BorderColor="#512BD4"
                     TextColor="#512BD4"
                     Text="Listar "

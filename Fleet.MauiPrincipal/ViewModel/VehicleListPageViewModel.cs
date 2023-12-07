@@ -29,8 +29,6 @@ namespace Fleet.MauiPrincipal.ViewModel
         [ObservableProperty]
         public string _assignedState;
 
-        public ObservableCollection<Vehicle> SelectedItems { get; set; } = new ObservableCollection<Vehicle>();
-        public Vehicle SelectedVehicle { get; set; } = new Vehicle();
         [ObservableProperty]
         public ObservableCollection<Vehicle> _vehicleList;
         private List<Vehicle> _vehicles;
@@ -55,6 +53,7 @@ namespace Fleet.MauiPrincipal.ViewModel
             };
 
             CarregarVehiclesAsync();
+
         }
         public VehicleListPageViewModel(string token)
         {
@@ -109,12 +108,9 @@ namespace Fleet.MauiPrincipal.ViewModel
                         (responseStream, _SerializerOptions);
 
                     VehicleList = data;
-    
+
                 }
         }
- 
-        public ObservableCollection<Vehicle> Items { get; set; }
-
         public ICommand GoToAddVehicleCommand => new Command(async () =>
              await GoToAddVehicleAsync());
         private async Task GoToAddVehicleAsync()
@@ -126,9 +122,10 @@ namespace Fleet.MauiPrincipal.ViewModel
         [RelayCommand]
         public async void DisplayAlert(Vehicle vehicle)
         {
-            Vehicle VehicleSeleted = new Vehicle() ;
+            Vehicle VehicleSeleted = new Vehicle();
             if (VehicleList != null && VehicleList.Contains(vehicle))
-            {   VehicleSeleted = vehicle;
+            {
+                VehicleSeleted = vehicle;
                 var option = await Application.Current.MainPage.DisplayActionSheet("Selecionar a Opção", "Ok", null, "Atualizar", "Detalhes");
                 if (option == "Atualizar")
                 {
@@ -139,8 +136,34 @@ namespace Fleet.MauiPrincipal.ViewModel
                     await Application.Current.MainPage.Navigation.PushAsync(new VehicleDetailPage(VehicleSeleted.Id));
                 }
             }
-
         }
-    
+
+       [ObservableProperty]
+        public string _termoPesquisar;
+        
+        public ICommand PerformSearch => new Command<string>(async (string query) =>
+          {
+              await PerformSearchAsync(query);
+
+          });
+        private async Task PerformSearchAsync(string query)
+        {
+            VehicleList = new ObservableCollection<Vehicle>();
+           if(!string.IsNullOrEmpty(TermoPesquisar)){
+             var url = $"{baseUrl}/FleetTransport/Vehicle/GetVehicles/{query}";
+            var response = await Client.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+                using (var responseStream = await response.Content.ReadAsStreamAsync())
+                {
+                    var data = await JsonSerializer.DeserializeAsync<ObservableCollection<Vehicle>>
+                        (responseStream, _SerializerOptions);
+
+                    VehicleList = data;
+                    Debug.WriteLine("Carregou filter");
+
+                }
+           }
+        }
+
     }
 }

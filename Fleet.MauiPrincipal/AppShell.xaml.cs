@@ -1,4 +1,5 @@
-﻿using Fleet.MauiPrincipal.View;
+﻿using Fleet.MauiPrincipal.Service;
+using Fleet.MauiPrincipal.View;
 using Fleet.MauiPrincipal.View.Part;
 using Fleet.MauiPrincipal.View.session;
 using Fleet.MauiPrincipal.View.Vehicle;
@@ -10,9 +11,12 @@ namespace Fleet.MauiPrincipal
     {
 
         public string Token; 
-        public AppShell(string token)
+        private User userActivo= new User();
+
+        public AppShell(string token, User user)
         {
             Token = token;
+            userActivo = user;
             InitializeComponent(); 
             Routing.RegisterRoute(nameof(VehicleBrandPage), typeof(VehicleBrandPage));
             Routing.RegisterRoute(nameof(VehicleModelPage), typeof(VehicleModelPage));
@@ -39,12 +43,15 @@ namespace Fleet.MauiPrincipal
             //flyoutPage.btn.Clicked += OpenPartPageClicked;
             //flyoutPage.btn2.Clicked += OpenVehiclePageClicked;
             //flyoutPage.btn3.Clicked += OpenUserPagePage;
+           
             btnLogout.Clicked += Logout; 
-
+            btnLogout.Text += userActivo.UserName; 
+           
         }
 
         private async void Logout(object sender, EventArgs e)
         {
+           
            var option =  await DisplayActionSheet("Pretente terminar a sessão", "Sair", "Cancelar");
             if (option.Equals("Sair"))
             {

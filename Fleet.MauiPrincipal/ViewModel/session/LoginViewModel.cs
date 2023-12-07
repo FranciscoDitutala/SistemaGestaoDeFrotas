@@ -14,7 +14,7 @@ using System.Windows.Input;
 
 namespace Fleet.MauiPrincipal.ViewModel.session
 {
-    public partial class LoginViewModel:ObservableObject
+    public partial class LoginViewModel : ObservableObject
     {
         private HttpClient Client;
         JsonSerializerOptions _SerializerOptions;
@@ -32,7 +32,7 @@ namespace Fleet.MauiPrincipal.ViewModel.session
             {
                 PropertyNameCaseInsensitive = true
             };
-           
+
         }
         public string token;
 
@@ -41,7 +41,6 @@ namespace Fleet.MauiPrincipal.ViewModel.session
 
         private async Task EntrarSistemaAsync()
         {
-            //Debug.WriteLine("Entrou no metodo Login ");
             var Login = new User
             {
                 Password = PassUser,
@@ -56,10 +55,10 @@ namespace Fleet.MauiPrincipal.ViewModel.session
                 var conteudo = await response.Content.ReadAsStringAsync();
                 var tokenResponse = JsonSerializer.Deserialize<JsonDocument>(conteudo);
                 token = tokenResponse.RootElement.GetProperty("token").GetString();
-                
+
                 await Application.Current.MainPage.DisplayAlert("Informação ", "Login com sucesso!", "Ok");
-            
-                await Application.Current.MainPage.Navigation.PushAsync(new AppShell(token));
+
+                await Application.Current.MainPage.Navigation.PushAsync(new AppShell(token,Login));
                 //await Application.Current.MainPage.Navigation.PushAsync(new AppShell());
                 NameUser = "";
                 PassUser = "";
