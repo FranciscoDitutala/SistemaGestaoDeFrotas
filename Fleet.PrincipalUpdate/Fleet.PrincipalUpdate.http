@@ -1,0 +1,6 @@
+@Fleet.PrincipalUpdate_HostAddress = http://localhost:5028
+
+GET {{Fleet.PrincipalUpdate_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

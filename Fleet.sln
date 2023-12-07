@@ -27,6 +27,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleetException", "FleetExce
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fleet.MauiPrincipal", "Fleet.MauiPrincipal\Fleet.MauiPrincipal.csproj", "{C4D5E129-5BF7-44C6-A8AC-DA317BF5A76F}"
 EndProject
+<<<<<<< HEAD
+=======
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceTest", "ServiceTest\ServiceTest.csproj", "{4BBD82E1-D94C-41DA-9E78-5ED4DB4BCF6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fleet.PrincipalUpdate", "Fleet.PrincipalUpdate\Fleet.PrincipalUpdate.csproj", "{658720D9-7F2E-4757-94C9-09F37E84B45F}"
+EndProject
+>>>>>>> f06b3040d0820876f5d715fbafe85b9c66b59c0d
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +94,17 @@ Global
 		{C4D5E129-5BF7-44C6-A8AC-DA317BF5A76F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4D5E129-5BF7-44C6-A8AC-DA317BF5A76F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C4D5E129-5BF7-44C6-A8AC-DA317BF5A76F}.Release|Any CPU.Deploy.0 = Release|Any CPU
+<<<<<<< HEAD
+=======
+		{4BBD82E1-D94C-41DA-9E78-5ED4DB4BCF6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BBD82E1-D94C-41DA-9E78-5ED4DB4BCF6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BBD82E1-D94C-41DA-9E78-5ED4DB4BCF6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BBD82E1-D94C-41DA-9E78-5ED4DB4BCF6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{658720D9-7F2E-4757-94C9-09F37E84B45F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{658720D9-7F2E-4757-94C9-09F37E84B45F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{658720D9-7F2E-4757-94C9-09F37E84B45F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{658720D9-7F2E-4757-94C9-09F37E84B45F}.Release|Any CPU.Build.0 = Release|Any CPU
+>>>>>>> f06b3040d0820876f5d715fbafe85b9c66b59c0d
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,7 +2,7 @@
 {
     public class DateModel
     {
-        public DateTime FromDate;
-        public DateTime ToDate;
+        public DateTime FromDate { get; set; }
+        public DateTime ToDate { get; set; }
     }
 }
