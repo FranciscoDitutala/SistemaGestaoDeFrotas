@@ -79,7 +79,8 @@
 &#xA;                    Glyph={x:Static m:MaterialRegular.Car_rental}}">
                     <validation:RequiredValidation />
                 </material:PickerField>
-                <material:PickerField Padding="10,0,0,0"
+            
+                <material:PickerField Padding="10,0,0,0" 
                                       Title="Transmissão "
                                       ItemsSource="{Binding VehicleTransmission}"
                                       SelectedItem="{Binding SelectedTransmissions}"
