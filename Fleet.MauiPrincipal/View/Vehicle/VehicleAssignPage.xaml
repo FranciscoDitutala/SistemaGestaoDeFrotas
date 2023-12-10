@@ -13,130 +13,75 @@
               NavigationPage.HasNavigationBar="False"
                Title="VehicleAssignPage">
    
-        <Grid RowDefinitions="3*,5*,2*,*"     >
+        <Grid RowDefinitions="6*,5*,2*"     >
         <ImageButton Source="return_64px.png" Command="{Binding VoltarCommand}" ZIndex="1" Grid.Row="0" Aspect="AspectFit" WidthRequest="20" HeightRequest="20" 
 Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" BackgroundColor="Transparent"/>
-        <Image  Grid.Row="0" Grid.ColumnSpan="3"  Margin="0,-30,0,0" Source="monitorar.png" Aspect="AspectFill" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
+        <Image  Grid.Row="0" Grid.ColumnSpan="3"  Margin="0,-30,0,0" Source="cars.png" Aspect="AspectFill" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
 
         <Grid Grid.Row="1" Grid.ColumnSpan="3"  Margin="10,10,20,0"  VerticalOptions="Start"
                   RowDefinitions="*,*" ColumnDefinitions="*,*" ColumnSpacing="10" RowSpacing="10" >
-                
-                <VerticalStackLayout Grid.RowSpan="1" Grid.Column="0" Spacing="15" Padding="10,0,0,0"  >
-                
-                    <material:PickerField 
-                         Title="Tipo atribuição" 
-                         ItemsSource="{Binding Assign}"
-                         SelectedItem="{Binding SelectedAssignType}"
-                         Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Assignment_turned_in}}"
-    
-                    />
+
+            <input:FormView Grid.ColumnSpan="3" Grid.Row="1"
+                Spacing="15"
+                SubmitCommand="{Binding CadastrarAssignmentCommand}">
                 <material:PickerField 
-                         Title="Funcionário a Atribuir" 
+                         Title="Tipo atribuição"   FontFamily="Gilroy" ItemsSource="{Binding Assign}"
+                    SelectedItem="{Binding SelectedAssignType}" 
+                    Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Assignment_turned_in}}">
+                    <validation:RequiredValidation />
+                </material:PickerField>
+                <material:PickerField 
+                         Title="Funcionário a Atribuir"   FontFamily="Gilroy"
                          ItemsSource="{Binding Employees}"
                          ItemDisplayBinding="{Binding Name}"
                          SelectedItem="{Binding SelectedEmployee}"
-                         Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Face}}"  />
-            </VerticalStackLayout>
- 
-            <VerticalStackLayout Grid.RowSpan="1" Grid.Column="1" Spacing="15"   >
+                         Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Face}}"  >
+                    <validation:RequiredValidation />
+                </material:PickerField>
                 <material:PickerField 
-                        Title="Veículo Atribuir" 
+                        Title="Veículo Atribuir"   FontFamily="Gilroy"
                         ItemsSource="{Binding Vehicles}"
                         ItemDisplayBinding="{Binding Registration}"
                         SelectedItem="{Binding SelectedVehicle}"
                         Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Car_rental}}"
-                    />
+                   >
+                    <validation:RequiredValidation />
+                </material:PickerField>
+                
                 <material:PickerField 
-                            Title="Departamento" 
+                            Title="Departamento"   FontFamily="Gilroy"
                             ItemsSource="{Binding Orgao}"
                             ItemDisplayBinding="{Binding Acronym}"
                             SelectedItem="{Binding SelectedOrgao}"
                             Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Car_rental}}"
-/>
-                </VerticalStackLayout>
-            <VerticalStackLayout  Grid.Row="1" Margin="10,0,0,0" HeightRequest="90" >
+                 >
+                    <validation:RequiredValidation />
+                </material:PickerField>
                 <material:EditorField HeightRequest="200" Grid.ColumnSpan="2"
-                       Title="Descrição" Text="{Binding Descricao}" 
+                       Title="Descrição" Text="{Binding Descricao}"   FontFamily="Gilroy"
                            Icon="{FontImageSource FontFamily=MaterialRegular,
-                       Glyph={x:Static m:MaterialRegular.Assignment}} "/>   
-            </VerticalStackLayout>
+                       Glyph={x:Static m:MaterialRegular.Assignment}} ">
+                    
+                </material:EditorField>
+                    <Button CornerRadius="8"
+                  WidthRequest="200"
+                  TextColor="#512BD4"
+                  BorderColor="#512BD4"
+                  FontSize="Medium"
+                  Text="Atribuir "
+                   Margin="10,-100,0,0"
+                  HorizontalOptions="EndAndExpand"
+                  VerticalOptions="Start"
+                  HeightRequest="50"
+                  BackgroundColor="White"
+                  FontFamily="Gilroy"
+                  ImageSource="save_64px.png"
+                  Command="{Binding CadastrarAssignmentCommand}"
+                  input:FormView.IsSubmitButton="True" />
 
+            </input:FormView>
         </Grid>
-        <!--<Grid Grid.Row="2" Grid.ColumnSpan="3" Margin="20,-90,20,20" >
-            <ScrollView  >
-                <material:DataGrid ItemsSource="{Binding Atribuicoes}"  BackgroundColor="WhiteSmoke" CornerRadius="0"
-                 LineSeparatorColor="#004D97"  BorderColor="#004D97" FlowDirection="LeftToRight" FlexLayout.Shrink="2"  >
-                    <material:DataGrid.EmptyView>
-                        <VerticalStackLayout Margin="80,20">
-                            <Image
-	                WidthRequest="40"
-	                HeightRequest="40"
-	                HorizontalOptions="Center"
-	                VerticalOptions="Center"
-	                Source="{FontImageSource FontFamily=MaterialOutlined, Glyph={x:Static m:MaterialOutlined.Backup_table}, Color={AppThemeBinding
-                 Light={StaticResource OnSurface}, Dark={StaticResource OnSurfaceDark}}}"/>
-                            <Label Text="No data available..." HorizontalOptions="Center"/>
-                        </VerticalStackLayout>
-                    </material:DataGrid.EmptyView>
-
-                    <material:DataGrid.Columns >
-
-                        <material:DataGridColumn Binding="{Binding Type}" Title="Tipo "  />
-                        <material:DataGridColumn Binding="{Binding OrgaoId}" Title="Departamento"/>
-                        <material:DataGridColumn Binding="{Binding Description}" Title="Descrição" />
-                        <material:DataGridColumn Binding="{Binding EmployeeId}" Title="Funcionario"/>
-                        <material:DataGridColumn Binding="{Binding VehicleId}" Title="Veiculo"/>
-
-                        <material:DataGridColumn  >
-                            <material:DataGridColumn.CellItemTemplate    >
-                                <DataTemplate>
-
-                                    <Button  ImageSource="update_64px.png" Margin="0,0,10,0" Text="Atualizar" BackgroundColor="White" 
-                                             BorderColor="#512BD4" TextColor="#512BD4" FontSize="Micro"  FontFamily="Gilroy" />
-                                </DataTemplate>
-                            </material:DataGridColumn.CellItemTemplate>
-
-                        </material:DataGridColumn>
-                        <material:DataGridColumn Title="Ações"  >
-                            <material:DataGridColumn.CellItemTemplate    >
-                                <DataTemplate>
-                                    <Button  ImageSource="show_property_64px.png" Margin="10,0,0,0" Text="Detalhes" BackgroundColor="White" 
-                                             BorderColor="#512BD4" TextColor="#512BD4" FontSize="Micro" FontFamily="Gilroy" />
-                                </DataTemplate>
-                            </material:DataGridColumn.CellItemTemplate>
-                        </material:DataGridColumn>
-                        <material:DataGridColumn  >
-                            <material:DataGridColumn.CellItemTemplate    >
-                                <DataTemplate>
-                                    <Button  ImageSource="add_64px.png" Margin="10,0,0,0" Text="Atribuir" BackgroundColor="White" BorderColor="#512BD4" 
-                                             TextColor="#512BD4" FontSize="Micro" FontFamily="Gilroy" />
-                                </DataTemplate>
-                            </material:DataGridColumn.CellItemTemplate>
-
-                        </material:DataGridColumn>
-                    </material:DataGrid.Columns>
-                </material:DataGrid>
-            </ScrollView>
-
-        </Grid>-->
-
-        <Grid Grid.Row="3" Grid.ColumnSpan="2"  RowDefinitions="*,*" ColumnDefinitions="*,*,*" Margin="0,-20,0,0" Padding="10,30,30,0"  
-              BackgroundColor="LightGray" WidthRequest="2000" HorizontalOptions="Start" ColumnSpacing="10" >
-            <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4" BackgroundColor="White"  FontSize="Medium" Text="Salvar " HorizontalOptions="Start"
-            HeightRequest="50"  FontFamily="Gilroy" ImageSource="save_64px.png" Command="{Binding CadastrarAssignmentCommand}"  >
-            </Button>
-
-            <!--<Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Refresh " 
-              Margin="10,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png" Command="{Binding CarregarAssignmentCommand}"
-           Grid.Column="1" >
-            </Button>-->
-            <!--<Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Apagar " 
-           Margin="10,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="delete_64px.png" Command="{Binding DeletarAssignmentCommand}" 
-           Grid.Column="2" >   
-            </Button>-->
-
-        </Grid>
-
+     
     </Grid>
 
    

@@ -46,7 +46,7 @@ namespace Fleet.MauiPrincipal.ViewModel
         [ObservableProperty]
         public Vehicle _vehicle;
       
-        public List<Vehicle> Vehicles;
+        public Vehicle Vehicles;
         [ObservableProperty]
         public string _model;
         [ObservableProperty]
@@ -66,7 +66,7 @@ namespace Fleet.MauiPrincipal.ViewModel
             };
             FillTheFields();
             CarregarVehicleMarcaAsync();
-            CarregarVehiclesAsync();
+            //CarregarVehiclesAsync();
 
         }   
         // Metodo Carregar Vehicle Type
@@ -187,60 +187,13 @@ namespace Fleet.MauiPrincipal.ViewModel
                     VehicleMarcas = data;
                 }
         }
-        public ICommand VoltarCommand => new Command(async () =>
-await Voltar());
-        private async Task Voltar()
-        {
-            await Application.Current.MainPage.Navigation.PopAsync();
-        }
-        public bool isNewItem ;
-        string path;
-        int paramId;
-        Vehicle teste =  new Vehicle() ;
-        public void VerifyNewVehicles()
-        {
-            foreach (var item in Vehicles)
-            {
-              
-                        if (!item.Vin.Equals(Vin) && !item.Registration.Equals(Registration))
-                        {
-                            isNewItem = true;
-                            path = "/FleetTransport/Vehicle";
-                            teste =item;
-                        }
-                        else
-                        {
-                            isNewItem = false;
-                            path = $"/FleetTransport/Vehicle/{item.Id}";
-                            paramId = item.Id;
-                        }
-                    
-            }
-        }
-     
-        public ICommand CarregarVehiclesCommand => new Command(async () =>
-            await CarregarVehiclesAsync());
-        private async Task CarregarVehiclesAsync()
-        {
-            Vehicles = new List<Vehicle>();
-            var url = $"{baseUrl}/FleetTransport/Vehicle";
-
-            var response = await Client.GetAsync(url);
-            if (response.IsSuccessStatusCode)
-                using (var responseStream = await response.Content.ReadAsStreamAsync())
-                {
-                    var data = await JsonSerializer.DeserializeAsync<List<Vehicle>>
-                        (responseStream, _SerializerOptions);
-                       Vehicles = data;
-                }
-        }
-   
-    public ICommand GoToVehicleAddSecondCommand => new Command(async () =>
+    
+        public ICommand GoToVehicleAddSecondCommand => new Command(async () =>
             await GoToVehicleAddSecondAsync());
         private async Task GoToVehicleAddSecondAsync()
         {
-              await Application.Current.MainPage.Navigation.PushAsync(new NewPage2
-              (Vin, _selectedColor,_selectedTransmission,_selectedVehicleType, _selectedMarca.Name, Registration));
+                await Application.Current.MainPage.Navigation.PushAsync(new NewPage2
+                             (vehicleUpdate.Id, Vin, _selectedColor, _selectedTransmission, _selectedVehicleType, _selectedMarca.Name, Registration));
         }
 
         public void CleanFields()
@@ -259,18 +212,20 @@ await Voltar());
         }   
         public void FillTheFields()
         {
-            //Model = vehicleUpdate.Model;
-            //Variante = vehicleUpdate.Variant;
-           // DataFabrico = vehicleUpdate.YearOfManufacture;
-           // Power = vehicleUpdate.Power;
             Vin = vehicleUpdate.Vin;
             Registration = vehicleUpdate.Registration;
             Cor = vehicleUpdate.Cor;
             Brand = vehicleUpdate.Brand;
             VehicleTipo = vehicleUpdate.Type;
             TransmitionType = vehicleUpdate.Transmission;
-            //FuelConsumption = vehicleUpdate.FuelConsumption;
+
         }
-       
+        public ICommand VoltarCommand => new Command(async () =>
+            await Voltar());
+        private async Task Voltar()
+        {
+            await Application.Current.MainPage.Navigation.PopAsync();
+        }
+
     }
 }

@@ -23,9 +23,9 @@ namespace Fleet.MauiPrincipal.ViewModel.session
         public string _emailEntry;
         
         public User userUpdate;
-        public CreateUserViewModel()
-        {
-            //userUpdate = user;
+        public CreateUserViewModel(User user)
+        { 
+            userUpdate = user;
             Client = new HttpClient();
             //Vehicles = new ObservableCollection<Vehicle>();
             _SerializerOptions = new JsonSerializerOptions
@@ -76,6 +76,49 @@ namespace Fleet.MauiPrincipal.ViewModel.session
 
             }
         }
+        // Metodo Carregar user Type
+        private string _userType;
+        public List<string> UserType
+        {
+            get
+            {      
+                return new List<string> { "Usuario", "Admnistrador"};
+
+            }
+        }
+        public ICommand VoltarCommand => new Command(async () =>
+               await Voltar());
+        private async Task Voltar()
+        {
+            await Application.Current.MainPage.Navigation.PopAsync();
+        }
+        private string _selectedUserType;
+        public string SelectedUserType
+        {
+            get { return _selectedUserType; }
+            set
+            {
+                if (SelectedUserType != value)
+                {
+                    _selectedUserType = value;
+                    OnPropertyChanged(nameof(SelectedUserType));
+
+                }
+            }
+
+        }
+        public bool isAdmin;
+        public void VerifyType()
+        {
+            if (SelectedUserType.Equals("Usuario"))
+            {
+                isAdmin = false;
+            }
+            else
+            {
+                isAdmin= true;
+            }
+        }
         public ICommand CadastraUsuarioCommand => new Command(async () =>
           await CadastraUsuarioAsync());
         private async Task CadastraUsuarioAsync()
@@ -84,7 +127,6 @@ namespace Fleet.MauiPrincipal.ViewModel.session
             var url = $"{baseUrl + path}";
             if ((!(string.IsNullOrEmpty(UserName)) && !(string.IsNullOrEmpty(EmailEntry)) && !(string.IsNullOrEmpty(Password))))
             {
-
                 var user = new User
                 {
                     UserName = UserName,
@@ -95,7 +137,6 @@ namespace Fleet.MauiPrincipal.ViewModel.session
 
                 string json = JsonSerializer.Serialize<User>(user, _SerializerOptions);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-
                 HttpResponseMessage response = null;
                 if (isNewItem.Equals(false))
                 {

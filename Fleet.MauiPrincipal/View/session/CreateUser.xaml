@@ -11,18 +11,30 @@
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
              x:DataType="viewModel:CreateUserViewModel"
              NavigationPage.HasNavigationBar="False"
-             Title="CreateUser">
-    
-    <FlexLayout    FlowDirection="LeftToRight" Direction="Column" Wrap="Wrap" Margin="0,-30,0,0"
-         JustifyContent="Center" AlignItems="Center"  AlignContent="Center" BackgroundColor="WhiteSmoke">
-        <Grid Grid.Row="2" Grid.Column="1" BackgroundColor="WhiteSmoke" WidthRequest="400" HeightRequest="480" Padding="0,0,0,0" 
-              VerticalOptions="Center" HorizontalOptions="End"  RowDefinitions="*,2*">
-         
-                <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Margin="0,0,0,0" Grid.Row="0" >
+             BackgroundImageSource="cars.png"
+             Title="CreateUser" >
+
+    <Grid>
+        <ImageButton Source="return_64px.png"
+     Command="{Binding VoltarCommand}"
+     ZIndex="1"
+     Grid.Row="0"
+     Aspect="AspectFit"
+     WidthRequest="20"
+     HeightRequest="20"
+     Grid.Column="0"
+     HorizontalOptions="Start"
+     VerticalOptions="Start"
+     BackgroundColor="Transparent" />
+  
+        <Grid Grid.Row="2" Grid.Column="1" BackgroundColor="WhiteSmoke" WidthRequest="400" HeightRequest="500" Padding="0,0,0,0" 
+              VerticalOptions="Center" HorizontalOptions="Center"  RowDefinitions="*,2*">
+     
+        <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Margin="0,0,0,0" Grid.Row="0" >
 
                     <Label  Text="Cadastrar Usuário " FontSize="37" TextColor="#512BD4" FontAttributes="Bold"
                   VerticalOptions="Center" HorizontalOptions="Center" FontFamily="Gilroy" />
-                    <Label  Text="Gerencie Usuarios " FontSize="Medium" TextColor="#111111"  FontFamily="Gilroy"
+                    <Label  Text="Crie um usuario para o sistema " FontSize="Subtitle" TextColor="#111111"  FontFamily="Gilroy"
                   VerticalOptions="Center" HorizontalOptions="Center" />
 
                 </VerticalStackLayout>
@@ -32,21 +44,30 @@
                 <Grid RowDefinitions="*,*"  RowSpacing="20"
                           HorizontalOptions="Center" VerticalOptions="Center" >
 
-                    <VerticalStackLayout Spacing="25" Grid.Row="0" >
+                    <VerticalStackLayout Spacing="15" Grid.Row="0" >
                         <material:TextField WidthRequest="350" 
                                 Title="Nome de Usuario" HeightRequest="50" FontFamily="Gilroy" Text="{Binding UserName}"
                                      Icon="{FontImageSource FontFamily=MaterialRegular, 
                                 Glyph={x:Static m:MaterialRegular.Person}}">
                             <validation:RequiredValidation />
+                            <validation:LettersOnlyValidation />
+                            <validation:MinLengthValidation MinLength="8" />
+                            <validation:MaxValueValidation MaxValue="25" />
+                           
                         </material:TextField>
                         <material:TextField WidthRequest="350" Text="{Binding EmailEntry}"
-                              Title="Nome de Usuario" HeightRequest="50" FontFamily="Gilroy" 
+                              Title="E-mail" HeightRequest="50" FontFamily="Gilroy" 
                                    Icon="{FontImageSource FontFamily=MaterialRegular,
                               Glyph={x:Static m:MaterialRegular.Email}}">
                             <validation:RequiredValidation Message="Required eat least One UpperLetter " />
                             <validation:MinLengthValidation MinLength="5"   />
                             <validation:RegexValidation Pattern="{x:Static input:AdvancedEntry.REGEX_EMAIL}" Message="Invalid email address" />
                         </material:TextField>
+                        <material:PickerField Title="Tipo de User"  
+                                      FontFamily="Gilroy"
+                                      ItemsSource="{Binding UserType}"
+                                      SelectedItem="{Binding SelectedUserType}"  Icon="{FontImageSource FontFamily=MaterialRegular,
+                                        Glyph={x:Static m:MaterialRegular.Verified_user}}" />
                         <material:TextField WidthRequest="350" HeightRequest="50" Text="{Binding Password}"
                               Title="Senha" x:Name="PassUser" FontFamily="Gilroy" IsPassword="True" 
                                    Icon="{FontImageSource FontFamily=MaterialRegular,
@@ -58,16 +79,11 @@
                             <validation:RegexValidation Pattern="{x:Static input:AdvancedEntry.REGEX_PASSWORD}" Message="Invalid Password At lesat Char, Upperletter" />
                         </material:TextField>
                     </VerticalStackLayout>
-
-                
-                        <Button  CornerRadius="8"  FontSize="Medium" Text="Cadastrar"  FontFamily="Gilroy"  Grid.Row="1" Command="{Binding CadastraUsuarioCommand}"
+                <Button  CornerRadius="8"  FontSize="Medium" Text="Cadastrar"  FontFamily="Gilroy"  Grid.Row="1" Command="{Binding CadastraUsuarioCommand}"
                                  Margin="0,0,0,0" HeightRequest="50" BackgroundColor="#512BD4" input:FormView.IsSubmitButton="True"  />
-
-       
-
-                </Grid>
+            </Grid>
 
             </input:FormView>
         </Grid>
-    </FlexLayout>
+    </Grid>
 </ContentPage>

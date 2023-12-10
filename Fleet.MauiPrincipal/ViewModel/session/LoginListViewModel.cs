@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Fleet.MauiPrincipal.Service;
 using Fleet.MauiPrincipal.View.session;
 using System;
@@ -46,7 +47,8 @@ namespace Fleet.MauiPrincipal.ViewModel.session
              await GoToCreateUserAsync());
         private async Task GoToCreateUserAsync()
         {
-            await Application.Current.MainPage.Navigation.PushAsync(new CreateUser());
+            User user = new User();
+            await Application.Current.MainPage.Navigation.PushAsync(new CreateUser(user));
         }
         public ICommand GoToUserDetailsCommand => new Command(async () =>
            await GoToUserDetailsAsync());
@@ -84,6 +86,25 @@ namespace Fleet.MauiPrincipal.ViewModel.session
                     Users = data;
            
                 }
+        }
+
+        [RelayCommand]
+        public async void DisplayAlert(User user)
+        {
+            User UserSeleted = new User();
+            if (Users != null && Users.Contains(user))
+            {
+                UserSeleted = user;
+                var option = await Application.Current.MainPage.DisplayActionSheet("Selecionar a Opção", "Ok", null, "Atualizar", "Detalhes");
+                if (option == "Atualizar")
+                {
+                    await Application.Current.MainPage.Navigation.PushAsync(new CreateUser(UserSeleted));
+                }
+                else if (option == "Detalhes")
+                {
+                    await Application.Current.MainPage.Navigation.PushAsync(new UserDetailPage(UserSeleted));
+                }
+            }
         }
     }
 }

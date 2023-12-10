@@ -16,10 +16,10 @@
                Title="Login">
 
     <Grid    FlowDirection="LeftToRight"     VerticalOptions="Center"  
-            RowDefinitions="*,*,*" ColumnDefinitions="*,*" HorizontalOptions="End"  Margin="0,-20,40,0" >
+            RowDefinitions="*,*,*" ColumnDefinitions="*,*" HorizontalOptions="Center"  Margin="0,-20,0,0" >
 
         <Grid Grid.Row="2" Grid.Column="1" BackgroundColor="WhiteSmoke" WidthRequest="400" HeightRequest="480" Padding="0,50,0,0" 
-              VerticalOptions="Center" HorizontalOptions="EndAndExpand" RowDefinitions="*,3*" >
+              VerticalOptions="Center" HorizontalOptions="Center" RowDefinitions="*,3*" >
            
                 <VerticalStackLayout VerticalOptions="Center" Grid.Row="0" HorizontalOptions="Center" Margin="0,0,0,30" >
 

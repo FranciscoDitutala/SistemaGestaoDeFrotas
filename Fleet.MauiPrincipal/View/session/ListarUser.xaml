@@ -8,76 +8,119 @@
             xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
             xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"    
             xmlns:viewmodel="clr-namespace:Fleet.MauiPrincipal.ViewModel.session"
+            xmlns:model="clr-namespace:Fleet.MauiPrincipal.Service"
             x:DataType="viewmodel:LoginListViewModel"
             NavigationPage.HasNavigationBar="False"
             NavigationPage.HasBackButton="False"
             Title="ListarUser">
 
 
-    <Grid  RowDefinitions ="3*,7*,1*" ColumnDefinitions="*"  >
-        <Image  Grid.Row="0" Aspect="AspectFill" Source="controlo.png" Margin="0,-30,0,0"  />
-        <Label Text="Gerir Usuários" TextColor="White" FontSize="Large" FontFamily="Gilroy" FontAttributes="Bold"
-         HorizontalOptions="Start" VerticalOptions="EndAndExpand" Margin="20,40,0,0" />
-
-        <Grid  Grid.Row="1" Grid.ColumnSpan="2"  Margin="-20,10,0,0" HorizontalOptions="Start" 
-                 RowDefinitions="*,6*" ColumnDefinitions="8*,2*">
-            <!--<Grid Grid.Row="0" FlowDirection="LeftToRight" Margin="20,0,0,0" Grid.ColumnSpan="2" VerticalOptions="Start"
-            RowDefinitions="*" ColumnDefinitions="*,*" HeightRequest="60">
-                <material:TextField  Padding="20,0,0,0" FontFamily="Gilroy" 
-                    Title="Procurar" Text="{Binding Filter}" Grid.Row="0" Grid.Column="0"
-                     Icon="{FontImageSource FontFamily=MaterialRegular,
-                    Glyph={x:Static m:MaterialRegular.Search}}"/>
-                <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Procurar " HorizontalOptions="Start"
-                        Margin="20,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="search_64px.png" VerticalOptions="Start"
-                        Grid.Column="1" Grid.Row="0" Command="{Binding CarregarVehiclesFilterCommand}">
-                </Button>
-
-            </Grid>-->
-            <ScrollView HorizontalOptions="Start" Margin="20,0,0,0"   Grid.Row="2" VerticalOptions="Start" Grid.ColumnSpan="2"
-                      >
-
-                <material:DataGrid ItemsSource="{Binding Users}"  Margin="20,0,20,20"  BackgroundColor="WhiteSmoke" CornerRadius="0" x:Name="GridList" HorizontalOptions="Start"
-                      LineSeparatorColor="#004D97" SelectedItems="{Binding SelectedItems}" BorderColor="#004D97" FlowDirection="LeftToRight"   >
-                    <material:DataGrid.EmptyView>
-                        <VerticalStackLayout Margin="80,20">
-                            <Image
-                WidthRequest="40"
-                HeightRequest="40"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                Source="{FontImageSource FontFamily=MaterialOutlined, Glyph={x:Static m:MaterialOutlined.Backup_table}, Color={AppThemeBinding
-                      Light={StaticResource OnSurface}, Dark={StaticResource OnSurfaceDark}}}"/>
-                            <Label Text="Sem dados armazenados..." HorizontalOptions="Center"/>
-                        </VerticalStackLayout>
-                    </material:DataGrid.EmptyView>
-
-                    <material:DataGrid.Columns >
-                        <material:DataGridSelectionColumn Title="#"/>
-                        <material:DataGridColumn Binding="{Binding UserName}" Title="Nome de Usuario"  />
-                        <material:DataGridColumn Binding="{Binding Email}" Title="Email"/>
-    
-                    </material:DataGrid.Columns>
-
-
-                </material:DataGrid>
-            </ScrollView>
-
+    <Grid RowDefinitions="3*,1*,6*,2*" 
+          ColumnDefinitions="*">
+        <Image Grid.Row="0"
+               Aspect="AspectFill"
+               Source="controlo.png"
+               Margin="0,-30,0,0" />
+        <Label Text="Usuários"
+               TextColor="White"
+               FontSize="Large"
+               FontFamily="Gilroy"
+               FontAttributes="Bold"
+               HorizontalOptions="Start"
+               VerticalOptions="End"
+               Margin="20,40,10,0" />
+        <Grid Grid.Row="1"
+              Margin="10,10,10,10"
+              Grid.ColumnSpan="2"
+              VerticalOptions="Start"
+              RowDefinitions="*,*"
+              HeightRequest="60">
+            <!--<SearchBar  x:Name="searchBar"
+                        Text="{Binding TermoPesquisar}"
+                        SearchCommand="{Binding PerformSearch}"
+                        SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
+                        Placeholder="Pesquisar " />-->
         </Grid>
+        <ScrollView HorizontalOptions="Start"
+                    Margin="10,-20,10,10"
+                    Grid.Row="2"
+                    VerticalOptions="Start"
+                    Grid.ColumnSpan="2">
+            <CollectionView ItemsSource="{Binding Users}"
+                            x:Name="mCollectionView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:User">
+                        <Frame Margin="5"
+                               CornerRadius="0"
+                               Padding="10"
+                               BackgroundColor="WhiteSmoke">
+                            <StackLayout HeightRequest="50">
+                                <HorizontalStackLayout Spacing="10">
+                                    <Label Grid.Row="1"
+                                           Grid.Column="1"
+                                           Text="Nome de Usuário:"
+                                           FontFamily="Girloy" />
+                                    <Label Grid.Row="1"
+                                           Grid.Column="1"
+                                           FontFamily="Girloy"
+                                           Text="{Binding UserName}"
+                                           FontAttributes="Bold" />
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout Spacing="10">
+                                    <Label Grid.Row="1"
+                                       Grid.Column="1"
+                                       Text="Email:"
+                                       FontFamily="Girloy" />
+                                       <Label Grid.Row="1"
+                                       Grid.Column="1"
+                                       FontFamily="Girloy"
+                                       Text="{Binding Email}"
+                                       FontAttributes="Bold" />
+                                   </HorizontalStackLayout>
 
-        <Grid Grid.Row="3" Margin="20,0,20,20" RowDefinitions="*,*" ColumnDefinitions="*,*,*" BackgroundColor="WhiteSmoke" HorizontalOptions="Start" ColumnSpacing="10" VerticalOptions="EndAndExpand" >
-            <Button  CornerRadius="8" WidthRequest="200" TextColor="#512BD4" BorderColor="#512BD4"  FontSize="Medium" Text="Adicionar " HorizontalOptions="Start"
-               Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="add_64px.png" Command="{Binding GoToCreateUserCommand}"  >
-            </Button>
-            <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Listar " HorizontalOptions="Start"
-               Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png"
-                       Grid.Column="1" Command="{Binding CarregarUsersCommand}" >
-            </Button>
-            <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Detalhes " HorizontalOptions="Start"
-            Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png"
-                    Grid.Column="2" Command="{Binding GoToUserDetailsCommand}">
-            </Button>
-
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1"
+                                                      Command="{Binding BindingContext.DisplayAlertCommand, Source={x:Reference mCollectionView}}"
+                                                      CommandParameter="{Binding .}" />
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+        <Grid Grid.Row="3"
+              Margin="10,10,10,10"
+              Padding="0"
+              RowDefinitions="*,*"
+              ColumnDefinitions="*,*,*"
+              BackgroundColor="WhiteSmoke"
+              HorizontalOptions="Start"
+              VerticalOptions="End"
+              ColumnSpacing="10">
+            <Button CornerRadius="8"
+                    WidthRequest="150"
+                    TextColor="#512BD4"
+                    BorderColor="#512BD4"
+                    Text="Adicionar "
+                    HorizontalOptions="Start"
+                    HeightRequest="30"
+                    BackgroundColor="White"
+                    FontFamily="Gilroy"
+                    ImageSource="add_64px.png"
+                    Command="{Binding GoToUserDetailsCommand}" />
+            <Button CornerRadius="8"
+                    WidthRequest="100"
+                    BorderColor="#512BD4"
+                    TextColor="#512BD4"
+                    Text="Listar "
+                    HorizontalOptions="Start"
+                    HeightRequest="30"
+                    BackgroundColor="White"
+                    FontFamily="Gilroy"
+                    ImageSource="refresh_64px.png"
+                    Grid.Column="1"
+                    Command="{Binding CarregarUsersCommand}" />
         </Grid>
-
     </Grid>
 </ContentPage>

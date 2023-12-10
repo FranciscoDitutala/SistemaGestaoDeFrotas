@@ -11,79 +11,39 @@
               x:DataType="viewmodel:UsersDetailsViewModel"
               NavigationPage.HasNavigationBar="False"
              Title="UserDetailPage">
-    <Grid RowDefinitions="3*,7*,*" ColumnDefinitions="*,*,*"  >
+    <Grid RowDefinitions="8*,5*,*" ColumnDefinitions="*,*,*"  >
         <ImageButton Source="return_64px.png" Command="{Binding VoltarCommand}" ZIndex="1" Grid.Row="0" Aspect="AspectFit" WidthRequest="20" HeightRequest="20" 
               Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" BackgroundColor="Transparent"/>
 
-        <Image  Grid.Row="0" Grid.ColumnSpan="3"  Margin="0,-30,0,0" Source="monitorar.png" Aspect="AspectFill" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
-        <Grid Grid.Row="0" Grid.ColumnSpan="3" Margin="40,130,10,10" RowDefinitions="*,*"  ZIndex="1" >
-            <Label  Text="Informações do Usuario" FontFamily="Gilroy" FontAttributes="Bold" FontSize="Large"
-               TextColor="White" ZIndex="1" />
-        </Grid>
-        <Grid Grid.ColumnSpan="3" Grid.Row="1" HorizontalOptions="Start"  Margin="30,10,10,10" ColumnDefinitions="*,*" >
+        <Image  Grid.Row="0" Grid.ColumnSpan="3"  Margin="0,0,0,0" Source="monitorar.png" Aspect="AspectFill" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
 
-            <Border Grid.ColumnSpan="2" Grid.Row="1" Padding="10,10,0,10"  VerticalOptions="Start"
-             Margin="10,0,0,0" Opacity="1" HeightRequest="100" WidthRequest="600" BackgroundColor="#512BD4" >
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="4"/>
-                </Border.StrokeShape>
-                <VerticalStackLayout  Spacing="2"  HorizontalOptions="Start" Margin="15,10,0,0" VerticalOptions="Start" Grid.Row="0">
-                    <HorizontalStackLayout Spacing="15">
-                        <Label Text="Nome do Usuario:" FontFamily="Gilroy" FontSize="Subtitle"  HorizontalOptions="Start" TextColor="White" />
-                        <Label Text="{Binding Users.UserName}" FontFamily="Gilroy" FontSize="Subtitle"  FontAttributes="Bold" TextColor="White" HorizontalOptions="Start" />
-                    </HorizontalStackLayout>
-                    <HorizontalStackLayout Spacing="15">
-                        <Label Text="Email do Usuario:" FontFamily="Gilroy" FontSize="Subtitle"  HorizontalOptions="Start" TextColor="White" />
-                        <Label Text="{Binding Users.Email}" FontFamily="Gilroy" FontSize="Subtitle"  FontAttributes="Bold" TextColor="White" HorizontalOptions="Start" />
-                    </HorizontalStackLayout>
-                    <!--<HorizontalStackLayout Spacing="15">
-                        <Label Text="Numero da Placa:" FontFamily="Gilroy" FontSize="Subtitle"  HorizontalOptions="Start" TextColor="White" />
-                        <Label Text="{Binding Users.Password}" FontSize="Subtitle" FontFamily="Gilroy" TextColor="White" FontAttributes="Bold" HorizontalOptions="Start" />
-                    </HorizontalStackLayout>-->
-                </VerticalStackLayout>
-            </Border>
-            <!--<Border Grid.ColumnSpan="2" Grid.Row="0" Padding="10,20,0,10" 
-                Margin="10,45,0,0" Opacity="1" HeightRequest="300" WidthRequest="600">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="4"/>
-                </Border.StrokeShape>
-                <Grid Margin="20,0,0,0" RowDefinitions="*,*,*,*,*,*,*,*,*"  ColumnDefinitions="*,*" ColumnSpacing="70" >
-                    <HorizontalStackLayout Spacing="15" Grid.Row="7" Grid.Column="0">
-                        <Label Text="Data de Registro:" FontFamily="Gilroy" FontSize="Default"   HorizontalOptions="Start" />
-                        <Label Text="{Binding Vehicles.RegistrationDate}" FontFamily="Gilroy" FontSize="Default" FontAttributes="Bold" HorizontalOptions="Start" />
-                    </HorizontalStackLayout>
-                    <HorizontalStackLayout Spacing="15"  Grid.Row="0" Grid.Column="1" >
-                        <Label Text="Cor:" FontFamily="Gilroy" FontSize="Default"   HorizontalOptions="Start" />
-                        <Label Text="{Binding Vehicles.Cor}" FontSize="Default" FontFamily="Gilroy"  FontAttributes="Bold" HorizontalOptions="Start" />
-                    </HorizontalStackLayout>
-                    <HorizontalStackLayout Spacing="15"  Grid.Row="1" Grid.Column="0">
-                        <Label Text="Tipo:" FontFamily="Gilroy" FontSize="Default"  HorizontalOptions="Start" />
-                        <Label Text="{Binding Vehicles.Type}" FontFamily="Gilroy" FontSize="Default"  FontAttributes="Bold" HorizontalOptions="Start" />
-                    </HorizontalStackLayout>
-                   
-                </Grid>
-            </Border>-->
+        <Grid Grid.ColumnSpan="3" Grid.Row="1" HorizontalOptions="Start"  Margin="30,10,10,10" ColumnDefinitions="*,*" RowDefinitions="*,6*" >
+            <Label  Text="Informações do Usuario" FontFamily="Gilroy" FontAttributes="Bold" FontSize="Large" Margin="0,0,0,0"
+           ZIndex="1" />
+                <VerticalStackLayout  Spacing="5"  HorizontalOptions="Start" Margin="0,10,0,0" VerticalOptions="Start" Grid.Row="1">
+                    
+                        <Label Text="Nome do Usuario:" FontFamily="Gilroy" FontSize="Subtitle"  HorizontalOptions="Start"  />
+                        <Label Text="{Binding Users.UserName}" FontFamily="Gilroy" FontSize="Subtitle"  FontAttributes="Bold"  HorizontalOptions="Start" />
+                        <Label Text="Email do Usuario:" FontFamily="Gilroy" FontSize="Subtitle"  HorizontalOptions="Start"  />
+                        <Label Text="{Binding Users.Email}" FontFamily="Gilroy" FontSize="Subtitle"  FontAttributes="Bold"  HorizontalOptions="Start" />
+                        <Label Text="Tipo de Usuario:" FontFamily="Gilroy" FontSize="Subtitle"  HorizontalOptions="Start"  />
+                        <Label Text="Administrador" FontFamily="Gilroy" FontSize="Subtitle"  FontAttributes="Bold"  HorizontalOptions="Start" />
+
+            </VerticalStackLayout>
+           
+
         </Grid>
         <Grid Grid.Row="3" Grid.ColumnSpan="2" Margin="20,0,0,0" RowDefinitions="*,*" ColumnDefinitions="*,*,*,*"  
           HorizontalOptions="Start" ColumnSpacing="10" >
+                    <!--<Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Atualizar"
+               Margin="10,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png" Command="{Binding RefreshCommand}"
+            Grid.Column="1" >
+         </Button>-->
             <Button  CornerRadius="8" WidthRequest="200" TextColor="white" BackgroundColor="Red"  FontSize="Medium" Text="Deletar " HorizontalOptions="Start"
     HeightRequest="50"  FontFamily="Gilroy" ImageSource="delete_64px.png"  Command="{Binding RemoveSelectedCommand}"  Grid.Column="0"  >
             </Button>
 
-            <!--<Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Atualizar"
-                  Margin="10,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png" Command="{Binding RefreshCommand}"
-               Grid.Column="1" >
-            </Button>
-
-            <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Editar"
-                  Margin="10,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="update_64px.png" Command="{Binding GoToUpdateVehicleCommand}"
-               Grid.Column="2" >
-            </Button>
-            <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Atribuir " 
-           Margin="10,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="vehicle_insurance_64px.png" Command="{Binding GoToAssignVehicleCommand}"
-        Grid.Column="3" >
-            </Button>-->
-
+         
         </Grid>
 
     </Grid>

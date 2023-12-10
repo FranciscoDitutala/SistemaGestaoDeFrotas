@@ -41,7 +41,6 @@ namespace Fleet.MauiPrincipal.ViewModel
                 OnPropertyChanged(nameof(Vehicles));
             }
         }
-
         public VehicleListPageViewModel()
         {
             Client = new HttpClient();

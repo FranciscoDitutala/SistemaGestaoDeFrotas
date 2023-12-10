@@ -54,12 +54,14 @@ namespace Fleet.MauiPrincipal.ViewModel
         public string _assignedState;
         [ObservableProperty]
         public string _marca;
+        public bool isNewItem;
+        string path;
+        int Id;
         public Vehicle vehicleUpdate { get; set; }
-        public VehicleAddSecondViewModel(string vin, string cor, string transmission, string typeVehicle, string brand, string registration)
+        public VehicleAddSecondViewModel(int id, string vin, string cor, string transmission, string typeVehicle, string brand, string registration)
         {
-            Vin = vin; Cor = cor; TransmitionType = transmission; VehicleTipo = typeVehicle; Brand = brand; Registration = registration;
+            Id = id;  Vin = vin; Cor = cor; TransmitionType = transmission; VehicleTipo = typeVehicle; Brand = brand; Registration = registration;
             Client = new HttpClient();
-            //Vehicles = new ObservableCollection<Vehicle>();
             _SerializerOptions = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
@@ -68,7 +70,7 @@ namespace Fleet.MauiPrincipal.ViewModel
             CarregarVehiclesAsync();
         }
          public VehicleAddSecondViewModel(Vehicle vehicle)
-        {
+           {
             vehicleUpdate = vehicle;
             Client = new HttpClient();
             _SerializerOptions = new JsonSerializerOptions
@@ -78,43 +80,36 @@ namespace Fleet.MauiPrincipal.ViewModel
            // FillTheFields();
             CarregarVehiclesAsync();
         }
-      
+
+        public void VerifyNewVehicles()
+        {
+                if (Id == 0)
+                {
+                    isNewItem = true;
+                    path = "/FleetTransport/Vehicle";
+                }
+                else if(Id>0)
+                {
+                    isNewItem = false;
+                    path = $"/FleetTransport/Vehicle/{Id}";
+                   
+                }
+        }
         public ICommand VoltarCommand => new Command(async () =>
                     await Voltar());
         private async Task Voltar()
         {
             await Application.Current.MainPage.Navigation.PopAsync();
         }
-        public bool isNewItem;
-        string path;
-        int paramId;
-        Vehicle teste = new Vehicle();
-        public void VerifyNewVehicles()
-        {
-            foreach (var item in Vehicles)
-            {
-
-                if (!item.Vin.Equals(Vin) && !item.Registration.Equals(Registration))
-                {
-                    isNewItem = true;
-                    path = "/FleetTransport/Vehicle";
-                    teste = item;
-                }
-                else
-                {
-                    isNewItem = false;
-                    path = $"/FleetTransport/Vehicle/{item.Id}";
-                    paramId = item.Id;
-                }
-            }
-        }
+        
         public ICommand CadastraVehicleCommand => new Command(async () =>
       await CadastraVehicleAsync());
         private async Task CadastraVehicleAsync()
         {
             VerifyNewVehicles();
             var url = $"{baseUrl + path}";
-            if (!(string.IsNullOrEmpty(Vin)) && !(string.IsNullOrEmpty(Registration)) && !(string.IsNullOrEmpty(Variante)) &&  !(string.IsNullOrEmpty(Model))) {
+            Debug.WriteLine("O caminho é: ", url);
+     
                 var vehicle = new Vehicle
                 {
                     Vin = Vin,   Cor = Cor, Variant = Variante, Brand = Brand,  Model = Model,Power = Power,Registration = Registration,
@@ -127,29 +122,33 @@ namespace Fleet.MauiPrincipal.ViewModel
                 if (isNewItem.Equals(false))
                 {
                     response = await Client.PutAsync(url, content);
-                    await Application.Current.MainPage.DisplayAlert("Informação ", "Veiculo Atualizado com sucesso!", "Ok");
-                    CleanFields();
-                    await Application.Current.MainPage.Navigation.PushAsync(new VehicleDetailPage(paramId));
+                 
+                    if (response.IsSuccessStatusCode)
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Informação", "Atualizado com sucesso!", "Ok");
+                        CleanFields();
+                        await Application.Current.MainPage.Navigation.PushAsync(new VehicleListPage());
+                    }
+                    else
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Informação", "Não Atualizado !", "Ok");
+                    }
                 }
                 else
                 { 
                     response = await Client.PostAsync(url, content);
                     if (response.IsSuccessStatusCode)
                     {
-                        await Application.Current.MainPage.DisplayAlert("Informação", "Veiculo Cadastrado com sucesso!", "Ok");
+                        await Application.Current.MainPage.DisplayAlert("Informação", "Cadastrado com sucesso!", "Ok");
                         CleanFields();
-                        await Application.Current.MainPage.Navigation.PopAsync();
+                        await Application.Current.MainPage.Navigation.PushAsync(new VehicleListPage());
                     }
                     else
                     {
-                        await Application.Current.MainPage.DisplayAlert("Informação", "Veiculo nao Cadastrado sucesso!", "Ok");
+                        await Application.Current.MainPage.DisplayAlert("Informação", "Não Cadastrado !", "Ok");
                     }
                 }
-            }
-            else
-            {
-                await Application.Current.MainPage.DisplayAlert("Atenção ", "Campos obrigatório vazio", "Ok");
-            }
+
         }
         public ICommand CarregarVehiclesCommand => new Command(async () =>
             await CarregarVehiclesAsync());
@@ -184,6 +183,13 @@ namespace Fleet.MauiPrincipal.ViewModel
             FuelConsumption = 0;
             DataFabrico = 1900;
         }
-       
+        public void FillTheFields()
+        {
+            Model = vehicleUpdate.Model;
+            Variante = vehicleUpdate.Variant;
+            DataFabrico = vehicleUpdate.YearOfManufacture;
+            Power = vehicleUpdate.Power;
+            FuelConsumption = vehicleUpdate.FuelConsumption;
+        }
     }
 }
