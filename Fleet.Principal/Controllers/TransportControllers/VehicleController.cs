@@ -35,12 +35,7 @@ namespace Fleet.Principal.Controllers.TransportControllers
             if (ans.Id <= 0) return NotFound("O veiculo não foi encontrado");
             return Ok(ans);
         }
-<<<<<<< HEAD
-        //[Authorize]
-=======
 
-        //[Authorize(Roles =UserRoles.User)]
->>>>>>> f06b3040d0820876f5d715fbafe85b9c66b59c0d
         [HttpGet]
     
         public async Task<IActionResult> GetAllVehicles()
