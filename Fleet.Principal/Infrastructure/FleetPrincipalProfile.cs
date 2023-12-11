@@ -53,8 +53,9 @@ namespace Fleet.Principal.Infrastructure
                 .ReverseMap();
             //PartMapper
             CreateMap<PartPayload, PartDto>().ReverseMap();
-            CreateMap<AddPartDto, CreatePartRequest>().ReverseMap();
-            //.ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+            CreateMap<AddPartDto, CreatePartRequest>()
+            .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+            CreateMap<CreatePartRequest, AddPartDto>();
            
 
             CreateMap<PartCategoryPayload,PartCategoryDto>();
