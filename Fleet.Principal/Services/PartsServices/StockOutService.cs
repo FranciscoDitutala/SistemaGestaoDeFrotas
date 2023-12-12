@@ -67,5 +67,18 @@ namespace Fleet.Principal.Services.PartsServices
 
             return _mapper.Map<StockOutDto>(updated);
         }
+
+        public async Task<StockOutDto> ApproveAsync(StockOutApproveDto stockOutApproveDto)
+        {
+            var entry = _mapper.Map<StockOutApproveRequest>(stockOutApproveDto);
+            var result = await _stockOutManagerClient.ApproveAsync(entry);
+            return _mapper.Map<StockOutDto>(result);
+        }
+
+        public async Task<StockOutDto> CancelAsync(int id)
+        {
+            var result =await  _stockOutManagerClient.CancelAsync(new StockOutCancelRequest { Id = id });
+            return _mapper.Map<StockOutDto>(result);
+        }
     }
 }

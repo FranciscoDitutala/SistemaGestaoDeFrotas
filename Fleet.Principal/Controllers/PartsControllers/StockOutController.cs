@@ -3,6 +3,7 @@ using Fleet.Principal.Dtos.PartsDtos.StockyEntryDtos;
 using Fleet.Principal.Services.PartsServices.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Runtime.InteropServices;
 
 namespace Fleet.Principal.Controllers.PartsControllers
 {
@@ -53,5 +54,36 @@ namespace Fleet.Principal.Controllers.PartsControllers
             return Ok(ans);
         }
 
+        [HttpGet("Approve/{id}")]
+        public async Task<IActionResult> Approve(int id)
+        {
+
+            var entry = await _stockOutService.GetAsync(id);
+
+            if (entry == null)
+                return BadRequest("não existe essa entrada");
+
+            StockOutApproveDto stockOutApproveDto = new StockOutApproveDto();
+
+            stockOutApproveDto.Id = entry.Id;
+
+            foreach( var p in entry.RequestedLines )
+            {
+                stockOutApproveDto.ApprovedLines.Add(p);
+            }
+
+            var ans = await _stockOutService.ApproveAsync(stockOutApproveDto);
+            return Ok(ans);
+
+        }
+
+        [HttpGet("Cancel/{id}")]
+        public async Task<IActionResult> Cancel(int id)
+        {
+
+            var ans = await _stockOutService.CancelAsync(id);
+            return Ok(ans);
+
+        }
     }
 }

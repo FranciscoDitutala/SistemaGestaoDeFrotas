@@ -102,6 +102,7 @@ builder.Services.AddSingleton<IVehicleBrandService, VehicleBrandService>();
 builder.Services.AddSingleton<IVehicleVariantService, VehicleVariantService>();
 builder.Services.AddSingleton<IPartService,PartService>();
 builder.Services.AddSingleton<IStockEntryService, StockEntryService>();
+builder.Services.AddSingleton<IStockOutService, StockOutService>();
 builder.Services.AddSingleton<IDocumentService, DocumentService>();
 builder.Services.AddSingleton<IVehicleService, VehicleServices>();
 builder.Services.AddSingleton<IOrgaoService,OrgaoService>();

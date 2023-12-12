@@ -8,6 +8,8 @@ namespace Fleet.Principal.Services.PartsServices.Interfaces
         public Task<StockOutDto> GetAsync(int id);
         public Task<IEnumerable<StockOutDto>> GetAllAsync();
         public Task<StockOutDto> CreateAsync(AddStockOutDto addStockOutDto);
+        public Task<StockOutDto> ApproveAsync(StockOutApproveDto stockOutApproveDto);
+        public Task<StockOutDto> CancelAsync(int id);
         public Task<StockOutDto> UpdateAsync(int id,UpdateStockOutDto updateStockOutDto );
         public Task<StockOutDto> DeleteAsync(int id);
   
