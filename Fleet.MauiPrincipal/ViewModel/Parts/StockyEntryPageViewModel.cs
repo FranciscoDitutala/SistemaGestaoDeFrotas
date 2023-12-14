@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using DynamicData;
 using Fleet.MauiPrincipal.Service.Part;
 using Fleet.MauiPrincipal.View.Part;
@@ -273,6 +274,22 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
             Notes = "";
             BuyValue =0;
             _lines = null;
+        }
+
+        [RelayCommand]
+        public async void DisplayAlert(StockEntryLines stockLines)
+        {
+            StockEntryLines StLineSeleted = new StockEntryLines();
+            if (StLines != null && StLines.Contains(stockLines))
+            {
+                StLineSeleted = stockLines;
+                var option = await Application.Current.MainPage.DisplayActionSheet("Deseja Apagar", "Apagar", "Cancelar");
+                if (option == "Apagar")
+                {
+                    StLines.Remove(StLineSeleted);
+                    //await Application.Current.MainPage.Navigation.PushAsync(new VehicleAddPage(VehicleSeleted));
+                }  
+            }
         }
     }
 }

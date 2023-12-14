@@ -56,8 +56,8 @@
             <Grid Grid.Column="1" WidthRequest="300" Grid.RowSpan="3"  Margin="20,0,0,0" RowDefinitions="*,8*" RowSpacing="0">
                 <Label Text="Peças Cadastradas no Stock"  Margin="8" Grid.Row="0" FontFamily="Gilroy" FontSize="Subtitle"  FontAttributes="Bold"/>
                 <ScrollView Margin="0,0,0,0" Grid.Row="1" >
-                    <material:DataGrid ItemsSource="{Binding Stock.Lines}"  Margin="0,0,20,20"  BackgroundColor="WhiteSmoke" CornerRadius="0" 
-                    LineSeparatorColor="#004D97" SelectedItems="{Binding SelectedItems}" BorderColor="#004D97"  >
+                    <material:DataGrid ItemsSource="{Binding Stock.Lines}"  Margin="0,0,20,20"  BackgroundColor="WhiteSmoke" 
+                    LineSeparatorColor="#004D97" SelectedItems="{Binding SelectedItems}"  >
                         <material:DataGrid.Columns >
                             <material:DataGridColumn Binding="{Binding PartUpc}" Title="Codigo"  />
                             <material:DataGridColumn Binding="{Binding Quantity}" Title="Quantidade"/>

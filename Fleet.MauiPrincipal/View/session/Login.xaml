@@ -50,7 +50,6 @@
                         <material:TextFieldPasswordShowHideAttachment />
                     </material:TextField.Attachments>
                     <validation:RequiredValidation />
-
                 </material:TextField>
                 <Button  CornerRadius="8" WidthRequest="350" FontSize="Medium" Text="Entrar" Command="{Binding EntrarSistemaCommand}"
                                  Margin="0,0,0,0" HeightRequest="50" BackgroundColor="#512BD4" input:FormView.IsSubmitButton="True" />

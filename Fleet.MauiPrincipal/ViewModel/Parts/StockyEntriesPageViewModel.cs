@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Fleet.MauiPrincipal.Service.Part;
 using Fleet.MauiPrincipal.View.Part;
 using System;
@@ -120,7 +121,7 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
             }
         }
         public ICommand VoltarCommand => new Command(async () =>
- await Voltar());
+               await Voltar());
         private async Task Voltar()
         {
             await Application.Current.MainPage.Navigation.PopAsync();
@@ -133,8 +134,25 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
             StockEntry v = new StockEntry();
             await Application.Current.MainPage.Navigation.PushAsync(new StockyEntryPage(v));
         }
+        [RelayCommand]
+        public async void DisplayAlert(StockEntry stockEntry)
+        {
+            StockEntry StockSeleted = new StockEntry();
+            if (Stock != null && Stock.Contains(stockEntry))
+            {
+                StockSeleted = stockEntry;
+                var option = await Application.Current.MainPage.DisplayActionSheet("Selecionar a Opção", "Ok", null, "Atualizar", "Detalhes");
+                if (option == "Atualizar")
+                {
+                    await Application.Current.MainPage.Navigation.PushAsync(new StockyEntryPage(StockSeleted));
+                }
+                else if (option == "Detalhes")
+                {
+                    await Application.Current.MainPage.Navigation.PushAsync(new StockDetailsPage(StockSeleted.Id));
+                }
+            }
+        }
 
-      
 
     }
 }

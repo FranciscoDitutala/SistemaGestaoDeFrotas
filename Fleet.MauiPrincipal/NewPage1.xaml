@@ -1,12 +1,49 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+             xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome"
+             xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
+             xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
+             xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui" 
+             xmlns:viewModel="clr-namespace:Fleet.MauiPrincipal.ViewModel"
+             x:DataType="viewModel:VehicleLocalizationViewModel"
              x:Class="Fleet.MauiPrincipal.NewPage1"
+             NavigationPage.HasNavigationBar="False"
              Title="NewPage1">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <Grid Margin="10" RowDefinitions="*,2.2*" >
+        <Grid Grid.Row="0" RowDefinitions="*,*,*,*" RowSpacing="5" >
+            <material:PickerField Title="Veiculo:" Grid.Row="0" HeightRequest="50" FontFamily="Gilroy" 
+                                   Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Local_taxi}}"/>
+            <material:TextField Title="Latitude:" Grid.Row="1" HeightRequest="50" FontFamily="Gilroy"  Text="{Binding Latitude }"
+                                Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Gps_fixed}}"/>
+            <material:TextField Title="Longitude :" Grid.Row="2" FontFamily="Gilroy"   Text="{Binding Longitude}"                                   
+                                Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Gps_fixed}}"/>
+            <Button Text="Rastear Veículo" Grid.Row="3" CornerRadius="8"
+                        TextColor="#512BD4"
+                        HeightRequest="50"
+                        BorderColor="#512BD4"
+                        FontSize="Medium"
+                        BackgroundColor="WhiteSmoke"
+                        FontFamily="Gilroy"
+                        Command="{Binding GetLocalizationMapsCommand}"
+                    />
+        </Grid>
+        <!--<maps:Map Grid.Row="1" ItemsSource="{Binding Map}"
+            x:Name="myMap"  IsShowingUser="true" IsTrafficEnabled="True"/>-->
+        <maps:Map x:Name="map" Grid.Row="1"
+                  IsTrafficEnabled="True"
+                  IsShowingUser="True"
+                  ItemsSource="{Binding Map}">
+            <maps:Map.ItemTemplate>
+                <DataTemplate >
+                    <maps:Pin Location="{Binding Location}"
+                              Address="{Binding Address}"
+                              Label="{Binding Description}" />
+                </DataTemplate>
+            </maps:Map.ItemTemplate>
+        </maps:Map>
+    </Grid>
+
 </ContentPage>

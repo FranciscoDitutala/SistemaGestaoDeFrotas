@@ -63,7 +63,7 @@
 
         <ScrollView  Grid.Row="1" Grid.ColumnSpan="2" Margin="0,10,0,10"   >
 
-            <material:DataGrid HorizontalOptions="Start" Margin="20,30,20,20" BackgroundColor="WhiteSmoke" BorderColor="#512BD4"
+            <material:DataGrid HorizontalOptions="Start" Margin="20,30,20,20" BackgroundColor="WhiteSmoke"
                          LineSeparatorColor="Blue"  WidthRequest="1000" >
                 <material:DataGrid.EmptyView>
                     <VerticalStackLayout Margin="80,20">

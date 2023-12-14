@@ -21,10 +21,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fleet.Transport.Shared", "F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleetException", "FleetException\FleetException.csproj", "{5310A6E4-4C9D-4F09-9F60-22AEA92C1E4C}"
 EndProject
+<<<<<<< HEAD
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fleet.MauiPrincipal", "Fleet.MauiPrincipal\Fleet.MauiPrincipal.csproj", "{C4D5E129-5BF7-44C6-A8AC-DA317BF5A76F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fleet.PrincipalUpdate", "Fleet.PrincipalUpdate\Fleet.PrincipalUpdate.csproj", "{658720D9-7F2E-4757-94C9-09F37E84B45F}"
 EndProject
+=======
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceTest", "ServiceTest\ServiceTest.csproj", "{4BBD82E1-D94C-41DA-9E78-5ED4DB4BCF6C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fleet.PrincipalUpdate", "Fleet.PrincipalUpdate\Fleet.PrincipalUpdate.csproj", "{658720D9-7F2E-4757-94C9-09F37E84B45F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fleet.MauiPrincipal", "Fleet.MauiPrincipal\Fleet.MauiPrincipal.csproj", "{2C24FDED-E331-4462-B663-9FC9B7F34D11}"
+EndProject
+>>>>>>> 8fcd9bcb9b0739adbc8f785d9d7dae441dca244d
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,16 +76,32 @@ Global
 		{5310A6E4-4C9D-4F09-9F60-22AEA92C1E4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5310A6E4-4C9D-4F09-9F60-22AEA92C1E4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5310A6E4-4C9D-4F09-9F60-22AEA92C1E4C}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< HEAD
 		{C4D5E129-5BF7-44C6-A8AC-DA317BF5A76F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C4D5E129-5BF7-44C6-A8AC-DA317BF5A76F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4D5E129-5BF7-44C6-A8AC-DA317BF5A76F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{C4D5E129-5BF7-44C6-A8AC-DA317BF5A76F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4D5E129-5BF7-44C6-A8AC-DA317BF5A76F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C4D5E129-5BF7-44C6-A8AC-DA317BF5A76F}.Release|Any CPU.Deploy.0 = Release|Any CPU
+=======
+		{4BBD82E1-D94C-41DA-9E78-5ED4DB4BCF6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BBD82E1-D94C-41DA-9E78-5ED4DB4BCF6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BBD82E1-D94C-41DA-9E78-5ED4DB4BCF6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BBD82E1-D94C-41DA-9E78-5ED4DB4BCF6C}.Release|Any CPU.Build.0 = Release|Any CPU
+>>>>>>> 8fcd9bcb9b0739adbc8f785d9d7dae441dca244d
 		{658720D9-7F2E-4757-94C9-09F37E84B45F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{658720D9-7F2E-4757-94C9-09F37E84B45F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{658720D9-7F2E-4757-94C9-09F37E84B45F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{658720D9-7F2E-4757-94C9-09F37E84B45F}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< HEAD
+=======
+		{2C24FDED-E331-4462-B663-9FC9B7F34D11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C24FDED-E331-4462-B663-9FC9B7F34D11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C24FDED-E331-4462-B663-9FC9B7F34D11}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{2C24FDED-E331-4462-B663-9FC9B7F34D11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C24FDED-E331-4462-B663-9FC9B7F34D11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C24FDED-E331-4462-B663-9FC9B7F34D11}.Release|Any CPU.Deploy.0 = Release|Any CPU
+>>>>>>> 8fcd9bcb9b0739adbc8f785d9d7dae441dca244d
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

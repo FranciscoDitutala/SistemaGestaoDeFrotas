@@ -38,12 +38,13 @@ namespace Fleet.MauiPrincipal
             Routing.RegisterRoute(nameof(StockyEntriesPage), typeof(StockyEntriesPage));
             Routing.RegisterRoute(nameof(StockyOutsPage), typeof(StockyOutsPage));
             Routing.RegisterRoute(nameof(VehicleDetailPage), typeof(VehicleDetailPage));
+            Routing.RegisterRoute(nameof(NewPage1), typeof(NewPage1));
 
             //flyoutPage.btnDash.Clicked += OpenDashPage;  
             //flyoutPage.btn.Clicked += OpenPartPageClicked;
             //flyoutPage.btn2.Clicked += OpenVehiclePageClicked;
             //flyoutPage.btn3.Clicked += OpenUserPagePage;
-           
+
             btnLogout.Clicked += Logout; 
             btnLogout.Text += userActivo.UserName; 
            

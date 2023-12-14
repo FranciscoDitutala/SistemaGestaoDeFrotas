@@ -9,141 +9,130 @@
              xmlns:controls="https://trungnt2910.github.io/schemas/maui/2022/colorpicker"
              xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
              xmlns:viewModel="clr-namespace:Fleet.MauiPrincipal.ViewModel.Parts"
+             xmlns:model="clr-namespace:Fleet.MauiPrincipal.Service.Part"
              x:DataType="viewModel:StockyEntryPageViewModel"
              NavigationPage.HasNavigationBar="False"
              Title="Cadastrar Stock"   >
-    
-    <Grid RowDefinitions="4*,4*,1.3*,*" ColumnDefinitions="2*,*" ColumnSpacing="10" >
-        <ImageButton Source="return_64px.png" Command="{Binding VoltarCommand}" ZIndex="1" Grid.Row="0" Aspect="AspectFit" WidthRequest="20" HeightRequest="20" 
-Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" BackgroundColor="Transparent"/>
-        <input:FormView SubmitCommand="{Binding CadastrarSoctkCommand}" Grid.ColumnSpan="2" >
-            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="5*,5*"  Grid.ColumnSpan="2" Margin="10,0,0,0" HeightRequest="230"
-              Grid.RowSpan="1"  RowSpacing="5" VerticalOptions="Start" HorizontalOptions="Start"     >
-      
-                <Border Grid.ColumnSpan="3" Grid.Row="0" Padding="10,10,0,10" 
-             Margin="10,15,0,0" Opacity="1" HeightRequest="150" WidthRequest="900">
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="4"/>
-                    </Border.StrokeShape>
 
-                    <Grid Grid.ColumnSpan="2" RowDefinitions="*,*"  ColumnDefinitions="*,*" HorizontalOptions="Start" >
-                  
-                        <material:TextField Padding="10,10,0,0" Grid.Column="0" Grid.Row="0"
-                        Title="Provedor" Text="{Binding Providers}" WidthRequest="300"  FontFamily="Gilroy"
-                        Icon="{FontImageSource FontFamily=MaterialRegular,
-                        Glyph={x:Static m:MaterialRegular.Perm_identity}} ">
-                            <validation:MinLengthValidation MinLength="10"/>
-                            <validation:RequiredValidation />
-                        </material:TextField>
+    <Grid  ColumnSpacing="10" RowDefinitions="0.5*,1.5*,1.8*,4*,*">
+        <ImageButton Source="return_64px.png" Command="{Binding VoltarCommand}" ZIndex="1" 
+                     Grid.Row="0" Aspect="AspectFit"    Margin="10,0,1,1"
+                      Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start"
+                     BackgroundColor="Transparent"/>
 
-                        <material:TextField  Padding="10,10,0,0"  FontFamily="Gilroy" Grid.Column="0" Grid.Row="1"
-                        Title="Valor da Compra" Text="{Binding BuyValue}" WidthRequest="300"  HorizontalOptions="Start"
-                        Icon="{FontImageSource FontFamily=MaterialRegular,
-                        Glyph={x:Static m:MaterialRegular.Shopping_cart_checkout}}">
-                            <validation:DigitsOnlyValidation />
-                            <validation:RequiredValidation />
-                        </material:TextField>
-
-                        <material:EditorField  Padding="10,10,0,0"  Grid.Column="1" Grid.RowSpan="1"  HorizontalOptions="Start"
-                        Title="Descrição" Text="{Binding Notes}" WidthRequest="560" HeightRequest="60" FontFamily="Gilroy"
+        <Grid Grid.Row="1" ColumnDefinitions="*,*" RowDefinitions="*,*"
+              RowSpacing="5">
+           
+                <material:TextField Padding="10,10,0,0"  Grid.Column="0" Grid.Row="0"
+                Title="Provedor" Text="{Binding Providers}" FontFamily="Gilroy"
+                Icon="{FontImageSource FontFamily=MaterialRegular,
+                Glyph={x:Static m:MaterialRegular.Perm_identity}} ">
+                    <validation:MinLengthValidation MinLength="10"/>
+                    <validation:RequiredValidation />
+                </material:TextField>
+                <material:TextField  Padding="10,10,0,0"  FontFamily="Gilroy"  Grid.Row="0"
+                         Title="Valor da Compra" Text="{Binding BuyValue}"  Grid.Column="1"
                          Icon="{FontImageSource FontFamily=MaterialRegular,
-                         Glyph={x:Static m:MaterialRegular.Description}}" >
-
-                        </material:EditorField>
-                    
-                </Grid>
+                         Glyph={x:Static m:MaterialRegular.Shopping_cart_checkout}}">
+                    <validation:DigitsOnlyValidation />
+                    <validation:RequiredValidation />
+                </material:TextField>
+                <material:EditorField  Padding="10,10,0,0" Grid.Column="0"
+                        Title="Descrição" Text="{Binding Notes}"  FontFamily="Gilroy" Grid.Row="1"
+                         Icon="{FontImageSource FontFamily=MaterialRegular,
+                         Glyph={x:Static m:MaterialRegular.Description}}"  >
                
+            </material:EditorField>
+         
+        </Grid>
+        <input:FormView SubmitCommand="{Binding CadastrarSoctkEntryLinesCommand}" Grid.Row="2"  >
 
-            </Border>
-                
-                    <Border Grid.ColumnSpan="2" Grid.Row="1" Padding="10,0,0,0"  HeightRequest="100" WidthRequest="720"
-           Margin="10,0,0,10" Opacity="1" HorizontalOptions="Start" >
+            <Grid ColumnDefinitions="*,*,*" RowDefinitions="*,*" RowSpacing="5">
+                <Label Text="Adicionar Artigo no Stock:" Grid.Row="0"  FontAttributes="Bold"
+                Margin="15,10,0,0" FontFamily="Gilroy" FontSize="Small" />
+                <material:TextField  Padding="10,0,0,0"  Margin="0,10,0,0" Grid.Column="0"  Grid.Row="1"
+                   Title="Codigo Upc" Text="{Binding UpcStock, Mode=TwoWay}" FontFamily="Gilroy"
+                   Icon="{FontImageSource FontFamily=MaterialRegular,
+                   Glyph={x:Static m:MaterialRegular.Production_quantity_limits}}">
+                    <validation:MinLengthValidation MinLength="5"/>
+                    <validation:RequiredValidation />
+                </material:TextField>
+                <material:TextField  Padding="10,0,0,0"  Margin="0,10,0,0" Grid.Column="1"  Grid.Row="1"
+                  Title="Quantidade" Text="{Binding QuantStock}" FontFamily="Gilroy"
+                  Icon="{FontImageSource FontFamily=MaterialRegular,
+                  Glyph={x:Static m:MaterialRegular.Production_quantity_limits}}">
+                    <validation:DigitsOnlyValidation />
+                    <validation:RequiredValidation />
+                    <validation:MinValueValidation MinValue="1" />
+                </material:TextField>
+                <Button ImageSource="add_64px.png" BackgroundColor="white"    Margin="10"  FontFamily="Gilroy"
+                  BorderColor="#512BD4"  Grid.Column="2"  Grid.Row="1" Text="Adicionar" TextColor="#512BD4"
+                     Command="{Binding CadastrarSoctkEntryLinesCommand}" input:FormView.IsSubmitButton="True" />
 
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="4"/>
-                        </Border.StrokeShape>
+            </Grid>
+            
+        </input:FormView>
+        <Grid Grid.Row="3" RowDefinitions="2*,3*" >
+            <Label  Text="Lista de Entradas do Stock" Padding="15,10,0,10"  FontAttributes="Bold"  TextColor="#512BD4"
+            FontSize="Title" FontFamily="Gilroy"   Grid.Row="0"/>
+            <Grid  RowDefinitions="*" >
+                <ScrollView  Grid.Row="1"   >
+                    <CollectionView ItemsSource="{Binding StLines}"
+                x:Name="mCollectionView" >
+                        <CollectionView.ItemTemplate>
 
-                        <Grid RowDefinitions="*"  ColumnDefinitions="*">
-                            <Label Text="Adicionar Artigo no Stock:" Margin="15,0,0,0" FontFamily="Gilroy" Grid.Row="0"/>
-
-
-                       
-                            <!--<material:AutoCompleteTextField Padding="10,0,0,0" WidthRequest="300" Margin="0,10,0,0"
-                            Title="Código" ItemsSource="{Binding Items}" Text="{Binding SearchText} "  SelectedText="{Binding UpcStock}"
-                            Icon="{FontImageSource FontFamily=MaterialRegular,  Glyph={x:Static m:MaterialRegular.Engineering}} "/>-->
-                            <!--<editors:SfAutocomplete x:Name="autocomplete" HeightRequest="50"
-                                    WidthRequest="300" Text="{Binding SearchText}" SelectedItem="{Binding UpcStock }"
-                                    ItemsSource="{Binding Items}"  />-->
-                            <input:FormView SubmitCommand="{Binding CadastrarSoctkEntryLinesCommand}" Grid.Row="1" Grid.ColumnSpan="1" >
-                            <HorizontalStackLayout>
-                                <material:TextField  Padding="10,0,0,0" WidthRequest="300" Margin="0,10,0,0"
-                                             Title="Codigo Upc" Text="{Binding UpcStock, Mode=TwoWay}" FontFamily="Gilroy"
-                                             Icon="{FontImageSource FontFamily=MaterialRegular,
-                                             Glyph={x:Static m:MaterialRegular.Production_quantity_limits}}">
-                                                                                <validation:MinLengthValidation MinLength="5"/>
-                                                                            </material:TextField>
-                                                                            <material:TextField  Padding="10,0,0,0" WidthRequest="300" Margin="0,10,0,0"
-                                            Title="Quantidade" Text="{Binding QuantStock}" FontFamily="Gilroy"
-                                            Icon="{FontImageSource FontFamily=MaterialRegular,
-                                            Glyph={x:Static m:MaterialRegular.Production_quantity_limits}}">
-                                                                                <validation:DigitsOnlyValidation />
-                                                                                <validation:MinValueValidation MinValue="1" />
-                                                                            </material:TextField>
-                                                                            <!--</input:FormView>-->
-                                                                            <Button ImageSource="add_64px.png" BackgroundColor="white"  HeightRequest="45" Margin="10"  HorizontalOptions="Center" BorderColor="#512BD4"
-                                               Command="{Binding CadastrarSoctkEntryLinesCommand}" input:FormView.IsSubmitButton="True" />
-                                                                            <!--<Button ImageSource="update_64px.png" BackgroundColor="White" Margin="5,10,0,0" HeightRequest="46" Command="{Binding CarregarSoctkEntryLinesCommand}"  />-->
-
-                                                                        </HorizontalStackLayout>
-                            </input:FormView>
-                       
-                    </Grid>
-
-                    </Border>
-                
-                <Label Grid.Row="2" Text="Lista de Entradas do Stock" Padding="25,0,0,10"  FontAttributes="Bold"  TextColor="#512BD4"
-              FontSize="Title"   VerticalOptions="Start" HorizontalOptions="Start" FontFamily="Gilroy" />
+                            <DataTemplate x:DataType="model:StockEntryLines">
+                                <Frame Margin="5"
+                    CornerRadius="0"
+                    Padding="10"
+                    BackgroundColor="WhiteSmoke">
+                                    <HorizontalStackLayout>
+                                        <HorizontalStackLayout Spacing="10" Margin="10,0,10,0">
+                                            <Label Grid.Row="1"
+                Grid.Column="1"
+                Text="UPC:"
+                FontFamily="Girloy" />
+                                            <Label Grid.Row="1"
+                Grid.Column="1"
+                FontFamily="Girloy"
+                Text="{Binding PartUpc} "
+                FontAttributes="Bold" />
+                                        </HorizontalStackLayout>
+                                        <HorizontalStackLayout Spacing="10">
+                                            <Label Grid.Row="1"
+                Grid.Column="1"
+                Text="Quantidade:"
+                FontFamily="Girloy" />
+                                            <Label Grid.Row="1"
+                Grid.Column="1"
+                FontFamily="Girloy"
+                Text="{Binding Quantity}"
+                FontAttributes="Bold" />
+                                        </HorizontalStackLayout>
+                                    </HorizontalStackLayout>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer NumberOfTapsRequired="1"
+                           Command="{Binding BindingContext.DisplayAlertCommand, Source={x:Reference mCollectionView}}"
+                           CommandParameter="{Binding .}" />
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ScrollView>
+            </Grid>
         </Grid>
 
-        <ScrollView  Grid.Row="1" Grid.ColumnSpan="2" Margin="0,90,0,10"   >
-
-            <material:DataGrid HorizontalOptions="Start" Margin="20,30,20,20" ItemsSource="{Binding StLines}" BackgroundColor="WhiteSmoke" BorderColor="#512BD4"
-                         LineSeparatorColor="Blue"  WidthRequest="1000" >
-                <material:DataGrid.EmptyView>
-                    <VerticalStackLayout Margin="80,20">
-                        <Image
-			                WidthRequest="40"
-			                HeightRequest="40"
-			                HorizontalOptions="Center"
-			                VerticalOptions="Center"
-			                Source="{FontImageSource FontFamily=MaterialOutlined, Glyph={x:Static m:MaterialOutlined.Backup_table}, Color={AppThemeBinding
-                         Light={StaticResource OnSurface}, Dark={StaticResource OnSurfaceDark}}}"/>
-                        <Label Text="No data available..." HorizontalOptions="Center"/>
-                    </VerticalStackLayout>
-                </material:DataGrid.EmptyView>
-                <material:DataGrid.Columns >
-                    <material:DataGridSelectionColumn Title="#" />
-                    <material:DataGridColumn Binding="{Binding PartUpc}"  Title="Código  Upc"/>
-                    <material:DataGridColumn Binding="{Binding Quantity}" Title="Quantidade de Peça"/>
-                </material:DataGrid.Columns>
-            </material:DataGrid>
-        </ScrollView >
-
-       
-        <Grid Grid.Row="4" Grid.ColumnSpan="2" Margin="20,20,0,0" RowDefinitions="*,*" ColumnDefinitions="*,*,*"  HorizontalOptions="Start" ColumnSpacing="10" >
-            <Button  CornerRadius="8" WidthRequest="200" TextColor="#512BD4" BorderColor="#512BD4"  FontSize="Medium" Text="Refresh " HorizontalOptions="Start"
-               HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png" Command="{Binding CarregarSoctkEntryLinesCommand}"   >
+        <Grid Grid.Row="4" Grid.ColumnSpan="2" Margin="20,0,20,10" RowDefinitions="*,*" ColumnDefinitions="*,*"  
+                         ColumnSpacing="10"  VerticalOptions="End" >
+            <Button  CornerRadius="8"  TextColor="#512BD4" BorderColor="#512BD4"  FontSize="Medium" Text="Refresh "
+                HeightRequest="45" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png" Command="{Binding CarregarSoctkEntryLinesCommand}"   >
             </Button>
-            <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Salvar " 
-                  Margin="10,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="save_64px.png"
+            <Button  CornerRadius="8"  BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Salvar " 
+                  Margin="10,0,0,0" HeightRequest="45" BackgroundColor="White" FontFamily="Gilroy" ImageSource="save_64px.png "
                   Grid.Column="1" Command="{Binding CadastrarSoctkCommand}" input:FormView.IsSubmitButton="True" >
             </Button>
-          
         </Grid>
-        </input:FormView>
+   
     </Grid>
-    
-    
-    
-    
 </ContentPage>
