@@ -12,7 +12,7 @@
              x:DataType="viewmodel:VehicleListPageViewModel"
              NavigationPage.HasNavigationBar="False"
              Title="Lista de Viaturas ">
-    <Grid RowDefinitions="3*,1*,6*,2*"
+    <Grid RowDefinitions="4*,1*,6*,2*"
           ColumnDefinitions="*">
         <Image Grid.Row="0"
                Aspect="AspectFill"
@@ -115,7 +115,7 @@
             </CollectionView>
         </ScrollView>
         <Grid Grid.Row="3"
-              Margin="10,10,10,10"
+              Margin="10,-20,0,10"
               Padding="0"
               RowDefinitions="*,*"
               ColumnDefinitions="*,*,*"

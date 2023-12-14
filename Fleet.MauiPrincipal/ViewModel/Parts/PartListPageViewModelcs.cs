@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Fleet.MauiPrincipal.Service.Part;
 using Fleet.MauiPrincipal.View.Part;
 using System;
@@ -79,6 +80,17 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
         private async Task Voltar()
         {
             await Application.Current.MainPage.Navigation.PopAsync();
+        }
+        [RelayCommand]
+        public async void DisplayAlert(Part part)
+        {
+            Part partSeleted = new Part();
+            if (Parts != null && Parts.Contains(part))
+            {
+                partSeleted = part;
+                await Application.Current.MainPage.Navigation.PushAsync(new PartDetailsPage(partSeleted.Upc));
+
+            }
         }
 
 

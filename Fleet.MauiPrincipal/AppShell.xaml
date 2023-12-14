@@ -13,11 +13,9 @@
          xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome"
          xmlns:m="clr-namespace:UraniumUI.Icons.MaterialIcons;assembly=UraniumUI.Icons.MaterialIcons"
          xmlns:validation="clr-namespace:InputKit.Shared.Validations;assembly=InputKit.Maui"
-         xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui" 
-          
+         xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"    
           FlyoutBehavior="Locked"
                  >
-    
     <Shell.FlyoutHeader>
         <StackLayout BackgroundColor="White" HeightRequest="95"  VerticalOptions="Center" Padding="15" >
             <Label Text="SISTEMA DE GESTÃO " FontSize="28" TextColor="#512BD4" HorizontalOptions="Start" Margin="20,10,0,0" VerticalOptions="Center"
@@ -46,7 +44,15 @@
         Title="Gerir Usuario" Icon="user_64px.png"
         ContentTemplate="{DataTemplate user:ListarUser}"
         Route="ListarUser" >
+    
 </ShellContent>
+ <ShellContent 
+        Title="Geolocalização" Icon="user_64px.png"
+        ContentTemplate="{DataTemplate main:NewPage1}"
+        Route="NewPage1" >
+
+ </ShellContent>
+
     <Shell.FlyoutFooter>
         <HorizontalStackLayout  Margin="20,0,0,10" Spacing="10"  >
             <Button x:Name="btnLogout" Text="" HeightRequest="45"  CornerRadius="0"

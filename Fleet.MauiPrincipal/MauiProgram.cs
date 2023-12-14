@@ -11,6 +11,8 @@ using UraniumUI;
 using Microsoft.Maui.Controls.Compatibility.Hosting;
 using Microsoft.Maui.Controls.Handlers.Compatibility;
 using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Maps;
+
 
 namespace Fleet.MauiPrincipal
 {
@@ -19,20 +21,33 @@ namespace Fleet.MauiPrincipal
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
-            builder.UseUraniumUI().UseUraniumUIMaterial().UseMauiApp<App>().ConfigureFonts(fonts =>
+            builder
+                .UseUraniumUI()
+                .UseUraniumUIMaterial()
+                .UseMauiApp<App>()
+                .UseMauiMaps()
+                .UseMauiCommunityToolkitMaps("m1gGT5qUU9avmzL8F7mz~fwaNpwldFesm-s5wuMAweQ~" +
+                "AsqmTi9DRESOqVoOer0459RUrXP8NMVGk_eKnv0TNl4-Skii5DqUYaP6wQ90JXPK")
+                .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 fonts.AddMaterialIconFonts();
                 fonts.AddFontAwesomeIconFonts();
-            }).UseMauiCommunityToolkit();
-            builder.UseMauiApp<App>().ConfigureMauiHandlers(handlers =>
+            })
+                .UseMauiCommunityToolkit();
+            builder
+                .UseMauiApp<App>()
+                .ConfigureMauiHandlers(handlers =>
             {
                 // Add following line:
                 handlers.AddInputKitHandlers(); // 👈
-            //handlers.AddCompatibilityRenderer(typeof(Shell), typeof(ShellRenderer));
+         
             });
-            //.ConfigureMauiHandlers((_, handlers) => handlers.AddCompatibilityRenderer(typeof(Shell), typeof(ShellRenderer)));
+            builder.Services.AddSingleton<IConnectivity>(Connectivity.Current);
+            builder.Services.AddSingleton<IMap>(Map.Default);
+            builder.Services.AddSingleton<IGeolocation>(Geolocation.Default); 
+            
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
@@ -89,6 +104,7 @@ namespace Fleet.MauiPrincipal
             builder.Services.AddTransient<LoginListViewModel>();
             builder.Services.AddTransient<UsersDetailsViewModel>(); 
             builder.Services.AddTransient<UserDetailPage>();
+            builder.Services.AddTransient<VehicleLocalizationViewModel>();
             return builder.Build();
         }
     }

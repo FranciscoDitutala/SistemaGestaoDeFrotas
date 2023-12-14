@@ -84,5 +84,17 @@ namespace Fleet.MauiPrincipal.ViewModel.Parts
             await Application.Current.MainPage.Navigation.PopAsync();
         }
 
+        [RelayCommand]
+        public async void DisplayAlert(PartTypeCategory partCategories)
+        {
+            PartTypeCategory categorySeleted = new PartTypeCategory();
+            if (TypeCategoriesItems != null && TypeCategoriesItems.Contains(partCategories))
+            {
+                categorySeleted = partCategories;
+                await Application.Current.MainPage.Navigation.PushAsync(new PartListPage(partCategories));
+              
+            }
+        }
+
     }
 }

@@ -37,8 +37,8 @@
 
             </Grid>
             <ScrollView HorizontalOptions="Start"  Grid.Row="1" Grid.Column="0"  >
-                <material:DataGrid ItemsSource="{Binding Stock}"  Margin="10,0,20,20"  BackgroundColor="WhiteSmoke" CornerRadius="0"   
-              LineSeparatorColor="#004D97" SelectedItems="{Binding SelectedItems}" BorderColor="#004D97"     >
+                <material:DataGrid ItemsSource="{Binding Stock}"  Margin="10,0,20,20"  BackgroundColor="WhiteSmoke"   
+              LineSeparatorColor="#004D97" SelectedItems="{Binding SelectedItems}"     >
                     <material:DataGrid.EmptyView>
                         <VerticalStackLayout Margin="80,20">
                             <Image

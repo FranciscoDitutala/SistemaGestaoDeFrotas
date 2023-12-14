@@ -13,15 +13,15 @@
               NavigationPage.HasBackButton="False"
              Title="PartDetailsPage">
     
-    <Grid RowDefinitions="3*,6*,*" ColumnDefinitions="*,*,*"  >
+    <Grid RowDefinitions="4*,6*,*" ColumnDefinitions="*,*,*"  >
         <ImageButton Source="return_64px.png" Command="{Binding VoltarCommand}" ZIndex="1" Grid.Row="0" Aspect="AspectFit" WidthRequest="20" HeightRequest="20" 
-    Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" BackgroundColor="Transparent"/>
+    Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" BackgroundColor="Transparent" Margin="20,0,0,0" />
         <Image  Grid.Row="0" Grid.ColumnSpan="3"  Margin="0,-30,0,0" Source="sobressalentes.png" Aspect="AspectFill" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
-        <Grid Grid.Row="0" Grid.ColumnSpan="3" Margin="40,130,10,10" RowDefinitions="*,*"  ZIndex="1" >
-            <Label  Text="Informações da Peça" FontFamily="Gilroy" FontAttributes="Bold" FontSize="Large"
-                   TextColor="White" ZIndex="1" />
+        <Grid Grid.Row="0" Grid.ColumnSpan="3" Margin="30,0,10,10" RowDefinitions="*,*"  ZIndex="1" VerticalOptions="End" >
+            <Label  Text="Detalhes da Peça" FontFamily="Gilroy" FontAttributes="Bold" FontSize="Large"
+                   TextColor="White" ZIndex="1" VerticalOptions="End" />
         </Grid>
-        <Grid Grid.ColumnSpan="3" Grid.Row="1" HorizontalOptions="Start"  Margin="30,20,10,10" ColumnDefinitions="*,*" RowSpacing="0" RowDefinitions="*,2*" >
+        <Grid Grid.ColumnSpan="3" Grid.Row="1" HorizontalOptions="Start"  Margin="20,20,10,10" ColumnDefinitions="*,*" RowSpacing="0" RowDefinitions="*,2*" >
             <Border Grid.ColumnSpan="2" Grid.Row="0" Padding="10,10,0,10"  VerticalOptions="Start"
                  Margin="10,0,0,0" Opacity="1" HeightRequest="100" WidthRequest="500" BackgroundColor="#512BD4" >
                 <Border.StrokeShape>
@@ -38,16 +38,16 @@
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
                 </Border>
-            <Border Grid.ColumnSpan="2" Grid.Row="1" Padding="10,10,0,10"  VerticalOptions="Start"
+            <Border Grid.ColumnSpan="2" Grid.Row="1" Padding="10,10,20,10"  VerticalOptions="Start"
                Margin="10,0,0,0" Opacity="1" HeightRequest="200" WidthRequest="500">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="4"/>
                 </Border.StrokeShape>
                 <VerticalStackLayout Margin="20,0,0,0" Spacing="8">
-                    <HorizontalStackLayout Spacing="15">
+                    <VerticalStackLayout Spacing="5">
                         <Label Text="SubCategoria da Peça:" FontFamily="Gilroy" FontSize="Subtitle"   HorizontalOptions="Start" />
                         <Label Text="{Binding Parts.PartTypeName}" FontFamily="Gilroy" FontSize="Subtitle" FontAttributes="Bold" HorizontalOptions="Start" />
-                    </HorizontalStackLayout>
+                    </VerticalStackLayout>
                     <HorizontalStackLayout Spacing="15">
                         <Label Text="Marca da Peça:" FontFamily="Gilroy" FontSize="Subtitle"   HorizontalOptions="Start" />
                         <Label Text="{Binding Parts.Brand}" FontSize="Subtitle" FontFamily="Gilroy"  FontAttributes="Bold" HorizontalOptions="Start" />
@@ -64,21 +64,15 @@
                 </VerticalStackLayout>
             </Border>
         </Grid>
-        <Grid Grid.Row="3" Grid.ColumnSpan="2" Margin="20,0,0,0" RowDefinitions="*,*" ColumnDefinitions="*,*,*,*"  
-              HorizontalOptions="Start" ColumnSpacing="10" >
-            <!--<Button  CornerRadius="8" WidthRequest="200" TextColor="white" BackgroundColor="Red"  FontSize="Medium" Text="Deletar " HorizontalOptions="Start"
-        HeightRequest="50"  FontFamily="Gilroy" ImageSource="delete_64px.png"    Grid.Column="0"  >
-            </Button>-->
+        <Grid Grid.Row="2" Grid.ColumnSpan="2" Margin="10,0,0,10" RowDefinitions="*,*" ColumnDefinitions="*,*,*,*"  
+              ColumnSpacing="10" VerticalOptions="End" >
+            
 
-            <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Refresh " 
-                      Margin="10,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png" Command="{Binding CarregarPartsCommand}"
-                   Grid.Column="1" >
+            <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Refresh " VerticalOptions="End" HorizontalOptions="Start"
+                      Margin="20,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png" Command="{Binding CarregarPartsCommand}"
+                   Grid.Column="0" >
             </Button>
 
-            <!--<Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Atualizar " 
-                      Margin="10,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="update_64px.png" 
-                   Grid.Column="2" >
-            </Button>-->
         </Grid>
 
     </Grid>

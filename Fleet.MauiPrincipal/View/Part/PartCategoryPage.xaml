@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Fleet.MauiPrincipal.View.Part.PartCategoryPage" 
              xmlns:viewmodel="clr-namespace:Fleet.MauiPrincipal.ViewModel.Parts"
+             xmlns:model="clr-namespace:Fleet.MauiPrincipal.Service.Part"
              x:DataType="viewmodel:PartCategoryViewModel"      
              xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
              xmlns:fa="clr-namespace:UraniumUI.Icons.FontAwesome;assembly=UraniumUI.Icons.FontAwesome"
@@ -12,66 +13,70 @@
              NavigationPage.HasNavigationBar="False"
              
              Title="Part Categoria" >
-    <Grid  RowDefinitions ="3*,*,7*,1*" ColumnDefinitions="*"  >
+    <Grid  RowDefinitions ="4*,7*,2*" ColumnDefinitions="*"  >
 
-        <ImageButton Source="return_64px.png" Command="{Binding VoltarCommand}" ZIndex="1" Grid.Row="0" Aspect="AspectFit" WidthRequest="20" HeightRequest="20" 
+        <ImageButton Source="return_64px.png" Command="{Binding VoltarCommand}" ZIndex="1" Grid.Row="0" Aspect="AspectFit"
+                     WidthRequest="20" HeightRequest="20"  Margin="20,0,0,0"
               Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" BackgroundColor="Transparent"/>
-        <Image  Grid.Row="0" Aspect="AspectFill" Source="sobressalentes.png" Margin="0,-30,0,0"  />
-        <Label Text="Listar SubCategorias" TextColor="White" FontSize="Header" FontFamily="Gilroy" FontAttributes="Bold"
-        HorizontalOptions="Start" VerticalOptions="Start" Margin="20,40,0,0" />
+        <Image  Grid.Row="0" Aspect="AspectFill" Source="sobressalentes.png" Margin="0,0,0,0"  />
+        <Label Text="SubCategorias" TextColor="White" FontSize="Large" FontFamily="Gilroy" FontAttributes="Bold"
+        HorizontalOptions="Start" VerticalOptions="End" Margin="20,0,20,10" />
 
-        <Grid  Grid.Row="2" Grid.ColumnSpan="2"  Margin="-20,-50,0,0"  >
+        <Grid  Grid.Row="1" Grid.ColumnSpan="2"  Margin="20,20,20,-20"  >
             <ScrollView  >
+                <CollectionView ItemsSource="{Binding TypeCategoriesItems}" 
+              x:Name="mCollectionView">
+                    <CollectionView.ItemTemplate>
 
-                <material:DataGrid Margin="20,0,20,20"  BackgroundColor="WhiteSmoke" CornerRadius="0" ItemsSource="{Binding TypeCategoriesItems}"
-                     LineSeparatorColor="#004D97" BorderColor="#004D97" FlowDirection="LeftToRight" FlexLayout.Shrink="2" SelectedItems="{Binding SelectedItems}"  >
-                    <material:DataGrid.EmptyView>
-                        <VerticalStackLayout Margin="80,20">
-                            <Image
-               WidthRequest="40"
-               HeightRequest="40"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"
-               Source="{FontImageSource FontFamily=MaterialOutlined, Glyph={x:Static m:MaterialOutlined.Backup_table}, Color={AppThemeBinding
-                     Light={StaticResource OnSurface}, Dark={StaticResource OnSurfaceDark}}}"/>
-                            <Label Text="Sem dados armazenados..." HorizontalOptions="Center"/>
-                        </VerticalStackLayout>
-                    </material:DataGrid.EmptyView>
+                        <DataTemplate x:DataType="model:PartTypeCategory">
+                            <Frame Margin="5"
+                    CornerRadius="0"
+                    Padding="10"
+                    BackgroundColor="WhiteSmoke">
+                                <VerticalStackLayout>
+                                    <HorizontalStackLayout Spacing="10">
+                                        <Label Grid.Row="1"
+                    Grid.Column="1"
+                    Text="Imagem:"
+                    FontFamily="Girloy" />
+                                        <Label Grid.Row="1"
+                    Grid.Column="1"
+                    FontFamily="Girloy"
+                    Text="{Binding Name}"
+                    FontAttributes="Bold" />
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout Spacing="10">
+                                        <Label Grid.Row="1"
+                    Grid.Column="1"
+                    Text="Nome :"
+                    FontFamily="Girloy" />
+                                        <Label Grid.Row="1"
+                    Grid.Column="1"
+                    FontFamily="Girloy"
+                    Text="{Binding Name}"
+                    FontAttributes="Bold" />
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1"
+                               Command="{Binding BindingContext.DisplayAlertCommand, Source={x:Reference mCollectionView}}"
+                               CommandParameter="{Binding .}" />
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
-                    <material:DataGrid.Columns >
-                        <material:DataGridSelectionColumn Title="#"/>
-                        <material:DataGridColumn Binding="{Binding Name}" Title="Nome "/>
-                        <material:DataGridColumn Binding="{Binding SubCategory}" Title="Sub Categorias" />
-                        <material:DataGridColumn  >
-                            <!--<material:DataGridColumn.CellItemTemplate    >
-                                <DataTemplate>
-
-                                    <Button  ImageSource="update_64px.png" Margin="0,0,10,0" Text="Atualizar" BackgroundColor="White"
-                                          BorderColor="#512BD4" TextColor="#512BD4" FontSize="Micro"   FontFamily="Gilroy"  />
-                                </DataTemplate>
-                            </material:DataGridColumn.CellItemTemplate>-->
-
-                        </material:DataGridColumn>
-                    </material:DataGrid.Columns>
-                </material:DataGrid>
             </ScrollView>
 
         </Grid>
 
-        <Grid Grid.Row="3" Margin="0,0,0,0" RowDefinitions="*,*" ColumnDefinitions="*,*,*" BackgroundColor="WhiteSmoke" HorizontalOptions="Start" ColumnSpacing="10" >
-            
+        <Grid Grid.Row="3" Margin="20,0,10,10" RowDefinitions="*,*" ColumnDefinitions="*,*,*" VerticalOptions="End"
+              BackgroundColor="WhiteSmoke" HorizontalOptions="Start" ColumnSpacing="10" >
             <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Atualizar " HorizontalOptions="Start"
-              Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png" Command="{Binding CarregarPartTypeCategoriesCommand}"
+              Margin="0,0,0,0" HeightRequest="45" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png" Command="{Binding CarregarPartTypeCategoriesCommand}"
                       Grid.Column="1" >
             </Button>
-            <Button  CornerRadius="8" WidthRequest="200" BorderColor="#512BD4" TextColor="#512BD4"  FontSize="Medium" Text="Peças " HorizontalOptions="Start"
-           Margin="0,0,0,0" HeightRequest="50" BackgroundColor="White" FontFamily="Gilroy" ImageSource="refresh_64px.png" Command="{Binding CarregarPartsCommand}"
-          Grid.Column="2" >
-            </Button>
-
         </Grid>
-
     </Grid>
-
-
 </ContentPage>

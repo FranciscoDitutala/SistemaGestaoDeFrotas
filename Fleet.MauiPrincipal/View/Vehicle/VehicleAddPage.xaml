@@ -12,7 +12,7 @@
              x:DataType="viewModel:VehicleAddPageViewModel"
              NavigationPage.HasNavigationBar="False"
              Title="Cadastrar Veículos">
-    <Grid RowDefinitions="3*,5*,2*"
+    <Grid RowDefinitions="4*,5*,2*"
           ColumnDefinitions="5*,5*,5*"
           ColumnSpacing="5"
           RowSpacing="10">
@@ -30,11 +30,12 @@
                FontAttributes="Bold"
                HorizontalOptions="Start"
                VerticalOptions="End"
-               Margin="20,40,10,0" />
+               Margin="20,0,10,10" />
         <ImageButton Source="return_64px.png"
                      Command="{Binding VoltarCommand}"
                      ZIndex="1"
                      Grid.Row="0"
+                     Margin="10,0,0,0"
                      Aspect="AspectFit"
                      WidthRequest="20"
                      HeightRequest="20"
@@ -42,81 +43,88 @@
                      HorizontalOptions="Start"
                      VerticalOptions="Start"
                      BackgroundColor="Transparent" />
-        <Grid Grid.ColumnSpan="3"
-              Grid.Row="1"
-              RowDefinitions="*,*,*"
-              ColumnDefinitions="*,*,*"
-              Margin="0,0,15,0">
-            <input:FormView Grid.ColumnSpan="3"
+
+        <input:FormView  Grid.ColumnSpan="3"
+                            Grid.Row="1"
                             Spacing="15"
                             Grid.RowSpan="3"
                             SubmitCommand="{Binding GoToVehicleAddSecondCommand}">
-                <!-- <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="15" Padding="10,0,0,0" VerticalOptions="Start"> -->
-                <material:TextField Padding="10,0,0,0"
+            <Grid 
+              RowDefinitions="7*,*"
+              ColumnDefinitions="*"
+              Margin="0,0,15,0">
+
+                <Grid Grid.Row="0" RowDefinitions="*,*" RowSpacing="10" >
+
+                    <VerticalStackLayout Spacing="10" Grid.Row="0">
+                        <material:TextField Padding="10,0,0,0" 
                                     Title="Nº do Chassis "
                                     Text="{Binding Vin}"
                                     FontFamily="Gilroy"
                                     Icon="{FontImageSource FontFamily=MaterialRegular,
 &#xA;                    Glyph={x:Static m:MaterialRegular.Numbers}} ">
-                    <validation:RequiredValidation />
-                    <validation:MinLengthValidation MinLength="17" />
-                </material:TextField>
-                <material:PickerField Padding="10,0,0,0"
+                            <validation:RequiredValidation />
+                            <validation:MinLengthValidation MinLength="17" />
+                        </material:TextField>
+                        <material:PickerField Padding="10,0,0,0"
                                       FontFamily="Gilroy"
                                       Title="Cor"
                                       ItemsSource="{Binding Colors}"
                                       SelectedItem="{Binding SelectedColors}"
                                       Icon="{FontImageSource FontFamily=MaterialRegular,
 &#xA;                        Glyph={x:Static m:MaterialRegular.Color_lens}}">
-                    <validation:RequiredValidation />
-                </material:PickerField>
-                <material:PickerField Padding="10,0,0,0"
+                            <validation:RequiredValidation />
+                        </material:PickerField>
+                        <material:PickerField Padding="10,0,0,0"
                                       FontFamily="Gilroy"
                                       Title="Tipo do Veiculo"
                                       ItemsSource="{Binding VehicleTypes}"
                                       SelectedItem="{Binding SelectedVehicleTypes}"
                                       Icon="{FontImageSource FontFamily=MaterialRegular,
 &#xA;                    Glyph={x:Static m:MaterialRegular.Car_rental}}">
-                    <validation:RequiredValidation />
-                </material:PickerField>
-            
-                <material:PickerField Padding="10,0,0,0" 
+                            <validation:RequiredValidation />
+                        </material:PickerField>
+
+                        <material:PickerField Padding="10,0,0,0" 
                                       Title="Transmissão "
                                       ItemsSource="{Binding VehicleTransmission}"
                                       SelectedItem="{Binding SelectedTransmissions}"
                                       FontFamily="Gilroy"
                                       Icon="{FontImageSource FontFamily=MaterialRegular,
 &#xA;                Glyph={x:Static m:MaterialRegular.Branding_watermark}}">
-                    <validation:RequiredValidation />
-                </material:PickerField>
-                <material:TextField Padding="10,0,0,0"
+                            <validation:RequiredValidation />
+                        </material:PickerField>
+                        <material:TextField Padding="10,0,0,0"
                                     FontFamily="Gilroy"
                                     Title="Matricula"
                                     Text="{Binding Registration}"
                                     Icon="{FontImageSource FontFamily=MaterialRegular,
 &#xA;      Glyph={x:Static m:MaterialRegular.Code}}">
-                    <validation:RequiredValidation />
-                    <validation:RegexValidation Pattern="^[A-Za-z]{2}-\d{2}-\d{2}-[A-Za-z]{2}$"
+                            <validation:RequiredValidation />
+                            <validation:RegexValidation Pattern="^[A-Za-z]{2}-\d{2}-\d{2}-[A-Za-z]{2}$"
                                                 Message=" The pattern EX. LD-12-12-AZ" />
-                </material:TextField>
-                <material:PickerField Padding="10,0,0,0"
+                        </material:TextField>
+                        <material:PickerField Padding="10,0,0,0"
                                       Title="Marca do Veiculo"
                                       ItemsSource="{Binding VehicleMarcas}"
                                       SelectedItem="{Binding SelectedMarcas}"
                                       ItemDisplayBinding="{Binding Name}"
                                       Icon="{FontImageSource FontFamily=MaterialRegular,   
 &#xA;                     Glyph={x:Static m:MaterialRegular.Model_training}}">
-                    <validation:RequiredValidation />
-                </material:PickerField>
-                <!-- </VerticalStackLayout> -->
-                <Button CornerRadius="8"
+                            <validation:RequiredValidation />
+                        </material:PickerField>
+                    </VerticalStackLayout>
+                </Grid>
+
+  
+                <Button CornerRadius="8" Grid.Row="1"
                         WidthRequest="200"
+                        VerticalOptions="End"
                         TextColor="#512BD4"
                         BorderColor="#512BD4"
                         FontSize="Medium"
                         Text="Proximo "
                         HorizontalOptions="EndAndExpand"
-                        VerticalOptions="End"
                         Margin="10,0,0,0"
                         HeightRequest="50"
                         BackgroundColor="White"
@@ -124,8 +132,7 @@
                         ImageSource="save_64px.png"
                         Command="{Binding GoToVehicleAddSecondCommand}"
                         input:FormView.IsSubmitButton="True" />
-            </input:FormView>
-
         </Grid>
+        </input:FormView>
     </Grid>
 </ContentPage>
