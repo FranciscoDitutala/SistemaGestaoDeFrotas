@@ -13,6 +13,7 @@ namespace Fleet.Transport.Infrastructure
             CreateMap<TransportDocumentPayload, Document>().ReverseMap();
             CreateMap<OrgaoPayload, Orgao>().ReverseMap();
             CreateMap<Employee,EmployeePayload>().ReverseMap();
+            CreateMap<LocationPayload,Location>().ReverseMap();
             CreateMap<Assignment, AssignmentPayload>();
             CreateMap<AssignmentPayload, Assignment>().ForMember(dest => dest.EndDateOfAssignment, opt => opt.Ignore());
             CreateMap<byte[], ByteString>()

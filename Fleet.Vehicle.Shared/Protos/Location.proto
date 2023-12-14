@@ -1,0 +1,23 @@
+
+syntax ="proto3";
+
+option csharp_namespace="Fleet.Transport";
+
+
+service LocationManager {
+	rpc FindLocationById(FindLocationByIdRequest) returns (LocationPayload);
+	rpc FindLocationByRegistration(FindLocationByRegistrationRequest) returns (LocationPayload);
+}
+
+message FindLocationByIdRequest{
+	int32 vehicle_id=1;
+
+}
+message FindLocationByRegistrationRequest{
+	string registration=1;
+}
+message LocationPayload{
+
+	double lantitude=1;
+	double longitude=2;
+}

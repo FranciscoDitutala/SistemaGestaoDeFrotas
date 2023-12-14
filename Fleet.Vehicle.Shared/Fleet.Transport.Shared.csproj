@@ -21,5 +21,6 @@
 		<Protobuf Include="Protos\Employee.proto" />
 		<Protobuf Include="Protos\Orgao.proto" />
 		<Protobuf Include="Protos\Assignment.proto" />
+		<Protobuf Include="Protos\Location.proto" />
 	</ItemGroup>
 </Project>

@@ -95,6 +95,7 @@ builder.Services.AddSingleton(services => new DocumentManager.DocumentManagerCli
 builder.Services.AddSingleton(services => new OrgaoManager.OrgaoManagerClient(transportChanel));
 builder.Services.AddSingleton(services => new EmployeeManager.EmployeeManagerClient(transportChanel));
 builder.Services.AddSingleton(services => new AssignmentManager.AssignmentManagerClient(transportChanel));
+builder.Services.AddSingleton(services => new LocationManager.LocationManagerClient(transportChanel));
 
 
 builder.Services.AddSingleton<IVehicleModelService, VehicleModelService>();
@@ -109,6 +110,7 @@ builder.Services.AddSingleton<IOrgaoService,OrgaoService>();
 builder.Services.AddSingleton<IEmployeeService, EmployeeService>();
 builder.Services.AddSingleton<IAssignmentService, AssignmentService>();
 builder.Services.AddSingleton<VehicleDetailService>();
+builder.Services.AddSingleton<ILocationService, LocationService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

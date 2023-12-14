@@ -82,6 +82,7 @@ namespace Fleet.Principal.Infrastructure
             CreateMap<StockOutApproveRequest,StockOutApproveDto>().ReverseMap();
 
             //VehicleMapper
+            CreateMap<LocationDto, LocationPayload>() .ReverseMap();
             CreateMap<VehicleDto, VehiclePayload>().ReverseMap();
                  CreateMap<VehicleDto, VehiclePayload>()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));

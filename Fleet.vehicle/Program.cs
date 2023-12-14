@@ -30,7 +30,7 @@ builder.Services.AddScoped<DocumentRepository>();
 builder.Services.AddScoped<OrgaoRepository>();
 builder.Services.AddScoped<EmployeeRepository>();
 builder.Services.AddScoped<AssignmentRepository>();
-
+builder.Services.AddScoped<LocationRepository>();
 builder.Services.AddScoped<DocumentService>();
 
 
@@ -42,6 +42,7 @@ app.MapGrpcService<DocumentService>();
 app.MapGrpcService<OrgaoService>();
 app.MapGrpcService<EmployeeService>();
 app.MapGrpcService<AssignmentService>();
+app.MapGrpcService<LocationService>();
 
 
 if (app.Environment.IsDevelopment())
