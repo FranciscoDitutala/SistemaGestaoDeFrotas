@@ -59,22 +59,37 @@ namespace Fleet.MauiPrincipal.ViewModel.session
         int paramId;
         public void VerifyNewUser()
         {
-            foreach (var item in Users)
-            {
+            //foreach (var item in Users)
+            //{
 
-                if (!item.Email.Equals(EmailEntry) && !item.UserName.Equals(UserName))
-                {
-                    isNewItem = true;
-                    path = "/api/Authenticate/register";
-                }
-                else
-                {
-                    isNewItem = false;
-                    path = $"/api/Authenticate/edit-password{item.Id}";
-                    paramId = item.Id;
-                }
+                //if (!item.Email.Equals(EmailEntry) && !item.UserName.Equals(UserName))
+                //{
+                    //Add
+                    //isNewItem = true;
+                    //if (isAdmin)
+                    //{
+                    //    path = "/api/Authenticate/register-admin";
+                    //}
+                    //else { path = "/api/Authenticate/register";  }
+                  
+                //}
+                //else
+                //{
+                //    //Update
+                //    isNewItem = false;
+                //    if (!isAdmin)
+                //    {
+                //        path = $"/api/Authenticate/register-admin{item.Id}";
+                //    }
+                //    else
+                //    {
+                //        path = $"/api/Authenticate/edit-password{item.Id}";
+                //    }
+                   
+                //    paramId = item.Id;
+                //}
 
-            }
+            //}
         }
         // Metodo Carregar user Type
         private string _userType;
@@ -82,7 +97,7 @@ namespace Fleet.MauiPrincipal.ViewModel.session
         {
             get
             {      
-                return new List<string> { "Usuario", "Admnistrador"};
+                return new List<string> { "Usuario", "Administrador"};
 
             }
         }
@@ -113,20 +128,24 @@ namespace Fleet.MauiPrincipal.ViewModel.session
             if (SelectedUserType.Equals("Usuario"))
             {
                 isAdmin = false;
+                path = "/api/Authenticate/register";
             }
-            else
+            else if (SelectedUserType.Equals("Administrador"))
             {
                 isAdmin= true;
+               
+                path = "/api/Authenticate/register-admin";
             }
         }
+
         public ICommand CadastraUsuarioCommand => new Command(async () =>
           await CadastraUsuarioAsync());
         private async Task CadastraUsuarioAsync()
         {
+            VerifyType();
             VerifyNewUser();
             var url = $"{baseUrl + path}";
-            if ((!(string.IsNullOrEmpty(UserName)) && !(string.IsNullOrEmpty(EmailEntry)) && !(string.IsNullOrEmpty(Password))))
-            {
+    
                 var user = new User
                 {
                     UserName = UserName,
@@ -138,34 +157,24 @@ namespace Fleet.MauiPrincipal.ViewModel.session
                 string json = JsonSerializer.Serialize<User>(user, _SerializerOptions);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = null;
-                if (isNewItem.Equals(false))
-                {
-                    //response = await Client.PutAsync(url, content);
-                    await Application.Current.MainPage.DisplayAlert("Informação ", "Usuario Atualizado com sucesso!", "Ok");
-                    //CleanFields();
-                    //await Application.Current.MainPage.Navigation.PushAsync(new (paramId));
-                }
-                else
-                {
+                
                     response = await Client.PostAsync(url, content);
                     if (response.IsSuccessStatusCode)
                     {
-                        await Application.Current.MainPage.DisplayAlert("Informação", "Usuario Cadastrado com sucesso!", "Ok");
-                        //CleanFields();
+                        if (isAdmin)
+                        {
+                            await Application.Current.MainPage.DisplayAlert("Informação", "Admin Cadastrado com sucesso!", "Ok");
+                        }
+                        else { await Application.Current.MainPage.DisplayAlert("Informação", "Usuario Cadastrado com sucesso!", "Ok"); }
+                   
                         await Application.Current.MainPage.Navigation.PopAsync();
                     }
                     else
                     {
-                        await Application.Current.MainPage.DisplayAlert("Informação", "Usuario nao Cadastrado sucesso!", "Ok");
+                        await Application.Current.MainPage.DisplayAlert("Falha", "Operação sem sucesso", "Ok");
                     }
 
-                }
             }
 
-            else
-            {
-                await Application.Current.MainPage.DisplayAlert("Atenção ", "Campos obrigatório vazio", "Ok");
-            }
-        }
     }
 }

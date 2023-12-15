@@ -237,7 +237,7 @@ await Voltar());
         {
             Debug.WriteLine("Entro no metodo cadastrar Atribuição");
             var url = $"{baseUrl}/FleetTransport/Assignment";
-            if (selectedVehicle.Id > 0)
+            if (selectedVehicle.Id > 0 && selectedEmployee.Id > 0 && _selectedOrgao.Id > 0 && !string.IsNullOrEmpty(SelectedAssignType))
             {
                 var Atribuir = new Assignment
                 {
@@ -260,6 +260,10 @@ await Voltar());
                 }
                 else { await Application.Current.MainPage.DisplayAlert("Falhou", "Atribucao não feita  ", "OK"); }
 
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Atenção", " Campos obrigatorios vazio ", "Ok");
             }
 
         }

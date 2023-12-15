@@ -13,75 +13,75 @@
               NavigationPage.HasNavigationBar="False"
                Title="VehicleAssignPage">
    
-        <Grid RowDefinitions="6*,5*,2*"     >
-        <ImageButton Source="return_64px.png" Command="{Binding VoltarCommand}" ZIndex="1" Grid.Row="0" Aspect="AspectFit" WidthRequest="20" HeightRequest="20" 
+        <Grid RowDefinitions="3*,5*"   >
+        <ImageButton Source="return_64px.png" Command="{Binding VoltarCommand}" ZIndex="1" Grid.Row="0" Aspect="AspectFit" WidthRequest="20" HeightRequest="20" Margin="20,0,0,0"
 Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" BackgroundColor="Transparent"/>
-        <Image  Grid.Row="0" Grid.ColumnSpan="3"  Margin="0,-30,0,0" Source="cars.png" Aspect="AspectFill" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
+        <Image  Grid.Row="0" Grid.ColumnSpan="3"  Margin="0,0,0,0" Source="cars.png" Aspect="AspectFill" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand"/>
+      
+            <input:FormView Grid.ColumnSpan="3"  
+            Spacing="15" Grid.Row="1"
+            SubmitCommand="{Binding CadastrarAssignmentCommand}">
+            <Grid  Grid.ColumnSpan="3"  Margin="10,10,20,0"  VerticalOptions="Start"    RowDefinitions="*,*"
+                  ColumnSpacing="10" RowSpacing="10" >
 
-        <Grid Grid.Row="1" Grid.ColumnSpan="3"  Margin="10,10,20,0"  VerticalOptions="Start"
-                  RowDefinitions="*,*" ColumnDefinitions="*,*" ColumnSpacing="10" RowSpacing="10" >
+                <Grid   Margin="10,10,0,0"  Grid.Row="0"
+                  ColumnSpacing="10" RowSpacing="20" >
 
-            <input:FormView Grid.ColumnSpan="3" Grid.Row="1"
-                Spacing="15"
-                SubmitCommand="{Binding CadastrarAssignmentCommand}">
-                <material:PickerField 
-                         Title="Tipo atribuição"   FontFamily="Gilroy" ItemsSource="{Binding Assign}"
-                    SelectedItem="{Binding SelectedAssignType}" 
-                    Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Assignment_turned_in}}">
-                    <validation:RequiredValidation />
-                </material:PickerField>
-                <material:PickerField 
-                         Title="Funcionário a Atribuir"   FontFamily="Gilroy"
-                         ItemsSource="{Binding Employees}"
-                         ItemDisplayBinding="{Binding Name}"
-                         SelectedItem="{Binding SelectedEmployee}"
-                         Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Face}}"  >
-                    <validation:RequiredValidation />
-                </material:PickerField>
-                <material:PickerField 
-                        Title="Veículo Atribuir"   FontFamily="Gilroy"
-                        ItemsSource="{Binding Vehicles}"
-                        ItemDisplayBinding="{Binding Registration}"
-                        SelectedItem="{Binding SelectedVehicle}"
-                        Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Car_rental}}"
-                   >
-                    <validation:RequiredValidation />
-                </material:PickerField>
-                
-                <material:PickerField 
-                            Title="Departamento"   FontFamily="Gilroy"
-                            ItemsSource="{Binding Orgao}"
-                            ItemDisplayBinding="{Binding Acronym}"
-                            SelectedItem="{Binding SelectedOrgao}"
-                            Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Car_rental}}"
-                 >
-                    <validation:RequiredValidation />
-                </material:PickerField>
-                <material:EditorField HeightRequest="200" Grid.ColumnSpan="2"
-                       Title="Descrição" Text="{Binding Descricao}"   FontFamily="Gilroy"
-                           Icon="{FontImageSource FontFamily=MaterialRegular,
-                       Glyph={x:Static m:MaterialRegular.Assignment}} ">
-                    
-                </material:EditorField>
-                    <Button CornerRadius="8"
-                  WidthRequest="200"
-                  TextColor="#512BD4"
-                  BorderColor="#512BD4"
-                  FontSize="Medium"
-                  Text="Atribuir "
-                   Margin="10,-100,0,0"
-                  HorizontalOptions="EndAndExpand"
-                  VerticalOptions="Start"
-                  HeightRequest="50"
-                  BackgroundColor="White"
-                  FontFamily="Gilroy"
-                  ImageSource="save_64px.png"
-                  Command="{Binding CadastrarAssignmentCommand}"
-                  input:FormView.IsSubmitButton="True" />
+                    <VerticalStackLayout>
+                        <material:PickerField 
+            Title="Tipo atribuição"   FontFamily="Gilroy" ItemsSource="{Binding Assign}"
+               SelectedItem="{Binding SelectedAssignType}" 
+               Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Assignment_turned_in}}">    
+                            <validation:RequiredValidation />
+                        </material:PickerField>
+                        <material:PickerField 
+        Title="Funcionário a Atribuir"   FontFamily="Gilroy"
+        ItemsSource="{Binding Employees}"
+        ItemDisplayBinding="{Binding Name}"
+        SelectedItem="{Binding SelectedEmployee}"
+        Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Face}}"  >
+                            <validation:RequiredValidation />
+                        </material:PickerField>
+                        <material:PickerField 
+       Title="Veículo Atribuir"   FontFamily="Gilroy"
+       ItemsSource="{Binding Vehicles}"
+       ItemDisplayBinding="{Binding Registration}"
+       SelectedItem="{Binding SelectedVehicle}"
+       Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Car_rental}}"
+  >
+                            <validation:RequiredValidation />
+                        </material:PickerField>
+                        <material:PickerField 
+           Title="Departamento"   FontFamily="Gilroy"
+           ItemsSource="{Binding Orgao}"
+           ItemDisplayBinding="{Binding Acronym}"
+           SelectedItem="{Binding SelectedOrgao}"
+           Icon="{FontImageSource FontFamily=MaterialRegular, Glyph={x:Static m:MaterialRegular.Car_rental}}"
+>
+                            <validation:RequiredValidation />
+                        </material:PickerField>
+                        <material:EditorField HeightRequest="200" Grid.ColumnSpan="2"
+      Title="Descrição" Text="{Binding Descricao}"   FontFamily="Gilroy" 
+          Icon="{FontImageSource FontFamily=MaterialRegular,
+      Glyph={x:Static m:MaterialRegular.Assignment}} ">
 
-            </input:FormView>
-        </Grid>
-     
+                        </material:EditorField>
+                    </VerticalStackLayout>
+               </Grid>
+                <Button CornerRadius="8" TextColor="#512BD4" Grid.Row="1"
+                BorderColor="#512BD4"
+                        VerticalOptions="End"
+                FontSize="Medium"
+                Text="Atribuir "
+                Margin="20,0,0,10"
+                HeightRequest="50"
+                BackgroundColor="White"
+                FontFamily="Gilroy"
+                ImageSource="save_64px.png"
+                Command="{Binding CadastrarAssignmentCommand}"
+                input:FormView.IsSubmitButton="True" />
+            </Grid>
+        </input:FormView>
     </Grid>
 
    

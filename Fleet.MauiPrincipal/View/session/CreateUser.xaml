@@ -50,9 +50,9 @@
                                      Icon="{FontImageSource FontFamily=MaterialRegular, 
                                 Glyph={x:Static m:MaterialRegular.Person}}">
                             <validation:RequiredValidation />
-                            <validation:LettersOnlyValidation />
+                          
                             <validation:MinLengthValidation MinLength="8" />
-                            <validation:MaxValueValidation MaxValue="25" />
+                        
                            
                         </material:TextField>
                         <material:TextField WidthRequest="350" Text="{Binding EmailEntry}"
